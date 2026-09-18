@@ -1,0 +1,37 @@
+{
+  "captured_at": "2026-09-18T19:11:23.680Z",
+  "scope": "local protocol 22 simulation; instructions include RPC margin; successful under 40 MiB configured memory",
+  "calls": [
+    {
+      "id": "CDPFD3345CMTJ5MFA7W22ZGGTUSOOGPCN46CJYF2N5IC2EZPA7EA7OCD",
+      "method": "total_assets",
+      "ledger": 1982,
+      "value": "10060000002",
+      "instructions": 51538894,
+      "read_bytes": 158532,
+      "write_bytes": 0,
+      "read_entries": 33,
+      "write_entries": 0,
+      "min_resource_fee": "704134",
+      "cost": null
+    },
+    {
+      "id": "CDVSUUH5BMYX3V3SLLURX3BL2333BPQNBF4JKAKSU3UTAMC2Z5D2HIWZ",
+      "method": "mark",
+      "ledger": 1982,
+      "value": {
+        "price": "1000000000000",
+        "ready": true,
+        "reference": "1000000000000",
+        "timestamp": "1789758638"
+      },
+      "instructions": 8926966,
+      "read_bytes": 41136,
+      "write_bytes": 0,
+      "read_entries": 6,
+      "write_entries": 0,
+      "min_resource_fee": "188309",
+      "cost": null
+    }
+  ]
+}

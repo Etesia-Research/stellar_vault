@@ -110,8 +110,8 @@ pub struct State {
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Mark {
-    pub price: i128, // USDC per whole asset, 12 decimals
-    pub reference: i128,
+    pub price: i128,     // Reflector USDC per whole asset, 12 decimals
+    pub reference: i128, // Three-observation Soroswap sampled TWAP
     pub timestamp: u64,
     pub ready: bool,
 }

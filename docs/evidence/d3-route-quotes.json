@@ -1,0 +1,157 @@
+{
+  "scope": "research quotes at requested sizes, not fills or NAV inputs",
+  "quotes": [
+    {
+      "symbol": "XLM",
+      "captured_at": "2026-09-18T18:59:25.405468+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA",
+        "amount": "1000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "5191562944",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "XLM",
+      "captured_at": "2026-09-18T18:59:26.929325+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA",
+        "amount": "10000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "51344177100",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "AQUA",
+      "captured_at": "2026-09-18T18:59:28.516215+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK",
+        "amount": "1000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "334904113704",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "AQUA",
+      "captured_at": "2026-09-18T18:59:29.836023+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK",
+        "amount": "10000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "374125243547",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "SHX",
+      "captured_at": "2026-09-18T18:59:31.131301+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CCKCKCPHYVXQD4NECBFJTFSCU2AMSJGCNG4O6K4JVRE2BLPR7WNDBQIQ",
+        "amount": "1000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "69086027430",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "SHX",
+      "captured_at": "2026-09-18T18:59:32.744799+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CCKCKCPHYVXQD4NECBFJTFSCU2AMSJGCNG4O6K4JVRE2BLPR7WNDBQIQ",
+        "amount": "10000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "87467478155",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "USTRY",
+      "captured_at": "2026-09-18T18:59:34.040423+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CBLV4ATSIWU67CFSQU2NVRKINQIKUZ2ODSZBUJTJ43VJVRSBTZYOPNUR",
+        "amount": "1000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "927443185",
+      "platform": "router",
+      "route": null
+    },
+    {
+      "symbol": "USTRY",
+      "captured_at": "2026-09-18T18:59:35.343530+00:00",
+      "request": {
+        "assetIn": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+        "assetOut": "CBLV4ATSIWU67CFSQU2NVRKINQIKUZ2ODSZBUJTJ43VJVRSBTZYOPNUR",
+        "amount": "10000000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 2
+      },
+      "status": "quoted",
+      "amount_out": "9098497369",
+      "platform": "router",
+      "route": null
+    }
+  ]
+}

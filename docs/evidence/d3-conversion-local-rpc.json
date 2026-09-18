@@ -1,0 +1,649 @@
+{
+  "network": "local-only",
+  "passphrase": "Standalone Network ; September 2026",
+  "rpc": "http://127.0.0.1:8003",
+  "protocol": 22,
+  "assets": [
+    {
+      "symbol": "USDC",
+      "address": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+      "decimals": 7,
+      "kind": "Settlement"
+    },
+    {
+      "symbol": "XLM",
+      "address": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3",
+      "decimals": 7,
+      "kind": "Xlm"
+    },
+    {
+      "symbol": "AQUA",
+      "address": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "ETH",
+      "address": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "BTC",
+      "address": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "SHX",
+      "address": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "USTRY",
+      "address": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA",
+      "decimals": 7,
+      "kind": "Reserve"
+    }
+  ],
+  "transactions": [
+    {
+      "method": "update",
+      "hash": "1b878db96fae314e12874b8f132465e6251faa65acc1188b16f60cfddbd5bb53",
+      "status": "SUCCESS",
+      "ledger": 1984
+    },
+    {
+      "method": "update",
+      "hash": "a2d19f1fc2f20d13df3b69d887d096836a06e0855458d8e86a7cf2e6aca708e8",
+      "status": "SUCCESS",
+      "ledger": 1987
+    },
+    {
+      "method": "update",
+      "hash": "e1656af2aa2e9dfedd040d31bc8c12c59f5fc45a4b7115df451393579f9c5a8e",
+      "status": "SUCCESS",
+      "ledger": 1989
+    },
+    {
+      "method": "update",
+      "hash": "b90467a4339d9f6ec768fd132888a8379f56485fdeb134e7182dea166640a641",
+      "status": "SUCCESS",
+      "ledger": 1990
+    },
+    {
+      "method": "update",
+      "hash": "87487399d9b0c5bdf4eb9a53c3b2b743d15ecc1d950808536896731ac40bc227",
+      "status": "SUCCESS",
+      "ledger": 1991
+    },
+    {
+      "method": "update",
+      "hash": "d9a9b35603111e8935aeca6da66b6266892d74f071db5d12e5d496cc82baa7f1",
+      "status": "SUCCESS",
+      "ledger": 1992
+    },
+    {
+      "method": "update",
+      "hash": "12a2ae05bbccbe719ff9e695098042be0c3a3d66cf6541ba6e3263fde89a6bb8",
+      "status": "SUCCESS",
+      "ledger": 1993
+    },
+    {
+      "method": "deploy",
+      "hash": "9f93d8d6a6b887b70e7c3d923f2bd206f37e9b6cc700e67a4ac06b28a40ccc9b",
+      "status": "SUCCESS",
+      "ledger": 1994
+    },
+    {
+      "method": "observe",
+      "hash": "e3ae259f2d4d38d1747934f036ffd7a0a62c8623e00397ec369c1fbf2ad53f98",
+      "status": "SUCCESS",
+      "ledger": 1995
+    },
+    {
+      "method": "observe",
+      "hash": "c20b4eb6b79a496c11747a40fde0ac038afc218c7da489792ebfeec707de3f33",
+      "status": "SUCCESS",
+      "ledger": 1997
+    },
+    {
+      "method": "observe",
+      "hash": "1a3ec766f257c917a449ff93537cb32e8208722e4725173d67ff7a5b0c293be1",
+      "status": "SUCCESS",
+      "ledger": 1999
+    },
+    {
+      "method": "observe",
+      "hash": "e263c0fe520fdd108de5edd50fe31bd78e229a025403e00805b19e8df6f1c0a1",
+      "status": "SUCCESS",
+      "ledger": 2000
+    },
+    {
+      "method": "observe",
+      "hash": "91f8b4aa526d55298f95a842d736695863e461277d2d7a5ff9c8908aeb522df4",
+      "status": "SUCCESS",
+      "ledger": 2001
+    },
+    {
+      "method": "observe",
+      "hash": "08e6e55d3835b0e92d09fd0ead1d1ea6697c9a2795cde51ae9ba34a912739751",
+      "status": "SUCCESS",
+      "ledger": 2002
+    },
+    {
+      "method": "observe",
+      "hash": "9a79abce8611ec84083a03896f01c5c270dffc4884e5909404c663801d608a1b",
+      "status": "SUCCESS",
+      "ledger": 2004
+    },
+    {
+      "method": "observe",
+      "hash": "c333961334bda589c5845375e0a6a50aaf210eb4fc6d9f924d044c66005bb432",
+      "status": "SUCCESS",
+      "ledger": 2006
+    },
+    {
+      "method": "observe",
+      "hash": "1d315cc8c68fdb025606964900dbf7a04ca3d26cb0f90ca2ea709ee3bdf0b3b5",
+      "status": "SUCCESS",
+      "ledger": 2007
+    },
+    {
+      "method": "observe",
+      "hash": "b1bad13f21c3668eba8fc82863de70b00517eb79221a2285a2edeb92ec505726",
+      "status": "SUCCESS",
+      "ledger": 2008
+    },
+    {
+      "method": "observe",
+      "hash": "ff2db4a0e04d9378b7ad51cf4ae07dd25324e97875c092cdf55a6f2c4dbb1416",
+      "status": "SUCCESS",
+      "ledger": 2009
+    },
+    {
+      "method": "observe",
+      "hash": "bc73786cc908b52db0bcf7016c4c89b8966559d3b8017a709905bf7fc6b26c43",
+      "status": "SUCCESS",
+      "ledger": 2010
+    },
+    {
+      "method": "observe",
+      "hash": "14499b194e3028a39c0ec1ece19ddc497434a0ba3e0f3c0c7bda7f57908d3824",
+      "status": "SUCCESS",
+      "ledger": 2012
+    },
+    {
+      "method": "observe",
+      "hash": "e6aaedf6d1c54953743d021d9d35a89dacd89c03e37c3c0ee3932595744cd530",
+      "status": "SUCCESS",
+      "ledger": 2014
+    },
+    {
+      "method": "observe",
+      "hash": "d392303395008b878abe7831cca218a481d74999ca8def3b89e938179377b926",
+      "status": "SUCCESS",
+      "ledger": 2015
+    },
+    {
+      "method": "observe",
+      "hash": "2a96031e3801337ce05bd93f5ddbbea8d081606bf700ccb162d505119dfd2e95",
+      "status": "SUCCESS",
+      "ledger": 2016
+    },
+    {
+      "method": "observe",
+      "hash": "9f90bdea4cc73357e644157741c20ddf959091a978486195ff3d116ea1deec3e",
+      "status": "SUCCESS",
+      "ledger": 2017
+    },
+    {
+      "method": "observe",
+      "hash": "ea980f92da451013535a2a4fad4e21d43ba01b36024871c091e4b73b2ac973b9",
+      "status": "SUCCESS",
+      "ledger": 2019
+    },
+    {
+      "method": "deploy",
+      "hash": "7306ab7d116d36f2e32d62592b5a6f91ad171c62bc3a409d495730f3da33f3a6",
+      "status": "SUCCESS",
+      "ledger": 2021
+    },
+    {
+      "method": "mint",
+      "hash": "e2d92931b0e9bef875c96fead728035d0cbb48bb028ee24f230bc9f731993b41",
+      "status": "SUCCESS",
+      "ledger": 2022
+    },
+    {
+      "method": "mint",
+      "hash": "b08f3379510c78de880cdce23f2b5f3115e0b376b2c2d67279b22abda2fe04fd",
+      "status": "SUCCESS",
+      "ledger": 2023
+    },
+    {
+      "method": "mint",
+      "hash": "7a6a513ccbced5ce178dd1d50e312f8506c0274fe0632690d2cdb35fa6c33380",
+      "status": "SUCCESS",
+      "ledger": 2025
+    },
+    {
+      "method": "mint",
+      "hash": "16862d009810c64483290acfaa7468dc284e311432002d0b544ffaa0935dec65",
+      "status": "SUCCESS",
+      "ledger": 2028
+    },
+    {
+      "method": "mint",
+      "hash": "2a69b89155cd98db54e243a4a86f96cefeac4e1293c956981879e7542e847dbf",
+      "status": "SUCCESS",
+      "ledger": 2030
+    },
+    {
+      "method": "mint",
+      "hash": "0e24921bc94eb09a03f3e410571edaf09428d9c21a4d222f999202c4953a71a3",
+      "status": "SUCCESS",
+      "ledger": 2032
+    },
+    {
+      "method": "deposit",
+      "hash": "b179f1402690b3f0dc7d4fd1063fb881c47a1c41763f29f1969e92308d99e58d",
+      "status": "SUCCESS",
+      "ledger": 2034
+    },
+    {
+      "method": "update",
+      "hash": "1354bb6aba474b83ca4593b1f71f723e4ad4f370987da7ad2881a1152fefcef7",
+      "status": "SUCCESS",
+      "ledger": 2036
+    },
+    {
+      "method": "update",
+      "hash": "bfb207bd23308e8d29601945a56b44a7e52c10f4acfaddc2be5756c9f01a0c93",
+      "status": "SUCCESS",
+      "ledger": 2038
+    },
+    {
+      "method": "redeem",
+      "hash": "a716387f2b934d2d8ce78afe1d7fc4a867d3557bf713db70b51411d2da501c87",
+      "status": "SUCCESS",
+      "ledger": 2040
+    }
+  ],
+  "funding": "public standalone genesis account; no portfolio XLM reimbursement",
+  "result": "passed",
+  "provider": "CBAJ5YKOACHPYN3LHMJDCK3DKIS75MFCZ4AI6VI5V4WQAITDS6QYYWMN",
+  "provider_config": {
+    "usdc": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+    "sources": [
+      {
+        "asset": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [
+          {
+            "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+            "asset": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "base": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "decimals": 14,
+            "resolution": 300,
+            "max_age": 3600
+          }
+        ],
+        "pool": "CAZYTFV4EG6NWAHZIHRJERKHDFE5YBWZGFQMCNPFSAHN3WZTCU3G2WKB",
+        "asset_is_token0": true,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [
+          {
+            "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+            "asset": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "base": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "decimals": 14,
+            "resolution": 300,
+            "max_age": 3600
+          }
+        ],
+        "pool": "CABDQUMKBF7INYHJP6E43EYIHX4KYOYORSALMDXCNI5SAASRPV3ONXWA",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [
+          {
+            "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+            "asset": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "base": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "decimals": 14,
+            "resolution": 300,
+            "max_age": 3600
+          }
+        ],
+        "pool": "CAIXHCCUJZ2FHRPISSNEJOZE4MC4YQS6DZFLHNYRHZXNGI54I3VNPSBH",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [
+          {
+            "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+            "asset": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "base": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "decimals": 14,
+            "resolution": 300,
+            "max_age": 3600
+          }
+        ],
+        "pool": "CDTVYXJ3KQK33G5LOMUSPKKBUHJEHCAYK3N4P3ASGNZC3RCIJCUJPZJ6",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [
+          {
+            "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+            "asset": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "base": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "decimals": 14,
+            "resolution": 300,
+            "max_age": 3600
+          }
+        ],
+        "pool": "CCUQWXUGVQALTD2NXGXHSCVZ2VTTJJGUSKPT3CU6I6NXOMW4OO43SVAL",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [
+          {
+            "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+            "asset": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "base": {
+              "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+            },
+            "decimals": 14,
+            "resolution": 300,
+            "max_age": 3600
+          }
+        ],
+        "pool": "CAIR5Q7MTOFEGGMR4X4ZOTCSD23HFTNWZXBNZAODZJHXV2H27LLL7FGP",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      }
+    ]
+  },
+  "config_hash": "e97cb27e67c0d1e2dd29504b6994e57d88ae304dc50cd0b8130fba5f66885b58",
+  "vault": "CBN5GIQ5QCLCIRDQM5QMCDYXEGRDAUEDVNSOAJTM2JBR5USTZ5WJNMJI",
+  "config": {
+    "assets": [
+      {
+        "address": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3",
+        "decimals": 7,
+        "kind": "Xlm"
+      },
+      {
+        "address": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+        "decimals": 7,
+        "kind": "Settlement"
+      },
+      {
+        "address": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA",
+        "decimals": 7,
+        "kind": "Reserve"
+      },
+      {
+        "address": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ",
+        "decimals": 7,
+        "kind": "Risk"
+      }
+    ],
+    "usdc": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+    "oracle": "CBAJ5YKOACHPYN3LHMJDCK3DKIS75MFCZ4AI6VI5V4WQAITDS6QYYWMN",
+    "router": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+    "route_contracts": [],
+    "pool": null,
+    "pool_assets": [],
+    "admin": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "executor": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "guardian": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "fees": {
+      "management_bps": 100,
+      "performance_bps": 1000,
+      "recipient": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5"
+    },
+    "borrowing": false,
+    "max_price_age": 3600,
+    "max_divergence_bps": 100,
+    "max_slippage_bps": 100,
+    "max_leg_bps": 2000,
+    "max_turnover_bps": 10000,
+    "max_loss_bps": 200,
+    "cooldown": 1,
+    "max_debt_bps": 0,
+    "min_health_bps": 12500
+  },
+  "marks": [
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758683
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758683
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758683
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758683
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758683
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758683
+    }
+  ],
+  "nav": 10060000000,
+  "minted_shares": 99462900706636,
+  "redeemed_assets": 999999998,
+  "final_state": {
+    "high_water": "10053999962755",
+    "last_execution": 0,
+    "last_fee": 1789758741,
+    "loss": "0",
+    "management_dust": "799670131158738742",
+    "nonce": 0,
+    "paused": false,
+    "performance_dust": "5837268000966",
+    "supply": "1000596783201727",
+    "turnover": "0",
+    "version": 1,
+    "window_equity": "10000000002",
+    "window_ledger": 2021
+  },
+  "upstream_pair_sha256": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+  "feed": "controlled local ABI fixture; deployed Reflector v6 spec is incompatible with pinned CLI 22",
+  "wasm_sha256": {
+    "etesia_pricing.optimized.wasm": "031518ad742ebebd86983adf63d1f0bb6f5c0212b244bada8f6d5b6f39be04bb",
+    "etesia_vault.optimized.wasm": "605f3ce004d000a383aa88a2a3527acef82c7567713ee6932e6766054f28e568",
+    "etesia_defindex_adapter.optimized.wasm": "9e24580022d90237b9d501ac6f209fec33ec1632723c345118d5139b12cdd811",
+    "etesia_local_fixture.optimized.wasm": "28b4f81dde95d3f8181e2267e18198e14e5ec4f162ad3a7c1b75b5ba88ae2a08",
+    "etesia_pricing_fixture.optimized.wasm": "4cb759e1ea7f1d041ef76e297f393adbcc19d062877630f2f63b86d353b24d26"
+  },
+  "scope": "local fixture tokens/feed; actual deployed Soroswap pair WASM; no external activation",
+  "recorded_at": "2026-09-18T19:12:45.799350+00:00",
+  "resource_profile_sha256": "dd1173416dd22f142cdf6e18d45ab53af504917a02ba6fb89d1030fd05909346"
+}

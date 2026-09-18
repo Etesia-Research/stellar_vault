@@ -537,6 +537,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "etesia-pricing"
+version = "0.1.0"
+dependencies = [
+ "etesia-vault",
+ "soroban-sdk",
+]
+
+[[package]]
+name = "etesia-pricing-fixture"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
 name = "etesia-vault"
 version = "0.1.0"
 dependencies = [

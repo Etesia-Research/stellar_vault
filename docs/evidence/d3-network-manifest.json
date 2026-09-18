@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "captured_at": "2026-09-18T18:45:13.910Z",
+  "scope": "mainnet read-only research; not a deployment or activation manifest",
+  "network": "Public Global Stellar Network ; September 2015",
+  "protocol": 28,
+  "selected_activation_network": null,
+  "provider_address": null,
+  "production_config_hash": null,
+  "compatible_vault_baseline": "8aa929092435ab82fccb8ae24f00bba9e4cc1387",
+  "provider_abi_source": "https://github.com/reflector-network/reflector-contract/tree/42f3116b0c5ea335181508c926e5ec48d67af419",
+  "pair_source": "https://github.com/soroswap/core/tree/6eade008ee6794075ad941609e0fef0d1124d3eb",
+  "deployed_reflector": {
+    "stellar": {
+      "id": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "identity": {
+        "status": "verified",
+        "value": {
+          "ledger": 64494266,
+          "wasm_hash": "8ecd1857496df2c15aaab4d18d2d7689542a62814245e9b2c613c609b86bd11c",
+          "sha256": "8ecd1857496df2c15aaab4d18d2d7689542a62814245e9b2c613c609b86bd11c",
+          "bytes": 19169,
+          "spec_bytes": 2472
+        }
+      },
+      "history_retention_period": {
+        "status": "verified",
+        "value": "86400"
+      },
+      "admin": {
+        "status": "verified",
+        "value": "GC2M2UTZ57GSENZBTPMLPB6QSAL2USIPHMXSUCT2I3V24GYWF3EI6RFA"
+      },
+      "version": {
+        "status": "verified",
+        "value": 6
+      }
+    },
+    "external": {
+      "id": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+      "identity": {
+        "status": "verified",
+        "value": {
+          "ledger": 64494267,
+          "wasm_hash": "8ecd1857496df2c15aaab4d18d2d7689542a62814245e9b2c613c609b86bd11c",
+          "sha256": "8ecd1857496df2c15aaab4d18d2d7689542a62814245e9b2c613c609b86bd11c",
+          "bytes": 19169,
+          "spec_bytes": 2472
+        }
+      },
+      "history_retention_period": {
+        "status": "verified",
+        "value": "86400"
+      },
+      "admin": {
+        "status": "verified",
+        "value": "GCJ2RDQLOVNOYBD2LELEGEVIDZ3LRLPHGANVOFJZXTUQHKHVZX2LMRFB"
+      },
+      "version": {
+        "status": "verified",
+        "value": 6
+      }
+    }
+  },
+  "production_limits": null,
+  "observation_definition": "direct reserve ratio, implemented for local qualification; trapezoidal three-observation TWAP",
+  "coverage": {
+    "USDC": {
+      "status": "verified",
+      "contract": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+      "issuer": [
+        "USDC",
+        "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
+      ],
+      "decimals": 7,
+      "reflector": null,
+      "pool": null,
+      "activation": false,
+      "reason": "USDC/USDC is one by denomination; conversion reference Other(USDC)/USD is separately verified."
+    },
+    "XLM": {
+      "status": "verified",
+      "contract": "CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA",
+      "issuer": null,
+      "decimals": 7,
+      "reflector": {
+        "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+        "key": [
+          "Stellar",
+          "CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA"
+        ],
+        "base": [
+          "Stellar",
+          "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75"
+        ],
+        "decimals": 14,
+        "resolution_seconds": 300
+      },
+      "pool": {
+        "status": "verified",
+        "value": {
+          "id": "CAM7DY53G63XA4AJRS24Z6VFYAFSSF76C3RZ45BE5YU3FQS5255OOABP",
+          "identity": {
+            "status": "verified",
+            "value": {
+              "ledger": 64494267,
+              "wasm_hash": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+              "sha256": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+              "bytes": 27410,
+              "spec_bytes": 7728
+            }
+          },
+          "token0": "CAS3J7GYLGXMF6TDJBBYYSE3HQ6BBSMLNUQ34T6TZMYMW2EVH34XOWMA",
+          "token1": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+          "reserves": [
+            "3195218939703",
+            "615469300004"
+          ]
+        }
+      },
+      "activation": false
+    },
+    "AQUA": {
+      "status": "unverified",
+      "contract": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK",
+      "issuer": [
+        "AQUA",
+        "GBNZILSTVQZ4R7IKQDGHYGY2QXL5QOFJYQMXPKWRRM5PAV7Y4M67AQUA"
+      ],
+      "decimals": 7,
+      "reflector": {
+        "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+        "key": [
+          "Stellar",
+          "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK"
+        ],
+        "base": [
+          "Stellar",
+          "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75"
+        ],
+        "decimals": 14,
+        "resolution_seconds": 300
+      },
+      "pool": {
+        "status": "verified",
+        "value": {
+          "id": "CB3CBFWCLES4VUFXDYKH3KW6SO2XJEH3SJSPX36FHLV4I544M2CI4L63",
+          "identity": {
+            "status": "verified",
+            "value": {
+              "ledger": 64494267,
+              "wasm_hash": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+              "sha256": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+              "bytes": 27410,
+              "spec_bytes": 7728
+            }
+          },
+          "token0": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK",
+          "token1": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+          "reserves": [
+            "13137990305",
+            "4494706"
+          ]
+        }
+      },
+      "activation": false,
+      "reason": "Feed and direct pool verified, but USDC reserve was only 0.4494706; adequate breaker depth is unverified."
+    },
+    "SHX": {
+      "status": "unsupported",
+      "contract": "CCKCKCPHYVXQD4NECBFJTFSCU2AMSJGCNG4O6K4JVRE2BLPR7WNDBQIQ",
+      "issuer": [
+        "SHX",
+        "GDSTRSHXHGJ7ZIVRBXEYE5Q74XUVCUSEKEBR7UCHEUUEK72N7I7KJ6JH"
+      ],
+      "decimals": 7,
+      "reflector": {
+        "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+        "key": [
+          "Stellar",
+          "CCKCKCPHYVXQD4NECBFJTFSCU2AMSJGCNG4O6K4JVRE2BLPR7WNDBQIQ"
+        ],
+        "base": [
+          "Stellar",
+          "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75"
+        ],
+        "decimals": 14,
+        "resolution_seconds": 300
+      },
+      "pool": {
+        "status": "unverified",
+        "error": "HostError: Error(Contract, #205)\n\nEvent log (newest first):\n   0: [Diagnostic Event] contract:CA4HEQTL2WPEUYKYKCDOHCDNIV4QHNJ7EL4J4NQ6VADP7SYHVRYZ7AW2, topics:[error, Error(Contract, #205)], data:\"escalating Ok(ScErrorType::Contract) frame-exit to Err\"\n   1: [Diagnostic Event] topics:[fn_call, CA4HEQTL2WPEUYKYKCDOHCDNIV4QHNJ7EL4J4NQ6VADP7SYHVRYZ7AW2, get_pair], data:[CCKCKCPHYVXQD4NECBFJTFSCU2AMSJGCNG4O6K4JVRE2BLPR7WNDBQIQ, CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75]\n"
+      },
+      "activation": false,
+      "reason": "Exact token absent from Stellar feed list; lastprice returned None. Direct pair query failed with factory error 205."
+    },
+    "USTRY": {
+      "status": "verified",
+      "contract": "CBLV4ATSIWU67CFSQU2NVRKINQIKUZ2ODSZBUJTJ43VJVRSBTZYOPNUR",
+      "issuer": [
+        "USTRY",
+        "GCRYUGD5NVARGXT56XEZI5CIFCQETYHAPQQTHO2O3IQZTHDH4LATMYWC"
+      ],
+      "decimals": 7,
+      "reflector": {
+        "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+        "key": [
+          "Stellar",
+          "CBLV4ATSIWU67CFSQU2NVRKINQIKUZ2ODSZBUJTJ43VJVRSBTZYOPNUR"
+        ],
+        "base": [
+          "Stellar",
+          "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75"
+        ],
+        "decimals": 14,
+        "resolution_seconds": 300
+      },
+      "pool": {
+        "status": "verified",
+        "value": {
+          "id": "CDIXSYDR7S5OLT56JM7G5Y5LHH6NEFINZOE2YG2TJEXHHYWKLV3FDCCU",
+          "identity": {
+            "status": "verified",
+            "value": {
+              "ledger": 64494268,
+              "wasm_hash": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+              "sha256": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+              "bytes": 27410,
+              "spec_bytes": 7728
+            }
+          },
+          "token0": "CBLV4ATSIWU67CFSQU2NVRKINQIKUZ2ODSZBUJTJ43VJVRSBTZYOPNUR",
+          "token1": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+          "reserves": [
+            "431666669525",
+            "463044006644"
+          ]
+        }
+      },
+      "activation": false
+    },
+    "BTC": {
+      "status": "unverified",
+      "contract": null,
+      "wrapper_basis": null,
+      "decimals": null,
+      "reflector": {
+        "contract": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+        "key": [
+          "Other",
+          "BTC"
+        ],
+        "base": [
+          "Other",
+          "USD"
+        ],
+        "decimals": 14,
+        "resolution_seconds": 300
+      },
+      "conversion": {
+        "contract": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+        "key": [
+          "Other",
+          "USDC"
+        ],
+        "base": [
+          "Other",
+          "USD"
+        ]
+      },
+      "pool": null,
+      "activation": false
+    },
+    "ETH": {
+      "status": "unverified",
+      "contract": null,
+      "wrapper_basis": null,
+      "decimals": null,
+      "reflector": {
+        "contract": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+        "key": [
+          "Other",
+          "ETH"
+        ],
+        "base": [
+          "Other",
+          "USD"
+        ],
+        "decimals": 14,
+        "resolution_seconds": 300
+      },
+      "conversion": {
+        "contract": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+        "key": [
+          "Other",
+          "USDC"
+        ],
+        "base": [
+          "Other",
+          "USD"
+        ]
+      },
+      "pool": null,
+      "activation": false
+    }
+  },
+  "remaining": [
+    "SHX Reflector/pool coverage decision",
+    "BTC/ETH exact wrappers and basis; direct pools",
+    "AQUA adequate breaker depth",
+    "selected network and protocol compatibility",
+    "calibrated per-leg age/skew/spacing/gap/depth/divergence and trade loss limits",
+    "reviewed stale-mark entry/exit mitigation",
+    "upstream upgrade monitoring with guardian pause procedure",
+    "sustained collection/TTL operation and target-network resource simulation"
+  ]
+}

@@ -42,7 +42,7 @@ pub fn price(e: &Env, a: &Asset) -> Result<i128, Error> {
         e,
         (mark.price - mark.reference).abs(),
         BPS,
-        mark.reference,
+        mark.price,
         true,
     ) > i128::from(c.max_divergence_bps)
     {

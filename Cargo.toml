@@ -1,5 +1,5 @@
 [workspace]
-members = ["contracts/vault", "contracts/adapter", "tools/local-fixture"]
+members = ["contracts/vault", "contracts/adapter", "contracts/pricing", "tools/local-fixture", "tools/pricing-fixture"]
 exclude = ["vendor/defindex"]
 resolver = "2"
 

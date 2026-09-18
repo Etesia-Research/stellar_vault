@@ -1,0 +1,835 @@
+{
+  "network": "local-only",
+  "passphrase": "Standalone Network ; September 2026",
+  "rpc": "http://127.0.0.1:8003",
+  "protocol": 22,
+  "assets": [
+    {
+      "symbol": "USDC",
+      "address": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+      "decimals": 7,
+      "kind": "Settlement"
+    },
+    {
+      "symbol": "XLM",
+      "address": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3",
+      "decimals": 7,
+      "kind": "Xlm"
+    },
+    {
+      "symbol": "AQUA",
+      "address": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "ETH",
+      "address": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "BTC",
+      "address": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "SHX",
+      "address": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO",
+      "decimals": 7,
+      "kind": "Risk"
+    },
+    {
+      "symbol": "USTRY",
+      "address": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA",
+      "decimals": 7,
+      "kind": "Reserve"
+    }
+  ],
+  "transactions": [
+    {
+      "method": "deploy",
+      "hash": "ae3e6a03c452ce01f75279c22a2fcef33b1205c9c69a9f97a91936ae7bc08c83",
+      "status": "SUCCESS",
+      "ledger": 1866
+    },
+    {
+      "method": "mint",
+      "hash": "f99c88ebe257b46225d6bf662091ff756a533462d771d18c942c66a49c9574fd",
+      "status": "SUCCESS",
+      "ledger": 1868
+    },
+    {
+      "method": "deploy",
+      "hash": "8ff3d82d34babbff8732022a5dd0dc216cd466bfc8d9d775a0870c369eb2137e",
+      "status": "SUCCESS",
+      "ledger": 1870
+    },
+    {
+      "method": "mint",
+      "hash": "cc53e4f49ee0ebe0be4e7642d488ec22fa7d1e880480162dcd9d9454e0abbc3b",
+      "status": "SUCCESS",
+      "ledger": 1872
+    },
+    {
+      "method": "deploy",
+      "hash": "3ca8b95cb0806f40b1f5c39ea121447a8713a640a502103d8d774941af7a8102",
+      "status": "SUCCESS",
+      "ledger": 1873
+    },
+    {
+      "method": "mint",
+      "hash": "58c81e6d58f87bfad23fd427255cf5b7dc46e16f25e263d318a51e3fc6cb2d64",
+      "status": "SUCCESS",
+      "ledger": 1874
+    },
+    {
+      "method": "deploy",
+      "hash": "f74a404e755ad31cca0a13fc630eb206121136ace3827200e1c0632a8e138ec5",
+      "status": "SUCCESS",
+      "ledger": 1875
+    },
+    {
+      "method": "mint",
+      "hash": "de5457af3ed5de5843fdd55a4e99c54efb7f8a0886b55af58b4461bd47fb5e0a",
+      "status": "SUCCESS",
+      "ledger": 1876
+    },
+    {
+      "method": "deploy",
+      "hash": "e56437849e69cb178e4b4286c02e0b2a478269153967c2f0f438f6944f936f29",
+      "status": "SUCCESS",
+      "ledger": 1878
+    },
+    {
+      "method": "mint",
+      "hash": "265694171c5ad10bcdda8d1377c03d9a4b7ce5aec3f36790f9ce8a497a64e775",
+      "status": "SUCCESS",
+      "ledger": 1880
+    },
+    {
+      "method": "deploy",
+      "hash": "5b8bb7090c0a9cef4b1f1e2480805588978ea8f4791630f4c45174a2e5fd920b",
+      "status": "SUCCESS",
+      "ledger": 1881
+    },
+    {
+      "method": "mint",
+      "hash": "259c5dcd682ed8b9c1d040a20c01c28dbba83e517ab347bcbe6e00d98dd4b5fa",
+      "status": "SUCCESS",
+      "ledger": 1882
+    },
+    {
+      "method": "deploy",
+      "hash": "206a7f9f1869e6c600e0f92efbf543458d13745066c0a1310d137be9cc6c8813",
+      "status": "SUCCESS",
+      "ledger": 1883
+    },
+    {
+      "method": "mint",
+      "hash": "69e988474ee6a273190a2eff7e0762327a858167a45d1cf1875ddfc2dcc54317",
+      "status": "SUCCESS",
+      "ledger": 1884
+    },
+    {
+      "method": "deploy",
+      "hash": "5e65d48cef96e00d54e2c4a6713625d61519cea99cb0f6b50ec080fc80e6feef",
+      "status": "SUCCESS",
+      "ledger": 1885
+    },
+    {
+      "method": "deploy",
+      "hash": "6df3c8d4f3c1aefb914397c5706bffa6f3df769ed7dc6e2613b3817367604e38",
+      "status": "SUCCESS",
+      "ledger": 1887
+    },
+    {
+      "method": "initialize",
+      "hash": "bd60aef47c45b6ccf2095b4f57623b598337459e0e9cdfe7555cac5e7fba3dab",
+      "status": "SUCCESS",
+      "ledger": 1889
+    },
+    {
+      "method": "mint",
+      "hash": "217afe19f12b530d3cdcee41b57eed1311ab37866b990215050daf008f2f8e83",
+      "status": "SUCCESS",
+      "ledger": 1890
+    },
+    {
+      "method": "mint",
+      "hash": "4b072691be0a0871792267eae7e06883716cb0879c0cfdca96f22906ef5ee650",
+      "status": "SUCCESS",
+      "ledger": 1891
+    },
+    {
+      "method": "sync",
+      "hash": "b4c000cc5d5618924b7250981f33580d4354b0dda3a744f153177cf86d7a1db0",
+      "status": "SUCCESS",
+      "ledger": 1892
+    },
+    {
+      "method": "update",
+      "hash": "2c371856fd3f40c16e3589758ef28f447195e1b1460595ad735f2b415e6fa59b",
+      "status": "SUCCESS",
+      "ledger": 1893
+    },
+    {
+      "method": "deploy",
+      "hash": "c569f404f64f37657aa8e4afcd1def5d34f0dca09ef385dc60ff9045ad4f1357",
+      "status": "SUCCESS",
+      "ledger": 1895
+    },
+    {
+      "method": "initialize",
+      "hash": "764aae5969b045e97e0100e5e76e9f61e1dcc09d610cc758c798151c7810a26a",
+      "status": "SUCCESS",
+      "ledger": 1897
+    },
+    {
+      "method": "mint",
+      "hash": "6e9e5aae985f6e66c4311c189ce96d5f4d2e9f4f143c3decc01aa4d2c19e30d1",
+      "status": "SUCCESS",
+      "ledger": 1898
+    },
+    {
+      "method": "mint",
+      "hash": "eccbcb70a81034429881eb803af70eb296791c7294c177330fc64d6f3563e5fa",
+      "status": "SUCCESS",
+      "ledger": 1899
+    },
+    {
+      "method": "sync",
+      "hash": "2c9d67bc50c812daf4239920a088cee222b40a748f67c92ca7766847eac8aa92",
+      "status": "SUCCESS",
+      "ledger": 1900
+    },
+    {
+      "method": "update",
+      "hash": "6733542dcccb0d94f550d8d2a5da7c434ec999c8a97599bb530defa740aa971a",
+      "status": "SUCCESS",
+      "ledger": 1902
+    },
+    {
+      "method": "deploy",
+      "hash": "91bbb63406a287e80f435b48c61fe4f9df17a0c52444ca889baff2402c108340",
+      "status": "SUCCESS",
+      "ledger": 1904
+    },
+    {
+      "method": "initialize",
+      "hash": "71bd733bea9ca8d9b675fb7689506f4e196982cd03b8cce1475a1a87ffd761f7",
+      "status": "SUCCESS",
+      "ledger": 1905
+    },
+    {
+      "method": "mint",
+      "hash": "869374345ce67dbc50b73e987095f28bf1eb3ae42abe36354692250e03d955ac",
+      "status": "SUCCESS",
+      "ledger": 1906
+    },
+    {
+      "method": "mint",
+      "hash": "7a87ce3d4d6d9c71df09163926c00f184fde09f7efe1d893aa66947f38622b90",
+      "status": "SUCCESS",
+      "ledger": 1907
+    },
+    {
+      "method": "sync",
+      "hash": "1d613266c256e1c4ef1d4daecffd572ea85e65b29b19166e21fbd4a62c6a60d4",
+      "status": "SUCCESS",
+      "ledger": 1909
+    },
+    {
+      "method": "update",
+      "hash": "d5d75d22e246762d135b532556e8e743a86a03b6b5e334d9a006e19eb7535391",
+      "status": "SUCCESS",
+      "ledger": 1911
+    },
+    {
+      "method": "deploy",
+      "hash": "7dcb3da8f57660751d5d1d8ba355471d0fa54b376a4aeb907ad1ecd1314ccdd4",
+      "status": "SUCCESS",
+      "ledger": 1912
+    },
+    {
+      "method": "initialize",
+      "hash": "de0a12fc13a6afc5f9e77dcf47a9314e1abe7ae5f4b93d9749914725297948a8",
+      "status": "SUCCESS",
+      "ledger": 1913
+    },
+    {
+      "method": "mint",
+      "hash": "1724a1ed8b1c998dfa2fccf2d6013722ac19ecf2e337a4a27d71d2a336fd2156",
+      "status": "SUCCESS",
+      "ledger": 1914
+    },
+    {
+      "method": "mint",
+      "hash": "fcdf6607d318d7059b0e8cc6d8c9578d9647b1c22ead89e809fad2cfe07233b1",
+      "status": "SUCCESS",
+      "ledger": 1915
+    },
+    {
+      "method": "sync",
+      "hash": "6096ed60dd08dd4c9464511d1824e188fb0707d3a8a074db833cc8b496533798",
+      "status": "SUCCESS",
+      "ledger": 1916
+    },
+    {
+      "method": "update",
+      "hash": "ae91e9a2b762e42f86c09405c2b5f51cb57fb27e3c107a659c30a6d13c432e47",
+      "status": "SUCCESS",
+      "ledger": 1918
+    },
+    {
+      "method": "deploy",
+      "hash": "e9e21e64fb8d5c92a001c7ed2f5aba3952d2884a865872cf645614e50c916713",
+      "status": "SUCCESS",
+      "ledger": 1920
+    },
+    {
+      "method": "initialize",
+      "hash": "7fb0822ec517cebaf34dd11689c987188b9900bac6142761126e817c5be1b03b",
+      "status": "SUCCESS",
+      "ledger": 1921
+    },
+    {
+      "method": "mint",
+      "hash": "b94f5c2841898bf1cd0eec769df2ef0c9b382af4b3478287a1447d4559c77cbc",
+      "status": "SUCCESS",
+      "ledger": 1922
+    },
+    {
+      "method": "mint",
+      "hash": "2d952982c65d045ae0170d96679ac89f49604b31221e1cddac02b61283eeb3ed",
+      "status": "SUCCESS",
+      "ledger": 1923
+    },
+    {
+      "method": "sync",
+      "hash": "096ae5b23a47bfd9ad19fcfa23779e6c6de4bdf5a7b02d72fdfea140a965e411",
+      "status": "SUCCESS",
+      "ledger": 1924
+    },
+    {
+      "method": "update",
+      "hash": "ecd385210023442678a11641155b2966d3211e5b4d9640f1d20137a33bd5b6a1",
+      "status": "SUCCESS",
+      "ledger": 1926
+    },
+    {
+      "method": "deploy",
+      "hash": "c2f9a558e53f0b29200b27a0255667a1998daaba3054e0886602920138cf7c72",
+      "status": "SUCCESS",
+      "ledger": 1928
+    },
+    {
+      "method": "initialize",
+      "hash": "ad1e1d378d5fc0c0e0ec8cd32083ad27ba264c90d014abaebf979c1e97fb240b",
+      "status": "SUCCESS",
+      "ledger": 1929
+    },
+    {
+      "method": "mint",
+      "hash": "117639b4211b80ec2a8c673ec859c04b3046407303ac553b4c64f5ede9be1481",
+      "status": "SUCCESS",
+      "ledger": 1930
+    },
+    {
+      "method": "mint",
+      "hash": "a1e8c5f41fe8634af797853385d766a3883cc3028eae75b5a7bd84e107f87b03",
+      "status": "SUCCESS",
+      "ledger": 1931
+    },
+    {
+      "method": "sync",
+      "hash": "e61b45f0defaba5f26e6f69c3fff1972c22318bd4f3efebd271b35fcff325f50",
+      "status": "SUCCESS",
+      "ledger": 1932
+    },
+    {
+      "method": "update",
+      "hash": "d75ba46c09830b604a6c5e8878eb87f820f8d3992d801ce738a97e6f1661820f",
+      "status": "SUCCESS",
+      "ledger": 1934
+    },
+    {
+      "method": "deploy",
+      "hash": "f4d9913f0631e213086599a5e2905971e39f17137bbbfd9f82344fd12d21bdb1",
+      "status": "SUCCESS",
+      "ledger": 1937
+    },
+    {
+      "method": "observe",
+      "hash": "5512f2197806c43b13dd5354774c8cf99b1c397f689f120f7a63485ec4d9b4ba",
+      "status": "SUCCESS",
+      "ledger": 1938
+    },
+    {
+      "method": "observe",
+      "hash": "836d0f193498869f9f5f4ea48bd28803461012e61c453910b086983507a6b335",
+      "status": "SUCCESS",
+      "ledger": 1939
+    },
+    {
+      "method": "observe",
+      "hash": "c8e3b4d53f0ef2f793960e2639fe68588e1f08ba3f398e3b996bcd3778643671",
+      "status": "SUCCESS",
+      "ledger": 1941
+    },
+    {
+      "method": "observe",
+      "hash": "e689ca3ca13b9c1e16f8f3e16b3dc358734e7d9c6a7a8e4c854c7d5dbe8708f7",
+      "status": "SUCCESS",
+      "ledger": 1943
+    },
+    {
+      "method": "observe",
+      "hash": "ead35e74e31f5acfbc70eaa52a686faa5d71ced127eaac41704d7003f93d800c",
+      "status": "SUCCESS",
+      "ledger": 1944
+    },
+    {
+      "method": "observe",
+      "hash": "9b837d6a168721d7fd40f2de8dc33d6bfce1803cf64de82cd65df368c8bb6052",
+      "status": "SUCCESS",
+      "ledger": 1945
+    },
+    {
+      "method": "observe",
+      "hash": "d4a26dd2f2af389de10647719cdd329fe7f72b1f8226f698897198eda2b8d669",
+      "status": "SUCCESS",
+      "ledger": 1947
+    },
+    {
+      "method": "observe",
+      "hash": "27372075187bd4c178e10e01d4601cea4ffd6915c9e6edafe103c1563c62c81e",
+      "status": "SUCCESS",
+      "ledger": 1949
+    },
+    {
+      "method": "observe",
+      "hash": "e633681ef557d8f9ef871e1a59e7bd5bd04404154bf72ccc2cd5a65661727508",
+      "status": "SUCCESS",
+      "ledger": 1950
+    },
+    {
+      "method": "observe",
+      "hash": "8aee88e4a90d52f64823826b4f0f90bb070341db6318c28432a2f650f2cf4d82",
+      "status": "SUCCESS",
+      "ledger": 1951
+    },
+    {
+      "method": "observe",
+      "hash": "abc75f3d61f488f4a6e3a532da84f5aa5601338ae00a25269e17e44c192ed777",
+      "status": "SUCCESS",
+      "ledger": 1952
+    },
+    {
+      "method": "observe",
+      "hash": "99db3a155f75561eaec91b6425fe62f5659610564b76c1b615ca7d8c75305066",
+      "status": "SUCCESS",
+      "ledger": 1954
+    },
+    {
+      "method": "observe",
+      "hash": "b8878ef7537e51e6e028408dbf4be6591af3d8edf72a3572a5abc997d1a4d2e8",
+      "status": "SUCCESS",
+      "ledger": 1956
+    },
+    {
+      "method": "observe",
+      "hash": "44c9d384eb28bf7abe2c5f5cd191bda85c0109f68f97dc2e2e4218bc69a01c3b",
+      "status": "SUCCESS",
+      "ledger": 1958
+    },
+    {
+      "method": "observe",
+      "hash": "33a3bfbbd0677778cc557f91c417924a980c6f82a519574eef08ab3c9c48a63e",
+      "status": "SUCCESS",
+      "ledger": 1960
+    },
+    {
+      "method": "observe",
+      "hash": "ba8b474774390014884feea96ad863bdb29da3627e025487134ed1c65dcdcb32",
+      "status": "SUCCESS",
+      "ledger": 1961
+    },
+    {
+      "method": "observe",
+      "hash": "f6ef3db562d100c8c0fe2ddf4813e7a6f164319e2534c95577fee8eacf5767dd",
+      "status": "SUCCESS",
+      "ledger": 1962
+    },
+    {
+      "method": "observe",
+      "hash": "6a9488d2ab59d79e0711f1aea3470240c84f0e4d4d11088ebac46cfe16e8fb28",
+      "status": "SUCCESS",
+      "ledger": 1963
+    },
+    {
+      "method": "deploy",
+      "hash": "d92d958f49198e54b4a38d5a86c170a3bbc9a05d6f50a542fcdfe377e6bd5826",
+      "status": "SUCCESS",
+      "ledger": 1965
+    },
+    {
+      "method": "mint",
+      "hash": "fcf4ab1ee889ca6efff684599b67c59574dc39b723615d6e0353e41db2f374f8",
+      "status": "SUCCESS",
+      "ledger": 1967
+    },
+    {
+      "method": "mint",
+      "hash": "204c57d6d3d2f72565aa6c51f87b51db314cc34111ad4d8ee5f56c72cf3968b8",
+      "status": "SUCCESS",
+      "ledger": 1968
+    },
+    {
+      "method": "mint",
+      "hash": "251acaf81220ec9058424d332f4d34c6d67028f49a2a075971104279855854a7",
+      "status": "SUCCESS",
+      "ledger": 1969
+    },
+    {
+      "method": "mint",
+      "hash": "c4a1508e0ce409d4283458d9e4c0b2ecfcc7d804ad152dd6fae41187292885c4",
+      "status": "SUCCESS",
+      "ledger": 1970
+    },
+    {
+      "method": "mint",
+      "hash": "52025390111fabf9291f9e77ae237c33a060ff937046d112649ba285df265210",
+      "status": "SUCCESS",
+      "ledger": 1972
+    },
+    {
+      "method": "mint",
+      "hash": "7071abf43ee02223db9059dafaffb61d36ebe2b5f7b683d38937ff5da03c8333",
+      "status": "SUCCESS",
+      "ledger": 1974
+    },
+    {
+      "method": "deposit",
+      "hash": "a3ca2e800c09d20361d2436d9b4e746e842f3ddb90058f810cd67529c3b1e4fe",
+      "status": "SUCCESS",
+      "ledger": 1976
+    },
+    {
+      "method": "update",
+      "hash": "0fe7119d6239978cc9e5721ee87df4d4cf708dcb65820477c0221ade488eb04c",
+      "status": "SUCCESS",
+      "ledger": 1978
+    },
+    {
+      "method": "update",
+      "hash": "95594dcd25b14dd3cb9916a8cc83e2fc43c632bcd42f782512d80bf35e4b4bf6",
+      "status": "SUCCESS",
+      "ledger": 1980
+    },
+    {
+      "method": "redeem",
+      "hash": "32ba1c0ff1a0e7b38ee5052ca86550d53304416c2c5dbf73f617a31e9aa05d62",
+      "status": "SUCCESS",
+      "ledger": 1982
+    }
+  ],
+  "funding": "public standalone genesis account; no portfolio XLM reimbursement",
+  "result": "passed",
+  "provider": "CDVSUUH5BMYX3V3SLLURX3BL2333BPQNBF4JKAKSU3UTAMC2Z5D2HIWZ",
+  "provider_config": {
+    "usdc": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+    "sources": [
+      {
+        "asset": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [],
+        "pool": "CAZYTFV4EG6NWAHZIHRJERKHDFE5YBWZGFQMCNPFSAHN3WZTCU3G2WKB",
+        "asset_is_token0": true,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [],
+        "pool": "CABDQUMKBF7INYHJP6E43EYIHX4KYOYORSALMDXCNI5SAASRPV3ONXWA",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [],
+        "pool": "CAIXHCCUJZ2FHRPISSNEJOZE4MC4YQS6DZFLHNYRHZXNGI54I3VNPSBH",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [],
+        "pool": "CDTVYXJ3KQK33G5LOMUSPKKBUHJEHCAYK3N4P3ASGNZC3RCIJCUJPZJ6",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [],
+        "pool": "CCUQWXUGVQALTD2NXGXHSCVZ2VTTJJGUSKPT3CU6I6NXOMW4OO43SVAL",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      },
+      {
+        "asset": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA",
+        "decimals": 7,
+        "numerator": {
+          "contract": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+          "asset": {
+            "Stellar": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA"
+          },
+          "base": {
+            "Stellar": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK"
+          },
+          "decimals": 14,
+          "resolution": 300,
+          "max_age": 3600
+        },
+        "denominator": [],
+        "pool": "CAIR5Q7MTOFEGGMR4X4ZOTCSD23HFTNWZXBNZAODZJHXV2H27LLL7FGP",
+        "asset_is_token0": false,
+        "min_asset_reserve": "10000000",
+        "min_usdc_reserve": "10000000",
+        "min_spacing": 1,
+        "max_gap": 300,
+        "max_age": 3600,
+        "max_skew": 3600,
+        "divergence_bps": 100
+      }
+    ]
+  },
+  "config_hash": "fdd7e3f4f3ff3aac696f0331c3cfb26bacf3e04d87fda0a6ab48b66934656ba9",
+  "vault": "CDPFD3345CMTJ5MFA7W22ZGGTUSOOGPCN46CJYF2N5IC2EZPA7EA7OCD",
+  "config": {
+    "assets": [
+      {
+        "address": "CAQ5AHOOIT5MVHGTO4VMVP57HVEW6DITBRMQLOQ7PHPADGX5T5BNEQN3",
+        "decimals": 7,
+        "kind": "Xlm"
+      },
+      {
+        "address": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+        "decimals": 7,
+        "kind": "Settlement"
+      },
+      {
+        "address": "CBACH7GLVS6KHYKMFXGCSVN3NWYC3WPEZIU7SMD2HZWOKORPWKX6ZQX6",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CBIHLATIO75JT62ATF3WJWT66GVJNZND4R3OMN4WGLB5UXU2RJ55IQMC",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CBIY7KMZARZMT4GHKMYWQTTISTSEKI5CM7QBFQHUFYWVD3L36UYAT3TA",
+        "decimals": 7,
+        "kind": "Reserve"
+      },
+      {
+        "address": "CCGKXMASVPIJIXLTAJPP7XRP5SMGIEKEFLJRGJ4K2G7L2DYPTG3C5RFO",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CDTGJAQOOBQZHX3TSV5IJI3LOM5XB6LHH5QPQDI5UPA45E25RCP6UEQJ",
+        "decimals": 7,
+        "kind": "Risk"
+      }
+    ],
+    "usdc": "CA2YTH43QTL2PZ5NXOPFOWX5KEAHR7ZA77WBN4GRJ7DLWHLCNY2VXYTK",
+    "oracle": "CDVSUUH5BMYX3V3SLLURX3BL2333BPQNBF4JKAKSU3UTAMC2Z5D2HIWZ",
+    "router": "CCLQHXPS662OOOUIPAARIWMQBLHDY2GMRKUNRKT6BAJV4O6YU3QF3P5P",
+    "route_contracts": [],
+    "pool": null,
+    "pool_assets": [],
+    "admin": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "executor": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "guardian": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "fees": {
+      "management_bps": 100,
+      "performance_bps": 1000,
+      "recipient": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5"
+    },
+    "borrowing": false,
+    "max_price_age": 3600,
+    "max_divergence_bps": 100,
+    "max_slippage_bps": 100,
+    "max_leg_bps": 2000,
+    "max_turnover_bps": 10000,
+    "max_loss_bps": 200,
+    "cooldown": 1,
+    "max_debt_bps": 0,
+    "min_health_bps": 12500
+  },
+  "marks": [
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758593
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758601
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758611
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758617
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758625
+    },
+    {
+      "price": "1000000000000",
+      "ready": true,
+      "reference": "1000000000000",
+      "timestamp": 1789758633
+    }
+  ],
+  "nav": 10060000000,
+  "minted_shares": 99462900650483,
+  "redeemed_assets": 999999998,
+  "final_state": {
+    "high_water": "10053999968431",
+    "last_execution": 0,
+    "last_fee": 1789758682,
+    "loss": "0",
+    "management_dust": "953986764134901228",
+    "nonce": 0,
+    "paused": false,
+    "performance_dust": "6819717714564",
+    "supply": "1000596782636818",
+    "turnover": "0",
+    "version": 1,
+    "window_equity": "10000000002",
+    "window_ledger": 1965
+  },
+  "upstream_pair_sha256": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+  "feed": "controlled local ABI fixture; deployed Reflector v6 spec is incompatible with pinned CLI 22",
+  "wasm_sha256": {
+    "etesia_pricing.optimized.wasm": "031518ad742ebebd86983adf63d1f0bb6f5c0212b244bada8f6d5b6f39be04bb",
+    "etesia_vault.optimized.wasm": "605f3ce004d000a383aa88a2a3527acef82c7567713ee6932e6766054f28e568",
+    "etesia_defindex_adapter.optimized.wasm": "9e24580022d90237b9d501ac6f209fec33ec1632723c345118d5139b12cdd811",
+    "etesia_local_fixture.optimized.wasm": "28b4f81dde95d3f8181e2267e18198e14e5ec4f162ad3a7c1b75b5ba88ae2a08",
+    "etesia_pricing_fixture.optimized.wasm": "4cb759e1ea7f1d041ef76e297f393adbcc19d062877630f2f63b86d353b24d26"
+  },
+  "scope": "local fixture tokens/feed; actual deployed Soroswap pair WASM; no external activation",
+  "recorded_at": "2026-09-18T19:12:45.764045+00:00",
+  "resource_profile_sha256": "dd1173416dd22f142cdf6e18d45ab53af504917a02ba6fb89d1030fd05909346"
+}

@@ -1,0 +1,89 @@
+{
+  "recorded_at": "2026-09-18T19:12:46.179923+00:00",
+  "command": "sh scripts/check.sh",
+  "lines": {
+    "count": 2345,
+    "covered": 2204,
+    "percent": 93.9872068230277
+  },
+  "files": {
+    "contracts/adapter/src/lib.rs": {
+      "count": 108,
+      "covered": 102,
+      "percent": 94.44444444444444
+    },
+    "contracts/pricing/src/lib.rs": {
+      "count": 210,
+      "covered": 210,
+      "percent": 100.0
+    },
+    "contracts/pricing/src/math.rs": {
+      "count": 57,
+      "covered": 56,
+      "percent": 98.24561403508771
+    },
+    "contracts/pricing/src/sources.rs": {
+      "count": 101,
+      "covered": 84,
+      "percent": 83.16831683168317
+    },
+    "contracts/vault/src/blend.rs": {
+      "count": 78,
+      "covered": 54,
+      "percent": 69.23076923076923
+    },
+    "contracts/vault/src/execution.rs": {
+      "count": 709,
+      "covered": 661,
+      "percent": 93.22990126939351
+    },
+    "contracts/vault/src/fees.rs": {
+      "count": 87,
+      "covered": 86,
+      "percent": 98.85057471264368
+    },
+    "contracts/vault/src/governance.rs": {
+      "count": 104,
+      "covered": 97,
+      "percent": 93.26923076923077
+    },
+    "contracts/vault/src/lib.rs": {
+      "count": 528,
+      "covered": 507,
+      "percent": 96.02272727272727
+    },
+    "contracts/vault/src/math.rs": {
+      "count": 47,
+      "covered": 43,
+      "percent": 91.48936170212765
+    },
+    "contracts/vault/src/pricing.rs": {
+      "count": 196,
+      "covered": 192,
+      "percent": 97.95918367346938
+    },
+    "contracts/vault/src/storage.rs": {
+      "count": 82,
+      "covered": 75,
+      "percent": 91.46341463414635
+    },
+    "contracts/vault/src/token.rs": {
+      "count": 38,
+      "covered": 37,
+      "percent": 97.36842105263156
+    }
+  },
+  "exclusions": [
+    "vendor/",
+    "testutils.rs",
+    "tests.rs",
+    "types.rs",
+    "tools/"
+  ],
+  "tools": {
+    "rust": "1.84.1",
+    "sdk": "22.0.8",
+    "stellar_cli": "22.8.2",
+    "cargo_llvm_cov": "0.6.16"
+  }
+}

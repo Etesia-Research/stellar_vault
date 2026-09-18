@@ -1424,3 +1424,23 @@ fn ordinary_execution_cannot_use_the_partial_deleveraging_exception() {
     assert_eq!(c.holdings(), before);
     assert_eq!(c.state().nonce, 0);
 }
+
+#[test]
+fn divergence_is_rounded_up_relative_to_reflector() {
+    let f = Fixture::new(false, false);
+    f.donate(&f.risk, 10_000_000);
+    for (reference, accepted) in [(9900, true), (10100, true), (9899, false), (10101, false)] {
+        f.e.as_contract(&f.oracle, || {
+            f.e.storage().instance().set(
+                &f.risk,
+                &Mark {
+                    price: 10_000,
+                    reference,
+                    timestamp: f.e.ledger().timestamp(),
+                    ready: true,
+                },
+            );
+        });
+        assert_eq!(f.client().try_total_assets().is_ok(), accepted);
+    }
+}
