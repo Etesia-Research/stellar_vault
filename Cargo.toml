@@ -1,0 +1,24 @@
+[workspace]
+members = ["contracts/vault", "contracts/adapter", "tools/local-fixture"]
+exclude = ["vendor/defindex"]
+resolver = "2"
+
+[workspace.dependencies]
+soroban-sdk = "=22.0.8"
+soroban-token-sdk = "=22.0.8"
+defindex-strategy-core = { path = "vendor/defindex/strategies/core" }
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = 0
+strip = "symbols"
+panic = "abort"
+codegen-units = 1
+lto = true
+
+[profile.dev]
+debug = 0
+
+[profile.test]
+debug = 0

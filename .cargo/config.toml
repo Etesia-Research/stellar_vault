@@ -1,0 +1,3 @@
+[target.wasm32-unknown-unknown]
+# Protocol 22's WASM host excludes these Rust 1.84 default features.
+rustflags = ["-C", "target-feature=-reference-types,-multivalue"]

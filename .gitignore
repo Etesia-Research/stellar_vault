@@ -1,0 +1,9 @@
+**/target/
+/.tooling/
+/.stellar/
+**/test_snapshots/
+/coverage/
+/artifacts/local/
+.env
+
+__pycache__/

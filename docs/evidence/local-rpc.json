@@ -1,0 +1,428 @@
+{
+  "network": "local-only",
+  "passphrase": "Standalone Network ; September 2026",
+  "rpc": "http://127.0.0.1:8003",
+  "protocol": 22,
+  "assets": [
+    {
+      "symbol": "LOCAL-USDC",
+      "address": "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+      "kind": "Settlement",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-XLM",
+      "address": "CDOUVH57IPHEUTJM4MOSW2SJYXSINSUHVELI5Z7T3PJWFQJ6JWWDOELG",
+      "kind": "Xlm",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-AQUA",
+      "address": "CC6GHIZQEV362GQOIRCT7W6KZJRQ374FB3CQX6LRJ6I477BYDQFWSRFH",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-ETH",
+      "address": "CDFUAQBDNAIOPFM2N5RICWTPMTORYSOUFSWV6A4PIYSIIBMQF4V6KKY4",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-BTC",
+      "address": "CDYBLXI2SNICQJQYAVGR24UPB25XZPUGZVHSCDRQH577D6JCCMV24HRG",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-SHX",
+      "address": "CD3UF3CXM2QMJIFGXLRJ7ODHC2VTQXHTSJSE4IW662455GLTDXIS7BTM",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-USTRY",
+      "address": "CC34SKN6KV53YQFMRDEGJIZAOFG6RZ5HDA3RFX3UYEYEZDWR2P76T5E6",
+      "kind": "Reserve",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    }
+  ],
+  "transactions": [
+    {
+      "method": "deploy",
+      "hash": "06a579a67e6381d64037043caef88c6ef15e4fe6fcaf27c834d66a0e57e43b31",
+      "status": "SUCCESS",
+      "ledger": 569
+    },
+    {
+      "method": "mint",
+      "hash": "5c1f8f3a9724164b13727d9a74b8e6929e4c55291f1e02ea377c553999375eed",
+      "status": "SUCCESS",
+      "ledger": 571
+    },
+    {
+      "method": "deploy",
+      "hash": "2e7ddedf7e0c099dd8c2907ce50b4a884ac2951794eace757997448f9a593cf6",
+      "status": "SUCCESS",
+      "ledger": 572
+    },
+    {
+      "method": "mint",
+      "hash": "87a6b1d0ce1a98e469eada8a85e58f17b6f9d5f8972d8cdc28da7c7f95d9982b",
+      "status": "SUCCESS",
+      "ledger": 574
+    },
+    {
+      "method": "deploy",
+      "hash": "84d21f5d06667b044cce66c0334195b14f45f407278ad1bf2e342e6edf576739",
+      "status": "SUCCESS",
+      "ledger": 576
+    },
+    {
+      "method": "mint",
+      "hash": "9437bddb5bba15060cd0641afeba2cf830304eb5465b1a216170e3de24abe733",
+      "status": "SUCCESS",
+      "ledger": 577
+    },
+    {
+      "method": "deploy",
+      "hash": "a63cae12e230a5975af9d40c701583aa6ae9e1c7f13a71987255a6a899390166",
+      "status": "SUCCESS",
+      "ledger": 578
+    },
+    {
+      "method": "mint",
+      "hash": "3e8061a71db01203129299a35a9c45debd259e20278cd12a3e5f52a105a78d6b",
+      "status": "SUCCESS",
+      "ledger": 579
+    },
+    {
+      "method": "deploy",
+      "hash": "f4d33adbd4582fa3ec6cbc3306fea3c845226fe2f4f129f771578885a6844a3b",
+      "status": "SUCCESS",
+      "ledger": 580
+    },
+    {
+      "method": "mint",
+      "hash": "74ab59fd59710c479e406ca23d6fbd5e5cea842d4505588ce95c5f73c6b89b25",
+      "status": "SUCCESS",
+      "ledger": 582
+    },
+    {
+      "method": "deploy",
+      "hash": "9ff6a04d3f406588c0672b22178cb16791bcb382c818c2d999b4d8fa4989ce07",
+      "status": "SUCCESS",
+      "ledger": 584
+    },
+    {
+      "method": "mint",
+      "hash": "ffa7b53b6cb27a77c648092c5417023eaf5bdc03c8e574b956b6657fa495b435",
+      "status": "SUCCESS",
+      "ledger": 585
+    },
+    {
+      "method": "deploy",
+      "hash": "2cbdfd637029f4ca9b51e073a8acd679d93697d13a86260badf7a30b5bc94c5f",
+      "status": "SUCCESS",
+      "ledger": 586
+    },
+    {
+      "method": "mint",
+      "hash": "5664423f48ebeeaa2521934c5e7b5f5bb38000b0f808e22042b3b43ff04f25b9",
+      "status": "SUCCESS",
+      "ledger": 587
+    },
+    {
+      "method": "deploy",
+      "hash": "f5b802aa899cdb35b3c003609adc244b7ac48cf6ee0fd9f958ebb1d6ce2eba76",
+      "status": "SUCCESS",
+      "ledger": 588
+    },
+    {
+      "method": "mint",
+      "hash": "ea707496bc66f90ddab94fa47be00806767b499cd52ada8e80d2e3bd9c11d740",
+      "status": "SUCCESS",
+      "ledger": 589
+    },
+    {
+      "method": "mint",
+      "hash": "84236765fa782e96768b2c92724056542780b163ec2c9e30981b1b5e17e11569",
+      "status": "SUCCESS",
+      "ledger": 591
+    },
+    {
+      "method": "mint",
+      "hash": "0317650a789da957d6dc5717a7e7b2c40bcd190de68a559f4ab64fa9c51efbc9",
+      "status": "SUCCESS",
+      "ledger": 593
+    },
+    {
+      "method": "mint",
+      "hash": "88a73dd27543349182171fc3d02eda7879e74be421a37e1664ad32ede243f80f",
+      "status": "SUCCESS",
+      "ledger": 594
+    },
+    {
+      "method": "mint",
+      "hash": "a96144b5854f4df86d6159fbbcc4c8ff85a270b8a1ce491fdb4e6efc86acb408",
+      "status": "SUCCESS",
+      "ledger": 595
+    },
+    {
+      "method": "mint",
+      "hash": "6c7ccef416e590e0643571117a3f9d1295b4c94a4e45d592277e9b66eca5df5e",
+      "status": "SUCCESS",
+      "ledger": 596
+    },
+    {
+      "method": "mint",
+      "hash": "f443c7e012bdf52dea0c3d2a8c3ffa900cd5bcb037eaa867b0351879d7e17b32",
+      "status": "SUCCESS",
+      "ledger": 597
+    },
+    {
+      "method": "deploy",
+      "hash": "eb8b00311824490b8467471baf1f5dd4228b56cc98c713e062eff14e48efc301",
+      "status": "SUCCESS",
+      "ledger": 601
+    },
+    {
+      "method": "deposit",
+      "hash": "2732bd6b4f5987a9ac1faede0b5adf39b5413d876ccf90b1368d46a99d9e8597",
+      "status": "SUCCESS",
+      "ledger": 602
+    },
+    {
+      "method": "publish_target",
+      "hash": "6e4741e3e9e65e6888abfa0bb8b8539c2b05f5f56e27d8368bb40f5325b682b6",
+      "status": "SUCCESS",
+      "ledger": 604
+    },
+    {
+      "method": "execute",
+      "hash": "156b573d099830e429d96eabd2799af06c5494a8cb86024b191176a69ae80083",
+      "status": "SUCCESS",
+      "ledger": 606
+    },
+    {
+      "method": "collect_fees",
+      "hash": "236045801359858f644351aa87cf4fbba1c838373a985e8483d87d98f2f41678",
+      "status": "SUCCESS",
+      "ledger": 607
+    },
+    {
+      "method": "unwind",
+      "hash": "68a7d6aa8069b5a6bf2cb302aa94f25570ef6d7b05728962a2ca235dd72b8fab",
+      "status": "SUCCESS",
+      "ledger": 608
+    },
+    {
+      "method": "redeem",
+      "hash": "d215fa8c135fa032d56964a2dd48a39d5aae053a387b04578dcdb905f9d73519",
+      "status": "SUCCESS",
+      "ledger": 610
+    }
+  ],
+  "funding": "public standalone genesis account; no portfolio XLM reimbursement",
+  "vault": "CDJL4C3N6NZ7LKRBJ6GXKWACC6FUVXXJHXH4SHCX5JDUYKQICZ7MVAIR",
+  "config": {
+    "assets": [
+      {
+        "address": "CC34SKN6KV53YQFMRDEGJIZAOFG6RZ5HDA3RFX3UYEYEZDWR2P76T5E6",
+        "decimals": 7,
+        "kind": "Reserve"
+      },
+      {
+        "address": "CC6GHIZQEV362GQOIRCT7W6KZJRQ374FB3CQX6LRJ6I477BYDQFWSRFH",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+        "decimals": 7,
+        "kind": "Settlement"
+      },
+      {
+        "address": "CDFUAQBDNAIOPFM2N5RICWTPMTORYSOUFSWV6A4PIYSIIBMQF4V6KKY4",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CDOUVH57IPHEUTJM4MOSW2SJYXSINSUHVELI5Z7T3PJWFQJ6JWWDOELG",
+        "decimals": 7,
+        "kind": "Xlm"
+      },
+      {
+        "address": "CDYBLXI2SNICQJQYAVGR24UPB25XZPUGZVHSCDRQH577D6JCCMV24HRG",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CD3UF3CXM2QMJIFGXLRJ7ODHC2VTQXHTSJSE4IW662455GLTDXIS7BTM",
+        "decimals": 7,
+        "kind": "Risk"
+      }
+    ],
+    "usdc": "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+    "oracle": "CBAL6DHZ6HMGL7WCQPGDCAYROC6CCARG2DU2NHGKOMDJSJWA2MA27TF5",
+    "router": "CBAL6DHZ6HMGL7WCQPGDCAYROC6CCARG2DU2NHGKOMDJSJWA2MA27TF5",
+    "route_contracts": [
+      "CBAL6DHZ6HMGL7WCQPGDCAYROC6CCARG2DU2NHGKOMDJSJWA2MA27TF5"
+    ],
+    "pool": null,
+    "pool_assets": [],
+    "admin": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "executor": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "guardian": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "fees": {
+      "management_bps": 100,
+      "performance_bps": 1000,
+      "recipient": "GCS5YTBIT7UHRFCG4YOMQIUKPKXULPOXLQQZLKUVCYSW66IO4PJ6I6AR"
+    },
+    "borrowing": false,
+    "max_price_age": 300,
+    "max_divergence_bps": 100,
+    "max_slippage_bps": 100,
+    "max_leg_bps": 2000,
+    "max_turnover_bps": 10000,
+    "max_loss_bps": 200,
+    "cooldown": 1,
+    "max_debt_bps": 0,
+    "min_health_bps": 12500
+  },
+  "router": "CBAL6DHZ6HMGL7WCQPGDCAYROC6CCARG2DU2NHGKOMDJSJWA2MA27TF5",
+  "oracle": "CBAL6DHZ6HMGL7WCQPGDCAYROC6CCARG2DU2NHGKOMDJSJWA2MA27TF5",
+  "wasm_sha256": {
+    "etesia_vault.optimized.wasm": "3d783156c21df42433e2e480552d548cdd46bbdff0dc0b10d9e043340edad8f8",
+    "etesia_defindex_adapter.optimized.wasm": "9e24580022d90237b9d501ac6f209fec33ec1632723c345118d5139b12cdd811",
+    "etesia_local_fixture.optimized.wasm": "28b4f81dde95d3f8181e2267e18198e14e5ec4f162ad3a7c1b75b5ba88ae2a08"
+  },
+  "result": "passed",
+  "deposited_assets": 1000000000,
+  "minted_shares": 100000000031709,
+  "redeemed_assets": 999999997,
+  "final_state": {
+    "high_water": "10000000000000",
+    "last_execution": 608,
+    "last_fee": 1789742090,
+    "loss": "0",
+    "management_dust": "620150393072766808",
+    "nonce": 2,
+    "paused": false,
+    "performance_dust": "0",
+    "supply": "1000000003107559",
+    "turnover": "550000000",
+    "version": 1,
+    "window_equity": "10000000003",
+    "window_ledger": 601
+  },
+  "target": {
+    "network": "492b943b9c421932312b94f9de419b37d8d969b80f3f0dce7b0c3f1bbf43caa3",
+    "vault": "CDJL4C3N6NZ7LKRBJ6GXKWACC6FUVXXJHXH4SHCX5JDUYKQICZ7MVAIR",
+    "epoch": 1,
+    "expiry": 1789743883,
+    "model": "0101010101010101010101010101010101010101010101010101010101010101",
+    "dataset": "0202020202020202020202020202020202020202020202020202020202020202",
+    "holdings": "85c1f0b421ef5ec7f94ab7b5e71ae91576b96b3e009b918de7496debce2a17bb",
+    "assets": [
+      "CC34SKN6KV53YQFMRDEGJIZAOFG6RZ5HDA3RFX3UYEYEZDWR2P76T5E6",
+      "CC6GHIZQEV362GQOIRCT7W6KZJRQ374FB3CQX6LRJ6I477BYDQFWSRFH",
+      "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+      "CDFUAQBDNAIOPFM2N5RICWTPMTORYSOUFSWV6A4PIYSIIBMQF4V6KKY4",
+      "CDOUVH57IPHEUTJM4MOSW2SJYXSINSUHVELI5Z7T3PJWFQJ6JWWDOELG",
+      "CDYBLXI2SNICQJQYAVGR24UPB25XZPUGZVHSCDRQH577D6JCCMV24HRG",
+      "CD3UF3CXM2QMJIFGXLRJ7ODHC2VTQXHTSJSE4IW662455GLTDXIS7BTM"
+    ],
+    "weights": [
+      9500,
+      0,
+      250,
+      0,
+      250,
+      0,
+      0
+    ],
+    "yield_bps": 0,
+    "equity": "11000000000",
+    "supply": "1100000000348806"
+  },
+  "plan": {
+    "target": "1f15b2f269b131d8b0cb48514304239ff467625b28ba7f8960210d7bc6f475e4",
+    "epoch": 1,
+    "nonce": 0,
+    "version": 1,
+    "deadline": 1789743883,
+    "actions": [
+      {
+        "Swap": {
+          "token_in": "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+          "token_out": "CDOUVH57IPHEUTJM4MOSW2SJYXSINSUHVELI5Z7T3PJWFQJ6JWWDOELG",
+          "amount": "275000000",
+          "minimum": "275000000",
+          "distribution": [
+            {
+              "protocol_id": 0,
+              "path": [
+                "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+                "CDOUVH57IPHEUTJM4MOSW2SJYXSINSUHVELI5Z7T3PJWFQJ6JWWDOELG"
+              ],
+              "parts": 1,
+              "bytes": null
+            }
+          ],
+          "auth": [
+            {
+              "Transfer": [
+                "CDFQVQK2IGQZ5ZV2EXENKG4PQGZOPYPOXTGDY63BB66LS2GTNOC4A4S5",
+                "CBAL6DHZ6HMGL7WCQPGDCAYROC6CCARG2DU2NHGKOMDJSJWA2MA27TF5",
+                "275000000"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "resource_profile_sha256": "dd1173416dd22f142cdf6e18d45ab53af504917a02ba6fb89d1030fd05909346",
+  "scope": "Seven local token fixtures, fixture oracle/router, no external pool or live protocol activation",
+  "tools": {
+    "rust": "1.84.1",
+    "stellar_cli": "22.8.2",
+    "sdk": "22.0.8",
+    "host": "22.1.3",
+    "core": "22.4.1 (89b9af01e705e076cdc607177d7bb953d36c8d97)",
+    "rpc": "22.1.5-125"
+  },
+  "dependency_sources": {
+    "sep56": "265d64edc87627707941a31bd12798b7fdeb47d1",
+    "defindex": "be878a9c1b0b176ec4351a85dad5557425c4a97c",
+    "blend_v2": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117",
+    "soroswap_aggregator": "84de10e0f8d26168b4a76f8c23b963e50917517c"
+  },
+  "supported_actions": {
+    "spot": [
+      "Swap",
+      "unwind",
+      "redeem_in_kind"
+    ],
+    "pool": [],
+    "borrowing": []
+  },
+  "disabled_actions": [
+    "Collateral",
+    "Release",
+    "Borrow"
+  ],
+  "upstream_defindex_wasm_sha256": "185d4db73aa21a8739140f6616815df8147de38a9de8748929a8f40c80dbbe13",
+  "source_revision": "uncommitted initial D2 workspace; source hashes recorded separately",
+  "inactive_dependencies": [
+    "pool; no live Blend integration in this local deployment"
+  ]
+}

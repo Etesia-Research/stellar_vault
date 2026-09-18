@@ -1,0 +1,34 @@
+[workspace]
+members = ["common", "strategies/core", "vault"]
+exclude = [
+    "strategies/external_wasms",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0"
+repository = "https://github.com/paltalabs/defindex"
+homepage = "https://defindex.io"
+
+[workspace.dependencies]
+soroban-sdk = "22.0.3"
+soroban-token-sdk = { version = "22.0.3" }
+soroswap-library = "2.0.0"
+defindex-strategy-core={ path="./strategies/core", package="defindex-strategy-core" }
+common={ path="./common", package="common" }
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = 0
+strip = "symbols"
+debug-assertions = false
+panic = "abort"
+codegen-units = 1
+lto = true
+
+[profile.release-with-logs]
+inherits = "release"
+debug-assertions = true

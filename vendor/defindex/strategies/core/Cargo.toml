@@ -1,0 +1,18 @@
+[package]
+name = "defindex-strategy-core"
+description = "A foundational library for developing and integrating strategies into the DeFindex ecosystem, providing reusable abstractions, events, and custom error handling."
+version = "0.2.0"
+authors = ["coderipper <joaquin@paltalabs.io>"]
+license = { workspace = true }
+edition = { workspace = true }
+publish = true
+repository = { workspace = true }
+homepage = { workspace = true }
+keywords = ["soroban", "defindex", "strategy", "core", "stellar"]
+categories = ["cryptography::cryptocurrencies", "no-std", "development-tools"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
