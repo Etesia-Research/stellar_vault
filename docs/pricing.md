@@ -1,5 +1,7 @@
 # D3 pricing provider
 
+Current A48 qualification scope excludes SHX: XLM/AQUA/ETH/BTC and USTRY require sources, with USDC as settlement. The generic constructor capacity below is not an approved asset list. Exact AQUA feed/pool identities are verified, but its direct pool liquidity remains inadequate; see [acceptance](d3-acceptance.md).
+
 Implemented locally **2026-09-18**, on vault baseline `8aa9290`. See [acceptance](d3-acceptance.md) and the
 [network/source manifest](evidence/d3-network-manifest.json). Production network,
 limits and full-universe acceptance remain open. No live provider is activated.

@@ -67,6 +67,7 @@ assert hashlib.sha256(pair_wasm.read_bytes()).hexdigest() == pair_wasm.stem
 if CONVERSION:
     previous=json.loads((ROOT/"artifacts/local/d3/manifest.json").read_text())
     assert previous["result"]=="passed"
+    assert {a["symbol"] for a in previous["assets"]} == {"USDC", "XLM", "AQUA", "ETH", "BTC", "USTRY"}, "Rerun the direct scenario with the current universe"
     manifest["assets"]=previous["assets"]
     assets={a["symbol"]:a["address"] for a in manifest["assets"]}
     sources=previous["provider_config"]["sources"]
@@ -76,7 +77,7 @@ if CONVERSION:
         s["denominator"]=[{**s["numerator"],"asset":{"Stellar":assets["USDC"]}}]
         invoke(feed,"update",asset={"Stellar":s["asset"]},price=100_000_000_000_000,timestamp=int(time.time()))
 else:
-    for symbol, kind in [("USDC","Settlement"),("XLM","Xlm"),("AQUA","Risk"),("ETH","Risk"),("BTC","Risk"),("SHX","Risk"),("USTRY","Reserve")]:
+    for symbol, kind in [("USDC","Settlement"),("XLM","Xlm"),("AQUA","Risk"),("ETH","Risk"),("BTC","Risk"),("USTRY","Reserve")]:
         address=deploy(fixture,admin=root)
         manifest["assets"].append({"symbol":symbol,"address":address,"decimals":7,"kind":kind})
         invoke(address,"mint",to=root,amount=1_000_000_000_000)
@@ -104,7 +105,7 @@ assert all(m["ready"] and int(m["price"])==10**12 and int(m["reference"])==10**1
 config={"assets":sorted([{k:a[k] for k in ("address","decimals","kind")} for a in manifest["assets"]],key=lambda a:base64.b32decode(a["address"])[1:33]),"usdc":assets["USDC"],"oracle":provider,"router":feed,"route_contracts":[],"pool":None,"pool_assets":[],"admin":root,"executor":root,"guardian":root,"fees":{"management_bps":100,"performance_bps":1000,"recipient":root},"borrowing":False,"max_price_age":3600,"max_divergence_bps":100,"max_slippage_bps":100,"max_leg_bps":2000,"max_turnover_bps":10000,"max_loss_bps":200,"cooldown":1,"max_debt_bps":0,"min_health_bps":12500}
 vault=deploy(base/"etesia_vault.optimized.wasm",config=config,seed_from=root)
 for s in sources: invoke(s["asset"],"mint",to=vault,amount=10_000_000)
-nav=int(invoke(vault,"total_assets")); assert nav==10_060_000_000
+nav=int(invoke(vault,"total_assets")); assert nav==10_050_000_000
 shares=int(invoke(vault,"deposit",assets=1_000_000_000,receiver=root,from_=root,operator=root))
 state=invoke(vault,"state")
 invoke(feed,"update",asset={"Stellar":assets["XLM"]},price=0,timestamp=int(time.time()))

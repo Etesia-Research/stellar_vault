@@ -1,5 +1,9 @@
 # D3 implementation and acceptance evidence
 
+**Current scope — A48, 2026-09-18:** SHX is temporarily excluded from the vault and new simulated targets/reports. Qualification now covers XLM/AQUA/ETH/BTC, USTRY and USDC. Original seven-asset evidence below remains a historical snapshot; it does not describe the revised fixture configuration.
+
+**AQUA follow-up:** [unsigned calls at ledger 64494947](evidence/d3-aqua-followup.json), collected 19:41:57 UTC, confirm the exact AQUA SAC, Reflector USDC feed, factory pair, token ordering and seven-decimal units. The 19:40 feed mark was 0.00034565733339 USDC/AQUA. Reserves were **1,313.7990305 AQUA and 0.4494706 USDC**. Feed coverage is present; breaker liquidity still fails qualification. No transaction was signed, and no depth limit was relaxed.
+
 Reviewed **2026-09-18**. Local implementation is complete for the selected direct
 pool mechanism; full D3 acceptance remains blocked. Baseline vault revision:
 `8aa929092435ab82fccb8ae24f00bba9e4cc1387`. The
@@ -7,6 +11,10 @@ pool mechanism; full D3 acceptance remains blocked. Baseline vault revision:
 from the implementation snapshot captured before the initial D3 commit.
 See [provider interface/operations](pricing.md) and the
 [research network manifest](evidence/d3-network-manifest.json).
+
+## Reduced-universe verification
+
+The A48 rerun passed `sh scripts/check.sh` (63 native tests, 93.99% production line coverage). [Fresh isolated-node receipts](evidence/shx-exclusion-local-rpc.json) record six fixture assets, five provider mappings, 26 successful D2 receipts, 69 direct D3 receipts and 32 conversion D3 receipts. Both D3 scenarios produced 1,005 USDC NAV after five donations, blocked invalid-feed redemption without state changes and redeemed 99.9999998 USDC after recovery. The evidence records current script/build hashes; it establishes local behavior only.
 
 ## Local verification
 
@@ -76,7 +84,7 @@ reads primitive results and verifies the pool. No transactions were submitted.
 | AQUA | Exact issued SAC/feed/pair, seven decimals | Direct pair had only **0.4494706 USDC**; sufficient breaker depth is not established |
 | USTRY | Exact stablebond SAC, USDC feed above par, direct USDC pair, seven decimals | Calibration and sustained operation |
 | BTC / ETH | External reference-symbol USD marks | Exact Stellar wrappers, approved basis and breaker pools are unverified |
-| SHX | Exact SAC and seven decimals | Missing from selected Stellar Reflector asset list; `lastprice=None`; direct factory pair query returned error 205 |
+| SHX (excluded under A48) | Historical exact SAC and seven-decimal check | Outside current acceptance scope; earlier selected feed/direct pair coverage failed |
 | USDC | Exact settlement SAC, seven decimals, separate `Other("USDC")/USD` reference | Conversion basis approval; USDC/USDC itself remains one |
 
 Both feeds reported version 6, 14 decimals, 300-second public resolution and

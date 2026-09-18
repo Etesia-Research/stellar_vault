@@ -62,7 +62,7 @@ command(["keys", "generate", "local-fees", "--no-fund", "--overwrite"])
 recipient = command(["keys", "address", "local-fees"])
 base = ROOT / "target/wasm32-unknown-unknown/release"
 fixture = base / "etesia_local_fixture.optimized.wasm"
-for symbol, kind in [("USDC", "Settlement"), ("XLM", "Xlm"), ("AQUA", "Risk"), ("ETH", "Risk"), ("BTC", "Risk"), ("SHX", "Risk"), ("USTRY", "Reserve")]:
+for symbol, kind in [("USDC", "Settlement"), ("XLM", "Xlm"), ("AQUA", "Risk"), ("ETH", "Risk"), ("BTC", "Risk"), ("USTRY", "Reserve")]:
     address = deploy(fixture, admin=root)
     manifest["assets"].append({"symbol": "LOCAL-" + symbol, "address": address, "kind": kind, "decimals": 7, "issuer": "local fixture, not an issuer-backed asset"})
     invoke(address, "mint", to=root, amount=1_000_000_000_000)

@@ -23,7 +23,7 @@ for name, digest in manifest['wasm_sha256'].items():
     assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
 manifest.pop('transactions_log')
 manifest['resource_profile_sha256'] = hashlib.sha256((ROOT / 'fixtures/local-network-settings.json').read_bytes()).hexdigest()
-manifest['scope'] = 'Seven local token fixtures, fixture oracle/router, no external pool or live protocol activation'
+manifest['scope'] = 'Six local token fixtures, fixture oracle/router, no external pool or live protocol activation'
 manifest['tools'] = {'rust': '1.84.1', 'stellar_cli': '22.8.2', 'sdk': '22.0.8', 'host': '22.1.3', 'core': '22.4.1 (89b9af01e705e076cdc607177d7bb953d36c8d97)', 'rpc': '22.1.5-125'}
 manifest['dependency_sources'] = {'sep56': '265d64edc87627707941a31bd12798b7fdeb47d1', 'defindex': 'be878a9c1b0b176ec4351a85dad5557425c4a97c', 'blend_v2': 'ba22b487b2c5057a4ecc28b05b5193c28e4bd117', 'soroswap_aggregator': '84de10e0f8d26168b4a76f8c23b963e50917517c'}
 manifest['supported_actions'] = {'spot': ['Swap', 'unwind', 'redeem_in_kind'], 'pool': [], 'borrowing': []}

@@ -56,8 +56,8 @@ The legacy 64 KiB code limit cannot load this vault. These are recorded local
 compatibility settings, **not** a claim that an unspecified live deployment uses
 them. Verify current protocol/resources before accepting any external network.
 
-The smoke script checks the passphrase before acting. It deploys seven local
-USDC/XLM/AQUA/ETH/BTC/SHX/USTRY fixtures, a fixture oracle/router and funded vault;
+The smoke script checks the passphrase before acting. It deploys six local
+USDC/XLM/AQUA/ETH/BTC/USTRY fixtures, a fixture oracle/router and funded vault;
 deposits 100 USDC; publishes a bound target; swaps to XLM under vault guards;
 collects fees; performs permissionless unwind; and redeems the holder's complete
 share balance. It records addresses, config, WASM hashes, target/plan, transaction
@@ -66,3 +66,5 @@ source is activated. The reviewed public record is in [evidence](evidence/).
 
 Stellar network fees are paid by external local genesis funding. The portfolio's
 XLM buffer is not presented as a fee-payer reimbursement mechanism.
+
+The A48 six-asset rerun is recorded in [reduced-universe receipts](evidence/shx-exclusion-local-rpc.json). The original seven-asset evidence remains a dated historical snapshot.

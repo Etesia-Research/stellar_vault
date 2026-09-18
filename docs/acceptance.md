@@ -1,5 +1,7 @@
 # D2 acceptance evidence
 
+**Scope amendment — 2026-09-18:** A48 excludes SHX; current local deployment fixtures contain six assets (USDC/XLM/AQUA/ETH/BTC/USTRY). The seven-asset evidence below remains the original dated D2 snapshot. See [D3 acceptance](d3-acceptance.md) for current qualification scope.
+
 **Locally implemented and verified, 2026-09-18; initial D2 publication.**
 The approved D2 foundation is implemented in this independent Rust repository.
 No Testnet/Mainnet activation, real oracle/venue integration or audit acceptance

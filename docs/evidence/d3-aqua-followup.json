@@ -1,0 +1,105 @@
+{
+  "captured_at": "2026-09-18T19:41:57.256Z",
+  "scope": "unsigned mainnet reads; no transactions submitted; single snapshot does not establish acceptance",
+  "network": "Public Global Stellar Network ; September 2015",
+  "aqua": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK",
+  "usdc": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+  "feed": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+  "factory": "CA4HEQTL2WPEUYKYKCDOHCDNIV4QHNJ7EL4J4NQ6VADP7SYHVRYZ7AW2",
+  "pool": "CB3CBFWCLES4VUFXDYKH3KW6SO2XJEH3SJSPX36FHLV4I544M2CI4L63",
+  "calls": [
+    {
+      "contract": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK",
+      "method": "decimals",
+      "args": [],
+      "ledger": 64494947,
+      "value": 7
+    },
+    {
+      "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "method": "resolution",
+      "args": [],
+      "ledger": 64494947,
+      "value": 300
+    },
+    {
+      "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "method": "base",
+      "args": [],
+      "ledger": 64494947,
+      "value": [
+        "Stellar",
+        "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75"
+      ]
+    },
+    {
+      "contract": "CA4HEQTL2WPEUYKYKCDOHCDNIV4QHNJ7EL4J4NQ6VADP7SYHVRYZ7AW2",
+      "method": "get_pair",
+      "args": [
+        "AAAAEgAAAAEohS9owZhIjjRvsSEu1QKQU3Ycwk9FM5LjU5ggGwgl5w==",
+        "AAAAEgAAAAGt785ZruUpaPdgYdSUwlJbdWWfpClqZfSZ7ynlZHfklg=="
+      ],
+      "ledger": 64494947,
+      "value": "CB3CBFWCLES4VUFXDYKH3KW6SO2XJEH3SJSPX36FHLV4I544M2CI4L63"
+    },
+    {
+      "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "method": "decimals",
+      "args": [],
+      "ledger": 64494947,
+      "value": 14
+    },
+    {
+      "contract": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75",
+      "method": "decimals",
+      "args": [],
+      "ledger": 64494947,
+      "value": 7
+    },
+    {
+      "contract": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "method": "lastprice",
+      "args": [
+        "AAAAEAAAAAEAAAACAAAADwAAAAdTdGVsbGFyAAAAABIAAAABKIUvaMGYSI40b7EhLtUCkFN2HMJPRTOS41OYIBsIJec="
+      ],
+      "ledger": 64494947,
+      "value": {
+        "price": "34565733339",
+        "timestamp": "1789760400"
+      }
+    },
+    {
+      "contract": "CB3CBFWCLES4VUFXDYKH3KW6SO2XJEH3SJSPX36FHLV4I544M2CI4L63",
+      "method": "token_0",
+      "args": [],
+      "ledger": 64494947,
+      "value": "CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK"
+    },
+    {
+      "contract": "CB3CBFWCLES4VUFXDYKH3KW6SO2XJEH3SJSPX36FHLV4I544M2CI4L63",
+      "method": "get_reserves",
+      "args": [],
+      "ledger": 64494947,
+      "value": [
+        "13137990305",
+        "4494706"
+      ]
+    },
+    {
+      "contract": "CB3CBFWCLES4VUFXDYKH3KW6SO2XJEH3SJSPX36FHLV4I544M2CI4L63",
+      "method": "token_1",
+      "args": [],
+      "ledger": 64494947,
+      "value": "CCW67TSZV3SSS2HXMBQ5JFGCKJNXKZM7UQUWUZPUTHXSTZLEO7SJMI75"
+    }
+  ],
+  "summary": {
+    "reflector": {
+      "price": "34565733339",
+      "timestamp": "1789760400"
+    },
+    "aqua_reserve_atoms": "13137990305",
+    "usdc_reserve_atoms": "4494706",
+    "pool_price_scale_12": "342115186"
+  }
+}

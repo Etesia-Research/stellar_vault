@@ -1,5 +1,7 @@
 # Etesia vault
 
+**Current universe (A48, 2026-09-18):** XLM/AQUA/ETH/BTC risk assets, USTRY reserve and USDC settlement. SHX is temporarily excluded. Local fixture scripts configure these six assets; the contracts retain generic immutable asset configuration. AQUA remains unqualified for activation because breaker depth is inadequate. See [D3 acceptance](docs/d3-acceptance.md).
+
 D2 vault/adapter and D3 pricing provider, implemented and locally verified
 2026-09-18. Independent Soroban workspace for USDC custody and guarded valuation.
 See [acceptance and evidence](docs/acceptance.md), [ABI](docs/interfaces.md),
