@@ -1,0 +1,229 @@
+{
+  "date": "2026-09-18",
+  "base_revision": "ca95392d1f6be733f23aed704c3cbd5de0426eef",
+  "source_status": "uncommitted guard corrections",
+  "scope": "Seven local token fixtures and fixture oracle/router; new recovery/debt/reward cases exercised by native tests, not by a live pool.",
+  "checks": {
+    "command": "sh scripts/check.sh",
+    "native_tests": 46,
+    "new_regression_tests": 7,
+    "production_lines": {
+      "count": 1977,
+      "covered": 1853,
+      "percent": 93.72787051087508
+    }
+  },
+  "original_source_manifest": "source-manifest.json",
+  "original_source_sha256": "d91af877061e624465210a317e11aaf2d583193f7aab762dcacba0e17a9dee68",
+  "changed_files_sha256": {
+    "contracts/vault/src/blend.rs": "bbb691efe4baafe80e786601e42854c3c948fab7cfeb69bcb60cc941b6ee87ed",
+    "contracts/vault/src/execution.rs": "dcfb1f1e0760c7ad498d49e90dbd5d8d9d2adb263f3d6197c5ae87e6647d4a4b",
+    "contracts/vault/src/tests.rs": "510bd57d6788871b03dbed2efce2bf3fe65ce7de1c80df2e3fff5884cfd59ec4"
+  },
+  "source_sha256": "14d4359c66ca53098b82b50f0701780f2da11cf77eb4962db40f8ae8011fcda1",
+  "local_rpc": {
+    "network": "local-only",
+    "passphrase": "Standalone Network ; September 2026",
+    "protocol": 22,
+    "vault": "CAGJJASDGYMYWGZZASBO4YS3XHRTBQWWTDAQ7J3TNQL6IBDI5N4TRVRN",
+    "wasm_sha256": {
+      "etesia_vault.optimized.wasm": "82da484d18bf983f376079f97e1b72195cb66e8324aaf018203e1b4902560139",
+      "etesia_defindex_adapter.optimized.wasm": "9e24580022d90237b9d501ac6f209fec33ec1632723c345118d5139b12cdd811",
+      "etesia_local_fixture.optimized.wasm": "28b4f81dde95d3f8181e2267e18198e14e5ec4f162ad3a7c1b75b5ba88ae2a08"
+    },
+    "deposited_assets": 1000000000,
+    "minted_shares": 100000000031709,
+    "redeemed_assets": 999999997,
+    "final_state": {
+      "high_water": "10000000000000",
+      "last_execution": 121,
+      "last_fee": 1789744914,
+      "loss": "0",
+      "management_dust": "333188470869149295",
+      "nonce": 2,
+      "paused": false,
+      "performance_dust": "0",
+      "supply": "1000000003456367",
+      "turnover": "550000000",
+      "version": 1,
+      "window_equity": "10000000003",
+      "window_ledger": 113
+    },
+    "transactions": [
+      {
+        "method": "deploy",
+        "hash": "5c14f2701c532e583e41941779b61d0202fd75c9db059fdf9e98e0b71816162a",
+        "status": "SUCCESS",
+        "ledger": 82
+      },
+      {
+        "method": "mint",
+        "hash": "e08994638e348b1f4f25d02bf84d242c3f8b5f47d9a92b28819d5efc6c4adb84",
+        "status": "SUCCESS",
+        "ledger": 83
+      },
+      {
+        "method": "deploy",
+        "hash": "9df8e62be6e6f0926f9a7b07b7108259def7d2398a079978460256cb621788b3",
+        "status": "SUCCESS",
+        "ledger": 85
+      },
+      {
+        "method": "mint",
+        "hash": "9434e7f91c2d737e219094debe29d904638b8f99118ff790190cada3b2792c6c",
+        "status": "SUCCESS",
+        "ledger": 87
+      },
+      {
+        "method": "deploy",
+        "hash": "41833f88ba534e6aaae6988f9bf0ea5f093ab225d85353f8b7352768d3392bba",
+        "status": "SUCCESS",
+        "ledger": 88
+      },
+      {
+        "method": "mint",
+        "hash": "1dfed8bd5ccfdad08fc96fbde37b25c525d0a2d169d40d61d9f9fe99c2244c2d",
+        "status": "SUCCESS",
+        "ledger": 89
+      },
+      {
+        "method": "deploy",
+        "hash": "bbc2bd0c4ed1aa51deb160ee08399f9165874cc4c39c6217edaf1674d29fc4d5",
+        "status": "SUCCESS",
+        "ledger": 90
+      },
+      {
+        "method": "mint",
+        "hash": "2625620f6a31772f5180398ad41a23ab509ee319d032ed0890cfa2145467437d",
+        "status": "SUCCESS",
+        "ledger": 91
+      },
+      {
+        "method": "deploy",
+        "hash": "2a585f9dafee1c63a8c21732a6d28881e9aba7d490bf920d2b79a48b215dbddd",
+        "status": "SUCCESS",
+        "ledger": 92
+      },
+      {
+        "method": "mint",
+        "hash": "519671cf9d777222d4bb44a34072ea1bad4d77ffd8c494e7d06675e0efb4a107",
+        "status": "SUCCESS",
+        "ledger": 94
+      },
+      {
+        "method": "deploy",
+        "hash": "a0f9d95c94c678d7566d00acc39271cdeca5eee87cd609c6c46945ea429a7900",
+        "status": "SUCCESS",
+        "ledger": 96
+      },
+      {
+        "method": "mint",
+        "hash": "59277a12a30cfed1980b3e5dcfd9dd8dd440a721499f71123ef7c9b80d2109d1",
+        "status": "SUCCESS",
+        "ledger": 97
+      },
+      {
+        "method": "deploy",
+        "hash": "1622b0507edc580cc47740c94d709e3619c1ae6daa5cfa86e726d5f8a14eb044",
+        "status": "SUCCESS",
+        "ledger": 98
+      },
+      {
+        "method": "mint",
+        "hash": "e164cdf52978d32a274fdf1cc52e417a5f0d92905f9d0427b9793113ab12caa0",
+        "status": "SUCCESS",
+        "ledger": 99
+      },
+      {
+        "method": "deploy",
+        "hash": "9963edc5f78cdc56b05f3712b185684311d749a56cacebe70ef4f339148c8be3",
+        "status": "SUCCESS",
+        "ledger": 100
+      },
+      {
+        "method": "mint",
+        "hash": "d04cdab2447645b0568e983fa8a8fae539595dd8fad9c42d377c0a1904845ec9",
+        "status": "SUCCESS",
+        "ledger": 102
+      },
+      {
+        "method": "mint",
+        "hash": "d1a71f68486f941b683a98834d19c6c878fa9090792cba408e38501cc4b87d1a",
+        "status": "SUCCESS",
+        "ledger": 104
+      },
+      {
+        "method": "mint",
+        "hash": "4bec9b43caa11a1e16d811ae79eee6a35f6e9f7e7a1d69327b93ecbd37318119",
+        "status": "SUCCESS",
+        "ledger": 105
+      },
+      {
+        "method": "mint",
+        "hash": "82a1704dcd9518afac2fce477acee4f7bce3f94bf3f367000e63b815972d4e1a",
+        "status": "SUCCESS",
+        "ledger": 106
+      },
+      {
+        "method": "mint",
+        "hash": "bfc0caba39ca842af519cfe47279878c2827510cad93c671b496903db0039479",
+        "status": "SUCCESS",
+        "ledger": 107
+      },
+      {
+        "method": "mint",
+        "hash": "20cf5ef75b20e8eeeb9b0dfbbbdf9c668fa6bf46b3d0a6ab822b7b0e42bf646c",
+        "status": "SUCCESS",
+        "ledger": 108
+      },
+      {
+        "method": "mint",
+        "hash": "a784d2605158f40d952ddd07d315fdc45f17c103f43a11b0ea797cd47abb9104",
+        "status": "SUCCESS",
+        "ledger": 110
+      },
+      {
+        "method": "deploy",
+        "hash": "4b2caaedb19b20f1098e4f6123f0c40061f5f85c71a43cd7b35a1652641a8861",
+        "status": "SUCCESS",
+        "ledger": 113
+      },
+      {
+        "method": "deposit",
+        "hash": "9c19d059b01cf54f46cd5743710faae0d23fe35a83fc786057a78b23d01f3067",
+        "status": "SUCCESS",
+        "ledger": 114
+      },
+      {
+        "method": "publish_target",
+        "hash": "117a3c9ab87ea0176aee6ed5a1a78ae459018c350723fe2c3cc144c21323db5d",
+        "status": "SUCCESS",
+        "ledger": 116
+      },
+      {
+        "method": "execute",
+        "hash": "1310b8778d67af66ef54454b5aea719b34aa3892231e8c3c241e580e987435e2",
+        "status": "SUCCESS",
+        "ledger": 118
+      },
+      {
+        "method": "collect_fees",
+        "hash": "eb1c8174e90bb5ab9b80effd7c9104717d31e62fedb5425f71dba75eb768044f",
+        "status": "SUCCESS",
+        "ledger": 119
+      },
+      {
+        "method": "unwind",
+        "hash": "b7864ff2bc52500a7b526698c51d9bacaf8b58edc9a6896a7bb0864530cee41f",
+        "status": "SUCCESS",
+        "ledger": 121
+      },
+      {
+        "method": "redeem",
+        "hash": "6f725f9a5444b8751d7b679689b4fa5f28f3a5596eb8eda179b570bf4a758152",
+        "status": "SUCCESS",
+        "ledger": 123
+      }
+    ]
+  }
+}

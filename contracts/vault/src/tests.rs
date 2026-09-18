@@ -1213,3 +1213,214 @@ fn extreme_inputs_and_fee_intermediates_fail_atomically_instead_of_wrapping() {
     assert_eq!(before, c.state());
     assert_eq!(cash, c.liquid_assets());
 }
+
+#[test]
+fn recovery_rejects_excess_debt_purchases_and_unrepaid_tokens_while_paused() {
+    for case in 0..5 {
+        let f = Fixture::new(true, true);
+        let e = &f.e;
+        let c = f.client();
+        let amount = SEED_ASSETS / 20;
+        f.positions(0, amount * 3, if case == 0 { 1 } else { amount });
+        f.donate(&f.reserve, amount * 2);
+        if case == 2 {
+            f.donate(&f.xlm, amount / 2);
+        }
+        f.auth(&f.guardian, "pause", ().into_val(e));
+        c.pause();
+        e.mock_auths(&[]);
+        let state = c.state();
+        let holdings = c.holdings();
+        // Increased cash must not disguise oversized or unconsumed purchases,
+        // including cases where repayment tokens are already held.
+        let mut actions = vec![
+            e,
+            Action::Swap(f.swap(&f.reserve, &f.usdc, amount * 2)),
+            Action::Swap(f.swap(&f.usdc, &f.xlm, amount)),
+        ];
+        if case == 3 {
+            actions.push_back(Action::Repay(f.xlm.clone(), amount / 2));
+        }
+        if case == 4 {
+            e.as_contract(&f.router, || {
+                e.storage()
+                    .instance()
+                    .set(&symbol_short!("output"), &(amount * 2));
+            });
+        }
+        assert_eq!(
+            c.try_unwind(&actions, &0, &u64::MAX),
+            Err(Ok(Error::Limit.into()))
+        );
+        assert_eq!(c.state(), state);
+        assert_eq!(c.holdings(), holdings);
+    }
+}
+
+#[test]
+fn recovery_consumes_only_the_missing_repayment_assets() {
+    let f = Fixture::new(true, true);
+    let e = &f.e;
+    let c = f.client();
+    let amount = SEED_ASSETS / 20;
+    f.positions(0, amount * 3, amount);
+    f.donate(&f.xlm, amount / 2);
+    c.unwind(
+        &vec![
+            e,
+            Action::Swap(f.swap(&f.usdc, &f.xlm, amount / 2)),
+            Action::Repay(f.xlm.clone(), amount),
+        ],
+        &0,
+        &u64::MAX,
+    );
+    let xlm = c.holdings().iter().find(|h| h.asset == f.xlm).unwrap();
+    assert_eq!((xlm.spot, xlm.debt), (0, 0));
+}
+
+#[test]
+fn recovery_allows_partial_deleveraging_while_limits_remain_breached() {
+    let f = Fixture::new(true, true);
+    let e = &f.e;
+    let c = f.client();
+    f.positions(0, SEED_ASSETS, SEED_ASSETS);
+    f.auth(&f.guardian, "pause", ().into_val(e));
+    c.pause();
+    e.mock_auths(&[]);
+    let equity = c.total_assets();
+    for nonce in 0..2 {
+        c.unwind(
+            &vec![
+                e,
+                Action::Swap(f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 10)),
+                Action::Repay(f.xlm.clone(), SEED_ASSETS / 10),
+            ],
+            &nonce,
+            &u64::MAX,
+        );
+    }
+    assert_eq!(c.total_assets(), equity);
+    let debt = c.holdings().iter().find(|h| h.asset == f.xlm).unwrap().debt;
+    assert_eq!(debt, SEED_ASSETS * 8 / 10);
+    assert!(debt > equity / 2);
+    assert_eq!(c.state().nonce, 2);
+}
+
+#[test]
+fn recovery_rejects_deleveraging_that_worsens_pool_health() {
+    let f = Fixture::new(true, true);
+    let e = &f.e;
+    let c = f.client();
+    f.positions(0, SEED_ASSETS, SEED_ASSETS);
+    let before = c.holdings();
+    let state = c.state();
+    assert_eq!(
+        c.try_unwind(
+            &vec![
+                e,
+                Action::Swap(f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 10)),
+                Action::Repay(f.xlm.clone(), SEED_ASSETS / 10),
+                Action::Release(f.usdc.clone(), SEED_ASSETS / 5),
+            ],
+            &0,
+            &u64::MAX,
+        ),
+        Err(Ok(Error::Limit.into()))
+    );
+    assert_eq!(c.holdings(), before);
+    assert_eq!(c.state(), state);
+}
+
+#[test]
+fn reward_assets_cannot_be_bought_but_can_be_realized() {
+    let f = Fixture::new(false, false);
+    let e = &f.e;
+    let c = f.client();
+    e.as_contract(&f.vault, || {
+        let mut config = crate::storage::config(e);
+        let i = config
+            .assets
+            .iter()
+            .position(|a| a.address == f.risk)
+            .unwrap() as u32;
+        let mut asset = config.assets.get(i).unwrap();
+        asset.kind = AssetKind::Reward;
+        config.assets.set(i, asset);
+        e.storage()
+            .instance()
+            .set(&crate::storage::Key::Config, &config);
+    });
+    let amount = SEED_ASSETS / 5;
+    let p = f.plan(
+        vec![
+            e,
+            Action::Swap(f.swap(&f.usdc, &f.reserve, amount)),
+            Action::Swap(f.swap(&f.usdc, &f.risk, amount)),
+        ],
+        0,
+    );
+    f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
+    let state = c.state();
+    let before = c.holdings();
+    assert_eq!(c.try_execute(&p), Err(Ok(Error::Invalid.into())));
+    assert_eq!(c.state(), state);
+    assert_eq!(c.holdings(), before);
+    f.donate(&f.risk, amount);
+    c.unwind(
+        &vec![e, Action::Swap(f.swap(&f.risk, &f.usdc, amount))],
+        &0,
+        &u64::MAX,
+    );
+    assert_eq!(TokenClient::new(e, &f.risk).balance(&f.vault), 0);
+}
+
+#[test]
+fn recovery_rejects_less_debt_when_losses_increase_leverage() {
+    let f = Fixture::new(true, true);
+    let e = &f.e;
+    let c = f.client();
+    f.positions(0, SEED_ASSETS, SEED_ASSETS);
+    f.donate(&f.reserve, SEED_ASSETS / 10);
+    f.donate(&f.xlm, SEED_ASSETS / 10000);
+    e.as_contract(&f.router, || {
+        e.storage()
+            .instance()
+            .set(&symbol_short!("output"), &(SEED_ASSETS * 99 / 1000));
+    });
+    let before = c.holdings();
+    assert_eq!(
+        c.try_unwind(
+            &vec![
+                e,
+                Action::Swap(f.swap(&f.reserve, &f.usdc, SEED_ASSETS / 10)),
+                Action::Repay(f.xlm.clone(), SEED_ASSETS / 10000),
+            ],
+            &0,
+            &u64::MAX,
+        ),
+        Err(Ok(Error::Limit.into()))
+    );
+    assert_eq!(c.holdings(), before);
+    assert_eq!(c.state().nonce, 0);
+}
+
+#[test]
+fn ordinary_execution_cannot_use_the_partial_deleveraging_exception() {
+    let f = Fixture::new(true, true);
+    let e = &f.e;
+    let c = f.client();
+    f.positions(0, SEED_ASSETS, SEED_ASSETS);
+    let p = f.plan(
+        vec![
+            e,
+            Action::Swap(f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 10)),
+            Action::Repay(f.xlm.clone(), SEED_ASSETS / 10),
+        ],
+        0,
+    );
+    f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
+    let before = c.holdings();
+    assert_eq!(c.try_execute(&p), Err(Ok(Error::Limit.into())));
+    assert_eq!(c.holdings(), before);
+    assert_eq!(c.state().nonce, 0);
+}

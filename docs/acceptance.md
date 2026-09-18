@@ -7,6 +7,30 @@ is implied. The [approved scope](../../doc/d2-vault-implementation-plan.md),
 [interfaces](interfaces.md), [operations](operations.md) and
 [reproduction guide](local-rpc.md) define the qualifications below.
 
+## Guard review corrections — 2026-09-18
+
+Corrections on top of `ca95392` address three reproduced review
+findings: excess or unconsumed debt-asset purchases during public recovery,
+blocked incremental deleveraging outside normal risk limits, and purchases of
+zero-target reward assets. The [interface](interfaces.md) and
+[recovery runbook](operations.md) describe the enforced boundaries.
+
+`sh scripts/check.sh` passed on the corrected source: fmt, strict clippy,
+upstream/Etesia optimized WASM builds, **46 native tests** (43 vault and 3 adapter),
+and **93.7279% production line coverage (1,853 / 1,977)**. Seven new regression
+tests cover the three failures, actual-output overshoot, existing repayment
+balances, partial repayment, rollback, recovery while paused, consecutive partial
+deleveraging, worsening leverage/health, ordinary-plan limits and reward sales.
+The three primary regressions failed before the guard changes and pass afterward.
+
+A fresh isolated protocol-22 network passed the seven-asset RPC smoke with the
+corrected WASM, and all 29 receipts were independently verified as `SUCCESS`.
+The [guard-fix evidence](evidence/guard-fixes.json) records source/build hashes,
+coverage, transaction hashes and results. Its source digest combines the unchanged
+initial manifest entries with the three changed Rust inputs. The original evidence
+below remains the initial publication snapshot; no real pool or live dependency
+activation is established by either local run.
+
 ## Recorded checks
 
 | Check | Result |

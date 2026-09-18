@@ -67,8 +67,19 @@ cannot exceed the chosen fraction (at most 1,000 bps) of residual reserve.
 Shrinking reserves block incompatible allocations until claims are withdrawn;
 permissionless partial recovery remains available when a full correction cannot
 fit one plan. Normal plans preserve already-established 2.5% liquid buffers;
-initial buffer deficits can be built up in bounded steps. Recovery is independent
-of strategy targets and can reduce an overweight position in bounded steps.
+initial buffer deficits can be built up in bounded steps. Reward-only assets cannot
+be swap outputs; held rewards can still be sold or routed through as intermediate
+assets without increasing their final balance. Recovery is independent of strategy
+targets and can reduce an overweight position in bounded steps.
+
+Recovery purchases of non-USDC debt assets are capped by actual outstanding debt
+minus already-held spot tokens, using measured output. Across the whole unwind,
+purchases must be covered by debt reduction, allowing at most one atomic unit per
+asset for Blend repayment rounding and requiring positive debt reduction. If debt
+or pool health remains outside its normal limit, the unwind must strictly reduce
+economic debt and debt/equity, and preserve or improve pool risk-weighted health.
+Fresh prices and all leg, loss and turnover limits still apply. Ordinary execution
+must satisfy the full configured limits.
 
 Only `Swap`, `Supply`, `Withdraw`, `Collateral`, `Release`, `Borrow`, `Repay`
 are executable. Flagship borrowing/collateral use is immutable off. Total debt

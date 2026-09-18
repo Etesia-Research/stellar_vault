@@ -115,7 +115,7 @@ pub trait HealthOracle {
     fn lastprice(e: Env, asset: OracleAsset) -> Option<PriceData>;
 }
 
-pub fn check_health(e: &Env) {
+pub fn health(e: &Env) -> (i128, i128) {
     use crate::{
         math::{add, mul_div},
         storage,
@@ -124,12 +124,12 @@ pub fn check_health(e: &Env) {
     use soroban_sdk::panic_with_error;
     let c = storage::config(e);
     let Some(address) = c.pool else {
-        return;
+        return (0, 0);
     };
     let pool = PoolClient::new(e, &address);
     let positions = pool.get_positions(&e.current_contract_address());
     if positions.liabilities.is_empty() {
-        return;
+        return (0, 0);
     }
     if !c.borrowing {
         panic_with_error!(e, Error::BorrowingDisabled);
@@ -168,7 +168,15 @@ pub fn check_health(e: &Env) {
         );
         debt = add(e, debt, mul_div(e, effective_d, p.price, r.scalar, true));
     }
-    if debt > 0 && mul_div(e, collateral, 10_000, debt, false) < i128::from(c.min_health_bps) {
-        panic_with_error!(e, Error::Limit);
+    (collateral, debt)
+}
+
+pub fn check_health(e: &Env) {
+    let (collateral, debt) = health(e);
+    if debt > 0
+        && crate::math::mul_div(e, collateral, 10_000, debt, false)
+            < i128::from(crate::storage::config(e).min_health_bps)
+    {
+        soroban_sdk::panic_with_error!(e, crate::types::Error::Limit);
     }
 }

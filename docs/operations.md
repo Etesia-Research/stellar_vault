@@ -30,8 +30,11 @@ requires an unexpired share allowance. Never infer settlement from a simulation.
 Anyone can call `unwind(actions, nonce, deadline)` with a reviewed Soroswap quote
 and exact bounded auth tree. Read the current nonce first. Only withdrawals,
 repayments, collateral release and swaps toward USDC or an actually owed asset
-are allowed. Proceeds stay in the vault. Per-leg/slippage/aggregate loss and
-turnover limits still apply; consumed window budget is not reset by cash flows.
+are allowed. Non-USDC debt-asset purchases cannot exceed debt minus existing spot
+holdings, and must be consumed by debt repayment within the same unwind (one atom
+of repayment rounding per asset is tolerated). Reward-only assets can be sold but
+cannot be purchased. Proceeds stay in the vault. Per-leg/slippage/aggregate loss
+and turnover limits still apply; consumed window budget is not reset by cash flows.
 The next 17,280-ledger window permits another bounded recovery budget. No new
 borrowing can finance an exit.
 
@@ -52,7 +55,11 @@ retry after the external condition changes. `claim_rewards()` uses only the
 configured pool/reward identity and verifies actual receipts.
 
 For the separate borrowing fixture, repay liabilities and release collateral
-under fresh pool health checks before standard payout. The current conservative
+under fresh pool health checks before standard payout. An unwind may finish above
+the debt ceiling or below the health buffer only when it strictly reduces debt
+and debt/equity without worsening pool risk-weighted health. This permits partial
+swap-and-repay recovery after adverse moves; collateral release that worsens an
+already deficient health ratio remains rejected. The current conservative
 interface blocks USDC exits with any residual debt/collateral. This does not prove
 D9 atomic/stressed settlement or authorize a flagship borrowing mode.
 

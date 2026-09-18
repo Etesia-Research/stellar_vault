@@ -272,7 +272,9 @@ fn swap(e: &Env, s: &Swap, deadline: u64) -> i128 {
         panic_with_error!(e, Error::Invalid);
     }
     pricing::asset(e, &s.token_in);
-    pricing::asset(e, &s.token_out);
+    if pricing::asset(e, &s.token_out).kind == AssetKind::Reward {
+        panic_with_error!(e, Error::Invalid);
+    }
     let mut parts = 0u32;
     let mut intermediate = Map::new(e);
     for route in s.distribution.iter() {
@@ -472,26 +474,44 @@ fn limits(e: &Env, before: i128, after: i128, turnover: i128) {
     storage::save(e, &s);
 }
 #[inline(never)]
-fn run(e: &Env, actions: &Vec<Action>, deadline: u64, recovery: bool, before: i128) -> i128 {
+fn run(
+    e: &Env,
+    actions: &Vec<Action>,
+    deadline: u64,
+    recovery: bool,
+    before: i128,
+) -> (i128, Map<Address, i128>) {
     let c = storage::config(e);
     if actions.is_empty() || actions.len() > 8 {
         panic_with_error!(e, Error::Limit);
     }
     let mut turnover = 0;
+    let mut purchases = Map::new(e);
     for action in actions.iter() {
         let value = match action {
             Action::Swap(s) => {
-                if recovery && s.token_out != c.usdc {
-                    let debt = pricing::holdings(e, true)
+                let repayment = if recovery && s.token_out != c.usdc {
+                    let h = pricing::holdings(e, true)
                         .iter()
                         .find(|h| h.asset == s.token_out)
-                        .map(|h| h.debt)
-                        .unwrap_or(0);
-                    if debt == 0 {
+                        .unwrap_or_else(|| panic_with_error!(e, Error::Invalid));
+                    if h.debt == 0 {
                         panic_with_error!(e, Error::Invalid);
                     }
+                    Some((h.spot, (h.debt - h.spot).max(0)))
+                } else {
+                    None
+                };
+                let value = swap(e, &s, deadline);
+                if let Some((spot, shortfall)) = repayment {
+                    let received = pricing::spot(e, &s.token_out) - spot;
+                    if received > shortfall {
+                        panic_with_error!(e, Error::Limit);
+                    }
+                    let bought = purchases.get(s.token_out.clone()).unwrap_or(0);
+                    purchases.set(s.token_out.clone(), add(e, bought, received));
                 }
-                swap(e, &s, deadline)
+                value
             }
             other => {
                 let (kind, asset, amount) = match other {
@@ -516,10 +536,10 @@ fn run(e: &Env, actions: &Vec<Action>, deadline: u64, recovery: bool, before: i1
         }
         turnover = add(e, turnover, value);
     }
-    turnover
+    (turnover, purchases)
 }
 #[inline(never)]
-fn check_positions(e: &Env, equity: i128, t: Option<&Target>, holdings: &Vec<Holding>) {
+fn check_positions(e: &Env, equity: i128, t: &Target, holdings: &Vec<Holding>) {
     let c = storage::config(e);
     let mut debt = 0;
     for h in holdings.iter() {
@@ -531,23 +551,55 @@ fn check_positions(e: &Env, equity: i128, t: Option<&Target>, holdings: &Vec<Hol
             false,
         );
         debt = add(e, debt, mark_value(e, &h.asset, h.debt, true));
-        if t.is_some()
-            && !c.borrowing
+        if !c.borrowing
             && matches!(a.kind, AssetKind::Risk | AssetKind::Xlm)
             && gross > mul_div(e, equity, 4_000, BPS, false)
         {
             panic_with_error!(e, Error::Limit);
         }
-        if let Some(t) = t {
-            if h.supply > 0 && (h.asset != c.usdc || h.supply > yield_limit(e, t, equity)) {
-                panic_with_error!(e, Error::Limit);
-            }
+        if h.supply > 0 && (h.asset != c.usdc || h.supply > yield_limit(e, t, equity)) {
+            panic_with_error!(e, Error::Limit);
         }
     }
     if debt > mul_div(e, equity, i128::from(c.max_debt_bps), BPS, false) {
         panic_with_error!(e, Error::Limit);
     }
     blend::check_health(e);
+}
+
+// While limits remain breached, recovery must reduce debt and leverage without worsening
+// the pool's risk-weighted health. Compare ratios with checked wide arithmetic.
+#[inline(never)]
+fn check_recovery(
+    e: &Env,
+    before: i128,
+    after: i128,
+    old: &Vec<Holding>,
+    new: &Vec<Holding>,
+    old_health: (i128, i128),
+) {
+    let c = storage::config(e);
+    let mut old_debt = 0;
+    let mut new_debt = 0;
+    for (previous, h) in old.iter().zip(new.iter()) {
+        old_debt = add(
+            e,
+            old_debt,
+            mark_value(e, &previous.asset, previous.debt, true),
+        );
+        new_debt = add(e, new_debt, mark_value(e, &h.asset, h.debt, true));
+    }
+    let (collateral, debt) = blend::health(e);
+    let outside_limits = new_debt > mul_div(e, after, i128::from(c.max_debt_bps), BPS, false)
+        || collateral < mul_div(e, debt, i128::from(c.min_health_bps), BPS, true);
+    if outside_limits
+        && (new_debt >= old_debt
+            || new_debt >= mul_div(e, old_debt, after, before, true)
+            || old_health.1 == 0
+            || collateral < mul_div(e, old_health.0, debt, old_health.1, true))
+    {
+        panic_with_error!(e, Error::Limit);
+    }
 }
 
 #[contractimpl]
@@ -614,7 +666,7 @@ impl Vault {
             panic_with_error!(&e, Error::Limit);
         }
         let old_distance = distance(&e, &target, before, &old);
-        let turnover = run(&e, &plan.actions, plan.deadline, false, before);
+        let (turnover, _) = run(&e, &plan.actions, plan.deadline, false, before);
         let new = pricing::holdings(&e, true);
         let after = pricing::equity_of(&e, &new).unwrap_or_else(|err| panic_with_error!(&e, err));
         positive(&e, after);
@@ -631,7 +683,7 @@ impl Vault {
                 }
             }
         }
-        check_positions(&e, after, Some(&target), &new);
+        check_positions(&e, after, &target, &new);
         limits(&e, before, after, turnover);
         e.events().publish(
             (symbol_short!("plan"), 1u32),
@@ -652,7 +704,8 @@ impl Vault {
         positive(&e, before);
         fees::settle(&e, Some(before), false);
         let cash = pricing::spot(&e, &storage::config(&e).usdc);
-        let turnover = run(&e, &actions, deadline, true, before);
+        let old_health = blend::health(&e);
+        let (turnover, purchases) = run(&e, &actions, deadline, true, before);
         let new = pricing::holdings(&e, true);
         let after = pricing::equity_of(&e, &new).unwrap_or_else(|err| panic_with_error!(&e, err));
         positive(&e, after);
@@ -665,12 +718,17 @@ impl Vault {
             {
                 panic_with_error!(&e, Error::Limit);
             }
+            let bought = purchases.get(h.asset.clone()).unwrap_or(0);
+            // Blend's accrued underlying debt can round by one atom on repayment.
+            if bought > 0 && (h.debt == previous.debt || bought > previous.debt - h.debt + 1) {
+                panic_with_error!(&e, Error::Limit);
+            }
             reduced |= h.debt < previous.debt || h.supply < previous.supply;
         }
         if !reduced {
             panic_with_error!(&e, Error::Limit);
         }
-        check_positions(&e, after, None, &new);
+        check_recovery(&e, before, after, &old, &new, old_health);
         limits(&e, before, after, turnover);
         e.events()
             .publish((symbol_short!("unwind"), 1u32), (nonce, before, after));
