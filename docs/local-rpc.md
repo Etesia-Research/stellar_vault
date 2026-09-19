@@ -68,3 +68,14 @@ Stellar network fees are paid by external local genesis funding. The portfolio's
 XLM buffer is not presented as a fee-payer reimbursement mechanism.
 
 The A48 six-asset rerun is recorded in [reduced-universe receipts](evidence/shx-exclusion-local-rpc.json). The original seven-asset evidence remains a dated historical snapshot.
+
+## Tranche 1 demonstration
+
+The [verification notebook](../notebooks/tranche-1-demo.ipynb) runs the existing
+checks and local smoke scripts in presentation order, verifies RPC receipts and
+WASM hashes, and demonstrates the pricing deviation check and NAV test. Run its
+preparation cells before recording; full coverage and fresh deployments exceed
+the short video segment. It uses only Python's standard library plus the pinned
+tools above, and starts/stops its own fresh isolated node. D3 additionally needs
+the source probe's locked dependencies and pinned upstream pair WASM, as explained
+in the notebook. Fixture evidence does not close the [live acceptance gates](d3-acceptance.md).
