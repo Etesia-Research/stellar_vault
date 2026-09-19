@@ -1,5 +1,7 @@
 # Etesia vault
 
+[![Production line coverage](docs/coverage.svg)](#test-coverage)
+
 **Current universe (A48, 2026-09-18):** XLM/AQUA/ETH/BTC risk assets, USTRY reserve and USDC settlement. SHX is temporarily excluded. Local fixture scripts configure these six assets; the contracts retain generic immutable asset configuration. AQUA remains unqualified for activation because breaker depth is inadequate. See [D3 acceptance](docs/d3-acceptance.md).
 
 D2 vault/adapter and D3 pricing provider, implemented and locally verified
@@ -24,3 +26,12 @@ python3 scripts/record-evidence.py
 For the optional repository-local tool installation, source `scripts/env.sh`.
 Deploy optimized WASM only. Tool caches, build output, keys and node state are
 ignored. Fixture assets/prices and public standalone keys are local-only.
+
+## Test coverage
+
+The badge shows production line coverage from the last successful
+`sh scripts/check.sh` run. The check enforces a 90% minimum and refreshes
+`docs/coverage.svg` from the generated `coverage/coverage.json`; include the
+updated badge when committing code changes. This is a local check, not a CI feed.
+Vendored code, test utilities, tests, type definitions and tools are excluded
+using the existing coverage filter in [the check script](scripts/check.sh).
