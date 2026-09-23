@@ -30,22 +30,7 @@ pub fn price(e: &Env, a: &Asset) -> Result<i128, Error> {
         _ => return Err(Error::Pricing),
     };
     let now = e.ledger().timestamp();
-    if !mark.ready
-        || mark.price <= 0
-        || mark.reference <= 0
-        || mark.timestamp > now
-        || now - mark.timestamp > c.max_price_age
-    {
-        return Err(Error::Pricing);
-    }
-    if mul_div(
-        e,
-        (mark.price - mark.reference).abs(),
-        BPS,
-        mark.price,
-        true,
-    ) > i128::from(c.max_divergence_bps)
-    {
+    if mark.price <= 0 || mark.timestamp > now || now - mark.timestamp > c.max_price_age {
         return Err(Error::Pricing);
     }
     Ok(mark.price)

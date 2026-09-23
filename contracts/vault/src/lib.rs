@@ -125,7 +125,6 @@ impl Vault {
             || config.pool_assets.len() > 7
             || config.max_price_age == 0
             || config.max_price_age > 3600
-            || config.max_divergence_bps > 500
             || config.max_slippage_bps > 100
             || config.max_leg_bps > 2_000
             || config.max_turnover_bps > 10_000

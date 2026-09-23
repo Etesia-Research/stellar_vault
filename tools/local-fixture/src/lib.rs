@@ -11,9 +11,7 @@ use soroban_sdk::{
 #[derive(Clone)]
 pub struct Mark {
     pub price: i128,
-    pub reference: i128,
     pub timestamp: u64,
-    pub ready: bool,
 }
 #[contracttype]
 #[derive(Clone)]
@@ -74,9 +72,7 @@ impl Fixture {
         let _ = asset;
         Mark {
             price: 1_000_000_000_000,
-            reference: 1_000_000_000_000,
             timestamp: e.ledger().timestamp(),
-            ready: true,
         }
     }
     pub fn swap_exact_tokens_for_tokens(

@@ -526,7 +526,7 @@ fn reject_expired_changed_or_unbounded_plans_before_custody_changes() {
     assert_eq!(c.try_execute(&p), Err(Ok(Error::Target.into())));
 }
 #[test]
-fn price_validity_divergence_insolvency_and_liquidity_views() {
+fn price_validity_insolvency_and_liquidity_views() {
     let f = Fixture::new(false, false);
     let c = f.client();
     f.deposit(SEED_ASSETS);
@@ -534,27 +534,15 @@ fn price_validity_divergence_insolvency_and_liquidity_views() {
     for mark in [
         Mark {
             price: 0,
-            reference: PRICE_SCALE,
             timestamp: f.e.ledger().timestamp(),
-            ready: true,
-        },
-        Mark {
-            price: PRICE_SCALE * 2,
-            reference: PRICE_SCALE,
-            timestamp: f.e.ledger().timestamp(),
-            ready: true,
         },
         Mark {
             price: PRICE_SCALE,
-            reference: PRICE_SCALE,
             timestamp: 1,
-            ready: true,
         },
         Mark {
             price: PRICE_SCALE,
-            reference: PRICE_SCALE,
             timestamp: u64::MAX,
-            ready: true,
         },
     ] {
         f.e.as_contract(&f.oracle, || f.e.storage().instance().set(&f.xlm, &mark));
@@ -1423,24 +1411,4 @@ fn ordinary_execution_cannot_use_the_partial_deleveraging_exception() {
     assert_eq!(c.try_execute(&p), Err(Ok(Error::Limit.into())));
     assert_eq!(c.holdings(), before);
     assert_eq!(c.state().nonce, 0);
-}
-
-#[test]
-fn divergence_is_rounded_up_relative_to_reflector() {
-    let f = Fixture::new(false, false);
-    f.donate(&f.risk, 10_000_000);
-    for (reference, accepted) in [(9900, true), (10100, true), (9899, false), (10101, false)] {
-        f.e.as_contract(&f.oracle, || {
-            f.e.storage().instance().set(
-                &f.risk,
-                &Mark {
-                    price: 10_000,
-                    reference,
-                    timestamp: f.e.ledger().timestamp(),
-                    ready: true,
-                },
-            );
-        });
-        assert_eq!(f.client().try_total_assets().is_ok(), accepted);
-    }
 }

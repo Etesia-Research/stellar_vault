@@ -166,10 +166,10 @@ from cash flows, share dilution, paper returns and externally paid network costs
 
 ## D3 pricing amendment
 
-The [immutable D3 provider](pricing.md) preserves `Mark { price, reference,
-timestamp, ready }`. `price` is the authoritative Reflector mark; `reference`
-is the three-observation Soroswap sampled TWAP. Vault divergence is rounded up
-relative to `price`, replacing D2's original reference denominator. Fee/share/NAV
+The [immutable D3 provider](pricing.md) returns `Mark { price, timestamp }`:
+the Reflector mark and its oldest feed-leg time. The vault rejects only oracle
+failure, a nonpositive price, a future timestamp or age above `max_price_age`;
+D2's `reference`/`ready` fields and `max_divergence_bps` check are removed. Fee/share/NAV
 rounding, independent execution-loss bounds and qualified price-free exits are
 unchanged. Fresh vaults bind the provider at construction; existing vaults cannot
 switch oracle identity. [Local integration and remaining acceptance](d3-acceptance.md).

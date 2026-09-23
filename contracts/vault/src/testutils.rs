@@ -16,9 +16,7 @@ impl OracleFixture {
     pub fn mark(e: Env, asset: Address) -> Mark {
         e.storage().instance().get(&asset).unwrap_or(Mark {
             price: PRICE_SCALE,
-            reference: PRICE_SCALE,
             timestamp: e.ledger().timestamp(),
-            ready: true,
         })
     }
     pub fn lastprice(e: Env, asset: OracleAsset) -> Option<PriceData> {
@@ -370,7 +368,6 @@ impl Fixture {
             },
             borrowing,
             max_price_age: 300,
-            max_divergence_bps: 100,
             max_slippage_bps: 100,
             max_leg_bps: 2000,
             max_turnover_bps: 10000,
@@ -431,9 +428,12 @@ impl Fixture {
                 asset,
                 &Mark {
                     price,
-                    reference: price,
-                    timestamp: self.e.ledger().timestamp(),
-                    ready: valid,
+                    // An invalid mark is stale.
+                    timestamp: if valid {
+                        self.e.ledger().timestamp()
+                    } else {
+                        0
+                    },
                 },
             )
         });

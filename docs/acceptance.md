@@ -104,7 +104,7 @@ calibrated production limits.
 | Fees | 100 bps/year management; 1,000 bps performance |
 | Immutable fee ceilings | 200 bps management; 2,000 bps performance, below the singular dilution denominator and limiting governance changes |
 | Timelock | 34,560 ledgers; two nominal days at five seconds/ledger, allowing holder/guardian response |
-| Price age/divergence | Local 300 seconds / 100 bps; constructor ceilings 3,600 seconds / 500 bps |
+| Price age | Local 300 seconds; constructor ceiling 3,600 seconds. The original D2 divergence limit (local 100 bps, ceiling 500 bps) was removed with the Reflector-only simplification |
 | Per-leg/slippage | At most 20% NAV / 100 bps; local defaults use these ceilings |
 | Aggregate turnover/loss | 100% / 2% NAV per 17,280-ledger window, shared by execution and unwind; consumed amounts survive deposits/withdrawals |
 | Capital changes | Deposits add to the window baseline; USDC withdrawals subtract cash; basket withdrawals reduce it pro rata; donations enter the next window baseline |
@@ -137,8 +137,8 @@ or intermediates fail atomically rather than saturating into a financial result.
   USDC liquidity limits; `max_redeem` is not an unconditional whole-balance promise.
   NAV-dependent views can fail on unavailable claims/rewards or fee catch-up.
 - D3 must replace the custom `mark(asset)` fixture boundary with approved-source
-  freshness, divergence, units and bootstrap evidence. Fixture readiness is not
-  TWAP/Reflector coverage.
+  freshness and units evidence. Fixture marks are not Reflector coverage. Pricing
+  is now Reflector only; the original D2 divergence/readiness check is removed.
 - D4 must verify live asset/pool/router code identities and actual route auth trees,
   pool eligibility, net yield versus USTRY, liquidity/re-entry, keeper restart and
   evidenced lending accounting/replays. All pinned Soroswap route structures are

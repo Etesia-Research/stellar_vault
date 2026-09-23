@@ -26,20 +26,6 @@ impl FeedFixture {
         e.storage().instance().get(&asset)
     }
 }
-#[contract]
-struct PairFixture;
-#[contractimpl]
-impl PairFixture {
-    pub fn token_0(e: Env) -> Address {
-        e.storage().instance().get(&0u32).unwrap()
-    }
-    pub fn token_1(e: Env) -> Address {
-        e.storage().instance().get(&1u32).unwrap()
-    }
-    pub fn get_reserves(e: Env) -> (i128, i128) {
-        e.storage().instance().get(&2u32).unwrap()
-    }
-}
 struct Fixture {
     e: Env,
     provider: Address,
@@ -60,7 +46,6 @@ impl Fixture {
             .address();
         let asset = e.register_stellar_asset_contract_v2(admin).address();
         let feed = e.register(FeedFixture, ());
-        let pool = e.register(PairFixture, ());
         let base = if conversion {
             FeedAsset::Other(symbol_short!("USD"))
         } else {
@@ -68,10 +53,6 @@ impl Fixture {
         };
         e.as_contract(&feed, || {
             e.storage().instance().set(&symbol_short!("base"), &base)
-        });
-        e.as_contract(&pool, || {
-            e.storage().instance().set(&0u32, &asset);
-            e.storage().instance().set(&1u32, &usdc);
         });
         let numerator = Feed {
             contract: feed.clone(),
@@ -95,18 +76,8 @@ impl Fixture {
                 &e,
                 Source {
                     asset,
-                    decimals: 7,
                     numerator,
                     denominator: Vec::from_slice(&e, denominator.as_slice()),
-                    pool,
-                    asset_is_token0: true,
-                    min_asset_reserve: 10_000_000,
-                    min_usdc_reserve: 10_000_000,
-                    min_spacing: 5,
-                    max_gap: 60,
-                    max_age: 300,
-                    max_skew: 300,
-                    divergence_bps: 100,
                 },
             ],
         };
@@ -116,7 +87,6 @@ impl Fixture {
         if let Some(d) = f.s().denominator.first() {
             f.write_feed(&d, SCALE * 100, 1000);
         }
-        f.reserves(100 * 10_000_000);
         f
     }
     fn client(&self) -> PricingClient<'_> {
@@ -139,89 +109,60 @@ impl Fixture {
     fn price(&self, price: i128, timestamp: u64) {
         self.write_feed(&self.s().numerator, price * 100, timestamp);
     }
-    fn reserves(&self, usdc: i128) {
-        self.e.as_contract(&self.s().pool, || {
-            self.e
-                .storage()
-                .instance()
-                .set(&2u32, &(10_000_000i128, usdc))
-        });
-    }
     fn advance(&self, seconds: u64) {
         self.e.ledger().with_mut(|l| {
             l.timestamp += seconds;
             l.sequence_number += 1;
         });
     }
-    fn collect(&self, prices: [i128; 3], gaps: [u64; 2]) {
-        for i in 0..3 {
-            if i > 0 {
-                self.advance(gaps[i - 1]);
-            }
-            self.reserves(prices[i] * 10_000_000);
-            self.client().observe(&self.asset());
-        }
-        self.advance(1);
-    }
     fn error(&self, err: Error) {
-        assert_eq!(self.client().diagnose(&self.asset()).error, err as u32);
+        let d = self.client().diagnose(&self.asset());
+        assert_eq!(d.error, err as u32);
+        assert_eq!(
+            d.mark,
+            Mark {
+                price: 0,
+                timestamp: 0
+            }
+        );
         assert!(self.client().try_mark(&self.asset()).is_err());
     }
 }
 
 #[test]
-fn temporal_mean_only_and_pending_cannot_evict() {
+fn direct_mark_is_the_reflector_price() {
     let f = Fixture::new(false);
-    f.error(Error::Bootstrap);
-    f.collect([90, 100, 110], [5, 5]);
-    let m = f.client().mark(&f.asset());
-    assert_eq!(
-        (m.price, m.reference, m.timestamp),
-        (100 * SCALE, 100 * SCALE, 1000)
-    );
-    assert_eq!(f.client().diagnose(&f.asset()).samples.len(), 3);
-    f.advance(5);
-    f.reserves(1000 * 10_000_000);
-    f.client().observe(&f.asset());
-    assert_eq!(f.client().mark(&f.asset()), m);
-    assert!(f.client().try_observe(&f.asset()).is_err());
-    f.advance(1);
-    f.error(Error::Divergence);
-}
-#[test]
-fn unequal_spacing_equal_prices_and_rounding() {
-    let f = Fixture::new(false);
-    f.collect([90, 100, 110], [5, 10]);
     let d = f.client().diagnose(&f.asset());
-    assert_eq!(d.mark.reference, 101_666_666_666_666);
-    assert_eq!(d.error, Error::Divergence as u32);
-    f.advance(61);
-    f.collect([100, 100, 100], [5, 5]);
-    assert_eq!(f.client().mark(&f.asset()).reference, 100 * SCALE);
-    let mut samples = f.client().diagnose(&f.asset()).samples;
-    for (i, price) in [1, 1, 2].iter().enumerate() {
-        let mut p = samples.get(i as u32).unwrap();
-        p.price = *price;
-        samples.set(i as u32, p);
-    }
-    assert_eq!(math::twap(&f.e, &samples), Ok(1));
-    let mut p = samples.get(1).unwrap();
-    p.timestamp = samples.get(0).unwrap().timestamp;
-    samples.set(1, p);
-    assert_eq!(math::twap(&f.e, &samples), Err(Error::Invalid));
-    assert_eq!(math::twap(&f.e, &Vec::new(&f.e)), Err(Error::Bootstrap));
+    assert_eq!((d.error, d.numerator.len(), d.denominator.len()), (0, 1, 0));
+    assert_eq!(
+        f.client().mark(&f.asset()),
+        Mark {
+            price: 100 * SCALE,
+            timestamp: 1000
+        }
+    );
+    assert_eq!(d.mark, f.client().mark(&f.asset()));
+    f.price(110 * SCALE, 1000);
+    assert_eq!(f.client().mark(&f.asset()).price, 110 * SCALE);
 }
 #[test]
 fn conversion_nonunit_denominator_and_all_leg_age_checks() {
     let f = Fixture::new(true);
     let den = f.s().denominator.first().unwrap();
-    f.write_feed(&den, 125_000_000_000_000, 1000);
+    f.write_feed(&den, 125_000_000_000_000, 990);
     f.price(125 * SCALE, 1000);
-    f.collect([100, 100, 100], [5, 5]);
-    assert_eq!(f.client().mark(&f.asset()).price, 100 * SCALE);
+    // The mark is only as fresh as its oldest leg.
+    assert_eq!(
+        f.client().mark(&f.asset()),
+        Mark {
+            price: 100 * SCALE,
+            timestamp: 990
+        }
+    );
+    assert_eq!(f.client().diagnose(&f.asset()).denominator.len(), 1);
     f.write_feed(&den, 125_000_000_000_000, 1012);
     f.error(Error::Future);
-    f.write_feed(&den, 125_000_000_000_000, 710);
+    f.write_feed(&den, 125_000_000_000_000, 699);
     f.error(Error::Stale);
     f.write_feed(&den, 0, 1000);
     f.error(Error::Invalid);
@@ -230,17 +171,19 @@ fn conversion_nonunit_denominator_and_all_leg_age_checks() {
     });
     f.error(Error::Missing);
     f.write_feed(&den, 125_000_000_000_000, 1000);
-    assert!(f.client().mark(&f.asset()).ready);
+    assert_eq!(f.client().mark(&f.asset()).price, 100 * SCALE);
+    f.write_feed(&den, 1, 1000);
+    f.price(i128::MAX / 100, 1000);
+    f.error(Error::Overflow);
 }
 #[test]
 fn source_failures_do_not_use_cached_marks() {
     let f = Fixture::new(false);
-    f.collect([100, 100, 100], [5, 5]);
     for (price, time, error) in [
         (0, 1000, Error::Invalid),
         (-1, 1000, Error::Invalid),
         (100 * SCALE, 1012, Error::Future),
-        (100 * SCALE, 710, Error::Stale),
+        (100 * SCALE, 699, Error::Stale),
     ] {
         f.price(price, time);
         f.error(error);
@@ -257,94 +200,37 @@ fn source_failures_do_not_use_cached_marks() {
             .instance()
             .set(&symbol_short!("decimals"), &14u32)
     });
-    assert!(f.client().mark(&f.asset()).ready);
+    assert_eq!(f.client().mark(&f.asset()).price, 100 * SCALE);
     assert!(f.client().try_mark(&Address::generate(&f.e)).is_err());
-    assert_eq!(f.client().mark(&f.c.usdc).price, SCALE);
+    assert!(f.client().try_diagnose(&Address::generate(&f.e)).is_err());
+    let usdc = f.client().mark(&f.c.usdc);
+    assert_eq!((usdc.price, usdc.timestamp), (SCALE, 1000));
     // Missing source method fails closed, with a bounded reason code.
     let bad = Feed {
-        contract: f.s().pool,
+        contract: f.c.usdc.clone(),
         ..f.s().numerator
     };
     assert_eq!(sources::feed(&f.e, &bad), Err(Error::Invocation));
 }
 #[test]
-fn depth_order_spacing_and_gap_recovery() {
+fn age_boundary_and_config_loss() {
     let f = Fixture::new(false);
-    f.reserves(0);
-    assert!(f.client().try_observe(&f.asset()).is_err());
-    f.reserves(100 * 10_000_000);
-    f.client().observe(&f.asset());
-    f.advance(4);
-    assert!(f.client().try_observe(&f.asset()).is_err());
-    f.advance(1);
-    f.client().observe(&f.asset());
-    f.advance(5);
-    f.client().observe(&f.asset());
-    f.error(Error::Bootstrap);
-    f.advance(1);
-    assert!(f.client().mark(&f.asset()).ready);
-    f.advance(61);
-    f.client().observe(&f.asset());
-    f.error(Error::Bootstrap);
-    f.advance(5);
-    f.client().observe(&f.asset());
-    f.advance(5);
-    f.client().observe(&f.asset());
-    f.advance(1);
-    assert!(f.client().mark(&f.asset()).ready);
-    f.e.as_contract(&f.s().pool, || {
-        f.e.storage().instance().set(&0u32, &f.c.usdc)
-    });
-    f.advance(5);
-    assert!(f.client().try_observe(&f.asset()).is_err());
-}
-#[test]
-fn age_skew_and_ttl_loss() {
-    let f = Fixture::new(false);
-    // Isolate the oldest-sample age boundary from the separately tested window-end gap.
-    f.e.as_contract(&f.provider, || {
-        let mut c = f.c.clone();
-        let mut s = f.s();
-        s.max_gap = 300;
-        c.sources.set(0, s);
-        f.e.storage().instance().set(&Key::Config, &c);
-    });
-    f.collect([100, 100, 100], [5, 5]);
-    f.advance(289);
-    assert!(f.client().mark(&f.asset()).ready); // Exactly 300.
+    f.advance(300);
+    assert_eq!(f.client().mark(&f.asset()).timestamp, 1000); // Exactly 300.
     f.advance(1);
     f.error(Error::Stale);
     f.price(100 * SCALE, 1301);
-    f.error(Error::Stale); // Samples independently stale.
-    f.client().upkeep();
-    f.e.as_contract(&f.provider, || {
-        f.e.storage().temporary().remove(&Key::History(f.asset()))
-    });
-    f.error(Error::Bootstrap);
-    f.collect([100, 100, 100], [5, 5]);
-    assert!(f.client().mark(&f.asset()).ready);
+    assert_eq!(f.client().mark(&f.asset()).timestamp, 1301);
     let hash = f.client().config_hash();
-    let saved_config = f.client().config();
-    f.client().upkeep();
+    assert_eq!(f.client().config(), f.c);
     assert_eq!(hash, f.client().config_hash());
-    assert_eq!(f.client().config(), saved_config);
-    // Source skew is checked independently of each age.
-    f.e.as_contract(&f.provider, || {
-        let mut c = f.c.clone();
-        let mut s = f.s();
-        s.max_skew = 10;
-        c.sources.set(0, s);
-        f.e.storage().instance().set(&Key::Config, &c);
-    });
-    f.price(100 * SCALE, f.e.ledger().timestamp());
-    f.error(Error::Skew);
     f.e.as_contract(&f.provider, || {
         f.e.storage().instance().remove(&Key::Config)
     });
     assert!(f.client().try_mark(&f.asset()).is_err());
 }
 #[test]
-fn decimal_vectors_wide_arithmetic_and_exact_divergence() {
+fn decimal_vectors_and_wide_arithmetic() {
     let e = Env::default();
     assert_eq!(
         math::ratio(&e, 125_000_000, 6, 1_250_000_000, 9),
@@ -362,70 +248,62 @@ fn decimal_vectors_wide_arithmetic_and_exact_divergence() {
     assert_eq!(math::ratio(&e, i128::MAX, 0, 1, 18), Err(Error::Overflow));
     assert_eq!(math::ratio(&e, 1, 18, i128::MAX, 0), Err(Error::Invalid));
     assert_eq!(math::ratio(&e, 1, 19, 1, 0), Err(Error::Invalid));
-    assert!(math::within(&e, 10000, 10100, 100));
-    assert!(!math::within(&e, 10000, 10101, 100));
-    assert!(math::within(&e, 10000, 9900, 100));
-    assert!(!math::within(&e, 10000, 9899, 100));
 }
-#[test]
-fn reversed_pool_and_metadata_mismatch() {
-    let f = Fixture::new(false);
-    let mut s = f.s();
-    s.asset_is_token0 = false;
-    f.e.as_contract(&s.pool, || {
-        f.e.storage().instance().set(&0u32, &f.c.usdc);
-        f.e.storage().instance().set(&1u32, &s.asset);
-        f.e.storage()
-            .instance()
-            .set(&2u32, &(1_000_000_000i128, 10_000_000i128));
+fn rejects(f: &Fixture, c: Config) {
+    // Call the constructor inside a fresh contract frame to inspect typed errors.
+    f.e.as_contract(&f.provider, || {
+        assert_eq!(Pricing::__constructor(f.e.clone(), c), Err(Error::Config))
     });
-    assert_eq!(
-        sources::pool(&f.e, &f.c.usdc, &s).unwrap().price,
-        100 * SCALE
-    );
-    s.decimals = 8;
-    assert_eq!(sources::pool(&f.e, &f.c.usdc, &s), Err(Error::Identity));
 }
 #[test]
 fn configuration_rejects_invalid_limits_and_conversion_identity() {
     let f = Fixture::new(false);
-    for case in 0..9 {
+    for case in 0..6 {
         let mut c = f.c.clone();
         let mut s = f.s();
         match case {
-            0 => s.min_spacing = 0,
-            1 => s.max_age = 3601,
-            2 => s.divergence_bps = 501,
-            3 => s.min_usdc_reserve = 0,
-            4 => s.numerator.decimals = 19,
-            5 => s.numerator.base = FeedAsset::Other(symbol_short!("USD")),
-            6 => s.numerator.resolution = 0,
-            7 => s.max_skew = 1,
+            0 => s.numerator.max_age = 0,
+            1 => s.numerator.max_age = 3601,
+            2 => s.numerator.decimals = 19,
+            3 => s.numerator.base = FeedAsset::Other(symbol_short!("USD")),
+            4 => s.numerator.resolution = 0,
             _ => s.asset = c.usdc.clone(),
         }
         c.sources.set(0, s);
-        // Call the constructor inside a fresh contract frame to inspect typed errors.
-        f.e.as_contract(&f.provider, || {
-            assert_eq!(Pricing::__constructor(f.e.clone(), c), Err(Error::Config))
-        });
+        rejects(&f, c);
     }
     let mut c = f.c.clone();
     c.sources.push_back(f.s());
-    f.e.as_contract(&f.provider, || {
-        assert_eq!(Pricing::__constructor(f.e.clone(), c), Err(Error::Config))
-    });
+    rejects(&f, c);
     let mut c = f.c.clone();
     c.sources = Vec::new(&f.e);
-    f.e.as_contract(&f.provider, || {
-        assert_eq!(Pricing::__constructor(f.e.clone(), c), Err(Error::Config))
-    });
+    rejects(&f, c);
     let mut c = f.c.clone();
     let mut s = f.s();
-    s.denominator = vec![&f.e, s.numerator.clone()];
+    s.denominator = vec![&f.e, s.numerator.clone(), s.numerator.clone()];
     c.sources.set(0, s);
-    f.e.as_contract(&f.provider, || {
-        assert_eq!(Pricing::__constructor(f.e.clone(), c), Err(Error::Config))
-    });
+    rejects(&f, c);
+    let mut c = f.c.clone();
+    for _ in 0..7 {
+        let mut s = f.s();
+        s.asset = Address::generate(&f.e);
+        c.sources.push_back(s);
+    }
+    rejects(&f, c);
+    let f = Fixture::new(true);
+    for case in 0..3 {
+        let mut c = f.c.clone();
+        let mut s = f.s();
+        let mut d = s.denominator.first().unwrap();
+        match case {
+            0 => d.base = FeedAsset::Stellar(c.usdc.clone()),
+            1 => d.asset = FeedAsset::Other(symbol_short!("USD")),
+            _ => d.max_age = 0,
+        }
+        s.denominator = vec![&f.e, d];
+        c.sources.set(0, s);
+        rejects(&f, c);
+    }
 }
 
 fn funded_vault(f: &Fixture) -> (Address, Address) {
@@ -481,7 +359,6 @@ fn funded_vault(f: &Fixture) -> (Address, Address) {
         },
         borrowing: false,
         max_price_age: 300,
-        max_divergence_bps: 100,
         max_slippage_bps: 100,
         max_leg_bps: 2000,
         max_turnover_bps: 10000,
@@ -502,7 +379,8 @@ fn new_vault_uses_provider_and_failures_preserve_state() {
     let e = &f.e;
     let (vault, user) = funded_vault(&f);
     let v = VaultClient::new(e, &vault);
-    // Unheld unready assets do not block deposits.
+    // Unheld unpriceable assets do not block deposits.
+    f.price(0, 1000);
     let shares = v.deposit(&10_000_000, &user, &user, &user);
     StellarAssetClient::new(e, &f.asset()).mint(&vault, &10_000_000);
     let state = v.state();
@@ -515,7 +393,7 @@ fn new_vault_uses_provider_and_failures_preserve_state() {
     assert_eq!(v.holdings(), holdings);
     assert_eq!(v.balance(&user), balance);
     assert_eq!(e.events().all(), events);
-    f.collect([90, 100, 110], [5, 5]);
+    f.price(100 * SCALE, 1000);
     assert_eq!(
         v.total_assets(),
         SEED_ASSETS + 10_000_000 + 100 * 10_000_000
@@ -540,23 +418,6 @@ fn python_rust_exact_rational_vectors() {
             Ok(v[4])
         );
     }
-    for line in include_str!("../../../fixtures/d3-twap.csv")
-        .lines()
-        .filter(|l| !l.starts_with('#'))
-    {
-        let v: std::vec::Vec<i128> = line.split(',').map(|n| n.parse().unwrap()).collect();
-        let mut samples = Vec::new(&e);
-        for i in 0..3 {
-            samples.push_back(Observation {
-                price: v[i],
-                timestamp: v[i + 3] as u64,
-                ledger: i as u32,
-                asset_reserve: 1,
-                usdc_reserve: 1,
-            });
-        }
-        assert_eq!(math::twap(&e, &samples), Ok(v[6]));
-    }
 }
 
 #[test]
@@ -568,7 +429,6 @@ fn source_recovery_does_not_clear_guardian_pause_and_basket_survives() {
     let v = VaultClient::new(&f.e, &vault);
     let shares = v.deposit(&100_000_000, &user, &user, &user);
     StellarAssetClient::new(&f.e, &f.asset()).mint(&vault, &10_000_000);
-    f.collect([100, 100, 100], [5, 5]);
     v.pause();
     f.price(0, 1000);
     assert!(v.try_total_assets().is_err());
@@ -599,16 +459,14 @@ fn feed_update_timing_exposes_residual_stale_mark_arbitrage() {
     let (vault, user) = funded_vault(&f);
     let v = VaultClient::new(&f.e, &vault);
     StellarAssetClient::new(&f.e, &f.asset()).mint(&vault, &100_000_000);
-    // Both layers can lag the economic price together; a mean-only breaker is not a latency defense.
+    // Reflector can lag the economic price; age bounds are not a latency defense.
     let mut gains = std::vec![];
     for old in [100, 110, 120] {
         f.advance(61);
         f.price(old * SCALE, f.e.ledger().timestamp());
-        f.collect([old, old, old], [5, 5]);
         let shares = v.deposit(&100_000_000, &user, &user, &user);
         f.advance(61);
         f.price((old + 10) * SCALE, f.e.ledger().timestamp());
-        f.collect([old + 10, old + 10, old + 10], [5, 5]);
         let received = v.redeem(&shares, &user, &user, &user);
         assert!(received > 100_000_000);
         gains.push(received - 100_000_000);
@@ -620,7 +478,7 @@ fn feed_update_timing_exposes_residual_stale_mark_arbitrage() {
 }
 
 #[test]
-fn reference_symbol_conversion_and_history_corruption_fail_closed() {
+fn usdc_symbol_conversion_leg_is_accepted() {
     let f = Fixture::new(true);
     let mut c = f.c.clone();
     let mut s = f.s();
@@ -629,71 +487,33 @@ fn reference_symbol_conversion_and_history_corruption_fail_closed() {
     s.denominator = vec![&f.e, d.clone()];
     c.sources.set(0, s);
     let provider = f.e.register(Pricing, (c,));
+    let p = PricingClient::new(&f.e, &provider);
     assert_eq!(
-        PricingClient::new(&f.e, &provider)
-            .config()
+        p.config()
             .sources
             .get(0)
             .unwrap()
             .denominator
             .first()
-            .unwrap()
-            .asset,
-        d.asset
+            .unwrap(),
+        d
     );
-    f.collect([100, 100, 100], [5, 5]);
-    for case in 0..5 {
-        let mut samples = f.client().diagnose(&f.asset()).samples;
-        // Restore fresh baseline before each adversarial storage case.
-        for i in 0..3 {
-            let mut p = samples.get(i).unwrap();
-            p.timestamp = 1000 + u64::from(i) * 5;
-            p.ledger = 100 + i;
-            p.asset_reserve = 10_000_000;
-            samples.set(i, p);
-        }
-        let mut p = samples.get(1).unwrap();
-        match case {
-            0 => p.ledger = 100,
-            1 => p.timestamp = 1000,
-            2 => p.timestamp = 1001,
-            3 => p.asset_reserve = 0,
-            _ => p.ledger = 1000,
-        };
-        samples.set(1, p);
-        f.e.as_contract(&f.provider, || {
-            f.e.storage().temporary().set(
-                &Key::History(f.asset()),
-                &History {
-                    completed: samples,
-                    pending: Vec::new(&f.e),
-                },
-            )
-        });
-        assert!(f.client().try_mark(&f.asset()).is_err());
-    }
+    f.write_feed(&d, SCALE * 100, 1000);
+    assert_eq!(p.mark(&f.asset()).price, 100 * SCALE);
 }
 
 #[test]
-fn restoring_configuration_cannot_restore_expired_temporary_history() {
-    use soroban_sdk::{
-        testutils::storage::{Instance, Temporary},
-        xdr::{ContractDataDurability, LedgerEntryData},
-    };
+fn restored_snapshot_preserves_configuration() {
+    use soroban_sdk::testutils::storage::Instance;
     use std::string::ToString;
     let f = Fixture::new(false);
-    f.collect([100, 100, 100], [5, 5]);
-    f.client().upkeep();
     f.e.as_contract(&f.provider, || {
         assert!(f.e.storage().instance().get_ttl() >= TTL / 2);
-        assert!(f.e.storage().temporary().get_ttl(&Key::History(f.asset())) >= TTL - 3);
     });
     let expected = f.client().config_hash().to_array();
     let mut snapshot = f.e.to_ledger_snapshot();
     snapshot.sequence_number += TTL + 1;
     snapshot.timestamp += 86400;
-    // Temporary entries are deleted, not archived. Only persistent payloads are restored.
-    snapshot.ledger_entries.retain(|(_, (entry, _))| !matches!(&entry.data, LedgerEntryData::ContractData(data) if data.durability==ContractDataDurability::Temporary));
     for (_, (_, ttl)) in snapshot.ledger_entries.iter_mut() {
         if ttl.is_some() {
             *ttl = Some(snapshot.sequence_number + TTL);
@@ -707,20 +527,5 @@ fn restoring_configuration_cannot_restore_expired_temporary_history() {
             Pricing::config_hash(restored.clone()).unwrap().to_array(),
             expected
         );
-        let asset = config(&restored).unwrap().sources.get(0).unwrap().asset;
-        let h = history(&restored, &asset);
-        assert!(h.completed.is_empty() && h.pending.is_empty());
     });
-}
-
-#[test]
-fn overdue_collection_cannot_evict_a_usable_window_in_its_ledger() {
-    let f = Fixture::new(false);
-    f.collect([100, 100, 100], [5, 5]);
-    f.advance(59);
-    assert!(f.client().mark(&f.asset()).ready);
-    f.advance(1);
-    f.error(Error::Stale);
-    f.client().observe(&f.asset());
-    f.error(Error::Bootstrap);
 }

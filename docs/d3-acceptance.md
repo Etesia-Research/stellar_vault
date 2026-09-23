@@ -2,21 +2,23 @@
 
 **Current scope — A48, 2026-09-18:** SHX is temporarily excluded from the vault and new simulated targets/reports. Qualification now covers XLM/AQUA/ETH/BTC, USTRY and USDC. Original seven-asset evidence below remains a historical snapshot; it does not describe the revised fixture configuration.
 
-**AQUA follow-up:** [unsigned calls at ledger 64494947](evidence/d3-aqua-followup.json), collected 19:41:57 UTC, confirm the exact AQUA SAC, Reflector USDC feed, factory pair, token ordering and seven-decimal units. The 19:40 feed mark was 0.00034565733339 USDC/AQUA. Reserves were **1,313.7990305 AQUA and 0.4494706 USDC**. Feed coverage is present; breaker liquidity still fails qualification. No transaction was signed, and no depth limit was relaxed.
+**Reflector-only simplification:** the provider now prices from Reflector alone. The Soroswap TWAP circuit breaker, `observe`/`upkeep`, sample history, depth/spacing/skew checks, `Mark.reference`/`ready` and the vault's `max_divergence_bps` were removed; see [pricing](pricing.md). All local runs, resource measurements and test counts below **predate this change** and record the earlier two-source design; they do not describe current behavior. No second source now catches a stale-but-within-age or wrong Reflector price.
 
-Reviewed **2026-09-18**. Local implementation is complete for the selected direct
-pool mechanism; full D3 acceptance remains blocked. Baseline vault revision:
+**AQUA follow-up:** [unsigned calls at ledger 64494947](evidence/d3-aqua-followup.json), collected 19:41:57 UTC, confirm the exact AQUA SAC, Reflector USDC feed, factory pair, token ordering and seven-decimal units. The 19:40 feed mark was 0.00034565733339 USDC/AQUA. Reserves were **1,313.7990305 AQUA and 0.4494706 USDC**. Feed coverage is present; direct-pair liquidity remains inadequate for execution. No transaction was signed.
+
+Reviewed **2026-09-18**. Local implementation was then complete for the selected
+direct-pool breaker, since removed; full D3 acceptance remains blocked. Baseline vault revision:
 `8aa929092435ab82fccb8ae24f00bba9e4cc1387`. The
 [source manifest](evidence/d3-source-manifest.json) identifies the exact tested files
 from the implementation snapshot captured before the initial D3 commit.
 See [provider interface/operations](pricing.md) and the
 [research network manifest](evidence/d3-network-manifest.json).
 
-## Reduced-universe verification
+## Reduced-universe verification (pre-simplification)
 
 The A48 rerun passed `sh scripts/check.sh` (63 native tests, 93.99% production line coverage). [Fresh isolated-node receipts](evidence/shx-exclusion-local-rpc.json) record six fixture assets, five provider mappings, 26 successful D2 receipts, 69 direct D3 receipts and 32 conversion D3 receipts. Both D3 scenarios produced 1,005 USDC NAV after five donations, blocked invalid-feed redemption without state changes and redeemed 99.9999998 USDC after recovery. The evidence records current script/build hashes; it establishes local behavior only.
 
-## Local verification
+## Local verification (pre-simplification)
 
 - `sh scripts/check.sh`: pinned fmt, strict clippy, optimized WASMs
   and **63 passing native tests**, **93.99% production line coverage** (2,204/2,345 lines). See [coverage](evidence/d3-coverage.json) for the
@@ -49,7 +51,7 @@ The first full-universe run exhausted the unchanged 40 MiB local memory limit.
 Reducing the new provider/fixture linker stack to 64 KiB resolved it; the existing
 vault and network settings were retained. The deployed Reflector WASM has one
 initial memory page, whereas the initial local Rust fixture reserved 17 pages.
-The current provider/fixture use two pages. These are recorded implementation
+The pre-simplification provider/fixture used two pages. These are recorded implementation
 measurements, not a target-network resource guarantee.
 
 | Local unsigned simulation | Instruction budget including RPC margin | Read bytes | Read entries |
@@ -81,9 +83,9 @@ reads primitive results and verifies the pool. No transactions were submitted.
 | Asset | What was verified | Remaining acceptance |
 | --- | --- | --- |
 | XLM | Native SAC, seven decimals, exact Stellar Reflector mark, direct USDC pair, token order/reserves/code hash | Calibration and sustained operation |
-| AQUA | Exact issued SAC/feed/pair, seven decimals | Direct pair had only **0.4494706 USDC**; sufficient breaker depth is not established |
+| AQUA | Exact issued SAC/feed/pair, seven decimals | Direct pair had only **0.4494706 USDC**; execution liquidity is inadequate |
 | USTRY | Exact stablebond SAC, USDC feed above par, direct USDC pair, seven decimals | Calibration and sustained operation |
-| BTC / ETH | External reference-symbol USD marks | Exact Stellar wrappers, approved basis and breaker pools are unverified |
+| BTC / ETH | External reference-symbol USD marks | Exact Stellar wrappers and approved basis are unverified |
 | SHX (excluded under A48) | Historical exact SAC and seven-decimal check | Outside current acceptance scope; earlier selected feed/direct pair coverage failed |
 | USDC | Exact settlement SAC, seven decimals, separate `Other("USDC")/USD` reference | Conversion basis approval; USDC/USDC itself remains one |
 
@@ -95,9 +97,9 @@ simulated successfully; CLI 22 could not decode the v6 full specification.
 
 Feed ages at the four probe starts were approximately 120, 197, 180 and 314
 seconds. A 300-second local limit would refuse the last read even during this
-ordinary sample. This short window cannot approve production age/skew limits.
+ordinary sample. This short window cannot approve production age limits.
 A candidate 600-second age limit needs longer cadence/outage measurements and
-stale-mark economics review; spacing, depth and divergence also remain unapproved.
+stale-mark economics review.
 
 [Actual-size HTTP quotes](evidence/d3-route-quotes-full.json) requested only
 Soroswap at 100 and 1,000 USDC for XLM/AQUA/SHX/USTRY. Responses include identities,
@@ -105,23 +107,26 @@ input amounts, paths, protocol, price impact and output minima. They are quotes,
 not fills, and were not synchronous with the earlier Reflector reads. The API-reported price impact was 88.26%/98.69% for AQUA and
 76.57%/97.03% for SHX at the two sizes; these are severe liquidity failures for
 normal guarded execution, not acceptable fills. Available routed quotes do not
-repair a missing Reflector feed or qualify an inadequately deep direct breaker
-pool. D4 must obtain a current trade-size quote, enforce the tighter quote-relative
+repair a missing Reflector feed. D4 must obtain a current trade-size quote, enforce the tighter quote-relative
 and Reflector-derived minima, and satisfy the existing custody/plan guards.
 
 ## Residual timing and recovery risks
 
-The deterministic test `feed_update_timing_exposes_residual_stale_mark_arbitrage`
-repeats entry before and exit after a lagging mark updates, while both layers agree
-at each valuation. On three 10-USDC entries, gains after configured fees/rounding
-were **0.4477609, 0.4266306 and 0.4074008 USDC**. These are controlled arithmetic
-scenarios, not observed market profits. Freshness plus mean-only comparison does
-not remove stale-price arbitrage; activation needs a reviewed mitigation/risk
-limit. No new delay, fee or flow restriction is silently introduced.
+The deterministic test
+`feed_update_timing_exposes_residual_stale_mark_arbitrage`, retained under
+Reflector-only pricing and still asserting a profit, repeats entry before
+and exit after a lagging mark updates. Measured before the simplification, while
+Reflector and the TWAP agreed at each valuation, gains on three 10-USDC entries
+after configured fees/rounding were
+**0.4477609, 0.4266306 and 0.4074008 USDC**. These are controlled arithmetic
+scenarios, not observed market profits. The breaker never removed this exposure;
+Reflector-only pricing leaves only per-leg `max_age` and the vault's
+`max_price_age`, so any stale-but-within-age or wrong Reflector mark is used
+directly. Activation still needs an approved mitigation or economic risk decision.
+No new delay, fee or flow restriction is silently introduced.
 
-Recovery is permissionless when feeds and samples become valid again. A stopped
-collector eventually blocks priced actions; temporary history loss requires
-three completed-ledger samples. Guardian pause remains independent. Qualified
+Recovery is permissionless when every feed leg is valid again; no collector or
+sample history is required. Guardian pause remains independent. Qualified
 basket exits do not acquire a price dependency; external claims, debt/collateral
 and reward restrictions remain in force.
 
@@ -130,11 +135,12 @@ and reward restrictions remain in force.
 | Task | Result |
 | --- | --- |
 | D3-01 | Manifest and probes implemented; coverage/network/calibration acceptance incomplete |
-| D3-02 | Immutable provider, direct observer, normalization, mean-only breaker, TTL and diagnostics implemented and locally verified |
-| D3-03 | Reflector-denominator vault integration and new-provider vault round trips verified locally; D2 guards retained |
-| D3-04 | Actual pair WASM exercised locally; repeated unsigned feed/pool reads and trade-size quotes recorded; actual Reflector v6 local/target integration incomplete |
+| D3-02 | Immutable Reflector-only provider, normalization, TTL and diagnostics implemented; the direct observer and mean-only breaker verified earlier were removed |
+| D3-03 | Vault integration and new-provider round trips verified locally before the simplification; divergence check since removed, other D2 guards retained |
+| D3-04 | Actual pair WASM exercised locally before the simplification; repeated unsigned feed/pool reads and trade-size quotes recorded; actual Reflector v6 local/target integration incomplete |
 | D3-05 | Evidence review recorded; full-universe live acceptance blocked |
 
 Do not activate or mark Tranche 1 accepted until source gaps, wrappers, adequate
-pool depth, network/tool compatibility, calibrated limits, latency mitigation,
-upstream upgrade monitoring and sustained collection/resource evidence are resolved.
+execution liquidity, network/tool compatibility, calibrated limits, stale-mark
+mitigation or risk decision, upstream upgrade monitoring and sustained feed/resource
+evidence for the Reflector-only provider are resolved.

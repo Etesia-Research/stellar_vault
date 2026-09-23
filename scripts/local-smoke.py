@@ -75,7 +75,7 @@ for asset in assets.values():
 config = {"assets": sorted([{k: a[k] for k in ("address", "decimals", "kind")} for a in manifest["assets"]], key=lambda a: base64.b32decode(a["address"])[1:33]),
           "usdc": assets["USDC"], "oracle": router, "router": router, "route_contracts": [router], "pool": None, "pool_assets": [],
           "admin": root, "executor": root, "guardian": root, "fees": {"management_bps": 100, "performance_bps": 1000, "recipient": recipient},
-          "borrowing": False, "max_price_age": 300, "max_divergence_bps": 100, "max_slippage_bps": 100,
+          "borrowing": False, "max_price_age": 300, "max_slippage_bps": 100,
           "max_leg_bps": 2000, "max_turnover_bps": 10000, "max_loss_bps": 200, "cooldown": 1, "max_debt_bps": 0, "min_health_bps": 12500}
 vault = deploy(base / "etesia_vault.optimized.wasm", config=config, seed_from=root)
 manifest.update(vault=vault, config=config, router=router, oracle=router)

@@ -22,10 +22,12 @@ unaffected.
 
 ## Implementation
 
-**Current universe (A48, 2026-09-18):** XLM/AQUA/ETH/BTC risk assets, USTRY reserve and USDC settlement. SHX is temporarily excluded. Local fixture scripts configure these six assets; the contracts retain generic immutable asset configuration. AQUA remains unqualified for activation because breaker depth is inadequate. See [D3 acceptance](docs/d3-acceptance.md).
+**Current universe (A48, 2026-09-18):** XLM/AQUA/ETH/BTC risk assets, USTRY reserve and USDC settlement. SHX is temporarily excluded. Local fixture scripts configure these six assets; the contracts retain generic immutable asset configuration. AQUA remains unqualified for activation because its measured Soroswap liquidity is inadequate. See [D3 acceptance](docs/d3-acceptance.md).
 
 D2 vault/adapter and D3 pricing provider, implemented and locally verified
-2026-09-18. Independent Soroban workspace for USDC custody and guarded valuation.
+2026-09-18; D3 was simplified to Reflector only on 2026-09-23 (native checks
+only, no recorded local RPC rerun yet). Independent Soroban workspace for USDC custody and guarded valuation.
+Pricing is Reflector only, with no second-source check; see the D3 provider.
 See [acceptance and evidence](docs/acceptance.md), [ABI](docs/interfaces.md),
 [direct exits/recovery](docs/operations.md) and [local RPC reproduction](docs/local-rpc.md).
 See [D3 provider](docs/pricing.md) and [D3 evidence/gates](docs/d3-acceptance.md).

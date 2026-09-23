@@ -1,5 +1,5 @@
-use crate::types::{Error, Observation};
-use soroban_sdk::{Env, Vec, U256};
+use crate::types::Error;
+use soroban_sdk::{Env, U256};
 
 fn narrow(n: U256) -> Result<i128, Error> {
     let n = n.to_u128().ok_or(Error::Overflow)?;
@@ -26,38 +26,4 @@ pub fn ratio(e: &Env, n: i128, nd: u32, d: i128, dd: u32) -> Result<i128, Error>
         d = d.mul(&scale);
     }
     narrow(n.div(&d))
-}
-
-pub fn twap(e: &Env, samples: &Vec<Observation>) -> Result<i128, Error> {
-    if samples.len() != 3 {
-        return Err(Error::Bootstrap);
-    }
-    let a = samples.get(0).unwrap();
-    let b = samples.get(1).unwrap();
-    let c = samples.get(2).unwrap();
-    if a.price <= 0
-        || b.price <= 0
-        || c.price <= 0
-        || a.timestamp >= b.timestamp
-        || b.timestamp >= c.timestamp
-    {
-        return Err(Error::Invalid);
-    }
-    let p = |v: i128| U256::from_u128(e, v as u128);
-    let dt = |v: u64| U256::from_u128(e, v as u128);
-    let sum = p(a.price)
-        .add(&p(b.price))
-        .mul(&dt(b.timestamp - a.timestamp))
-        .add(
-            &p(b.price)
-                .add(&p(c.price))
-                .mul(&dt(c.timestamp - b.timestamp)),
-        );
-    narrow(sum.div(&dt(c.timestamp - a.timestamp).mul(&U256::from_u32(e, 2))))
-}
-
-pub fn within(e: &Env, price: i128, reference: i128, limit: u32) -> bool {
-    // ceil(delta * 10000 / price) <= limit, without intermediate rounding.
-    U256::from_u128(e, price.abs_diff(reference)).mul(&U256::from_u32(e, 10_000))
-        <= U256::from_u128(e, price as u128).mul(&U256::from_u32(e, limit))
 }

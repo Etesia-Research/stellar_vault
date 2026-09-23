@@ -79,7 +79,6 @@ pub struct Config {
     pub fees: Fees,
     pub borrowing: bool,
     pub max_price_age: u64,
-    pub max_divergence_bps: u32,
     pub max_slippage_bps: u32,
     pub max_leg_bps: u32,
     pub max_turnover_bps: u32,
@@ -110,10 +109,8 @@ pub struct State {
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Mark {
-    pub price: i128,     // Reflector USDC per whole asset, 12 decimals
-    pub reference: i128, // Three-observation Soroswap sampled TWAP
+    pub price: i128, // Reflector USDC per whole asset, 12 decimals
     pub timestamp: u64,
-    pub ready: bool,
 }
 
 #[contracttype]

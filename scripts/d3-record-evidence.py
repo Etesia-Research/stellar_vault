@@ -27,7 +27,7 @@ for scenario in ("d3", "d3-conversion"):
     for name, digest in manifest["wasm_sha256"].items():
         assert hashlib.sha256((root / "target/wasm32-unknown-unknown/release" / name).read_bytes()).hexdigest() == digest
     manifest.pop("transactions_log")
-    manifest["scope"] = "local fixture tokens/feed; actual deployed Soroswap pair WASM; no external activation"
+    manifest["scope"] = "local fixture tokens/feed; Reflector-only provider; no external activation"
     manifest["recorded_at"] = datetime.now(timezone.utc).isoformat()
     manifest["resource_profile_sha256"] = hashlib.sha256((root / "fixtures/local-network-settings.json").read_bytes()).hexdigest()
     (out / (scenario + "-local-rpc.json")).write_text(json.dumps(manifest, indent=2) + "\n")
