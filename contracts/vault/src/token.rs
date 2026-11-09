@@ -3,17 +3,22 @@ use crate::{
     storage,
     types::Error,
 };
-use soroban_sdk::{panic_with_error, Address, Env};
-use soroban_token_sdk::TokenUtils;
+use soroban_sdk::{panic_with_error, symbol_short, Address, Env};
 
 #[inline(never)]
 pub fn credit(e: &Env, who: &Address, amount: i128) {
     nonnegative(e, amount);
     storage::write_balance(e, who, add(e, storage::balance(e, who), amount));
     if amount > 0 {
-        TokenUtils::new(e)
-            .events()
-            .mint(e.current_contract_address(), who.clone(), amount);
+        #[allow(deprecated)]
+        e.events().publish(
+            (
+                symbol_short!("mint"),
+                e.current_contract_address(),
+                who.clone(),
+            ),
+            amount,
+        );
     }
 }
 #[inline(never)]
@@ -36,9 +41,11 @@ pub fn transfer(e: &Env, from: &Address, to: &Address, amount: i128) {
         panic_with_error!(e, Error::SeedLocked);
     }
     storage::write_balance(e, to, add(e, storage::balance(e, to), amount));
-    TokenUtils::new(e)
-        .events()
-        .transfer(from.clone(), to.clone(), amount);
+    #[allow(deprecated)]
+    e.events().publish(
+        (symbol_short!("transfer"), from.clone(), to.clone()),
+        amount,
+    );
 }
 #[inline(never)]
 pub fn burn(e: &Env, from: &Address, amount: i128) {
@@ -46,5 +53,7 @@ pub fn burn(e: &Env, from: &Address, amount: i128) {
     let mut s = storage::state(e);
     s.supply -= amount;
     storage::save(e, &s);
-    TokenUtils::new(e).events().burn(from.clone(), amount);
+    #[allow(deprecated)]
+    e.events()
+        .publish((symbol_short!("burn"), from.clone()), amount);
 }

@@ -1,5 +1,38 @@
 #![no_std]
-use defindex_strategy_core::{DeFindexStrategyTrait, StrategyError};
+// Mirrors DeFindexStrategyTrait and StrategyError from the vendored
+// defindex-strategy-core; the parent-WASM tests check the interface.
+#[soroban_sdk::contracterror]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
+#[repr(u32)]
+pub enum StrategyError {
+    NotInitialized = 401,
+    NegativeNotAllowed = 410,
+    InvalidArgument = 411,
+    InsufficientBalance = 412,
+    UnderflowOverflow = 413,
+    ArithmeticError = 414,
+    DivisionByZero = 415,
+    InvalidSharesMinted = 416,
+    OnlyPositiveAmountAllowed = 417,
+    NotAuthorized = 418,
+    ProtocolAddressNotFound = 420,
+    DeadlineExpired = 421,
+    ExternalError = 422,
+    SoroswapPairError = 423,
+    AmountBelowMinDust = 451,
+    UnderlyingAmountBelowMin = 452,
+    BTokensAmountBelowMin = 453,
+    InternalSwapError = 454,
+    SupplyNotFound = 455,
+}
+pub trait DeFindexStrategyTrait {
+    fn __constructor(env: Env, asset: Address, init_args: Vec<Val>);
+    fn asset(env: Env) -> Result<Address, StrategyError>;
+    fn deposit(env: Env, amount: i128, from: Address) -> Result<i128, StrategyError>;
+    fn harvest(env: Env, from: Address, data: Option<Bytes>) -> Result<(), StrategyError>;
+    fn balance(env: Env, from: Address) -> Result<i128, StrategyError>;
+    fn withdraw(env: Env, amount: i128, from: Address, to: Address) -> Result<i128, StrategyError>;
+}
 #[soroban_sdk::contractclient(name = "VaultClient")]
 pub trait VaultInterface {
     fn query_asset(e: Env) -> Address;

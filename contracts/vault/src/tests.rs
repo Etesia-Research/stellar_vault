@@ -4,7 +4,9 @@ use soroban_sdk::{
     symbol_short,
     testutils::{Events, MockAuth, MockAuthInvoke},
     token::TokenClient,
-    vec, IntoVal, Symbol, TryFromVal,
+    vec,
+    xdr::{ContractEventBody, ScVal},
+    IntoVal, TryFromVal,
 };
 
 #[test]
@@ -151,15 +153,11 @@ fn stale_price_basket_waives_only_exiting_entitlement() {
     f.e.mock_all_auths();
     let minima = vec![&f.e, 0, 0, 0, 0];
     let paid = c.redeem_in_kind(&shares, &f.user, &f.user, &minima, &u64::MAX);
-    assert!(f
-        .e
-        .events()
-        .all()
-        .iter()
-        .any(
-            |(_, topics, _)| Symbol::try_from_val(&f.e, &topics.get(0).unwrap()).ok()
-                == Some(symbol_short!("waiver"))
-        ));
+    let waiver = ScVal::try_from_val(&f.e, &symbol_short!("waiver")).unwrap();
+    assert!(f.e.events().all().events().iter().any(|event| {
+        let ContractEventBody::V0(body) = &event.body;
+        body.topics.first() == Some(&waiver)
+    }));
     assert!(paid.iter().any(|n| n > 0));
     assert_eq!(c.balance(&f.user), 0);
     assert_eq!(c.state().high_water, old);
@@ -229,29 +227,32 @@ fn target_auth_guarded_swap_and_nonce_replay() {
     assert!(c.try_execute(&p).is_err());
 }
 #[test]
-fn malicious_output_and_reentry_roll_back_nonce_fees_and_transfers() {
-    for reentry in [false, true] {
+fn malicious_output_reentry_and_refund_roll_back_nonce_fees_and_transfers() {
+    use soroban_sdk::xdr::{ScErrorCode, ScErrorType};
+    let amount = SEED_ASSETS / 40;
+    // The host refuses the reentrant call before the vault's own guard runs.
+    let reentry =
+        soroban_sdk::Error::from_type_and_code(ScErrorType::Context, ScErrorCode::InvalidAction);
+    for (case, expected) in [Error::Slippage.into(), reentry, Error::Slippage.into()]
+        .into_iter()
+        .enumerate()
+    {
         let f = Fixture::new(false, false);
         let c = f.client();
-        let p = f.plan(
-            vec![
-                &f.e,
-                Action::Swap(f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 40)),
-            ],
-            0,
-        );
+        let p = f.plan(vec![&f.e, Action::Swap(f.swap(&f.usdc, &f.xlm, amount))], 0);
         f.e.as_contract(&f.router, || {
-            f.e.storage()
-                .instance()
-                .set(&symbol_short!("output"), &1i128);
-            f.e.storage()
-                .instance()
-                .set(&symbol_short!("reenter"), &reentry);
+            let store = f.e.storage().instance();
+            match case {
+                0 => store.set(&symbol_short!("output"), &1i128),
+                1 => store.set(&symbol_short!("reenter"), &true),
+                // A leftover-input refund: the vault did not spend exactly `amount`.
+                _ => store.set(&symbol_short!("take"), &(amount - 1)),
+            }
         });
         f.auth(&f.executor, "execute", (p.clone(),).into_val(&f.e));
         let state = c.state();
         let cash = c.liquid_assets();
-        assert!(c.try_execute(&p).is_err());
+        assert_eq!(c.try_execute(&p), Err(Ok(expected)));
         assert_eq!(state, c.state());
         assert_eq!(cash, c.liquid_assets());
     }
@@ -297,7 +298,7 @@ fn generated_cash_flow_sequences_conserve_assets_and_supply() {
         seed = seed.wrapping_mul(6364136223846793005).wrapping_add(1);
         let n = i128::from(seed % 1_000_000 + 1);
         f.e.mock_all_auths();
-        if seed % 2 == 0 || c.balance(&f.user) < n * SHARE_MULTIPLIER {
+        if seed.is_multiple_of(2) || c.balance(&f.user) < n * SHARE_MULTIPLIER {
             c.deposit(&n, &f.user, &f.user, &f.user);
         } else {
             c.withdraw(&n, &f.user, &f.user, &f.user);
@@ -684,7 +685,8 @@ fn material_rewards_block_priced_flows_until_claimed_and_held_rewards_count_once
     assert_eq!(c.total_assets(), SEED_ASSETS * 11 / 10 + 123);
 }
 #[test]
-fn unsafe_routes_and_caller_directed_recipients_are_rejected() {
+fn unsafe_routes_and_hop_variants_are_rejected_before_pricing() {
+    use soroban_sdk::{testutils::Address as _, Address, BytesN};
     let f = Fixture::new(false, false);
     let c = f.client();
     let e = &f.e;
@@ -692,64 +694,97 @@ fn unsafe_routes_and_caller_directed_recipients_are_rejected() {
         vec![e, Action::Swap(f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 40))],
         0,
     );
-    for case in 0..7 {
-        let mut s = f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 40);
-        let expected = match case {
-            0 => {
-                s.auth = vec![
-                    e,
-                    RouteAuth::Transfer(f.usdc.clone(), f.executor.clone(), s.amount),
-                ];
-                Error::Unauthorized
-            }
-            1 => {
-                s.auth = vec![
-                    e,
-                    RouteAuth::Transfer(f.risk.clone(), f.router.clone(), s.amount),
-                ];
-                Error::Unauthorized
-            }
-            2 => {
-                s.minimum = 1;
-                Error::Slippage
-            }
-            3 => {
-                let mut d = s.distribution.get(0).unwrap();
-                d.parts = 0;
-                s.distribution.set(0, d);
-                Error::Invalid
-            }
-            4 => {
-                let mut d = s.distribution.get(0).unwrap();
-                d.path = vec![e, f.xlm.clone(), f.usdc.clone()];
-                s.distribution.set(0, d);
-                Error::Invalid
-            }
-            5 => {
-                let mut d = s.distribution.get(0).unwrap();
-                d.protocol_id = Protocol::Aqua;
-                s.distribution.set(0, d);
-                Error::Invalid
-            }
-            _ => {
-                s.auth = vec![
-                    e,
-                    RouteAuth::Invoke(RouteInvocation {
-                        contract: f.router.clone(),
-                        function: symbol_short!("drain"),
-                        args: vec![e],
-                        children: vec![e],
-                    }),
-                ];
-                Error::Unauthorized
-            }
-        };
+    // A stale XLM mark fails any check that needs a price: the route checks must not.
+    f.mark(&f.xlm, PRICE_SCALE, false);
+    let (usdc, xlm, pool) = (f.usdc.clone(), f.xlm.clone(), Address::generate(e));
+    let foreign = Hop::Soroswap(SoroswapHop {
+        pair: pool.clone(),
+        token_in: usdc.clone(),
+        token_out: xlm.clone(),
+    });
+    let others = [
+        Hop::Aqua(AquaHop {
+            steps: vec![
+                e,
+                (
+                    vec![e, usdc.clone(), xlm.clone()],
+                    BytesN::from_array(e, &[1; 32]),
+                    xlm.clone(),
+                ),
+            ],
+            token_in: usdc.clone(),
+        }),
+        Hop::Sushi(SushiHop {
+            pool: pool.clone(),
+            token_in: usdc.clone(),
+            token_out: xlm.clone(),
+            zero_for_one: true,
+        }),
+        Hop::Phoenix(PhoenixHop {
+            pool: pool.clone(),
+            token_in: usdc.clone(),
+            token_out: xlm.clone(),
+        }),
+        Hop::Comet(CometHop {
+            pool: pool.clone(),
+            token_in: usdc.clone(),
+            token_out: xlm.clone(),
+        }),
+    ];
+    let amount = SEED_ASSETS / 40;
+    let unknown = Address::generate(e);
+    let mut cases = std::vec::Vec::new();
+    for hop in others.iter().chain([&foreign]) {
+        cases.push((
+            vec![
+                e,
+                Route {
+                    amount_in: amount,
+                    hops: vec![e, hop.clone()],
+                },
+            ],
+            Error::Unauthorized,
+        ));
+    }
+    for path in [
+        &[&usdc, &unknown, &xlm][..],
+        &[&usdc, &usdc, &xlm],
+        &[&usdc, &xlm, &f.risk, &xlm],
+        &[&usdc, &f.risk, &f.reserve, &f.risk, &usdc, &xlm],
+    ] {
+        cases.push((vec![e, f.route(amount, path)], Error::Invalid));
+    }
+    let empty = Route {
+        amount_in: amount,
+        hops: vec![e],
+    };
+    cases.push((vec![e], Error::Invalid));
+    cases.push((vec![e, empty], Error::Invalid));
+    let mut many = vec![e];
+    for _ in 0..16 {
+        many.push_back(f.route(amount / 16, &[&usdc, &xlm]));
+    }
+    cases.push((many, Error::Invalid));
+    for (routes, expected) in cases {
+        let mut s = f.swap(&usdc, &xlm, amount);
+        s.routes = routes;
         let mut bad = p.clone();
         bad.actions = vec![e, Action::Swap(s)];
         f.auth(&f.executor, "execute", (bad.clone(),).into_val(e));
         assert_eq!(c.try_execute(&bad), Err(Ok(expected.into())));
         assert_eq!(c.state().nonce, 0);
     }
+    // Only an admissible route reaches the Reflector floor.
+    f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
+    assert_eq!(c.try_execute(&p), Err(Ok(Error::Pricing.into())));
+    f.mark(&f.xlm, PRICE_SCALE, true);
+    let mut bad = p.clone();
+    let mut s = f.swap(&usdc, &xlm, amount);
+    s.minimum = 1;
+    bad.actions = vec![e, Action::Swap(s)];
+    f.auth(&f.executor, "execute", (bad.clone(),).into_val(e));
+    assert_eq!(c.try_execute(&bad), Err(Ok(Error::Slippage.into())));
+    assert_eq!(c.state().nonce, 0);
 }
 #[test]
 fn repeated_individually_legal_public_unwinds_obey_aggregate_turnover() {
@@ -783,6 +818,34 @@ fn repeated_individually_legal_public_unwinds_obey_aggregate_turnover() {
         &u64::MAX,
     );
     assert_eq!(c.state().nonce, 6);
+}
+#[test]
+fn swap_output_at_the_floor_binds_the_window_loss_limit() {
+    // Turnover stays under its cap, so only the loss half of the window check can fail.
+    let f = Fixture::new(false, false);
+    let c = f.client();
+    let e = &f.e;
+    let s = f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 40);
+    let loss = s.amount - s.minimum;
+    e.as_contract(&f.router, || {
+        e.storage()
+            .instance()
+            .set(&symbol_short!("output"), &s.minimum)
+    });
+    let p = f.plan(vec![e, Action::Swap(s.clone())], 0);
+    for (max_loss_bps, expected) in [(2, Err(Ok(Error::Limit.into()))), (3, Ok(Ok(())))] {
+        // 0.25 USDC lost on 1,000 USDC is 2.5 bps.
+        e.as_contract(&f.vault, || {
+            let mut config = crate::storage::config(e);
+            config.max_loss_bps = max_loss_bps;
+            e.storage()
+                .instance()
+                .set(&crate::storage::Key::Config, &config);
+        });
+        f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
+        assert_eq!(c.try_execute(&p), expected);
+    }
+    assert_eq!((c.state().turnover, c.state().loss), (s.amount, loss));
 }
 #[test]
 fn nonprofitable_fee_settlement_never_resets_mark_and_fractional_fees_accumulate() {
@@ -1115,73 +1178,34 @@ fn cash_flows_adjust_budget_capital_without_resetting_consumed_turnover() {
 }
 
 #[test]
-fn multihop_auth_preserves_existing_intermediate_holdings_and_supports_split_distributions() {
-    use crate::testutils::HopFixture;
-    use soroban_sdk::token::StellarAssetClient;
+fn multihop_split_routes_reject_intermediate_inflows_and_preserve_existing_holdings() {
     let f = Fixture::new(false, false);
     let e = &f.e;
-    let hop = e.register(HopFixture, ());
-    e.mock_all_auths();
-    for asset in [&f.risk, &f.xlm] {
-        StellarAssetClient::new(e, asset).mint(&hop, &SEED_ASSETS);
-    }
     f.donate(&f.risk, 100);
-    e.as_contract(&f.vault, || {
-        let mut config = crate::storage::config(e);
-        config.route_contracts.push_back(hop.clone());
-        e.storage()
-            .instance()
-            .set(&crate::storage::Key::Config, &config);
-    });
-    e.as_contract(&f.router, || {
-        e.storage().instance().set(&symbol_short!("hop"), &hop)
-    });
-    let mut swap = f.swap(&f.usdc, &f.xlm, SEED_ASSETS / 40);
-    swap.distribution = vec![e];
-    for protocol in [
-        Protocol::Soroswap,
-        Protocol::Phoenix,
-        Protocol::Aqua,
-        Protocol::Comet,
-    ] {
-        swap.distribution.push_back(DexDistribution {
-            protocol_id: protocol,
-            path: vec![e, f.usdc.clone(), f.risk.clone(), f.xlm.clone()],
-            parts: 1,
-            bytes: Some(vec![
-                e,
-                soroban_sdk::BytesN::from_array(e, &[1; 32]),
-                soroban_sdk::BytesN::from_array(e, &[2; 32]),
-            ]),
-        });
-    }
-    swap.auth = vec![
+    let amount = SEED_ASSETS / 40;
+    let mut swap = f.swap(&f.usdc, &f.xlm, amount);
+    swap.routes = vec![
         e,
-        RouteAuth::Invoke(RouteInvocation {
-            contract: hop.clone(),
-            function: symbol_short!("swap"),
-            args: (&f.vault, &f.usdc, &f.risk, &f.xlm, swap.amount).into_val(e),
-            children: vec![
-                e,
-                RouteAuth::Transfer(f.usdc.clone(), hop.clone(), swap.amount),
-                RouteAuth::Transfer(f.risk.clone(), hop.clone(), swap.amount),
-            ],
-        }),
+        f.route(amount / 2, &[&f.usdc, &f.risk, &f.xlm]),
+        f.route(amount / 2, &[&f.usdc, &f.xlm]),
     ];
     let p = f.plan(vec![e, Action::Swap(swap)], 0);
-    // Taking even one pre-existing intermediate atom invalidates the whole route.
-    e.as_contract(&hop, || {
-        e.storage().instance().set(&symbol_short!("short"), &1i128)
+    // The vault authorizes no intermediate transfer, so any intermediate change is a failure.
+    e.as_contract(&f.router, || {
+        e.storage()
+            .instance()
+            .set(&symbol_short!("inflow"), &f.risk)
     });
     f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
     assert_eq!(f.client().try_execute(&p), Err(Ok(Error::Slippage.into())));
     assert_eq!(TokenClient::new(e, &f.risk).balance(&f.vault), 100);
-    e.as_contract(&hop, || {
-        e.storage().instance().set(&symbol_short!("short"), &0i128)
+    e.as_contract(&f.router, || {
+        e.storage().instance().remove(&symbol_short!("inflow"))
     });
     f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
     f.client().execute(&p);
     assert_eq!(TokenClient::new(e, &f.risk).balance(&f.vault), 100);
+    assert_eq!(TokenClient::new(e, &f.xlm).balance(&f.vault), amount);
 }
 
 #[test]
@@ -1411,4 +1435,256 @@ fn ordinary_execution_cannot_use_the_partial_deleveraging_exception() {
     assert_eq!(c.try_execute(&p), Err(Ok(Error::Limit.into())));
     assert_eq!(c.holdings(), before);
     assert_eq!(c.state().nonce, 0);
+}
+
+#[test]
+fn golden_vault_and_share_token_events() {
+    // D5-04 decoders rely on these exact topics and data.
+    use crate::blend::{PoolClient, Positions};
+    use soroban_sdk::{map, Address, Symbol, Val, Vec};
+    let f = Fixture::new(true, false);
+    let (e, c, v, user) = (&f.e, f.client(), &f.vault, &f.user);
+    // Events are read before `expected` makes its own view calls.
+    let check = |expected: &dyn Fn() -> std::vec::Vec<(Vec<Val>, Val)>| {
+        let events = e.events().all().filter_by_contract(v);
+        let mut all = Vec::new(e);
+        for (topics, data) in expected() {
+            all.push_back((v.clone(), topics, data));
+        }
+        assert_eq!(events, all);
+    };
+    let fees = |s: &State, start: u64| {
+        (
+            (symbol_short!("fees"), 1u32).into_val(e),
+            (
+                0i128,
+                0i128,
+                start,
+                s.last_fee,
+                s.high_water,
+                c.config().fees,
+            )
+                .into_val(e),
+        )
+    };
+    // The constructor's events, from a second vault with the same config.
+    let config = c.config();
+    e.mock_all_auths();
+    let other = e.register(crate::Vault, (config.clone(), f.admin.clone()));
+    let events = e.events().all().filter_by_contract(&other);
+    e.mock_auths(&[]);
+    let seed = SEED_ASSETS * SHARE_MULTIPLIER;
+    let init: Vec<(Address, Vec<Val>, Val)> = vec![
+        e,
+        (
+            other.clone(),
+            (symbol_short!("mint"), &other, &other).into_val(e),
+            seed.into_val(e),
+        ),
+        (
+            other.clone(),
+            (symbol_short!("init"), 1u32).into_val(e),
+            (config, SEED_ASSETS, seed).into_val(e),
+        ),
+    ];
+    assert_eq!(events, init);
+    let t0 = c.state().last_fee;
+    let shares = f.deposit(SEED_ASSETS);
+    check(&|| {
+        std::vec![
+            fees(&c.state(), t0),
+            (
+                (symbol_short!("mint"), v, user).into_val(e),
+                shares.into_val(e)
+            ),
+            (
+                (symbol_short!("deposit"), user, user, user).into_val(e),
+                map![
+                    e,
+                    (symbol_short!("assets"), SEED_ASSETS),
+                    (symbol_short!("shares"), shares)
+                ]
+                .into_val(e),
+            ),
+        ]
+    });
+    e.mock_all_auths();
+    c.approve(user, &f.admin, &shares, &200);
+    let burned = c.withdraw(&100, &f.admin, user, &f.admin);
+    check(&|| {
+        std::vec![
+            fees(&c.state(), t0),
+            (
+                (symbol_short!("burn"), user).into_val(e),
+                burned.into_val(e)
+            ),
+            (
+                (symbol_short!("withdraw"), &f.admin, &f.admin, user).into_val(e),
+                map![
+                    e,
+                    (symbol_short!("assets"), 100i128),
+                    (symbol_short!("shares"), burned)
+                ]
+                .into_val(e),
+            ),
+        ]
+    });
+    c.transfer(user, &f.admin, &7);
+    check(&|| {
+        std::vec![(
+            (symbol_short!("transfer"), user, &f.admin).into_val(e),
+            7i128.into_val(e),
+        )]
+    });
+    c.approve(user, &f.executor, &9, &200);
+    check(&|| {
+        std::vec![(
+            (Symbol::new(e, "approve"), user, &f.executor).into_val(e),
+            (9i128, 200u32).into_val(e),
+        )]
+    });
+    let amount = SEED_ASSETS * 95 / 1000;
+    let t = f.target(1000);
+    f.auth(&f.executor, "publish_target", (t.clone(),).into_val(e));
+    let hash = c.publish_target(&t);
+    check(&|| {
+        std::vec![(
+            (symbol_short!("target"), 1u32).into_val(e),
+            (hash.clone(), t.clone()).into_val(e),
+        )]
+    });
+    let p = Plan {
+        target: hash,
+        epoch: t.epoch,
+        nonce: 0,
+        version: 1,
+        deadline: t.expiry,
+        actions: vec![e, Action::Supply(f.usdc.clone(), amount)],
+    };
+    let empty = Positions {
+        liabilities: map![e],
+        collateral: map![e],
+        supply: map![e],
+    };
+    let before = c.total_assets();
+    f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
+    c.execute(&p);
+    let supplied = || PoolClient::new(e, &f.pool).get_positions(v);
+    check(&|| {
+        std::vec![
+            fees(&c.state(), t0),
+            (
+                (symbol_short!("position"), 1u32).into_val(e),
+                (0u32, &f.usdc, amount, empty.clone(), supplied()).into_val(e),
+            ),
+            (
+                (symbol_short!("plan"), 1u32).into_val(e),
+                (
+                    0u64,
+                    p.target.clone(),
+                    before,
+                    c.total_assets(),
+                    c.state().turnover
+                )
+                    .into_val(e),
+            ),
+        ]
+    });
+    let before = c.total_assets();
+    let positions = supplied();
+    let withdraw = vec![e, Action::Withdraw(f.usdc.clone(), amount)];
+    c.unwind(&withdraw, &1, &u64::MAX);
+    check(&|| {
+        std::vec![
+            fees(&c.state(), t0),
+            (
+                (symbol_short!("position"), 1u32).into_val(e),
+                (1u32, &f.usdc, amount, positions.clone(), empty.clone()).into_val(e),
+            ),
+            (
+                (symbol_short!("unwind"), 1u32).into_val(e),
+                (1u64, before, c.total_assets()).into_val(e),
+            ),
+        ]
+    });
+    e.mock_all_auths();
+    c.pause();
+    check(&|| std::vec![((symbol_short!("pause"), 1u32).into_val(e), true.into_val(e))]);
+    let hash = c.announce(&Change::Resume);
+    check(&|| {
+        std::vec![(
+            (symbol_short!("announce"), 1u32).into_val(e),
+            c.pending_change().unwrap().into_val(e),
+        )]
+    });
+    c.cancel(&hash);
+    check(&|| {
+        std::vec![(
+            (symbol_short!("cancel"), 1u32).into_val(e),
+            hash.clone().into_val(e),
+        )]
+    });
+    let hash = c.announce(&Change::Resume);
+    let pending = c.pending_change().unwrap();
+    f.advance(0, ROLE_DELAY);
+    c.apply_change(&hash);
+    check(&|| {
+        std::vec![(
+            (symbol_short!("config"), 1u32).into_val(e),
+            (2u32, pending.clone()).into_val(e),
+        )]
+    });
+    f.donate(&f.xlm, SEED_ASSETS / 5);
+    f.mark(&f.xlm, PRICE_SCALE, false);
+    e.mock_all_auths();
+    let minima = Vec::from_array(e, [0i128; 4]);
+    let paid = c.redeem_in_kind(&7, &f.admin, &f.admin, &minima, &u64::MAX);
+    check(&|| {
+        let s = c.state();
+        std::vec![
+            fees(&s, t0),
+            (
+                (symbol_short!("burn"), &f.admin).into_val(e),
+                7i128.into_val(e)
+            ),
+            (
+                (symbol_short!("waiver"), 1u32).into_val(e),
+                // The settled supply, before the burn.
+                (&f.admin, 7i128, s.supply + 7, s.high_water).into_val(e),
+            ),
+            (
+                (symbol_short!("basket"), 1u32).into_val(e),
+                (&f.admin, &f.admin, 7i128, paid.clone()).into_val(e),
+            ),
+        ]
+    });
+    e.as_contract(v, || {
+        let mut config = crate::storage::config(e);
+        let i = config
+            .assets
+            .iter()
+            .position(|a| a.address == f.risk)
+            .unwrap() as u32;
+        let mut asset = config.assets.get(i).unwrap();
+        asset.kind = AssetKind::Reward;
+        config.assets.set(i, asset);
+        e.storage()
+            .instance()
+            .set(&crate::storage::Key::Config, &config);
+    });
+    e.as_contract(&f.pool, || {
+        e.storage()
+            .instance()
+            .set(&symbol_short!("claim"), &123i128);
+        e.storage()
+            .instance()
+            .set(&symbol_short!("reward"), &f.risk);
+    });
+    c.claim_rewards();
+    check(&|| {
+        std::vec![(
+            (symbol_short!("rewards"), 1u32).into_val(e),
+            (&f.risk, 123i128).into_val(e),
+        )]
+    });
 }

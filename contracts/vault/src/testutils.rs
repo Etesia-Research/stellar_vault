@@ -1,4 +1,4 @@
-// The pinned Soroswap ABI has eight parameters.
+// The pinned Soroswap Aggregator v3 ABI has eight parameters.
 #![allow(clippy::too_many_arguments)]
 extern crate std;
 use crate::{blend::*, types::*, Vault, VaultClient};
@@ -198,7 +198,7 @@ impl PoolFixture {
                 map.set(i, next);
             }
             if matches!(r.request_type, 0 | 2 | 5) {
-                token.transfer(&spender, &e.current_contract_address(), &amount);
+                token.transfer(&spender, e.current_contract_address(), &amount);
             } else {
                 token.transfer(&e.current_contract_address(), &to, &amount);
             }
@@ -207,58 +207,43 @@ impl PoolFixture {
         p
     }
 }
+// A v3-ABI aggregator mock. `take` is the input it keeps (the rest is refunded), `output`
+// the token_out it pays, `reenter` calls back into the vault and `inflow` pays one atom of
+// that token as an unexpected side transfer.
 #[contract]
 pub struct RouterFixture;
 #[contractimpl]
 impl RouterFixture {
-    pub fn swap_exact_tokens_for_tokens(
+    pub fn swap_exact_in(
         e: Env,
+        user: Address,
         token_in: Address,
-        token_out: Address,
         amount_in: i128,
-        amount_out_min: i128,
-        distribution: Vec<DexDistribution>,
-        to: Address,
-        deadline: u64,
-    ) -> Vec<Vec<i128>> {
-        to.require_auth();
-        assert!(deadline >= e.ledger().timestamp());
-        assert!(!distribution.is_empty());
-        if let Some(hop) = e
-            .storage()
-            .instance()
-            .get::<_, Address>(&symbol_short!("hop"))
-        {
-            HopFixtureClient::new(&e, &hop).swap(
-                &to,
-                &token_in,
-                &distribution.get(0).unwrap().path.get(1).unwrap(),
-                &token_out,
-                &amount_in,
-            );
-            return vec![&e, vec![&e, amount_in, amount_in]];
+        token_out: Address,
+        min_out: i128,
+        routes: Vec<Route>,
+        partner: Option<Partner>,
+    ) -> i128 {
+        user.require_auth();
+        assert!(!routes.is_empty() && partner.is_none());
+        let this = e.current_contract_address();
+        let store = e.storage().instance();
+        let input = TokenClient::new(&e, &token_in);
+        input.transfer(&user, &this, &amount_in);
+        let take = store.get(&symbol_short!("take")).unwrap_or(amount_in);
+        if take < amount_in {
+            input.transfer(&this, &user, &(amount_in - take));
         }
-        let take = e
-            .storage()
-            .instance()
-            .get(&symbol_short!("take"))
-            .unwrap_or(amount_in);
-        TokenClient::new(&e, &token_in).transfer(&to, &e.current_contract_address(), &take);
-        let output = e
-            .storage()
-            .instance()
-            .get(&symbol_short!("output"))
-            .unwrap_or(amount_in);
-        if e.storage()
-            .instance()
-            .get(&symbol_short!("reenter"))
-            .unwrap_or(false)
-        {
-            VaultClient::new(&e, &to).collect_fees();
+        let output = store.get(&symbol_short!("output")).unwrap_or(amount_in);
+        if store.get(&symbol_short!("reenter")).unwrap_or(false) {
+            VaultClient::new(&e, &user).collect_fees();
         }
-        TokenClient::new(&e, &token_out).transfer(&e.current_contract_address(), &to, &output);
-        let _ = amount_out_min;
-        vec![&e, vec![&e, amount_in, output]]
+        if let Some(token) = store.get::<_, Address>(&symbol_short!("inflow")) {
+            TokenClient::new(&e, &token).transfer(&this, &user, &1);
+        }
+        TokenClient::new(&e, &token_out).transfer(&this, &user, &output);
+        let _ = min_out;
+        output
     }
 }
 
@@ -276,12 +261,29 @@ pub struct Fixture {
     pub risk: Address,
     pub oracle: Address,
     pub router: Address,
+    pub pair: Address,
     pub pool: Address,
 }
 impl Fixture {
     pub fn new(pool: bool, borrowing: bool) -> Self {
         let e = Env::default();
         e.cost_estimate().budget().reset_unlimited();
+        Self::with_venue(e, pool, borrowing, |e, _, tokens| {
+            let router = e.register(RouterFixture, ());
+            for t in tokens {
+                StellarAssetClient::new(e, t).mint(&router, &(SEED_ASSETS * 1000));
+            }
+            (router, vec![e, Address::generate(e)])
+        })
+    }
+    /// Builds the fixture around a swap venue. `venue` gets the admin and the four tokens and
+    /// returns the aggregator and the pairs a hop may name; `pair` is the first of them.
+    pub fn with_venue(
+        e: Env,
+        pool: bool,
+        borrowing: bool,
+        venue: impl FnOnce(&Env, &Address, &[Address]) -> (Address, Vec<Address>),
+    ) -> Self {
         e.ledger().with_mut(|l| {
             l.timestamp = 1_000_000;
             l.sequence_number = 100;
@@ -307,7 +309,12 @@ impl Fixture {
             .register_stellar_asset_contract_v2(admin.clone())
             .address();
         let oracle = e.register(OracleFixture, ());
-        let router = e.register(RouterFixture, ());
+        let (router, route_contracts) = venue(
+            &e,
+            &admin,
+            &[usdc.clone(), xlm.clone(), reserve.clone(), risk.clone()],
+        );
+        let pair = route_contracts.get(0).unwrap();
         let pool_addr = e.register(
             PoolFixture,
             (
@@ -343,7 +350,6 @@ impl Fixture {
             let t = StellarAssetClient::new(&e, &a.address);
             t.mint(&admin, &(SEED_ASSETS * 1000));
             t.mint(&user, &(SEED_ASSETS * 1000));
-            t.mint(&router, &(SEED_ASSETS * 1000));
             t.mint(&pool_addr, &(SEED_ASSETS * 1000));
         }
         let config = Config {
@@ -351,7 +357,7 @@ impl Fixture {
             usdc: usdc.clone(),
             oracle: oracle.clone(),
             router: router.clone(),
-            route_contracts: vec![&e, router.clone()],
+            route_contracts,
             pool: if pool { Some(pool_addr.clone()) } else { None },
             pool_assets: if pool {
                 vec![&e, usdc.clone(), xlm.clone(), risk.clone()]
@@ -392,6 +398,7 @@ impl Fixture {
             risk,
             oracle,
             router,
+            pair,
             pool: pool_addr,
         }
     }
@@ -476,26 +483,25 @@ impl Fixture {
         }
     }
     pub fn swap(&self, input: &Address, output: &Address, amount: i128) -> Swap {
-        let e = &self.e;
         Swap {
             token_in: input.clone(),
             token_out: output.clone(),
             amount,
             minimum: amount * 99 / 100,
-            distribution: vec![
-                e,
-                DexDistribution {
-                    protocol_id: Protocol::Soroswap,
-                    path: vec![e, input.clone(), output.clone()],
-                    parts: 1,
-                    bytes: None,
-                },
-            ],
-            auth: vec![
-                e,
-                RouteAuth::Transfer(input.clone(), self.router.clone(), amount),
-            ],
+            routes: vec![&self.e, self.route(amount, &[input, output])],
         }
+    }
+    // One route of Soroswap hops along `path`, each through the configured pair.
+    pub fn route(&self, amount_in: i128, path: &[&Address]) -> Route {
+        let mut hops = Vec::new(&self.e);
+        for pair in path.windows(2) {
+            hops.push_back(Hop::Soroswap(SoroswapHop {
+                pair: self.pair.clone(),
+                token_in: pair[0].clone(),
+                token_out: pair[1].clone(),
+            }));
+        }
+        Route { amount_in, hops }
     }
     pub fn plan(&self, actions: Vec<Action>, yield_bps: u32) -> Plan {
         let t = self.target(yield_bps);
@@ -532,31 +538,5 @@ impl Fixture {
             }
             self.e.storage().persistent().set(&self.vault, &p);
         });
-    }
-}
-
-#[contract]
-pub struct HopFixture;
-#[contractimpl]
-impl HopFixture {
-    pub fn swap(
-        e: Env,
-        owner: Address,
-        input: Address,
-        middle: Address,
-        output: Address,
-        amount: i128,
-    ) {
-        owner.require_auth();
-        let this = e.current_contract_address();
-        TokenClient::new(&e, &input).transfer(&owner, &this, &amount);
-        let short: i128 = e
-            .storage()
-            .instance()
-            .get(&symbol_short!("short"))
-            .unwrap_or(0);
-        TokenClient::new(&e, &middle).transfer(&this, &owner, &(amount - short));
-        TokenClient::new(&e, &middle).transfer(&owner, &this, &amount);
-        TokenClient::new(&e, &output).transfer(&this, &owner, &amount);
     }
 }

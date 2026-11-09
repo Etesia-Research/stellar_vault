@@ -13,7 +13,7 @@ pub mod types;
 use math::{add, mul_div, nonnegative, positive};
 use soroban_sdk::{
     contract, contractimpl, map, panic_with_error, symbol_short, token::TokenClient, Address, Env,
-    String, Vec,
+    String, Symbol, Vec,
 };
 use soroban_token_sdk::{metadata::TokenMetadata, TokenUtils};
 use storage::Key;
@@ -37,9 +37,11 @@ fn flow_event(
         (symbol_short!("shares"), shares)
     ];
     if deposit {
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("deposit"), operator, from, to), data);
     } else {
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("withdraw"), operator, to, from), data);
     }
@@ -70,7 +72,7 @@ fn issue(e: &Env, assets: i128, shares: i128, receiver: Address, from: Address, 
     }
     let c = storage::config(e);
     let before = pricing::spot(e, &c.usdc);
-    TokenClient::new(e, &c.usdc).transfer(&from, &e.current_contract_address(), &assets);
+    TokenClient::new(e, &c.usdc).transfer(&from, e.current_contract_address(), &assets);
     if pricing::spot(e, &c.usdc) - before != assets {
         panic_with_error!(e, Error::Invalid);
     }
@@ -165,7 +167,7 @@ impl Vault {
         let before = pricing::spot(&e, &config.usdc);
         TokenClient::new(&e, &config.usdc).transfer(
             &seed_from,
-            &e.current_contract_address(),
+            e.current_contract_address(),
             &SEED_ASSETS,
         );
         if pricing::spot(&e, &config.usdc) - before != SEED_ASSETS {
@@ -196,6 +198,7 @@ impl Vault {
             name: String::from_str(&e, "Etesia Vault"),
             symbol: String::from_str(&e, "ETESIA"),
         });
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("init"), 1u32), (config, SEED_ASSETS, seed));
         storage::leave(&e);
@@ -253,9 +256,11 @@ impl Vault {
         e.storage()
             .persistent()
             .extend_ttl(&key, storage::TTL_THRESHOLD, storage::TTL_EXTEND);
-        TokenUtils::new(&e)
-            .events()
-            .approve(from, spender, amount, expiration_ledger);
+        #[allow(deprecated)]
+        e.events().publish(
+            (Symbol::new(&e, "approve"), from, spender),
+            (amount, expiration_ledger),
+        );
         storage::leave(&e);
     }
     pub fn transfer(e: Env, from: Address, to: Address, amount: i128) {
@@ -521,11 +526,13 @@ impl Vault {
             paid.push_back(amount);
         }
         if equity.is_none() {
+            #[allow(deprecated)]
             e.events().publish(
                 (symbol_short!("waiver"), 1u32),
                 (owner.clone(), shares, s.supply, s.high_water),
             );
         }
+        #[allow(deprecated)]
         e.events().publish(
             (symbol_short!("basket"), 1u32),
             (owner, receiver, shares, paid.clone()),
@@ -562,6 +569,8 @@ impl Vault {
     }
 }
 
+#[cfg(test)]
+mod soroswap_tests;
 #[cfg(test)]
 mod tests;
 #[cfg(any(test, feature = "testutils"))]

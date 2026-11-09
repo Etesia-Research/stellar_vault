@@ -14,6 +14,7 @@ impl Vault {
         let mut s = storage::state(&e);
         s.paused = true;
         storage::save(&e, &s);
+        #[allow(deprecated)]
         e.events().publish((symbol_short!("pause"), 1u32), true);
         storage::leave(&e);
     }
@@ -51,6 +52,7 @@ impl Vault {
             change,
         };
         e.storage().instance().set(&Key::Pending, &p);
+        #[allow(deprecated)]
         e.events().publish((symbol_short!("announce"), 1u32), p);
         storage::leave(&e);
         hash
@@ -62,6 +64,7 @@ impl Vault {
             panic_with_error!(&e, Error::Timelock);
         }
         e.storage().instance().remove(&Key::Pending);
+        #[allow(deprecated)]
         e.events().publish((symbol_short!("cancel"), 1u32), hash);
         storage::leave(&e);
     }
@@ -105,6 +108,7 @@ impl Vault {
             .unwrap_or_else(|| panic_with_error!(&e, Error::Overflow));
         storage::save(&e, &s);
         e.storage().instance().remove(&Key::Pending);
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("config"), 1u32), (s.version, p));
         storage::leave(&e);

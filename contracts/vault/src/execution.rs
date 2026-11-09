@@ -1,4 +1,4 @@
-// The pinned Soroswap ABI has eight parameters.
+// The pinned Soroswap Aggregator v3 ABI has eight parameters.
 #![allow(clippy::too_many_arguments)]
 use crate::{
     blend::{self, PoolClient, Request},
@@ -13,22 +13,22 @@ use soroban_sdk::{
     auth::{ContractContext, InvokerContractAuthEntry, SubContractInvocation},
     contractclient, contractimpl, panic_with_error, symbol_short, vec,
     xdr::ToXdr,
-    Address, BytesN, Env, IntoVal, Map, Symbol, Vec,
+    Address, BytesN, Env, IntoVal, Map, Vec,
 };
 
 #[allow(dead_code)]
-#[contractclient(name = "RouterClient")]
-pub trait Router {
-    fn swap_exact_tokens_for_tokens(
+#[contractclient(name = "AggregatorClient")]
+pub trait Aggregator {
+    fn swap_exact_in(
         e: Env,
+        user: Address,
         token_in: Address,
-        token_out: Address,
         amount_in: i128,
-        amount_out_min: i128,
-        distribution: Vec<DexDistribution>,
-        to: Address,
-        deadline: u64,
-    ) -> Vec<Vec<i128>>;
+        token_out: Address,
+        min_out: i128,
+        routes: Vec<Route>,
+        partner: Option<Partner>,
+    ) -> i128;
 }
 #[inline(never)]
 fn hash_target(e: &Env, target: &Target) -> BytesN<32> {
@@ -172,138 +172,46 @@ fn distance(e: &Env, t: &Target, equity: i128, holdings: &Vec<Holding>) -> i128 
     sum
 }
 
-// Only nested swap frames at pinned route contracts and bounded path-token transfers
-// can be authorized. This data grants authorization, never arbitrary invocation.
 #[inline(never)]
-fn check_auth(
-    e: &Env,
-    swap: &Swap,
-    entries: &Vec<RouteAuth>,
-    depth: u32,
-    count: &mut u32,
-    intermediate: &mut Map<Address, i128>,
-) -> (i128, Vec<InvokerContractAuthEntry>) {
-    let c = storage::config(e);
-    if depth > 5 || entries.len() > 24 {
-        panic_with_error!(e, Error::Limit);
-    }
-    let mut spent = 0;
-    let mut authorized = Vec::new(e);
-    for entry in entries.iter() {
-        *count += 1;
-        if *count > 48 {
-            panic_with_error!(e, Error::Limit);
-        }
-        let invocation = match entry {
-            RouteAuth::Transfer(token, to, amount) => {
-                positive(e, amount);
-                let mut text = [0u8; 56];
-                to.to_string().copy_into_slice(&mut text);
-                let is_input = token == swap.token_in;
-                if (!is_input && !intermediate.contains_key(token.clone()))
-                    || text[0] != b'C'
-                    || to == c.executor
-                    || to == c.admin
-                    || to == c.guardian
-                    || to == c.fees.recipient
-                    || to == e.current_contract_address()
-                {
-                    panic_with_error!(e, Error::Unauthorized);
-                }
-                if is_input {
-                    spent = add(e, spent, amount);
-                } else {
-                    let total = add(e, intermediate.get(token.clone()).unwrap(), amount);
-                    if mark_value(e, &token, total, true)
-                        > mul_div(
-                            e,
-                            mark_value(e, &swap.token_in, swap.amount, true),
-                            BPS + i128::from(c.max_slippage_bps),
-                            BPS,
-                            false,
-                        )
-                    {
-                        panic_with_error!(e, Error::Limit);
-                    }
-                    intermediate.set(token.clone(), total);
-                }
-                SubContractInvocation {
-                    context: ContractContext {
-                        contract: token,
-                        fn_name: symbol_short!("transfer"),
-                        args: (e.current_contract_address(), to, amount).into_val(e),
-                    },
-                    sub_invocations: vec![e],
-                }
-            }
-            RouteAuth::Invoke(frame) => {
-                if !c.route_contracts.contains(frame.contract.clone())
-                    || !(frame.function == Symbol::new(e, "swap_exact_tokens_for_tokens")
-                        || frame.function == symbol_short!("swap")
-                        || frame.function == Symbol::new(e, "swap_chained")
-                        || frame.function == Symbol::new(e, "swap_exact_amount_in"))
-                {
-                    panic_with_error!(e, Error::Unauthorized);
-                }
-                let (amount, children) =
-                    check_auth(e, swap, &frame.children, depth + 1, count, intermediate);
-                spent = add(e, spent, amount);
-                SubContractInvocation {
-                    context: ContractContext {
-                        contract: frame.contract,
-                        fn_name: frame.function,
-                        args: frame.args,
-                    },
-                    sub_invocations: children,
-                }
-            }
-        };
-        authorized.push_back(InvokerContractAuthEntry::Contract(invocation));
-    }
-    (spent, authorized)
-}
-
-#[inline(never)]
-fn swap(e: &Env, s: &Swap, deadline: u64) -> i128 {
+fn swap(e: &Env, s: &Swap) -> i128 {
     let c = storage::config(e);
     positive(e, s.amount);
     positive(e, s.minimum);
-    if s.token_in == s.token_out || s.distribution.is_empty() || s.distribution.len() > 15 {
+    if s.token_in == s.token_out || s.routes.is_empty() || s.routes.len() > 15 {
         panic_with_error!(e, Error::Invalid);
     }
     pricing::asset(e, &s.token_in);
     if pricing::asset(e, &s.token_out).kind == AssetKind::Reward {
         panic_with_error!(e, Error::Invalid);
     }
-    let mut parts = 0u32;
+    // Price-free route checks. Continuity and route sums are left to v3.
     let mut intermediate = Map::new(e);
-    for route in s.distribution.iter() {
-        if route.parts == 0
-            || route.path.len() < 2
-            || route.path.len() > 5
-            || route.path.first().unwrap() != s.token_in
-            || route.path.last().unwrap() != s.token_out
-        {
+    for route in s.routes.iter() {
+        if route.hops.is_empty() || route.hops.len() > 4 {
             panic_with_error!(e, Error::Invalid);
         }
         let mut seen = Vec::new(e);
-        for a in route.path.iter() {
-            pricing::asset(e, &a);
-            if seen.contains(a.clone()) {
+        for (i, hop) in route.hops.iter().enumerate() {
+            let Hop::Soroswap(h) = hop else {
+                panic_with_error!(e, Error::Unauthorized);
+            };
+            for a in [h.token_in.clone(), h.token_out.clone()] {
+                pricing::asset(e, &a);
+                if a != s.token_in && a != s.token_out {
+                    intermediate.set(a, 0i128);
+                }
+            }
+            // The route's path is the first input followed by every hop output.
+            if i == 0 {
+                seen.push_back(h.token_in);
+            }
+            if seen.contains(h.token_out.clone()) {
                 panic_with_error!(e, Error::Invalid);
             }
-            seen.push_back(a.clone());
-            if a != s.token_in && a != s.token_out {
-                intermediate.set(a, 0i128);
+            seen.push_back(h.token_out);
+            if !c.route_contracts.contains(h.pair) {
+                panic_with_error!(e, Error::Unauthorized);
             }
-        }
-        parts = parts
-            .checked_add(route.parts)
-            .unwrap_or_else(|| panic_with_error!(e, Error::Overflow));
-        if route.protocol_id == Protocol::Aqua
-            && route.bytes.as_ref().map(|v| v.len()) != Some(route.path.len() - 1)
-        {
-            panic_with_error!(e, Error::Invalid);
         }
     }
     let value = mark_value(e, &s.token_in, s.amount, true);
@@ -312,26 +220,33 @@ fn swap(e: &Env, s: &Swap, deadline: u64) -> i128 {
     {
         panic_with_error!(e, Error::Slippage);
     }
-    let (authorized_amount, authorization) =
-        check_auth(e, s, &s.auth, 0, &mut 0, &mut intermediate);
-    if authorized_amount != s.amount {
-        panic_with_error!(e, Error::Unauthorized);
-    }
     let mut intermediate_before = Map::new(e);
     for (asset, _) in intermediate.iter() {
         intermediate_before.set(asset.clone(), pricing::spot(e, &asset));
     }
     let before_in = pricing::spot(e, &s.token_in);
     let before_out = pricing::spot(e, &s.token_out);
-    e.authorize_as_current_contract(authorization);
-    RouterClient::new(e, &c.router).swap_exact_tokens_for_tokens(
+    let this = e.current_contract_address();
+    // The only authorization granted: v3 pulls exactly `amount` of the input.
+    e.authorize_as_current_contract(vec![
+        e,
+        InvokerContractAuthEntry::Contract(SubContractInvocation {
+            context: ContractContext {
+                contract: s.token_in.clone(),
+                fn_name: symbol_short!("transfer"),
+                args: (&this, &c.router, s.amount).into_val(e),
+            },
+            sub_invocations: vec![e],
+        }),
+    ]);
+    AggregatorClient::new(e, &c.router).swap_exact_in(
+        &this,
         &s.token_in,
-        &s.token_out,
         &s.amount,
+        &s.token_out,
         &s.minimum,
-        &s.distribution,
-        &e.current_contract_address(),
-        &deadline,
+        &s.routes,
+        &None,
     );
     for (asset, before) in intermediate_before.iter() {
         if pricing::spot(e, &asset) != before {
@@ -443,6 +358,7 @@ fn pool_action(e: &Env, kind: u32, asset: &Address, amount: i128) {
     {
         panic_with_error!(e, Error::Invalid);
     }
+    #[allow(deprecated)]
     e.events().publish(
         (symbol_short!("position"), 1u32),
         (kind, asset.clone(), amount, before_positions, result),
@@ -474,13 +390,7 @@ fn limits(e: &Env, before: i128, after: i128, turnover: i128) {
     storage::save(e, &s);
 }
 #[inline(never)]
-fn run(
-    e: &Env,
-    actions: &Vec<Action>,
-    deadline: u64,
-    recovery: bool,
-    before: i128,
-) -> (i128, Map<Address, i128>) {
+fn run(e: &Env, actions: &Vec<Action>, recovery: bool, before: i128) -> (i128, Map<Address, i128>) {
     let c = storage::config(e);
     if actions.is_empty() || actions.len() > 8 {
         panic_with_error!(e, Error::Limit);
@@ -502,7 +412,7 @@ fn run(
                 } else {
                     None
                 };
-                let value = swap(e, &s, deadline);
+                let value = swap(e, &s);
                 if let Some((spot, shortfall)) = repayment {
                     let received = pricing::spot(e, &s.token_out) - spot;
                     if received > shortfall {
@@ -626,6 +536,7 @@ impl Vault {
         }
         let hash = hash_target(&e, &target);
         e.storage().instance().set(&Key::Target, &target);
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("target"), 1u32), (hash.clone(), target));
         storage::leave(&e);
@@ -666,7 +577,7 @@ impl Vault {
             panic_with_error!(&e, Error::Limit);
         }
         let old_distance = distance(&e, &target, before, &old);
-        let (turnover, _) = run(&e, &plan.actions, plan.deadline, false, before);
+        let (turnover, _) = run(&e, &plan.actions, false, before);
         let new = pricing::holdings(&e, true);
         let after = pricing::equity_of(&e, &new).unwrap_or_else(|err| panic_with_error!(&e, err));
         positive(&e, after);
@@ -685,6 +596,7 @@ impl Vault {
         }
         check_positions(&e, after, &target, &new);
         limits(&e, before, after, turnover);
+        #[allow(deprecated)]
         e.events().publish(
             (symbol_short!("plan"), 1u32),
             (plan.nonce, plan.target, before, after, turnover),
@@ -705,7 +617,7 @@ impl Vault {
         fees::settle(&e, Some(before), false);
         let cash = pricing::spot(&e, &storage::config(&e).usdc);
         let old_health = blend::health(&e);
-        let (turnover, purchases) = run(&e, &actions, deadline, true, before);
+        let (turnover, purchases) = run(&e, &actions, true, before);
         let new = pricing::holdings(&e, true);
         let after = pricing::equity_of(&e, &new).unwrap_or_else(|err| panic_with_error!(&e, err));
         positive(&e, after);
@@ -730,6 +642,7 @@ impl Vault {
         }
         check_recovery(&e, before, after, &old, &new, old_health);
         limits(&e, before, after, turnover);
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("unwind"), 1u32), (nonce, before, after));
         storage::leave(&e);
@@ -795,6 +708,7 @@ impl Vault {
         if amount < 0 || pricing::spot(&e, &reward.address) - before != amount {
             panic_with_error!(&e, Error::Rewards);
         }
+        #[allow(deprecated)]
         e.events()
             .publish((symbol_short!("rewards"), 1u32), (reward.address, amount));
         storage::leave(&e);

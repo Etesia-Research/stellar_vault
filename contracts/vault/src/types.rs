@@ -1,4 +1,4 @@
-use soroban_sdk::{contracterror, contracttype, Address, BytesN, Vec};
+use soroban_sdk::{contracterror, contracttype, Address, BytesN, Symbol, Vec};
 
 pub const BPS: i128 = 10_000;
 pub const SCALE: i128 = 1_000_000_000_000_000_000;
@@ -69,7 +69,9 @@ pub struct Config {
     pub assets: Vec<Asset>,
     pub usdc: Address,
     pub oracle: Address,
+    /// The Soroswap Aggregator v3 contract that every swap calls.
     pub router: Address,
+    /// The Soroswap pairs a `Hop::Soroswap` may name.
     pub route_contracts: Vec<Address>,
     pub pool: Option<Address>,
     pub pool_assets: Vec<Address>,
@@ -140,33 +142,79 @@ pub struct Target {
     pub supply: i128,
 }
 
+// Soroswap Aggregator v3 wire types, mirrored from its mainnet WASM spec.
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub enum Protocol {
-    Soroswap = 0,
-    Phoenix = 1,
-    Aqua = 2,
-    Comet = 3,
+pub struct SoroswapHop {
+    pub pair: Address,
+    pub token_in: Address,
+    pub token_out: Address,
 }
 
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub struct DexDistribution {
-    pub protocol_id: Protocol,
-    pub path: Vec<Address>,
-    pub parts: u32,
-    pub bytes: Option<Vec<BytesN<32>>>,
+pub struct AquaHop {
+    pub steps: Vec<(Vec<Address>, BytesN<32>, Address)>,
+    pub token_in: Address,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SushiHop {
+    pub pool: Address,
+    pub token_in: Address,
+    pub token_out: Address,
+    pub zero_for_one: bool,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct PhoenixHop {
+    pub pool: Address,
+    pub token_in: Address,
+    pub token_out: Address,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct CometHop {
+    pub pool: Address,
+    pub token_in: Address,
+    pub token_out: Address,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Hop {
+    Soroswap(SoroswapHop),
+    Aqua(AquaHop),
+    Sushi(SushiHop),
+    Phoenix(PhoenixHop),
+    Comet(CometHop),
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Route {
+    pub amount_in: i128,
+    pub hops: Vec<Hop>,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Partner {
+    pub bps: u32,
+    pub id: Symbol,
 }
 
 #[contracttype]
 #[derive(Clone)]
 pub struct Swap {
-    pub auth: Vec<RouteAuth>,
     pub token_in: Address,
     pub token_out: Address,
     pub amount: i128,
     pub minimum: i128,
-    pub distribution: Vec<DexDistribution>,
+    pub routes: Vec<Route>,
 }
 
 #[contracttype]
@@ -214,19 +262,4 @@ pub struct Pending {
     pub hash: BytesN<32>,
     pub earliest: u32,
     pub change: Change,
-}
-
-#[contracttype]
-#[derive(Clone)]
-pub enum RouteAuth {
-    Transfer(Address, Address, i128), // token, recipient, exact amount; sender is the vault
-    Invoke(RouteInvocation),
-}
-#[contracttype]
-#[derive(Clone)]
-pub struct RouteInvocation {
-    pub contract: Address,
-    pub function: soroban_sdk::Symbol,
-    pub args: Vec<soroban_sdk::Val>,
-    pub children: Vec<RouteAuth>,
 }

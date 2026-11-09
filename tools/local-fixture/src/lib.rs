@@ -1,33 +1,13 @@
 #![no_std]
-//! Deliberately simple, admin-minted LOCAL TEST assets, marks and swap liquidity.
+//! Deliberately simple, admin-minted LOCAL TEST assets and marks.
 //! Never a production dependency or a D3/D4 protocol-compatibility claim.
-#![allow(clippy::too_many_arguments)]
-use soroban_sdk::{
-    contract, contractimpl, contracttype, symbol_short, token::TokenClient, vec, Address, BytesN,
-    Env, String, Vec,
-};
+use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, String};
 
 #[contracttype]
 #[derive(Clone)]
 pub struct Mark {
     pub price: i128,
     pub timestamp: u64,
-}
-#[contracttype]
-#[derive(Clone)]
-pub enum Protocol {
-    Soroswap = 0,
-    Phoenix = 1,
-    Aqua = 2,
-    Comet = 3,
-}
-#[contracttype]
-#[derive(Clone)]
-pub struct DexDistribution {
-    pub protocol_id: Protocol,
-    pub path: Vec<Address>,
-    pub parts: u32,
-    pub bytes: Option<Vec<BytesN<32>>>,
 }
 #[contract]
 pub struct Fixture;
@@ -74,23 +54,5 @@ impl Fixture {
             price: 1_000_000_000_000,
             timestamp: e.ledger().timestamp(),
         }
-    }
-    pub fn swap_exact_tokens_for_tokens(
-        e: Env,
-        token_in: Address,
-        token_out: Address,
-        amount_in: i128,
-        amount_out_min: i128,
-        distribution: Vec<DexDistribution>,
-        to: Address,
-        deadline: u64,
-    ) -> Vec<Vec<i128>> {
-        to.require_auth();
-        assert!(deadline >= e.ledger().timestamp());
-        assert!(!distribution.is_empty());
-        assert!(amount_in >= amount_out_min);
-        TokenClient::new(&e, &token_in).transfer(&to, &e.current_contract_address(), &amount_in);
-        TokenClient::new(&e, &token_out).transfer(&e.current_contract_address(), &to, &amount_in);
-        vec![&e, vec![&e, amount_in, amount_in]]
     }
 }

@@ -95,6 +95,7 @@ pub fn settle(e: &Env, equity: Option<i128>, checkpoint: bool) -> State {
     let p = equity.map(|a| performance(e, &mut s, &f, a)).unwrap_or(0);
     token::credit(e, &f.recipient, add(e, m, p));
     storage::save(e, &s);
+    #[allow(deprecated)]
     e.events().publish(
         (symbol_short!("fees"), 1u32),
         (m, p, start, s.last_fee, s.high_water, f),
