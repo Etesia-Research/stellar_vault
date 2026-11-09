@@ -1,0 +1,393 @@
+{
+  "network": "local-only",
+  "passphrase": "Standalone Network ; September 2026",
+  "rpc": "http://127.0.0.1:8003",
+  "protocol": 30,
+  "assets": [
+    {
+      "symbol": "LOCAL-USDC",
+      "address": "CBIL6WUZLHYNEQO2CU4UUHG76FMA7DBDKM2JYAQFQQWYOLS4UQMWQZ4A",
+      "kind": "Settlement",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-XLM",
+      "address": "CC5TGRPCAMDI4YAEXTSGX3DLO3ETVWCDATROBIXCD2AIFYNECYAA5KIM",
+      "kind": "Xlm",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-AQUA",
+      "address": "CB65T4ZQRADWEUBKXJ6ZVZXCUZKNNEXNQL7QRVBLDDBQSHWCFQ4QRNKG",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-ETH",
+      "address": "CBYXFRJCHWPQUOFQYWQG7TGZQY2AB5VKGTJI5P522KPXJJWNGW2LLL2Z",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-BTC",
+      "address": "CCR4OZYJT5KFC2XV6QNFDG6VIWOIBVUU2SVV33JNM65RPS7I3ZTL36KC",
+      "kind": "Risk",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    },
+    {
+      "symbol": "LOCAL-USTRY",
+      "address": "CDWKCQD2HAQUVV6UPM6CDF27V52O5KCZFU7SQQE2F7OJQ5HW753CZLOD",
+      "kind": "Reserve",
+      "decimals": 7,
+      "issuer": "local fixture, not an issuer-backed asset"
+    }
+  ],
+  "transactions": [
+    {
+      "method": "deploy",
+      "hash": "e2359aa4df9db3f094b3b4657861d1b10be57a01a4d71b8c898367fbbf2a20ac",
+      "status": "SUCCESS",
+      "ledger": 50
+    },
+    {
+      "method": "mint",
+      "hash": "421af02a04392060d60aef3e0c814a9a13b949f144599abd753a9ff92c2e67ee",
+      "status": "SUCCESS",
+      "ledger": 51
+    },
+    {
+      "method": "deploy",
+      "hash": "6a656a6ce0bba28f7717007edf1e71a29f77b16573d06c80931125c6b580d9b5",
+      "status": "SUCCESS",
+      "ledger": 53
+    },
+    {
+      "method": "mint",
+      "hash": "79ab2446702fa200f9279b45cfec614e49986fb0a980c41498b061833b805182",
+      "status": "SUCCESS",
+      "ledger": 55
+    },
+    {
+      "method": "deploy",
+      "hash": "27a16f7781e33846dd8a03edac394e04d9e673b83408429660148f8cca5f5f55",
+      "status": "SUCCESS",
+      "ledger": 56
+    },
+    {
+      "method": "mint",
+      "hash": "38c3aba9d9fb2d77e8a01a86fbb8ab66b190b3643844b832e249008c2efcdb3e",
+      "status": "SUCCESS",
+      "ledger": 58
+    },
+    {
+      "method": "deploy",
+      "hash": "ac2ae5a3629dbd7c453ec2d678dae78d5b380cb633cdad860f7e53b5bdf62bce",
+      "status": "SUCCESS",
+      "ledger": 60
+    },
+    {
+      "method": "mint",
+      "hash": "aa5d07aca83dd9560d1a327321cce98e7d5e7546fe0bba00f7d11cac0f9ddd15",
+      "status": "SUCCESS",
+      "ledger": 61
+    },
+    {
+      "method": "deploy",
+      "hash": "c4a9f535bc2ca9330c88d34c60607aedc2b3c5a1051158cf894fa39390463b69",
+      "status": "SUCCESS",
+      "ledger": 62
+    },
+    {
+      "method": "mint",
+      "hash": "653b7cadb53790c08e05407b9f7859d163e1c4a05ba9769f1d71ca2f61553fbc",
+      "status": "SUCCESS",
+      "ledger": 64
+    },
+    {
+      "method": "deploy",
+      "hash": "b1ac6ea21da1607acf55ffeb2d6d3ff4325e2323bc6a9c2fa64f928994b163d3",
+      "status": "SUCCESS",
+      "ledger": 66
+    },
+    {
+      "method": "mint",
+      "hash": "12351e6df68d5b45cac26e9822e88fcd8e430eab91b1e041ea59336f769b22af",
+      "status": "SUCCESS",
+      "ledger": 67
+    },
+    {
+      "method": "deploy",
+      "hash": "92ca0353f07f23ddb33ee9153e1c13ca39d0aebb69a9fbec825824fe662f5df6",
+      "status": "SUCCESS",
+      "ledger": 69
+    },
+    {
+      "method": "upload",
+      "hash": "adea5d6d9ae3a3e5a6c22170771489fd5ff27845604d57d388f2a5b02e20279a",
+      "status": "SUCCESS",
+      "ledger": 71
+    },
+    {
+      "method": "deploy",
+      "hash": "6b2c40502c0f8958eae75135863e0f6060d9be6eaee0475cb5069e445880f58a",
+      "status": "SUCCESS",
+      "ledger": 73
+    },
+    {
+      "method": "initialize",
+      "hash": "747d9f711ddf6d637500dfd9bed7dd87509f4bc99d67619c55b1855adfa3596b",
+      "status": "SUCCESS",
+      "ledger": 75
+    },
+    {
+      "method": "deploy",
+      "hash": "9b734a0c56d8321786d8dbb5cd3389378498ceceeff36c12a5eebdb0602bc858",
+      "status": "SUCCESS",
+      "ledger": 78
+    },
+    {
+      "method": "initialize",
+      "hash": "5dd37320b5c168f9109c4260e541f3b7a9184b76e56ba7b5bf5294dcfc53da32",
+      "status": "SUCCESS",
+      "ledger": 79
+    },
+    {
+      "method": "deploy",
+      "hash": "f8f91bec1663fa18542de60e7fe69a23894baffa909f653fd1b13eeaadddc36c",
+      "status": "SUCCESS",
+      "ledger": 83
+    },
+    {
+      "method": "add_liquidity",
+      "hash": "f821857496b343e259c45368ebe94c9ea43ee2d898d52ed1ad45563e9474df09",
+      "status": "SUCCESS",
+      "ledger": 85
+    },
+    {
+      "method": "deploy",
+      "hash": "cabd1174617fb7af213968b7bd739e6513f2a1cc63596272edcb3308a1273802",
+      "status": "SUCCESS",
+      "ledger": 90,
+      "fixture": "fixtures/d5-04-local/20-deploy.json"
+    },
+    {
+      "method": "deposit",
+      "hash": "b253d4c1106cd0f0ef518e4055fe8ea64b53a448f5f1316bf0aba4957b460abf",
+      "status": "SUCCESS",
+      "ledger": 92,
+      "fixture": "fixtures/d5-04-local/21-deposit.json"
+    },
+    {
+      "method": "publish_target",
+      "hash": "7a16d5f913106294acebbdc4cd8952e55aa6115c872aa92542f32583beac6639",
+      "status": "SUCCESS",
+      "ledger": 95,
+      "fixture": "fixtures/d5-04-local/22-publish_target.json"
+    },
+    {
+      "method": "execute",
+      "hash": "a07667fbd1b754345ce89e4b9ed51d426cf62d5902cd1caca32b3ac98a95558f",
+      "status": "SUCCESS",
+      "ledger": 98,
+      "fixture": "fixtures/d5-04-local/23-execute.json"
+    },
+    {
+      "method": "collect_fees",
+      "hash": "bdd43cac415ed2bd85e82ff11086ce31a5b6c37a5aa288d20437a59464cb490f",
+      "status": "SUCCESS",
+      "ledger": 99,
+      "fixture": "fixtures/d5-04-local/24-collect_fees.json"
+    },
+    {
+      "method": "unwind",
+      "hash": "29b27828f85f42781130ba2cd8b708f937103dcfbe6d4545855f82b6f3198520",
+      "status": "SUCCESS",
+      "ledger": 101,
+      "fixture": "fixtures/d5-04-local/25-unwind.json"
+    },
+    {
+      "method": "redeem",
+      "hash": "a99d8ff2ef273c228ebb51cb69a3dbcd2579582ebd888b1d10890c645288b748",
+      "status": "SUCCESS",
+      "ledger": 102,
+      "fixture": "fixtures/d5-04-local/26-redeem.json"
+    }
+  ],
+  "funding": "public standalone genesis account; no portfolio XLM reimbursement",
+  "vault": "CDA4BQJPIB2NRC52MKIY2C4DD5FW2PBRQUDE5CDNPGVSVTYNI6XJTULX",
+  "config": {
+    "assets": [
+      {
+        "address": "CBIL6WUZLHYNEQO2CU4UUHG76FMA7DBDKM2JYAQFQQWYOLS4UQMWQZ4A",
+        "decimals": 7,
+        "kind": "Settlement"
+      },
+      {
+        "address": "CBYXFRJCHWPQUOFQYWQG7TGZQY2AB5VKGTJI5P522KPXJJWNGW2LLL2Z",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CB65T4ZQRADWEUBKXJ6ZVZXCUZKNNEXNQL7QRVBLDDBQSHWCFQ4QRNKG",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CCR4OZYJT5KFC2XV6QNFDG6VIWOIBVUU2SVV33JNM65RPS7I3ZTL36KC",
+        "decimals": 7,
+        "kind": "Risk"
+      },
+      {
+        "address": "CC5TGRPCAMDI4YAEXTSGX3DLO3ETVWCDATROBIXCD2AIFYNECYAA5KIM",
+        "decimals": 7,
+        "kind": "Xlm"
+      },
+      {
+        "address": "CDWKCQD2HAQUVV6UPM6CDF27V52O5KCZFU7SQQE2F7OJQ5HW753CZLOD",
+        "decimals": 7,
+        "kind": "Reserve"
+      }
+    ],
+    "usdc": "CBIL6WUZLHYNEQO2CU4UUHG76FMA7DBDKM2JYAQFQQWYOLS4UQMWQZ4A",
+    "oracle": "CBCV57UBBMUUP4SLGYEBT5DMFRYTIPLNH4BQSXMC7KWPAUIMUNW6IERK",
+    "router": "CDEFXWLAES422SMKLDKEBE5QUIKM6WYLDWNQEORLEASXYPYJBKMFOXKV",
+    "route_contracts": [
+      "CBLQQZGOIDX3P6AUDCEWFNHKLM3NXCQ4O7DOTA4PWSNODWTDJPENVCHH"
+    ],
+    "pool": null,
+    "pool_assets": [],
+    "admin": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "executor": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "guardian": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+    "fees": {
+      "management_bps": 100,
+      "performance_bps": 1000,
+      "recipient": "GCHWPJ5YXUQS7RDIPGT4CAHA474YBAAWLTT6GF6MVUVNPHTSZY72TPGL"
+    },
+    "borrowing": false,
+    "max_price_age": 300,
+    "max_slippage_bps": 100,
+    "max_leg_bps": 2000,
+    "max_turnover_bps": 10000,
+    "max_loss_bps": 200,
+    "cooldown": 1,
+    "max_debt_bps": 0,
+    "min_health_bps": 12500
+  },
+  "router": "CDEFXWLAES422SMKLDKEBE5QUIKM6WYLDWNQEORLEASXYPYJBKMFOXKV",
+  "oracle": "CBCV57UBBMUUP4SLGYEBT5DMFRYTIPLNH4BQSXMC7KWPAUIMUNW6IERK",
+  "soroswap": {
+    "router": "CCBY3JUUI3OB7FU23OWH37HXPQOCQWUCLF7AP3LB4CYOHDFTJPI6U3OX",
+    "factory": "CCZ4HSCWZJ45XTPTTPVJQXQBBMEFFED3QQZHVWWDRMYQCHDDWJAWXBRD",
+    "pair": "CBLQQZGOIDX3P6AUDCEWFNHKLM3NXCQ4O7DOTA4PWSNODWTDJPENVCHH",
+    "treasury": "GCNO6ZRP5JVEHF5VH2OVMQJDRLYS6GXNMGN64C2RAZQ3ZZQEFZI34HGW",
+    "protocol_bps": 10
+  },
+  "wasm_sha256": {
+    "etesia_local_fixture.wasm": "125ab307d2cde68f05c8b53d3b4226acb64f4229eefbd7c9adac3d745f146cb3",
+    "etesia_pricing.wasm": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c",
+    "etesia_defindex_adapter.wasm": "921db38b78ba14c742f0788ffacacbae78fcec2c04d4a9ef0953ea4839f9d044",
+    "etesia_pricing_fixture.wasm": "f96ec943bdaac7cdba8cf55abfbfa641d1c5bbb9a181101c5e89731c3c78dbfb",
+    "etesia_vault.wasm": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+    "soroswap_factory.wasm": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae",
+    "soroswap_router.wasm": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07",
+    "soroswap_aggregator_v3.wasm": "437653282e9c93b0b4d736d8fde01bf002adefb61bfb75917e609f5336ee3190",
+    "soroswap_pair.wasm": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e"
+  },
+  "result": "passed",
+  "deposited_assets": 1000000000,
+  "minted_shares": 100000000063419,
+  "redeemed_assets": 999801020,
+  "final_state": {
+    "high_water": "10000000000000",
+    "last_execution": 101,
+    "last_fee": 1794258840,
+    "loss": "2188737",
+    "management_dust": "968356760722887556",
+    "nonce": 2,
+    "paused": false,
+    "performance_dust": "0",
+    "supply": "1000000004122272",
+    "turnover": "548152657",
+    "version": 1,
+    "window_equity": "10000198980",
+    "window_ledger": 90
+  },
+  "target": {
+    "network": "492b943b9c421932312b94f9de419b37d8d969b80f3f0dce7b0c3f1bbf43caa3",
+    "vault": "CDA4BQJPIB2NRC52MKIY2C4DD5FW2PBRQUDE5CDNPGVSVTYNI6XJTULX",
+    "epoch": 1,
+    "expiry": 1794260631,
+    "model": "0101010101010101010101010101010101010101010101010101010101010101",
+    "dataset": "0202020202020202020202020202020202020202020202020202020202020202",
+    "holdings": "f5b4f6f1a726563e2be72124f83e7ccac88b6c037f3e7480c94abdd612148bd6",
+    "assets": [
+      "CBIL6WUZLHYNEQO2CU4UUHG76FMA7DBDKM2JYAQFQQWYOLS4UQMWQZ4A",
+      "CBYXFRJCHWPQUOFQYWQG7TGZQY2AB5VKGTJI5P522KPXJJWNGW2LLL2Z",
+      "CB65T4ZQRADWEUBKXJ6ZVZXCUZKNNEXNQL7QRVBLDDBQSHWCFQ4QRNKG",
+      "CCR4OZYJT5KFC2XV6QNFDG6VIWOIBVUU2SVV33JNM65RPS7I3ZTL36KC",
+      "CC5TGRPCAMDI4YAEXTSGX3DLO3ETVWCDATROBIXCD2AIFYNECYAA5KIM",
+      "CDWKCQD2HAQUVV6UPM6CDF27V52O5KCZFU7SQQE2F7OJQ5HW753CZLOD"
+    ],
+    "weights": [
+      250,
+      0,
+      0,
+      0,
+      250,
+      9500
+    ],
+    "yield_bps": 0,
+    "equity": "11000000000",
+    "supply": "1100000000697614"
+  },
+  "plan": {
+    "target": "c398aa2d48a5eeac6db233170389fb0c8aeff45ce6e2fa2d18a8fb759b4b6a42",
+    "epoch": 1,
+    "nonce": 0,
+    "version": 1,
+    "deadline": 1794260631,
+    "actions": [
+      {
+        "Swap": {
+          "token_in": "CBIL6WUZLHYNEQO2CU4UUHG76FMA7DBDKM2JYAQFQQWYOLS4UQMWQZ4A",
+          "token_out": "CC5TGRPCAMDI4YAEXTSGX3DLO3ETVWCDATROBIXCD2AIFYNECYAA5KIM",
+          "amount": "275000000",
+          "minimum": "272250000",
+          "routes": [
+            {
+              "amount_in": "274725000",
+              "hops": [
+                {
+                  "Soroswap": {
+                    "pair": "CBLQQZGOIDX3P6AUDCEWFNHKLM3NXCQ4O7DOTA4PWSNODWTDJPENVCHH",
+                    "token_in": "CBIL6WUZLHYNEQO2CU4UUHG76FMA7DBDKM2JYAQFQQWYOLS4UQMWQZ4A",
+                    "token_out": "CC5TGRPCAMDI4YAEXTSGX3DLO3ETVWCDATROBIXCD2AIFYNECYAA5KIM"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "swap_output": 273152657,
+  "resource_profile_sha256": {
+    "local-network-enable-upgrades.json": "ebd4658f8aba1f823e74e609f1c6393f29b29d8430810e075b6f55b28ca911bf",
+    "local-network-settings.json": "b94c61613be7d5cf6536173534d7bcfc7b83e2a1753a54d532c210b7189839f1"
+  },
+  "scope": "Six local token fixtures and a fixture oracle; mainnet Soroswap Aggregator v3, router, factory and pair code (the factory and pair were source-built copies, found byte-identical to mainnet code on 2026-11-09 after the run); one Etesia-made pair; no Blend pool or live protocol activation",
+  "tools": {
+    "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+    "sdk": "29.0.1",
+    "core": "stellar-core 30.0.0 (0e49751aa9ddf892302cca02cea7f3f5d97df9f1)",
+    "rpc": "stellar-rpc 30.0.0-13e53516633c3ce1281c7edbacb607107d3a4e55 (13e53516633c3ce1281c7edbacb607107d3a4e55) HEAD"
+  }
+}

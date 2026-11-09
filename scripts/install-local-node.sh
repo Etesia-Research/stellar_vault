@@ -2,11 +2,11 @@
 set -eu
 # Linux amd64, official pinned Debian packages, extracted without a system install.
 mkdir -p .tooling/downloads .tooling/stellar
-curl -fsSL https://apt.stellar.org/pool/stable/s/stellar-core/stellar-core_22.4.1-2521.89b9af01e.jammy_amd64.deb -o .tooling/downloads/stellar-core.deb
-curl -fsSL https://apt.stellar.org/pool/stable/s/stellar-rpc/stellar-rpc_22.1.5-125_amd64.deb -o .tooling/downloads/stellar-rpc.deb
+curl -fsSL https://apt.stellar.org/pool/jammy/s/st/stellar-core_30.0.0-3642.0e49751aa.jammy_amd64.deb -o .tooling/downloads/stellar-core.deb
+curl -fsSL https://apt.stellar.org/pool/focal/s/st/stellar-rpc_30.0.0-220_amd64.deb -o .tooling/downloads/stellar-rpc.deb
 sha256sum -c <<'HASHES'
-492fdf3c978e810d67a3a0675da4097c5bb161a08562c614266bd67730ce2003  .tooling/downloads/stellar-core.deb
-9434c69988478ba77286c88daa504cf78bbcb90f2da90dc3d148e29714c5e6ca  .tooling/downloads/stellar-rpc.deb
+37faa5b5044a3b5b91cd68c00a25fb87c158be425e20245bd80ddfd0899dcca6  .tooling/downloads/stellar-core.deb
+1cc1b01f6bc2778ec7615cc1cc070445520f45fdd6524edad920c7ce30009b1c  .tooling/downloads/stellar-rpc.deb
 HASHES
 dpkg-deb -x .tooling/downloads/stellar-core.deb .tooling/stellar
 dpkg-deb -x .tooling/downloads/stellar-rpc.deb .tooling/stellar

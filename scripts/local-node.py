@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run an isolated protocol-22 network. Only public standalone test keys are used."""
+"""Run an isolated protocol-30 network. Only public standalone test keys are used."""
 import base64
 import binascii
 import hashlib
@@ -20,6 +20,8 @@ CORE = str(Path(os.environ.get('ETESIA_CORE', '.tooling/stellar/usr/bin/stellar-
 RPC = str(Path(os.environ.get('ETESIA_RPC', '.tooling/stellar/usr/bin/stellar-rpc')).resolve())
 PASSPHRASE = 'Standalone Network ; September 2026'
 os.environ.setdefault('LD_LIBRARY_PATH', str(ROOT / '.tooling/stellar/usr/lib/x86_64-linux-gnu'))
+# CLI 28 no longer reads ./.stellar unless it is named as the config home.
+os.environ.setdefault('STELLAR_CONFIG_HOME', str(ROOT / '.stellar'))
 if (DATA / 'core.db').exists():
     raise SystemExit('Choose a fresh local data directory; existing ledgers are never reset.')
 DATA.mkdir(parents=True, exist_ok=True)
@@ -68,7 +70,8 @@ DATABASE="sqlite3://{DATA}/core.db"
 BUCKET_DIR_PATH="{DATA}/buckets"
 LOG_FILE_PATH="{DATA}/core-internal.log"
 ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING=true
-ARTIFICIALLY_SET_CLOSE_TIME_FOR_TESTING=1
+# Milliseconds in core 30 (core 22 read seconds): one-second ledgers.
+ARTIFICIALLY_SET_CLOSE_TIME_FOR_TESTING=1000
 FAILURE_SAFETY=0
 UNSAFE_QUORUM=true
 [QUORUM_SET]
@@ -123,17 +126,21 @@ signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
 try:
     start([CORE, 'run', '--conf', str(DATA / 'core.cfg')], 'core')
     wait_for(lambda: json.loads(core_http('info'))['info']['ledger']['num'] > 2)
-    core_http('upgrades', mode='set', upgradetime='1970-01-01T00:00:00Z', protocolversion=22)
-    wait_for(lambda: json.loads(core_http('info'))['info']['ledger']['version'] == 22)
-    encoded = run(['stellar', 'xdr', 'encode', '--type', 'ConfigUpgradeSet', 'fixtures/local-network-settings.json'])
-    upgrades = run([CORE, 'get-settings-upgrade-txs', root, '0', PASSPHRASE, '--xdr', encoded, '--signtxs'], input=seed + '\n').splitlines()
-    assert len(upgrades) == 9, 'Unexpected pinned core upgrade output'
-    for envelope in upgrades[:8:2]:
-        result = json.loads(core_http('tx', blob=envelope))
-        assert result['status'] == 'PENDING', result
+    core_http('upgrades', mode='set', upgradetime='1970-01-01T00:00:00Z', protocolversion=30)
+    wait_for(lambda: json.loads(core_http('info'))['info']['ledger']['version'] == 30)
+    # As quickstart does: a small upgrade first raises the genesis limits that the full
+    # profile's upload transaction exceeds. The first run uses sequence numbers 1-4.
+    for settings, sequence in (('fixtures/local-network-enable-upgrades.json', '0'), ('fixtures/local-network-settings.json', '4')):
+        encoded = run(['stellar', 'xdr', 'encode', '--type', 'ConfigUpgradeSet', settings])
+        upgrades = run([CORE, 'get-settings-upgrade-txs', root, sequence, PASSPHRASE, '--xdr', encoded, '--signtxs'], input=seed + '\n').splitlines()
+        # Optional restore, install, deploy and upload transactions, each followed by its hash, then the key.
+        assert len(upgrades) in (7, 9), 'Unexpected pinned core upgrade output'
+        for envelope in upgrades[:-1:2]:
+            result = json.loads(core_http('tx', blob=envelope))
+            assert result['status'] == 'PENDING', result
+            time.sleep(3)
+        core_http('upgrades', mode='set', upgradetime='1970-01-01T00:00:00Z', configupgradesetkey=upgrades[-1])
         time.sleep(3)
-    core_http('upgrades', mode='set', upgradetime='1970-01-01T00:00:00Z', configupgradesetkey=upgrades[-1])
-    time.sleep(3)
     (DATA / 'resource-limits.json').write_text(core_http('sorobaninfo'))
     start([sys.executable, '-m', 'http.server', '1570', '--bind', '127.0.0.1', '--directory', str(DATA / 'history')], 'history')
     start([RPC, '--config-path', str(DATA / 'rpc.cfg')], 'rpc')
