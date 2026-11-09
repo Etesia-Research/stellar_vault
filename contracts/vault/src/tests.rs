@@ -356,6 +356,92 @@ fn python_rust_target_hash_golden_vector() {
     );
 }
 #[test]
+fn python_rust_plan_golden_vector() {
+    use soroban_sdk::{
+        xdr::{Limits, ReadXdr, ToXdr, WriteXdr},
+        Address, BytesN,
+    };
+    let e = &soroban_sdk::Env::default();
+    let fixture = include_str!("../../../fixtures/d4-plan-v1.json");
+    let field = |k: &str| {
+        let key = std::format!("\"{k}\": \"");
+        let s = &fixture[fixture.find(&key).unwrap() + key.len()..];
+        &s[..s.find('"').unwrap()]
+    };
+    let a = |s: &str| Address::from_str(e, s);
+    let (usdc, xlm, eurc) = (
+        a("CAQCAIBAEAQCAIBAEAQCAIBAEAQCAIBAEAQCAIBAEAQCAIBAEAQCAKAL"),
+        a("CAYDAMBQGAYDAMBQGAYDAMBQGAYDAMBQGAYDAMBQGAYDAMBQGAYDBWBA"),
+        a("CAIBAEAQCAIBAEAQCAIBAEAQCAIBAEAQCAIBAEAQCAIBAEAQCAIBAODX"),
+    );
+    let swap = |token_in: &Address, token_out: &Address, pair, amount, minimum, amount_in| {
+        Action::Swap(Swap {
+            token_in: token_in.clone(),
+            token_out: token_out.clone(),
+            amount,
+            minimum,
+            routes: vec![
+                e,
+                Route {
+                    amount_in,
+                    hops: vec![
+                        e,
+                        Hop::Soroswap(SoroswapHop {
+                            pair: a(pair),
+                            token_in: token_in.clone(),
+                            token_out: token_out.clone(),
+                        }),
+                    ],
+                },
+            ],
+        })
+    };
+    let plan = Plan {
+        target: BytesN::from_array(
+            e,
+            &[
+                0x1b, 0x62, 0xf3, 0x6d, 0x9f, 0x6c, 0x4d, 0xf2, 0xde, 0x18, 0xbb, 0xf2, 0xa7, 0x08,
+                0xfb, 0x53, 0xda, 0xad, 0x81, 0xde, 0x03, 0x19, 0x3b, 0xa5, 0x71, 0x1d, 0x49, 0xe4,
+                0x3c, 0x11, 0x7d, 0xba,
+            ],
+        ),
+        epoch: 1794200000,
+        nonce: 7,
+        deadline: 1794200300,
+        version: 1,
+        actions: vec![
+            e,
+            Action::Withdraw(usdc.clone(), 125_000_000),
+            swap(
+                &xlm,
+                &usdc,
+                "CBYHA4DQOBYHA4DQOBYHA4DQOBYHA4DQOBYHA4DQOBYHA4DQOBYHAGEP",
+                300_000_000,
+                297_298_731,
+                299_700_000,
+            ),
+            swap(
+                &usdc,
+                &eurc,
+                "CBQGAYDAMBQGAYDAMBQGAYDAMBQGAYDAMBQGAYDAMBQGAYDAMBQGB2FE",
+                450_000_000,
+                1_784_117_655,
+                449_550_000,
+            ),
+            Action::Supply(usdc, 10_000_000),
+        ],
+    };
+    let bytes = plan.to_xdr(e);
+    let golden = ScVal::from_xdr_base64(field("xdr"), Limits::none()).unwrap();
+    assert_eq!(
+        bytes.iter().collect::<std::vec::Vec<u8>>(),
+        WriteXdr::to_xdr(&golden, Limits::none()).unwrap()
+    );
+    let hash = e.crypto().sha256(&bytes).to_array();
+    let hex: std::string::String = hash.iter().map(|b| std::format!("{b:02x}")).collect();
+    assert_eq!(hex, field("sha256"));
+}
+#[test]
 fn yield_supply_cap_shrink_and_frozen_recovery_preserve_claims() {
     let f = Fixture::new(true, false);
     let c = f.client();
