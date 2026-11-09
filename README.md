@@ -33,8 +33,9 @@ See [acceptance and evidence](docs/acceptance.md), [ABI](docs/interfaces.md),
 See [D3 provider](docs/pricing.md) and [D3 evidence/gates](docs/d3-acceptance.md).
 Full D3 source acceptance, D4/D7/D9 activation and audit acceptance remain separate.
 
-Rust 1.84.1, SDK/token SDK 22.0.8, Stellar CLI 22.8.2 and cargo-llvm-cov 0.6.16.
-Dependencies and the actual vendored DeFindex trait/parent WASM harness are pinned.
+Rust 1.99.1, SDK/token SDK 29.0.1, Stellar CLI 28.1.0 and cargo-llvm-cov 0.9.1;
+Rust 1.84.1 builds the vendored DeFindex parent WASM harness. Dependencies and that
+harness are pinned; the adapter mirrors the DeFindex strategy trait and errors.
 Run from this repository with those tools on PATH:
 
 ```sh
@@ -42,7 +43,7 @@ sh scripts/check.sh
 python3 scripts/local-node.py
 # In another terminal:
 python3 scripts/local-smoke.py
-python3 scripts/record-evidence.py
+python3 scripts/d4-record-fixtures.py
 ```
 
 For the optional repository-local tool installation, source `scripts/env.sh`.

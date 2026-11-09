@@ -89,19 +89,30 @@ uses the pinned pool's risk factors and oracle, with at least 125% coverage.
 Standard exits conservatively require **all** debt and collateral recovered;
 proportional leveraged payout optimization is not activated.
 
-Soroswap aggregator revision `84de10e0f8d26168b4a76f8c23b963e50917517c`
-uses `swap_exact_tokens_for_tokens(token_in, token_out, amount_in,
-amount_out_min, distribution, to, deadline) -> Vec<Vec<i128>>`. Distribution
-contains the pinned numeric Soroswap/Phoenix/Aqua/Comet protocol enum, paths,
-parts and optional Aqua pool hashes. Complete split paths are bounded to 15
-routes and five assets per path. Final custody deltas, independent price minimum,
-slippage and aggregate limits apply across the whole quote.
+`Config.router` holds the Soroswap Aggregator v3 (mainnet code SHA-256
+`437653282e9c93b0b4d736d8fde01bf002adefb61bfb75917e609f5336ee3190`, pinned in
+`fixtures/wasm/SHA256SUMS`), called as `swap_exact_in(user, token_in, amount_in,
+token_out, min_out, routes, partner) -> i128` with `user` = the vault, `amount_in`
+= `amount`, `min_out` = `minimum` and no partner. `Swap` is `{ token_in, token_out,
+amount, minimum, routes }`; `Route { amount_in, hops }` and the five `Hop` variants
+(`Soroswap`, `Aqua`, `Sushi`, `Phoenix`, `Comet`) mirror v3's types exactly, so any
+v3 route decodes. v3 takes its `protocol_bps` fee in `token_in` from `amount`; the
+route amounts carry the rest.
 
-`RouteAuth` only supplies bounded nested authorization: exact input-token
-transfers and independently bounded intermediate-token transfers from the vault and allowed swap functions at configured route contracts.
-Intermediate balances must be unchanged at completion, so pre-existing holdings cannot subsidize a route. It is **not** an invocation API. There is no arbitrary execute, unlimited token
-allowance, external payout recipient, sweep, code upgrade or direct-venue fallback.
-Actual routed execution and code-hash/recipient-tree compatibility remain D4 gates.
+Before any price read, a swap needs 1–15 routes of 1–4 hops. Every hop must be
+`Hop::Soroswap` (otherwise `Unauthorized`), name configured assets, repeat no token
+within its route (otherwise `Invalid`) and name a pair in `route_contracts`
+(otherwise `Unauthorized`). Route continuity and route sums are left to v3
+(`BadRoute`). The Reflector floor then bounds `minimum`. The vault authorizes one
+call only: `token_in.transfer(vault, router, amount)`. It is **not** an invocation
+API. There is no arbitrary execute, unlimited token allowance, external payout
+recipient, sweep, code upgrade or direct-venue fallback. Afterwards the input must
+have fallen by exactly `amount`, the output risen by at least `minimum` and every
+intermediate balance be unchanged, so pre-existing holdings cannot subsidize a route.
+v3 and vault error codes 1–12 overlap; identify a failure by its contract. Of the
+Soroswap code v3 meets on mainnet, the router, factory and pair are pinned in
+`SHA256SUMS`, and the native tests and local smoke use those binaries. Testnet routing and code identities
+remain D4 gates.
 
 Blend request IDs are 0 supply, 1 withdraw, 2 collateral supply, 3 collateral
 release, 4 borrow and 5 repay. Exact pre/post positions and underlying transfers

@@ -28,9 +28,10 @@ requires an unexpired share allowance. Never infer settlement from a simulation.
 ## Restore liquidity without the executor
 
 Anyone can call `unwind(actions, nonce, deadline)` with a reviewed Soroswap quote
-and exact bounded auth tree. Read the current nonce first. Only withdrawals,
-repayments, collateral release and swaps toward USDC or an actually owed asset
-are allowed. Non-USDC debt-asset purchases cannot exceed debt minus existing spot
+translated to Aggregator v3 `routes` of `Hop::Soroswap` through configured pairs;
+the vault authorizes only the input transfer to v3. Read the current nonce first.
+Only withdrawals, repayments, collateral release and swaps toward USDC or an
+actually owed asset are allowed. Non-USDC debt-asset purchases cannot exceed debt minus existing spot
 holdings, and must be consumed by debt repayment within the same unwind (one atom
 of repayment rounding per asset is tolerated). Reward-only assets can be sold but
 cannot be purchased. Proceeds stay in the vault. Per-leg/slippage/aggregate loss
@@ -39,11 +40,13 @@ The next 17,280-ledger window permits another bounded recovery budget. No new
 borrowing can finance an exit.
 
 [`local-smoke.py`](../scripts/local-smoke.py) constructs a complete swap/action
-payload and invokes public unwind independently of target execution. Its router
-is a fixture. A live quote must supply the exact pinned Soroswap distribution and
-auth tree, with minimum output checked independently onchain. Do not substitute
-a direct venue call. Resimulate after every successful leg, use the new nonce,
-and retry the bounded USDC exit once liquidity is available.
+payload and invokes public unwind independently of target execution, through
+mainnet v3, router, factory and pair code on an Etesia-made
+local pair. A live quote's route amounts must sum to `amount` minus v3's
+`protocol_bps` fee, and `minimum` must clear the vault's Reflector floor, which is
+checked onchain. Do not substitute a direct venue call. Resimulate after every
+successful leg, use the new nonce, and retry the bounded USDC exit once liquidity
+is available.
 
 `recover_supply(asset, amount)` withdraws unencumbered supply and verifies spot
 plus claim conservation, with at most one atomic-unit rounding loss. `repay(asset,

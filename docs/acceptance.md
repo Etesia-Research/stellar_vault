@@ -9,6 +9,42 @@ is implied. The [approved scope](../../doc/d2-vault-implementation-plan.md),
 [interfaces](interfaces.md), [operations](operations.md) and
 [reproduction guide](local-rpc.md) define the qualifications below.
 
+## D4-01 aggregator v3 port — 2026-11-09 (local only)
+
+The vault now routes every swap through the Soroswap Aggregator v3
+([interface](interfaces.md), [recovery runbook](operations.md)). The toolchain is
+Rust 1.99.1 (`wasm32v1-none`), SDK/token SDK 29.0.1, Stellar CLI 28.1.0 and
+cargo-llvm-cov 0.9.1; Rust 1.84.1 builds only the unchanged DeFindex parent
+harness. No Testnet/Mainnet transaction, deployment or key is involved.
+
+| Check | Result |
+| --- | --- |
+| `sh scripts/check.sh` | Passed: Soroswap WASM presence and `SHA256SUMS`, fmt, parent WASM (Rust 1.84.1), `stellar contract build --optimize`, vault size, strict clippy, native tests, coverage threshold |
+| Optimized vault size | 62,877 bytes, under `contract_max_size_bytes` 131,072 (observed on Testnet and Mainnet, 2026-11-09) |
+| Native tests | 67 passed: 52 vault (6 against the real v3/Soroswap WASMs), 12 pricing, 3 adapter |
+| Production line coverage | **95.3054%: 1,888 / 1,981 lines**, cargo-llvm-cov 0.9.1 |
+| Fresh local node | Core 30.0.0 / RPC 30.0.0 upgraded to protocol 30 with the quickstart protocol-30 Testnet profile ([reproduction](local-rpc.md)) |
+| Protocol-30 RPC smoke | Passed: v3, Soroswap router/factory/pair and vault deploy → deposit → target → v3 swap (vault XLM 273,152,657 atoms = v3 `amount_out` ≥ the floor `minimum`) → fees → public unwind → complete holder redemption (999,801,020 of 1,000,000,000 USDC atoms) |
+| RPC receipts | 27 deployment/funding/flow transactions returned `SUCCESS`; vault flow at ledgers 90–102 |
+
+The public record is the [D4 local evidence](evidence/d4-local-rpc.json). The
+vault's deploy, deposit, `publish_target`, `execute`, `collect_fees`, `unwind` and
+`redeem` receipts, base64 and decoded, are the D5-04 decoder fixtures in
+[`fixtures/d5-04-local/`](../fixtures/d5-04-local/). Regenerate both with
+`python3 scripts/d4-record-fixtures.py` after a passing smoke, node still running.
+
+- v3 and the Soroswap router, factory and pair are mainnet code checked against
+  `fixtures/wasm/SHA256SUMS`. The run used source-built factory and pair copies that
+  were later found byte-identical to the mainnet code (hashes read on 2026-11-09
+  from factory `CA4HEQTL…7AW2` and pairs 0, 110 and 220).
+- The USDC/XLM pair is Etesia-made local liquidity at the fixture mark. Tokens and
+  oracle are local fixtures, and the tokens emit no events.
+- CLI 28.1.0 deployed and invoked on protocol 30 here. Testnet behaviour,
+  routing and code identities remain D4-02/D4-03 gates.
+- The Core 30 package declares libc++ 20; it ran on Debian's libc++ 19 libraries.
+- The D2 and D3 records below are dated snapshots; their protocol-22 runs
+  reproduce from commit `b318771`.
+
 ## Guard review corrections — 2026-09-18
 
 Corrections on top of `ca95392` address three reproduced review
