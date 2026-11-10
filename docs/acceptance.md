@@ -33,7 +33,7 @@ vault's deploy, deposit, `publish_target`, `execute`, `collect_fees`, `unwind` a
 [`fixtures/d5-04-local/`](../fixtures/d5-04-local/). Regenerate both with
 `python3 scripts/d4-record-fixtures.py` after a passing smoke, node still running.
 The testnet D5-04 fixtures (the D4-03 rehearsal flagship deploy, `publish_target` and
-`execute`) are in [`fixtures/d5-04-testnet/`](../fixtures/d5-04-testnet/), written by
+`execute`, and the D4-04 decision-built `publish_target`) are in [`fixtures/d5-04-testnet/`](../fixtures/d5-04-testnet/), written by
 `python3 scripts/testnet-deploy.py record` within RPC's 7-day retention.
 
 - v3 and the Soroswap router, factory and pair are mainnet code checked against
