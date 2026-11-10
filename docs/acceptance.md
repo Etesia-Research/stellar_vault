@@ -39,8 +39,9 @@ vault's deploy, deposit, `publish_target`, `execute`, `collect_fees`, `unwind` a
   from factory `CA4HEQTL…7AW2` and pairs 0, 110 and 220).
 - The USDC/XLM pair is Etesia-made local liquidity at the fixture mark. Tokens and
   oracle are local fixtures, and the tokens emit no events.
-- CLI 28.1.0 deployed and invoked on protocol 30 here. Testnet behaviour,
-  routing and code identities remain D4-02/D4-03 gates.
+- CLI 28.1.0 deployed and invoked on protocol 30 here. The D4-02 testnet gates are met
+  (`docs/evidence/d4-testnet-probes.json`): code identities, the Etesia-deployed v3 copy, one
+  included swap and one classified failed swap. Vault deployment and routing remain D4-03 gates.
 - The Core 30 package declares libc++ 20; it ran on Debian's libc++ 19 libraries.
 - The D2 and D3 records below are dated snapshots; their protocol-22 runs
   reproduce from commit `b318771`.
