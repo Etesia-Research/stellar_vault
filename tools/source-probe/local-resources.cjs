@@ -14,8 +14,8 @@ async function rpc(method,params={}) {
  for(const [id,method,args] of [[manifest.vault,"total_assets",[]],[manifest.provider,"mark",[new S.Address(manifest.provider_config.sources[0].asset).toScVal()]]]) {
   const tx=new S.TransactionBuilder(new S.Account(manifest.config.admin,"0"),{fee:"100",networkPassphrase:network.passphrase}).addOperation(new S.Contract(id).call(method,...args)).setTimeout(60).build();
   const r=await rpc("simulateTransaction",{transaction:tx.toXDR()});if(r.error)throw new Error(r.error);
-  const data=S.xdr.SorobanTransactionData.fromXDR(r.transactionData,"base64").resources();
-  calls.push({id,method,ledger:r.latestLedger,value:S.scValToNative(S.xdr.ScVal.fromXDR(r.results[0].xdr,"base64")),instructions:data.instructions(),read_bytes:data.readBytes(),write_bytes:data.writeBytes(),read_entries:data.footprint().readOnly().length,write_entries:data.footprint().readWrite().length,min_resource_fee:r.minResourceFee,cost:r.cost||null});
+  const data=S.xdr.SorobanTransactionData.fromXDR(r.transactionData,"base64").resources; // SDK 17: XDR fields are properties
+  calls.push({id,method,ledger:r.latestLedger,value:S.scValToNative(S.xdr.ScVal.fromXDR(r.results[0].xdr,"base64")),instructions:data.instructions,disk_read_bytes:data.diskReadBytes,write_bytes:data.writeBytes,read_entries:data.footprint.readOnly.length,write_entries:data.footprint.readWrite.length,min_resource_fee:r.minResourceFee,cost:r.cost||null});
  }
- fs.writeFileSync(process.argv[3],JSON.stringify({captured_at:new Date().toISOString(),scope:"local protocol 22 simulation; instructions include RPC margin; successful under 40 MiB configured memory",calls},(_,v)=>typeof v==="bigint"?v.toString():v,2)+"\n");
+ fs.writeFileSync(process.argv[3],JSON.stringify({captured_at:new Date().toISOString(),scope:"local protocol "+network.protocolVersion+" simulation; instructions include RPC margin; successful under 40 MiB configured memory",calls},(_,v)=>typeof v==="bigint"?v.toString():v,2)+"\n");
 })().catch(e=>{console.error(e);process.exitCode=1;});

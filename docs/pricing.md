@@ -66,10 +66,10 @@ Use the pinned Rust/CLI tools in [local RPC instructions](local-rpc.md):
 sh scripts/check.sh
 # In tools/source-probe:
 corepack pnpm install --frozen-lockfile
-# From the repository root; unsigned mainnet research only:
+# The D3 mainnet probe and quotes ran from commit b318771 (SDK 13.3.0); check it out to reproduce them:
 node tools/source-probe/probe.cjs docs/evidence/new-probe.json
-# Optional actual-size quotes; credential remains in the process environment:
 python3 tools/source-probe/quotes.py docs/evidence/new-probe.json docs/evidence/new-quotes.json
+# probe.cjs now holds the D4-02 testnet modes (doc/d4-02-implementation-plan.md in the workspace).
 # Start scripts/local-node.py with a fresh ignored directory in another terminal.
 python3 scripts/d3-local-smoke.py
 python3 scripts/d3-local-smoke.py --conversion
@@ -86,6 +86,8 @@ avoids SDK 13 parsing of newer protocol-28 transaction metadata. The pinned
 CLI 22 cannot decode the current Reflector v6 specification; local RPC uses an
 explicit controlled Reflector ABI fixture.
 No claim of running deployed Reflector v6 on the protocol-22 node is made.
+`local-resources.cjs` runs on SDK 17.3.0 since D4-02. On protocol 23 and later it records
+`disk_read_bytes` (the protocol-22 `read_bytes` in `d3-local-resources.json` is not comparable).
 
 ## Activation procedure still required
 
