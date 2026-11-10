@@ -32,6 +32,9 @@ vault's deploy, deposit, `publish_target`, `execute`, `collect_fees`, `unwind` a
 `redeem` receipts, base64 and decoded, are the D5-04 decoder fixtures in
 [`fixtures/d5-04-local/`](../fixtures/d5-04-local/). Regenerate both with
 `python3 scripts/d4-record-fixtures.py` after a passing smoke, node still running.
+The testnet D5-04 fixtures (the D4-03 rehearsal flagship deploy, `publish_target` and
+`execute`) are in [`fixtures/d5-04-testnet/`](../fixtures/d5-04-testnet/), written by
+`python3 scripts/testnet-deploy.py record` within RPC's 7-day retention.
 
 - v3 and the Soroswap router, factory and pair are mainnet code checked against
   `fixtures/wasm/SHA256SUMS`. The run used source-built factory and pair copies that
@@ -41,7 +44,11 @@ vault's deploy, deposit, `publish_target`, `execute`, `collect_fees`, `unwind` a
   oracle are local fixtures, and the tokens emit no events.
 - CLI 28.1.0 deployed and invoked on protocol 30 here. The D4-02 testnet gates are met
   (`docs/evidence/d4-testnet-probes.json`): code identities, the Etesia-deployed v3 copy, one
-  included swap and one classified failed swap. Vault deployment and routing remain D4-03 gates.
+  included swap and one classified failed swap. The pre-reset D4-03 vault deployment gate is met
+  (2026-11-10): manifest [`deploy/testnet/pre-2026-12-16-reset.json`](../deploy/testnet/pre-2026-12-16-reset.json),
+  flagship and guard vaults, and one included keeper `execute` routed through the v3 copy with a
+  Blend Supply (evidence keys `assets`, `vaults`, `quote_index`, `rehearsal`). The post-reset
+  redeploy follows the 2026-12-16 testnet reset.
 - The Core 30 package declares libc++ 20; it ran on Debian's libc++ 19 libraries.
 - The D2 and D3 records below are dated snapshots; their protocol-22 runs
   reproduce from commit `b318771`.

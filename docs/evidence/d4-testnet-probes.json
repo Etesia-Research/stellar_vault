@@ -13512,5 +13512,826 @@
         "return_value": null
       }
     }
+  },
+  "assets": {
+    "captured_at": "2026-11-10T16:24:29.670029+00:00",
+    "endpoint": "https://soroban-testnet.stellar.org",
+    "ledgers": {
+      "first": 5660032,
+      "last": 5660845
+    },
+    "revisions": {
+      "vault": {
+        "commit": "ba409fdbfb25be445458a1a9cd20775a983c29c9",
+        "dirty": true
+      },
+      "quant": {
+        "commit": "45ed81ac5b18a90035b024d0002e6af1b903cda8",
+        "dirty": false
+      },
+      "script_sha256": "ff88e10aecb7bbd41423b9d80d190c8968bcbb113b3dfc1b98d3eecc7e055548"
+    },
+    "tools": {
+      "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+      "node": "v22.23.2",
+      "stellar_sdk_js": "17.3.0",
+      "python": "Python 3.14.7",
+      "stellar_sdk_py": "17.0.0"
+    },
+    "label": "Etesia-issued tRESERVE (reserve stand-in, marked at par to Reflector USDC) and its Etesia-seeded Soroswap pair; Blend testnet USDC from the faucet",
+    "transactions": {
+      "admin_trustline": {
+        "line": "USDC:GATALTGTWIOT6BUDBCZM3Q4OQ4BO2COLOAZ7IYSKPLC2PMSOPPGF5V56",
+        "hashes": [
+          "bf600b2e1f2a0b018dc09b1fc9c394eff8573e2ea12bc2704cff66e0dead97e7"
+        ],
+        "transactions": [
+          {
+            "hash": "bf600b2e1f2a0b018dc09b1fc9c394eff8573e2ea12bc2704cff66e0dead97e7",
+            "ledger": 5660032,
+            "created_at": "2026-11-10T15:16:43+00:00"
+          }
+        ]
+      },
+      "treasury_trustline": {
+        "line": "USDC:GATALTGTWIOT6BUDBCZM3Q4OQ4BO2COLOAZ7IYSKPLC2PMSOPPGF5V56",
+        "hashes": [
+          "cfab3a70d2d69a2725cc3e440ecb38df2df16ec4076bbe2d2c4ce6a99310b4d8"
+        ],
+        "transactions": [
+          {
+            "hash": "cfab3a70d2d69a2725cc3e440ecb38df2df16ec4076bbe2d2c4ce6a99310b4d8",
+            "ledger": 5660805,
+            "created_at": "2026-11-10T16:21:08+00:00"
+          }
+        ]
+      },
+      "treserve_sac": {
+        "asset": "tRESERVE:GDRVYVG3SQC4DJ6L7DPPGV6OQSBCZZWJA64VDXUJDQVMWN2A4KRXZM3R",
+        "contract": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+        "hashes": [
+          "971d1f222412c796d83712b095710e761e08455120ac935312017630f757fba0"
+        ],
+        "transactions": [
+          {
+            "hash": "971d1f222412c796d83712b095710e761e08455120ac935312017630f757fba0",
+            "ledger": 5660821,
+            "created_at": "2026-11-10T16:22:28+00:00"
+          }
+        ]
+      },
+      "treserve_pair": {
+        "returned": [
+          "10000000000",
+          "10000000000",
+          "9999999000"
+        ],
+        "deadline": 1794328073,
+        "hashes": [
+          "20b27ce3abfd1c82c5dd941a1a11f14c4666b2d392c2d9f1edb80ae439aebbbb"
+        ],
+        "transactions": [
+          {
+            "hash": "20b27ce3abfd1c82c5dd941a1a11f14c4666b2d392c2d9f1edb80ae439aebbbb",
+            "ledger": 5660833,
+            "created_at": "2026-11-10T16:23:28+00:00"
+          }
+        ],
+        "pair": "CC47HAL6FXYPVBQ6LIHKDZFVYS7XJW3N6TGRAZJSXOB2URUDTOY555UA",
+        "sac": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7"
+      }
+    },
+    "funding": [
+      {
+        "label": "Blend testnet faucet funding: claimed by the user from a browser wallet and paid to an Etesia account (A71, D4-03-Q5)",
+        "hash": "8d8d9f3cfde94463cda95c83436200ab90a5f71af57faa921d9e58b192fece3d",
+        "ledger": 5660415,
+        "created_at": "2026-11-10T15:48:38+00:00",
+        "payments": [
+          {
+            "from": "GA6LXX262MMPCKGHJVB5MKYFUMYKFKZRJHFX65GPYOMB2GZT2CTK5CJP",
+            "to": "GAQKH3PL27IA7HE4NXFAXCUYI2POXVYVEDZOZUTXYWZEYCPDD5CRDUVY",
+            "to_name": "etesia-admin",
+            "amount": "10000000000"
+          }
+        ]
+      },
+      {
+        "label": "Blend testnet faucet funding: claimed by the user from a browser wallet and paid to an Etesia account (A71, D4-03-Q5)",
+        "hash": "0bdd25d4f7edf262784f79622e87abe2e526e9421ab39f1e05744dbac8f589b7",
+        "ledger": 5660421,
+        "created_at": "2026-11-10T15:49:08+00:00",
+        "payments": [
+          {
+            "from": "GCF2OL27CBDRT5IJRSF4WOJIUEJIRNB6BBQ5HIYZH4RO4JNOKMSJAVDW",
+            "to": "GAQKH3PL27IA7HE4NXFAXCUYI2POXVYVEDZOZUTXYWZEYCPDD5CRDUVY",
+            "to_name": "etesia-admin",
+            "amount": "10000000000"
+          }
+        ]
+      },
+      {
+        "label": "Blend testnet faucet funding: claimed by the user from a browser wallet and paid to an Etesia account (A71, D4-03-Q5)",
+        "hash": "9f75669bf8c5d9399e4394b09728c2f6f93d986053d2a6ee649ebe238b885fb2",
+        "ledger": 5660428,
+        "created_at": "2026-11-10T15:49:43+00:00",
+        "payments": [
+          {
+            "from": "GA5AXSFIGBANIXN3I76KFKYVENV3HSC7HBGIKGV4WULF2HWR66TC2XO5",
+            "to": "GDRVYVG3SQC4DJ6L7DPPGV6OQSBCZZWJA64VDXUJDQVMWN2A4KRXZM3R",
+            "to_name": "etesia-realign",
+            "amount": "10000000000"
+          }
+        ]
+      }
+    ],
+    "treserve": {
+      "asset": "tRESERVE:GDRVYVG3SQC4DJ6L7DPPGV6OQSBCZZWJA64VDXUJDQVMWN2A4KRXZM3R",
+      "sac": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+      "issuer_flags": "none (no AUTH_REQUIRED, AUTH_REVOCABLE or AUTH_CLAWBACK)"
+    },
+    "pair": {
+      "pair": "CC47HAL6FXYPVBQ6LIHKDZFVYS7XJW3N6TGRAZJSXOB2URUDTOY555UA",
+      "token_0": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+      "token_1": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+      "reserves": [
+        "10000000000",
+        "10000000000"
+      ],
+      "lp_held_by_issuer": "9999999000",
+      "ledger": 5660845,
+      "lp_minimum_liquidity_burned": 1000
+    }
+  },
+  "vaults": {
+    "captured_at": "2026-11-10T16:25:43.899250+00:00",
+    "endpoint": "https://soroban-testnet.stellar.org",
+    "ledgers": {
+      "first": 5660867,
+      "last": 5660933
+    },
+    "revisions": {
+      "vault": {
+        "commit": "ba409fdbfb25be445458a1a9cd20775a983c29c9",
+        "dirty": true
+      },
+      "quant": {
+        "commit": "45ed81ac5b18a90035b024d0002e6af1b903cda8",
+        "dirty": false
+      },
+      "script_sha256": "ff88e10aecb7bbd41423b9d80d190c8968bcbb113b3dfc1b98d3eecc7e055548"
+    },
+    "tools": {
+      "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+      "node": "v22.23.2",
+      "stellar_sdk_js": "17.3.0",
+      "python": "Python 3.14.7",
+      "stellar_sdk_py": "17.0.0"
+    },
+    "label": "Etesia rehearsal pricing provider, flagship and guard vaults (pre-reset seeds)",
+    "build": {
+      "command": "stellar contract build --locked --optimize",
+      "wasm": {
+        "etesia_vault.wasm": {
+          "sha256": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+          "expected": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47"
+        },
+        "etesia_pricing.wasm": {
+          "sha256": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c",
+          "expected": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c"
+        }
+      }
+    },
+    "transactions": {
+      "provider": {
+        "hashes": [
+          "59b16f2b01bc1c2b6fef55f68fbf5ec37edc433dd294a69048462827407bb5a7",
+          "93e274eb52080f441ed043fa0cbbaeea6f324bc411680eedaa4dedeb442d386c"
+        ],
+        "transactions": [
+          {
+            "hash": "59b16f2b01bc1c2b6fef55f68fbf5ec37edc433dd294a69048462827407bb5a7",
+            "ledger": 5660867,
+            "created_at": "2026-11-10T16:26:18+00:00"
+          },
+          {
+            "hash": "93e274eb52080f441ed043fa0cbbaeea6f324bc411680eedaa4dedeb442d386c",
+            "ledger": 5660871,
+            "created_at": "2026-11-10T16:26:38+00:00"
+          }
+        ],
+        "alias": "etesia-pricing",
+        "contract": "CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB",
+        "salt": "fe6132b708e403d10c74b6179e3a6df131fb3652eb98b64c621220e1ac14af4f"
+      },
+      "flagship": {
+        "hashes": [
+          "5e58fa051628d6ccdfc96b534afffad1668c4b91998d6ca59ccc56c42519c943",
+          "35ca57046571f19315aa19fbb20f864328c0d04735d8034dac03f77b153b614d"
+        ],
+        "transactions": [
+          {
+            "hash": "5e58fa051628d6ccdfc96b534afffad1668c4b91998d6ca59ccc56c42519c943",
+            "ledger": 5660901,
+            "created_at": "2026-11-10T16:29:08+00:00"
+          },
+          {
+            "hash": "35ca57046571f19315aa19fbb20f864328c0d04735d8034dac03f77b153b614d",
+            "ledger": 5660907,
+            "created_at": "2026-11-10T16:29:38+00:00"
+          }
+        ],
+        "alias": "etesia-flagship",
+        "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+        "salt": "b18d784cb3852876b5ff219a962cd867d89f24810d0721c8baa7355a5c7a18f7"
+      },
+      "guard": {
+        "hashes": [
+          "8782f4f2eae4f93a2461a3c0cc201d358f8b012baf098eb2194893523f219a1c"
+        ],
+        "transactions": [
+          {
+            "hash": "8782f4f2eae4f93a2461a3c0cc201d358f8b012baf098eb2194893523f219a1c",
+            "ledger": 5660913,
+            "created_at": "2026-11-10T16:30:08+00:00"
+          }
+        ],
+        "alias": "etesia-guard",
+        "contract": "CCUHQJ3FSGC26UOCLN3EK2DUO725ZLBVRUF5B7N36W6MB3DM4JEOC6VO",
+        "salt": "966768ec89056e465e71cefe01d692ada46858d6ad5f9f57fecff18708c6ccce"
+      }
+    },
+    "seed_from": {
+      "account": "GAQKH3PL27IA7HE4NXFAXCUYI2POXVYVEDZOZUTXYWZEYCPDD5CRDUVY",
+      "assets": 10000000000
+    },
+    "marks": {
+      "XLM": {
+        "price": "142883393069",
+        "timestamp": 1794327900
+      },
+      "tRESERVE": {
+        "price": "1000000000000",
+        "timestamp": 1794327900
+      },
+      "ledger": 5660881
+    },
+    "prechecks": [
+      {
+        "check": "provider config() equals its input",
+        "expected": {
+          "usdc": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+          "sources": [
+            {
+              "asset": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+              "numerator": {
+                "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                "asset": {
+                  "Other": "XLM"
+                },
+                "base": {
+                  "Other": "USD"
+                },
+                "decimals": 14,
+                "resolution": 300,
+                "max_age": 3600
+              },
+              "denominator": [
+                {
+                  "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                  "asset": {
+                    "Other": "USDC"
+                  },
+                  "base": {
+                    "Other": "USD"
+                  },
+                  "decimals": 14,
+                  "resolution": 300,
+                  "max_age": 3600
+                }
+              ]
+            },
+            {
+              "asset": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+              "numerator": {
+                "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                "asset": {
+                  "Other": "USDC"
+                },
+                "base": {
+                  "Other": "USD"
+                },
+                "decimals": 14,
+                "resolution": 300,
+                "max_age": 3600
+              },
+              "denominator": [
+                {
+                  "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                  "asset": {
+                    "Other": "USDC"
+                  },
+                  "base": {
+                    "Other": "USD"
+                  },
+                  "decimals": 14,
+                  "resolution": 300,
+                  "max_age": 3600
+                }
+              ]
+            }
+          ]
+        },
+        "observed": {
+          "sources": [
+            {
+              "asset": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+              "denominator": [
+                {
+                  "asset": {
+                    "Other": "USDC"
+                  },
+                  "base": {
+                    "Other": "USD"
+                  },
+                  "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                  "decimals": 14,
+                  "max_age": 3600,
+                  "resolution": 300
+                }
+              ],
+              "numerator": {
+                "asset": {
+                  "Other": "XLM"
+                },
+                "base": {
+                  "Other": "USD"
+                },
+                "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                "decimals": 14,
+                "max_age": 3600,
+                "resolution": 300
+              }
+            },
+            {
+              "asset": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+              "denominator": [
+                {
+                  "asset": {
+                    "Other": "USDC"
+                  },
+                  "base": {
+                    "Other": "USD"
+                  },
+                  "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                  "decimals": 14,
+                  "max_age": 3600,
+                  "resolution": 300
+                }
+              ],
+              "numerator": {
+                "asset": {
+                  "Other": "USDC"
+                },
+                "base": {
+                  "Other": "USD"
+                },
+                "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+                "decimals": 14,
+                "max_age": 3600,
+                "resolution": 300
+              }
+            }
+          ],
+          "usdc": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU"
+        },
+        "ok": true
+      },
+      {
+        "check": "provider usdc = vault usdc",
+        "expected": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+        "observed": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+        "ok": true
+      },
+      {
+        "check": "route_contracts[0] = factory get_pair(USDC, XLM)",
+        "expected": "CBR76WMT6J733CCVBP23M2EL5QGP5HXLPEFNFZGZ7IB6QHOJAHP7YM3V",
+        "observed": "CBR76WMT6J733CCVBP23M2EL5QGP5HXLPEFNFZGZ7IB6QHOJAHP7YM3V",
+        "ok": true
+      },
+      {
+        "check": "route_contracts[1] = factory get_pair(USDC, tRESERVE)",
+        "expected": "CC47HAL6FXYPVBQ6LIHKDZFVYS7XJW3N6TGRAZJSXOB2URUDTOY555UA",
+        "observed": "CC47HAL6FXYPVBQ6LIHKDZFVYS7XJW3N6TGRAZJSXOB2URUDTOY555UA",
+        "ok": true
+      },
+      {
+        "check": "pool get_reserve(USDC) decimals",
+        "expected": 7,
+        "observed": 7,
+        "ok": true
+      },
+      {
+        "check": "pool get_reserve(USDC) scalar",
+        "expected": "10000000",
+        "observed": "10000000",
+        "ok": true
+      },
+      {
+        "check": "pool USDC bToken emission entry",
+        "expected": null,
+        "observed": null,
+        "ok": true
+      },
+      {
+        "check": "router (v3 copy) not paused",
+        "expected": false,
+        "observed": false,
+        "ok": true
+      },
+      {
+        "ledger": 5660894
+      }
+    ],
+    "config_equals_manifest": {
+      "provider": true,
+      "flagship": true,
+      "guard": true
+    },
+    "code": [
+      {
+        "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+        "expected": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+        "observed": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+        "ok": true
+      },
+      {
+        "contract": "CCUHQJ3FSGC26UOCLN3EK2DUO725ZLBVRUF5B7N36W6MB3DM4JEOC6VO",
+        "expected": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+        "observed": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+        "ok": true
+      },
+      {
+        "contract": "CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB",
+        "expected": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c",
+        "observed": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c",
+        "ok": true
+      },
+      {
+        "contract": "CBE32GUTQH657PTGU2ILOCY44QCOYTKKVMFW5TWFPTBZYSIMTZVUV5TH",
+        "expected": "437653282e9c93b0b4d736d8fde01bf002adefb61bfb75917e609f5336ee3190",
+        "observed": "437653282e9c93b0b4d736d8fde01bf002adefb61bfb75917e609f5336ee3190",
+        "ok": true
+      },
+      {
+        "contract": "CCJUD55AG6W5HAI5LRVNKAE5WDP5XGZBUDS5WNTIVDU7O264UZZE7BRD",
+        "expected": "4b95bbf9caec2c6e00c786f53c5f392c2fcdb8435ac0a862ab5e0645eb65824c",
+        "observed": "4b95bbf9caec2c6e00c786f53c5f392c2fcdb8435ac0a862ab5e0645eb65824c",
+        "ok": true
+      },
+      {
+        "contract": "CDP3HMUH6SMS3S7NPGNDJLULCOXXEPSHY4JKUKMBNQMATHDHWXRRJTBY",
+        "expected": "86285a9234d3f0d687eaf88efe8d5d72172b38c9a86624c9934c0cbf2aff2993",
+        "observed": "86285a9234d3f0d687eaf88efe8d5d72172b38c9a86624c9934c0cbf2aff2993",
+        "ok": true
+      },
+      {
+        "contract": "CBR76WMT6J733CCVBP23M2EL5QGP5HXLPEFNFZGZ7IB6QHOJAHP7YM3V",
+        "expected": "8447525edd62f72ffaf52136358034657ea0511a8fec1cd0ebde649f86cca464",
+        "observed": "8447525edd62f72ffaf52136358034657ea0511a8fec1cd0ebde649f86cca464",
+        "ok": true
+      },
+      {
+        "contract": "CC47HAL6FXYPVBQ6LIHKDZFVYS7XJW3N6TGRAZJSXOB2URUDTOY555UA",
+        "expected": "8447525edd62f72ffaf52136358034657ea0511a8fec1cd0ebde649f86cca464",
+        "observed": "8447525edd62f72ffaf52136358034657ea0511a8fec1cd0ebde649f86cca464",
+        "ok": true
+      },
+      {
+        "contract": "CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF",
+        "expected": "a41fc53d6753b6c04eb15b021c55052366a4c8e0e21bc72700f461264ec1350e",
+        "observed": "a41fc53d6753b6c04eb15b021c55052366a4c8e0e21bc72700f461264ec1350e",
+        "ok": true
+      },
+      {
+        "contract": "CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63",
+        "expected": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439",
+        "observed": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439",
+        "ok": true
+      },
+      {
+        "contract": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+        "expected": "stellar-asset",
+        "observed": "stellar-asset",
+        "ok": true
+      },
+      {
+        "contract": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+        "expected": "stellar-asset",
+        "observed": "stellar-asset",
+        "ok": true
+      },
+      {
+        "contract": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+        "expected": "stellar-asset",
+        "observed": "stellar-asset",
+        "ok": true
+      }
+    ],
+    "manifest": {
+      "path": "deploy/testnet/pre-2026-12-16-reset.json",
+      "sha256": "cfa30d48adb6c5559dfbed446a4a0763c67ed0672305b18910e493b1920c2220"
+    }
+  },
+  "quote_index": {
+    "captured_at": "2026-11-10T16:32:38.636264+00:00",
+    "endpoint": "https://soroban-testnet.stellar.org",
+    "ledgers": {
+      "first": 5660833,
+      "last": 5660833
+    },
+    "revisions": {
+      "vault": {
+        "commit": "ba409fdbfb25be445458a1a9cd20775a983c29c9",
+        "dirty": true
+      },
+      "quant": {
+        "commit": "45ed81ac5b18a90035b024d0002e6af1b903cda8",
+        "dirty": false
+      },
+      "script_sha256": "ff88e10aecb7bbd41423b9d80d190c8968bcbb113b3dfc1b98d3eecc7e055548"
+    },
+    "tools": {
+      "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+      "node": "v22.23.2",
+      "stellar_sdk_js": "17.3.0",
+      "python": "Python 3.14.7",
+      "stellar_sdk_py": "17.0.0"
+    },
+    "label": "Soroswap API /quote index check of the Etesia-seeded tRESERVE pair",
+    "url": "https://api.soroswap.finance/quote?network=testnet",
+    "from": "2026-11-10T16:23:28+00:00",
+    "polls": 1,
+    "poll_seconds": 60,
+    "indexed": {
+      "request": {
+        "assetIn": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+        "assetOut": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+        "amount": "100000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 1,
+        "slippageBps": 50
+      },
+      "status": 201,
+      "body": "{\"assetIn\":\"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\",\"assetOut\":\"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\",\"tradeType\":\"EXACT_IN\",\"amountIn\":\"100000000\",\"amountOut\":\"98715803\",\"otherAmountThreshold\":\"98222223\",\"priceImpactPct\":\"0.00\",\"platform\":\"router\",\"routePlan\":[{\"swapInfo\":{\"protocol\":\"soroswap\",\"path\":[\"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\",\"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\"]},\"percent\":\"100.00\"}],\"rawTrade\":{\"amountIn\":\"100000000\",\"amountOutMin\":\"98222223\",\"distribution\":[{\"protocol_id\":\"soroswap\",\"path\":[\"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\",\"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\"],\"parts\":10,\"is_exact_in\":true}]}}",
+      "at": "2026-11-10T16:24:58.486798+00:00"
+    },
+    "elapsed_s": 90.486798,
+    "last_not_indexed": null,
+    "leg_200_usdc": {
+      "gross": 2000000000,
+      "request": {
+        "assetIn": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+        "assetOut": "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+        "amount": "1998000000",
+        "tradeType": "EXACT_IN",
+        "protocols": [
+          "soroswap"
+        ],
+        "parts": 1,
+        "maxHops": 1,
+        "slippageBps": 50
+      },
+      "status": 201,
+      "body": "{\"assetIn\":\"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\",\"assetOut\":\"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\",\"tradeType\":\"EXACT_IN\",\"amountIn\":\"1998000000\",\"amountOut\":\"1661111577\",\"otherAmountThreshold\":\"1652806019\",\"priceImpactPct\":\"0.00\",\"platform\":\"router\",\"routePlan\":[{\"swapInfo\":{\"protocol\":\"soroswap\",\"path\":[\"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\",\"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\"]},\"percent\":\"100.00\"}],\"rawTrade\":{\"amountIn\":\"1998000000\",\"amountOutMin\":\"1652806019\",\"distribution\":[{\"protocol_id\":\"soroswap\",\"path\":[\"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\",\"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\"],\"parts\":10,\"is_exact_in\":true}]}}",
+      "at": "2026-11-10T16:25:10.962032+00:00"
+    }
+  },
+  "rehearsal": {
+    "captured_at": "2026-11-10T16:59:49.922965+00:00",
+    "endpoint": "https://soroban-testnet.stellar.org",
+    "ledgers": {
+      "first": 5661234,
+      "last": 5661252
+    },
+    "revisions": {
+      "vault": {
+        "commit": "ba409fdbfb25be445458a1a9cd20775a983c29c9",
+        "dirty": true
+      },
+      "quant": {
+        "commit": "45ed81ac5b18a90035b024d0002e6af1b903cda8",
+        "dirty": false
+      },
+      "script_sha256": "ff88e10aecb7bbd41423b9d80d190c8968bcbb113b3dfc1b98d3eecc7e055548"
+    },
+    "tools": {
+      "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+      "node": "v22.23.2",
+      "stellar_sdk_js": "17.3.0",
+      "python": "Python 3.14.7",
+      "stellar_sdk_py": "17.0.0"
+    },
+    "label": "Flagship rehearsal: the unchanged keeper, one `once` cycle per run, D4-Q4 `flat` scenario target (D4-03-Q4, A71)",
+    "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "attempts": [
+      {
+        "kind": "publish",
+        "tx_hash": "d89fe72583d47db84521c19c30a087bd2928da9a7f4efc028fd8dfd25e05630b",
+        "outcome": "success",
+        "classification": null,
+        "action": "ok",
+        "ledger": 5661234,
+        "nonce": 0,
+        "version": 1,
+        "target_epoch": 1794329775,
+        "target_hash": "008be2d65a8d3019f34795cd19e8b65a3637d90c979aedaace1374d2675fd6e3",
+        "action_hash": null,
+        "max_time": 1794329853,
+        "send_status": "PENDING",
+        "keeper_evidence": "b2b688b563c0cfdaae86a2cd5e6e321532fb92b9811e96964192d7da1b8a4286.json",
+        "target": {
+          "network": "cee0302d59844d32bdca915c8203dd44b33fbb7edc19051ea37abedf28ecd472",
+          "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+          "epoch": 1794329775,
+          "expiry": 1794416183,
+          "model": "71b37bf88b88dcdda4067c4b12a3f62bfafc8f303180768be81b70564d6ffac7",
+          "dataset": "92c623e0a6a2e8c8529025ea83da6dff44a212fb92749ae4dcd87c8b01820837",
+          "holdings": "1e6c72ce7836af44584f297a87320da617f36d26cda2f30ef65461fee12f191e",
+          "assets": [
+            "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+            "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7",
+            "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC"
+          ],
+          "weights": [
+            1200,
+            8550,
+            250
+          ],
+          "yield_bps": 1000,
+          "equity": 10000000000,
+          "supply": 1000000508942420
+        },
+        "fixture": "fixtures/d5-04-testnet/01-publish_target.json"
+      },
+      {
+        "kind": "execute",
+        "tx_hash": "aa8f8e1938be1311db3fc3004f9c6ace82f745f42beb1edd4780a777a739b4c8",
+        "outcome": "success",
+        "classification": null,
+        "action": "ok",
+        "ledger": 5661252,
+        "nonce": 0,
+        "version": 1,
+        "target_epoch": 1794329775,
+        "target_hash": "008be2d65a8d3019f34795cd19e8b65a3637d90c979aedaace1374d2675fd6e3",
+        "action_hash": "b227a1bba86b423752ea8370440cbe789e6e5347f4ba543f7005e4d00f25a953",
+        "max_time": 1794329958,
+        "send_status": "PENDING",
+        "keeper_evidence": "7379f3b39929e754eeec9f8ae6b1ee90bbe59aa5aa78a7dda452f241db01eb31.json",
+        "plan": {
+          "target": "008be2d65a8d3019f34795cd19e8b65a3637d90c979aedaace1374d2675fd6e3",
+          "epoch": 1794329775,
+          "nonce": 0,
+          "deadline": 1794329958,
+          "version": 1,
+          "actions": [
+            [
+              "Swap",
+              {
+                "token_in": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+                "token_out": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+                "amount": 250000000,
+                "minimum": 1745440038,
+                "routes": [
+                  {
+                    "amount_in": 249750000,
+                    "hops": [
+                      [
+                        "Soroswap",
+                        {
+                          "pair": "CBR76WMT6J733CCVBP23M2EL5QGP5HXLPEFNFZGZ7IB6QHOJAHP7YM3V",
+                          "token_in": "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+                          "token_out": "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC"
+                        }
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ],
+            [
+              "Supply",
+              "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU",
+              949774255
+            ]
+          ]
+        },
+        "reconciliation": {
+          "ledgers": [
+            5661236,
+            5661255
+          ],
+          "problems": [],
+          "residuals": {
+            "CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU": {
+              "collateral": 0,
+              "debt": 0,
+              "spot": 0,
+              "supply": 323
+            },
+            "CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7": {
+              "collateral": 0,
+              "debt": 0,
+              "spot": 0,
+              "supply": 0
+            },
+            "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC": {
+              "collateral": 0,
+              "debt": 0,
+              "spot": 0,
+              "supply": 0
+            }
+          }
+        },
+        "fixture": "fixtures/d5-04-testnet/02-execute.json"
+      }
+    ],
+    "cycles": [
+      {
+        "cycle": 1,
+        "network_epoch": "pre-2026-12-16-reset",
+        "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+        "started_at": 1794328457,
+        "finished_at": 1794328537,
+        "status": "skipped",
+        "skips": [
+          "Reflector: the next update may land before inclusion; waiting for it"
+        ],
+        "scheduled": null,
+        "triggers": null
+      },
+      {
+        "cycle": 2,
+        "network_epoch": "pre-2026-12-16-reset",
+        "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+        "started_at": 1794328559,
+        "finished_at": 1794328573,
+        "status": "skipped",
+        "skips": [
+          "Reflector: the next update may land before inclusion; waiting for it"
+        ],
+        "scheduled": null,
+        "triggers": null
+      },
+      {
+        "cycle": 3,
+        "network_epoch": "pre-2026-12-16-reset",
+        "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+        "started_at": 1794328990,
+        "finished_at": 1794329147,
+        "status": "skipped",
+        "skips": [
+          "Reflector: the next update may land before inclusion; waiting for it"
+        ],
+        "scheduled": null,
+        "triggers": null
+      },
+      {
+        "cycle": 4,
+        "network_epoch": "pre-2026-12-16-reset",
+        "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+        "started_at": 1794329758,
+        "finished_at": 1794329929,
+        "status": "executed",
+        "skips": [
+          "decision: [Errno 2] No such file or directory: '../etesia-vault/artifacts/local/d4-03-keeper/market.json'",
+          "inadmissible CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU->CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7 2000000000: shortfall 1695 bps > 90 bps",
+          "inadmissible CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU->CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7 1000000000: shortfall 943 bps > 90 bps",
+          "inadmissible CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU->CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7 500000000: shortfall 513 bps > 90 bps"
+        ],
+        "scheduled": null,
+        "triggers": {
+          "labels": [
+            "Drift"
+          ],
+          "distance": 18550000000,
+          "band": 200000000,
+          "turn": null,
+          "scenario": "flat",
+          "evidence": null
+        }
+      }
+    ],
+    "alerts": [],
+    "fixtures": [
+      "fixtures/d5-04-testnet/00-deploy.json",
+      "fixtures/d5-04-testnet/01-publish_target.json",
+      "fixtures/d5-04-testnet/02-execute.json"
+    ]
   }
 }
