@@ -95,6 +95,49 @@ XLM buffer is not presented as a fee-payer reimbursement mechanism.
 
 The A48 six-asset rerun is recorded in [reduced-universe receipts](evidence/shx-exclusion-local-rpc.json). The original seven-asset evidence remains a dated historical snapshot.
 
+## D6-02 execute resource profile
+
+`scripts/d6-local-resources.py` measures `execute` against the protocol-30 limits on a fresh node.
+It needs the testnet Reflector and the testnet Blend v2 pool, backstop and Comet WASMs, fetched read-only:
+
+```sh
+dir=$(mktemp -d)
+for name in reflector:CCYOZJCOPG34LLQQ7N24YXBM7LL62R7ONMZ3G6WZAAYPB5OYKOMJRN63 pool:CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF backstop:CBDVWXT433PRVTUNM56C3JREF3HIZHRBA64NB2C3B2UNCKIS65ZYCLZA comet:CA5UTUUPHYL5K22UBRUVC37EARZUGYOSGK3IKIXG2JLCC5ZZLI4BDWDM; do
+  stellar contract fetch --id "${name#*:}" --rpc-url https://soroban-testnet.stellar.org --network-passphrase "Test SDF Network ; September 2015" -o "$dir/${name%%:*}.wasm"
+done
+python3 scripts/d6-local-resources.py "$dir/reflector.wasm" "$dir/pool.wasm" "$dir/backstop.wasm" "$dir/comet.wasm" .tooling/local-run
+```
+
+The fetched SHA-256 values were Reflector `25fc3060…1439`, pool `a41fc53d…350e`, backstop
+`c1f4502a…fbc2` and Comet `8abc2891…1a36` (2026-11-11); the record lists all of them.
+
+The last argument must be the data directory of the node that is running (for its
+`resource-limits.json`); the script checks it against the node and refuses another one. For the
+diagnostic run below that directory is `.tooling/raised`, not `.tooling/local-run`. The script
+deploys SAC assets issued by the standalone genesis account, all 15 universe pairs, the pricing
+provider over a local copy of the Reflector code with one USD price round and a USDC denominator leg,
+a Blend pool in status 2 and the vault. It supplies to Blend, then buys one more asset per execute
+until a single swap no longer fits: each valuation prices every asset held, so cost grows with
+holdings. From that state it sends each plan family largest first until one applies, then the
+proposed keeper caps. If a buy stopped fitting, it finally adds the remaining assets by direct SAC
+transfer and tries one one-hop buy at each holdings count. Routes have at most 2 hops and at most 2
+routes per swap: the keeper sends 1 hop and 1 route, and the mainnet API quote allows 2 hops. The
+contract's maximum of 4 hops and 15 routes per swap is not measured and would cost more. Each plan
+is also simulated through RPC; RPC 30.0.0 returns no simulation `cost`, so only simulated
+instructions are recorded, and simulation memory is not observable. Every receipt's
+`core_metrics` diagnostic events, call counts, declared resources and fees are in
+[the D6-02 record](evidence/d6-02-local-resources.json). The live testnet limits and one simulated
+testnet `mark` are in [d6-02-testnet-limits.json](evidence/d6-02-testnet-limits.json).
+
+To see what a plan needs beyond those limits, start the node with the diagnostic profile
+[`d6-02-raised-limits.json`](../fixtures/d6-02-raised-limits.json), which raises only the instruction
+limits (transaction and ledger), the memory limit and the event-size limit: `python3 scripts/local-node.py .tooling/raised
+fixtures/d6-02-raised-limits.json`. Then every plan applies, and the script writes
+[the raised record](evidence/d6-02-local-resources-raised.json), with headroom still computed against
+the protocol-30 profile. A plan whose simulation exceeds the budget is never sent; one that passes
+simulation and then fails when applied is kept as a failed receipt. The record is rewritten after
+every scenario, so a run that stops keeps its receipts so far.
+
 ## Tranche 1 demonstration
 
 The [verification notebook](../notebooks/tranche-1-demo.ipynb) runs the existing

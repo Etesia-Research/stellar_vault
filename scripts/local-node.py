@@ -16,6 +16,8 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 os.chdir(ROOT)
 DATA = Path(sys.argv[1] if len(sys.argv) > 1 else '.tooling/local-run').resolve()
+# A second argument replaces the resource profile (D6-02 measures with fixtures/d6-02-raised-limits.json).
+SETTINGS = sys.argv[2] if len(sys.argv) > 2 else 'fixtures/local-network-settings.json'
 CORE = str(Path(os.environ.get('ETESIA_CORE', '.tooling/stellar/usr/bin/stellar-core')).resolve())
 RPC = str(Path(os.environ.get('ETESIA_RPC', '.tooling/stellar/usr/bin/stellar-rpc')).resolve())
 PASSPHRASE = 'Standalone Network ; September 2026'
@@ -130,7 +132,7 @@ try:
     wait_for(lambda: json.loads(core_http('info'))['info']['ledger']['version'] == 30)
     # As quickstart does: a small upgrade first raises the genesis limits that the full
     # profile's upload transaction exceeds. The first run uses sequence numbers 1-4.
-    for settings, sequence in (('fixtures/local-network-enable-upgrades.json', '0'), ('fixtures/local-network-settings.json', '4')):
+    for settings, sequence in (('fixtures/local-network-enable-upgrades.json', '0'), (SETTINGS, '4')):
         encoded = run(['stellar', 'xdr', 'encode', '--type', 'ConfigUpgradeSet', settings])
         upgrades = run([CORE, 'get-settings-upgrade-txs', root, sequence, PASSPHRASE, '--xdr', encoded, '--signtxs'], input=seed + '\n').splitlines()
         # Optional restore, install, deploy and upload transactions, each followed by its hash, then the key.

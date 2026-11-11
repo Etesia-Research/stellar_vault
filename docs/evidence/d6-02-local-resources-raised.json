@@ -1,0 +1,2305 @@
+{
+ "captured_at": "2026-11-11T15:07:55+00:00",
+ "network": "local-only",
+ "passphrase": "Standalone Network ; September 2026",
+ "rpc": "http://127.0.0.1:8003",
+ "protocol": 30,
+ "revisions": {
+  "vault": {
+   "commit": "6c8a72382d4dae41a9d43e3c73a5c65d49f8ecbc",
+   "dirty": true
+  },
+  "script_sha256": "027404eee0aebda8ac0dab145873dfb0a2335174ad2756419bdbeb85e417ca19"
+ },
+ "tools": {
+  "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+  "rpc": {
+   "version": "30.0.0-13e53516633c3ce1281c7edbacb607107d3a4e55",
+   "commitHash": "13e53516633c3ce1281c7edbacb607107d3a4e55",
+   "buildTimestamp": "2026-10-20T22:36:51",
+   "captiveCoreVersion": "stellar-core 30.0.0 (0e49751aa9ddf892302cca02cea7f3f5d97df9f1)",
+   "protocolVersion": 30
+  }
+ },
+ "label": "Isolated local protocol-30 network; not Stellar Testnet or Mainnet",
+ "node_limits": {
+  "fee_contract_events_size_1kb": 2500,
+  "fee_historical_1kb": 2029,
+  "fee_rate_per_instructions_increment": 3,
+  "fee_read_1kb": 223,
+  "fee_read_ledger_entry": 781,
+  "fee_transaction_size_1kb": 203,
+  "fee_write_1kb": 1000,
+  "fee_write_ledger_entry": 1250,
+  "ledger": {
+   "max_instructions": 2000000000,
+   "max_read_bytes": 400000,
+   "max_read_ledger_entries": 2000,
+   "max_tx_count": 2000,
+   "max_tx_size_bytes": 864000,
+   "max_write_bytes": 297000,
+   "max_write_ledger_entries": 2000
+  },
+  "max_contract_data_entry_size": 65536,
+  "max_contract_data_key_size": 250,
+  "max_contract_size": 131072,
+  "max_dependent_tx_clusters": 3,
+  "scp": {
+   "ballot_timeout_inc_ms": 1000,
+   "ballot_timeout_ms": 1000,
+   "ledger_close_time_ms": 5000,
+   "nomination_timeout_inc_ms": 1000,
+   "nomination_timeout_ms": 1000
+  },
+  "state_archival": {
+   "average_bucket_list_size": 33460,
+   "bucket_list_size_snapshot_period": 30,
+   "bucketlist_size_window_sample_size": 30,
+   "eviction_scan_size": 500000,
+   "max_entries_to_archive": 1000,
+   "max_entry_ttl": 3110400,
+   "min_persistent_ttl": 120960,
+   "min_temporary_ttl": 720,
+   "persistent_rent_rate_denominator": 1215,
+   "starting_eviction_scan_level": 7,
+   "temp_rent_rate_denominator": 2430
+  },
+  "tx": {
+   "max_contract_events_size_bytes": 131072,
+   "max_footprint_size": 400,
+   "max_instructions": 2000000000,
+   "max_read_bytes": 200000,
+   "max_read_ledger_entries": 200,
+   "max_size_bytes": 132096,
+   "max_write_bytes": 132096,
+   "max_write_ledger_entries": 200,
+   "memory_limit": 419430400
+  }
+ },
+ "raised_limits": true,
+ "scenarios": [
+  {
+   "hash": "25b6624c0501a93f0abe1df2bd63e97e5f7e8293eaf7b1b307db523e36434595",
+   "status": "SUCCESS",
+   "ledger": 146,
+   "envelope_bytes": 2956,
+   "fee_bid": 641009,
+   "fee_charged": 556237,
+   "declared": {
+    "instructions": 18935861,
+    "disk_read_bytes": 144,
+    "write_bytes": 5184,
+    "footprint_read_only": 19,
+    "footprint_read_write": 6,
+    "resource_fee": 640909
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 23246,
+    "total_refundable_resource_fee_charged": 532891,
+    "rent_fee_charged": 529209
+   },
+   "core_metrics": {
+    "cpu_insn": 17939560,
+    "mem_byte": 5053634,
+    "read_entry": 25,
+    "write_entry": 6,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5184,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5184,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 6,
+    "emit_event_byte": 1508,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 392,
+    "invoke_time_nsecs": 4699897
+   },
+   "calls": {
+    "balance": 14,
+    "get_positions": 5,
+    "get_reserve_emissions": 4,
+    "get_reserve": 3,
+    "execute": 1,
+    "submit": 1,
+    "transfer": 1
+   },
+   "name": "W0",
+   "shape": "warm-up: Blend Supply",
+   "actions": 1,
+   "simulation": {
+    "instructions": 18935861,
+    "min_resource_fee": 640909
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 17939560,
+     "limit": 400000000,
+     "pct": 4.5
+    },
+    "memory": {
+     "used": 5053634,
+     "limit": 41943040,
+     "pct": 12.0
+    },
+    "read_entries": {
+     "used": 25,
+     "limit": 200,
+     "pct": 12.5
+    },
+    "write_entries": {
+     "used": 6,
+     "limit": 200,
+     "pct": 3.0
+    },
+    "footprint": {
+     "used": 25,
+     "limit": 400,
+     "pct": 6.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5184,
+     "limit": 132096,
+     "pct": 3.9
+    },
+    "events_bytes": {
+     "used": 1508,
+     "limit": 16384,
+     "pct": 9.2
+    },
+    "tx_size": {
+     "used": 2956,
+     "limit": 132096,
+     "pct": 2.2
+    }
+   }
+  },
+  {
+   "hash": "a9c7f3f0b2194cf4adff5edf873e0865f9127e9c927b5e8e3ad5c5878e1e8f65",
+   "status": "SUCCESS",
+   "ledger": 152,
+   "envelope_bytes": 4444,
+   "fee_bid": 377961,
+   "fee_charged": 329247,
+   "declared": {
+    "instructions": 44866824,
+    "disk_read_bytes": 144,
+    "write_bytes": 5940,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 377861
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 38340,
+    "total_refundable_resource_fee_charged": 290807,
+    "rent_fee_charged": 283814
+   },
+   "core_metrics": {
+    "cpu_insn": 42697849,
+    "mem_byte": 11921586,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5940,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5940,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2864,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 16516329
+   },
+   "calls": {
+    "balance": 21,
+    "base": 10,
+    "decimals": 10,
+    "resolution": 10,
+    "lastprice": 10,
+    "mark": 5,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W1",
+   "shape": "one-hop swap to XLM, holding 0 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 44866824,
+    "min_resource_fee": 377861
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 42697849,
+     "limit": 400000000,
+     "pct": 10.7
+    },
+    "memory": {
+     "used": 11921586,
+     "limit": 41943040,
+     "pct": 28.4
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5940,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2864,
+     "limit": 16384,
+     "pct": 17.5
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "hash": "9494b714c767c077b25b2583085c4b7f919d87bbb4eb549411732f530a51fabe",
+   "status": "SUCCESS",
+   "ledger": 158,
+   "envelope_bytes": 4444,
+   "fee_bid": 278500,
+   "fee_charged": 243936,
+   "declared": {
+    "instructions": 74942442,
+    "disk_read_bytes": 144,
+    "write_bytes": 5936,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 278400
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 47361,
+    "total_refundable_resource_fee_charged": 196475,
+    "rent_fee_charged": 189209
+   },
+   "core_metrics": {
+    "cpu_insn": 71644098,
+    "mem_byte": 19877513,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5936,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5936,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2976,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 13516197
+   },
+   "calls": {
+    "base": 22,
+    "decimals": 22,
+    "resolution": 22,
+    "lastprice": 22,
+    "balance": 21,
+    "mark": 11,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W2",
+   "shape": "one-hop swap to AQUA, holding 1 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 74942442,
+    "min_resource_fee": 278400
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 71644098,
+     "limit": 400000000,
+     "pct": 17.9
+    },
+    "memory": {
+     "used": 19877513,
+     "limit": 41943040,
+     "pct": 47.4
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5936,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2976,
+     "limit": 16384,
+     "pct": 18.2
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "hash": "fe05ac77736d679e6aab271b5ba5e31a9f87dc8ccb71cf3972f2b34772c54b9d",
+   "status": "SUCCESS",
+   "ledger": 167,
+   "envelope_bytes": 4444,
+   "fee_bid": 285966,
+   "fee_charged": 251405,
+   "declared": {
+    "instructions": 99908713,
+    "disk_read_bytes": 144,
+    "write_bytes": 5932,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 285866
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 54849,
+    "total_refundable_resource_fee_charged": 196456,
+    "rent_fee_charged": 189209
+   },
+   "core_metrics": {
+    "cpu_insn": 95612696,
+    "mem_byte": 26493194,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5932,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5932,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2968,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 21517814
+   },
+   "calls": {
+    "base": 32,
+    "decimals": 32,
+    "resolution": 32,
+    "lastprice": 32,
+    "balance": 21,
+    "mark": 16,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W3",
+   "shape": "one-hop swap to ETH, holding 2 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 99908335,
+    "min_resource_fee": 285866
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 95612696,
+     "limit": 400000000,
+     "pct": 23.9
+    },
+    "memory": {
+     "used": 26493194,
+     "limit": 41943040,
+     "pct": 63.2
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5932,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2968,
+     "limit": 16384,
+     "pct": 18.1
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "hash": "10f775f08b9b6294db87b760a865b0b375d18905ebee0af223368a07b3ca3cd2",
+   "status": "SUCCESS",
+   "ledger": 175,
+   "envelope_bytes": 4444,
+   "fee_bid": 293532,
+   "fee_charged": 258971,
+   "declared": {
+    "instructions": 125129701,
+    "disk_read_bytes": 144,
+    "write_bytes": 5932,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 293432
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 62415,
+    "total_refundable_resource_fee_charged": 196456,
+    "rent_fee_charged": 189209
+   },
+   "core_metrics": {
+    "cpu_insn": 119853816,
+    "mem_byte": 33111355,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5932,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5932,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2968,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 42391247
+   },
+   "calls": {
+    "base": 42,
+    "decimals": 42,
+    "resolution": 42,
+    "lastprice": 42,
+    "balance": 21,
+    "mark": 21,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W4",
+   "shape": "one-hop swap to BTC, holding 3 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 125127879,
+    "min_resource_fee": 293432
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 119853816,
+     "limit": 400000000,
+     "pct": 30.0
+    },
+    "memory": {
+     "used": 33111355,
+     "limit": 41943040,
+     "pct": 78.9
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5932,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2968,
+     "limit": 16384,
+     "pct": 18.1
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "hash": "5d5a258d7bf398716b7f1c8c17d1737b836788da0f971e4724a1efd58d41eb71",
+   "status": "SUCCESS",
+   "ledger": 182,
+   "envelope_bytes": 4444,
+   "fee_bid": 301239,
+   "fee_charged": 266675,
+   "declared": {
+    "instructions": 150736773,
+    "disk_read_bytes": 144,
+    "write_bytes": 5936,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 301139
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 70100,
+    "total_refundable_resource_fee_charged": 196475,
+    "rent_fee_charged": 189209
+   },
+   "core_metrics": {
+    "cpu_insn": 144524794,
+    "mem_byte": 39734286,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5936,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5936,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2976,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 30339880
+   },
+   "calls": {
+    "base": 52,
+    "decimals": 52,
+    "resolution": 52,
+    "lastprice": 52,
+    "mark": 26,
+    "balance": 21,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W5",
+   "shape": "one-hop swap to USTRY, holding 4 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 150738595,
+    "min_resource_fee": 301139
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 144524794,
+     "limit": 400000000,
+     "pct": 36.1
+    },
+    "memory": {
+     "used": 39734286,
+     "limit": 41943040,
+     "pct": 94.7
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5936,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2976,
+     "limit": 16384,
+     "pct": 18.2
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "hash": "3f0d7254cb92a36c705120f8c801f5732a6cacc51099323b0126715145f04dd0",
+   "status": "SUCCESS",
+   "ledger": 191,
+   "envelope_bytes": 13444,
+   "fee_bid": 200309,
+   "fee_charged": 186361,
+   "declared": {
+    "instructions": 230719719,
+    "disk_read_bytes": 0,
+    "write_bytes": 11548,
+    "footprint_read_only": 23,
+    "footprint_read_write": 29,
+    "resource_fee": 200209
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 140294,
+    "total_refundable_resource_fee_charged": 45967,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 219355785,
+    "mem_byte": 57790649,
+    "read_entry": 52,
+    "write_entry": 29,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 11548,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 11548,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 75,
+    "emit_event_byte": 18828,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 53603333
+   },
+   "calls": {
+    "balance": 84,
+    "base": 70,
+    "decimals": 70,
+    "resolution": 70,
+    "lastprice": 70,
+    "transfer": 40,
+    "mark": 35,
+    "swap_exact_in": 8,
+    "swap_exact_tokens_for_tokens": 8,
+    "get_reserves": 8,
+    "swap": 8,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1
+   },
+   "name": "S1-8",
+   "shape": "8 one-hop swaps",
+   "actions": 8,
+   "simulation": {
+    "instructions": 230719719,
+    "min_resource_fee": 200209
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 219355785,
+     "limit": 400000000,
+     "pct": 54.8
+    },
+    "memory": {
+     "used": 57790649,
+     "limit": 41943040,
+     "pct": 137.8
+    },
+    "read_entries": {
+     "used": 52,
+     "limit": 200,
+     "pct": 26.0
+    },
+    "write_entries": {
+     "used": 29,
+     "limit": 200,
+     "pct": 14.5
+    },
+    "footprint": {
+     "used": 52,
+     "limit": 400,
+     "pct": 13.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 11548,
+     "limit": 132096,
+     "pct": 8.7
+    },
+    "events_bytes": {
+     "used": 18828,
+     "limit": 16384,
+     "pct": 114.9
+    },
+    "tx_size": {
+     "used": 13444,
+     "limit": 132096,
+     "pct": 10.2
+    }
+   }
+  },
+  {
+   "hash": "9e72742d4e4ef5495f63c9f23bafc926fa2560b06dc72de731eed5ac50b8a47f",
+   "status": "SUCCESS",
+   "ledger": 203,
+   "envelope_bytes": 16772,
+   "fee_bid": 240737,
+   "fee_charged": 222514,
+   "declared": {
+    "instructions": 252667570,
+    "disk_read_bytes": 0,
+    "write_bytes": 11340,
+    "footprint_read_only": 24,
+    "footprint_read_write": 28,
+    "resource_fee": 240637
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 152794,
+    "total_refundable_resource_fee_charged": 69620,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 239401478,
+    "mem_byte": 61969179,
+    "read_entry": 52,
+    "write_entry": 28,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 11340,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 11340,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 115,
+    "emit_event_byte": 28516,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 53405766
+   },
+   "calls": {
+    "balance": 116,
+    "base": 70,
+    "decimals": 70,
+    "resolution": 70,
+    "lastprice": 70,
+    "transfer": 56,
+    "mark": 35,
+    "swap_exact_tokens_for_tokens": 16,
+    "get_reserves": 16,
+    "swap": 16,
+    "swap_exact_in": 8,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1
+   },
+   "name": "S2-8",
+   "shape": "8 two-hop swaps (via XLM)",
+   "actions": 8,
+   "simulation": {
+    "instructions": 252667949,
+    "min_resource_fee": 240637
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 239401478,
+     "limit": 400000000,
+     "pct": 59.9
+    },
+    "memory": {
+     "used": 61969179,
+     "limit": 41943040,
+     "pct": 147.7
+    },
+    "read_entries": {
+     "used": 52,
+     "limit": 200,
+     "pct": 26.0
+    },
+    "write_entries": {
+     "used": 28,
+     "limit": 200,
+     "pct": 14.0
+    },
+    "footprint": {
+     "used": 52,
+     "limit": 400,
+     "pct": 13.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 11340,
+     "limit": 132096,
+     "pct": 8.6
+    },
+    "events_bytes": {
+     "used": 28516,
+     "limit": 16384,
+     "pct": 174.0
+    },
+    "tx_size": {
+     "used": 16772,
+     "limit": 132096,
+     "pct": 12.7
+    }
+   }
+  },
+  {
+   "hash": "fa946fc8c1c653b7269df595e9a5ac57ca177892e69f16ad099f4311f3e3e7f1",
+   "status": "SUCCESS",
+   "ledger": 213,
+   "envelope_bytes": 15736,
+   "fee_bid": 232635,
+   "fee_charged": 215598,
+   "declared": {
+    "instructions": 244686515,
+    "disk_read_bytes": 0,
+    "write_bytes": 12216,
+    "footprint_read_only": 23,
+    "footprint_read_write": 31,
+    "resource_fee": 232535
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 152265,
+    "total_refundable_resource_fee_charged": 63233,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 232230502,
+    "mem_byte": 60151818,
+    "read_entry": 54,
+    "write_entry": 31,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 12216,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 12216,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 104,
+    "emit_event_byte": 25900,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 54976314
+   },
+   "calls": {
+    "balance": 105,
+    "base": 68,
+    "decimals": 68,
+    "resolution": 68,
+    "lastprice": 68,
+    "transfer": 50,
+    "mark": 34,
+    "swap_exact_tokens_for_tokens": 14,
+    "get_reserves": 14,
+    "swap": 14,
+    "swap_exact_in": 7,
+    "get_positions": 5,
+    "get_reserve_emissions": 4,
+    "get_reserve": 3,
+    "execute": 1,
+    "submit": 1
+   },
+   "name": "S3-7",
+   "shape": "7 two-hop swaps + Blend Supply",
+   "actions": 8,
+   "simulation": {
+    "instructions": 244686515,
+    "min_resource_fee": 232535
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 232230502,
+     "limit": 400000000,
+     "pct": 58.1
+    },
+    "memory": {
+     "used": 60151818,
+     "limit": 41943040,
+     "pct": 143.4
+    },
+    "read_entries": {
+     "used": 54,
+     "limit": 200,
+     "pct": 27.0
+    },
+    "write_entries": {
+     "used": 31,
+     "limit": 200,
+     "pct": 15.5
+    },
+    "footprint": {
+     "used": 54,
+     "limit": 400,
+     "pct": 13.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 12216,
+     "limit": 132096,
+     "pct": 9.2
+    },
+    "events_bytes": {
+     "used": 25900,
+     "limit": 16384,
+     "pct": 158.1
+    },
+    "tx_size": {
+     "used": 15736,
+     "limit": 132096,
+     "pct": 11.9
+    }
+   }
+  },
+  {
+   "hash": "3c305d77e7b84f1c07214b2320438944c4a1b508f6244459113de6fbd7c2a430",
+   "status": "SUCCESS",
+   "ledger": 223,
+   "envelope_bytes": 14424,
+   "fee_bid": 219714,
+   "fee_charged": 203923,
+   "declared": {
+    "instructions": 236655377,
+    "disk_read_bytes": 0,
+    "write_bytes": 12216,
+    "footprint_read_only": 23,
+    "footprint_read_write": 31,
+    "resource_fee": 219614
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 146996,
+    "total_refundable_resource_fee_charged": 56827,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 224447499,
+    "mem_byte": 58224989,
+    "read_entry": 54,
+    "write_entry": 31,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 12216,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 12216,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 93,
+    "emit_event_byte": 23276,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 48480304
+   },
+   "calls": {
+    "balance": 94,
+    "base": 66,
+    "decimals": 66,
+    "resolution": 66,
+    "lastprice": 66,
+    "transfer": 44,
+    "mark": 33,
+    "swap_exact_tokens_for_tokens": 12,
+    "get_reserves": 12,
+    "swap": 12,
+    "get_positions": 7,
+    "swap_exact_in": 6,
+    "get_reserve": 4,
+    "get_reserve_emissions": 4,
+    "submit": 2,
+    "execute": 1
+   },
+   "name": "S4-6",
+   "shape": "Blend Withdraw + 6 two-hop swaps + Blend Supply",
+   "actions": 8,
+   "simulation": {
+    "instructions": 236655377,
+    "min_resource_fee": 219614
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 224447499,
+     "limit": 400000000,
+     "pct": 56.1
+    },
+    "memory": {
+     "used": 58224989,
+     "limit": 41943040,
+     "pct": 138.8
+    },
+    "read_entries": {
+     "used": 54,
+     "limit": 200,
+     "pct": 27.0
+    },
+    "write_entries": {
+     "used": 31,
+     "limit": 200,
+     "pct": 15.5
+    },
+    "footprint": {
+     "used": 54,
+     "limit": 400,
+     "pct": 13.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 12216,
+     "limit": 132096,
+     "pct": 9.2
+    },
+    "events_bytes": {
+     "used": 23276,
+     "limit": 16384,
+     "pct": 142.1
+    },
+    "tx_size": {
+     "used": 14424,
+     "limit": 132096,
+     "pct": 10.9
+    }
+   }
+  },
+  {
+   "hash": "e47872898ecf5a62aa077e8bf46f777727df3462979db0b53c54be7669fe0626",
+   "status": "SUCCESS",
+   "ledger": 234,
+   "envelope_bytes": 22404,
+   "fee_bid": 307041,
+   "fee_charged": 283801,
+   "declared": {
+    "instructions": 276369176,
+    "disk_read_bytes": 0,
+    "write_bytes": 15156,
+    "footprint_read_only": 24,
+    "footprint_read_write": 40,
+    "resource_fee": 306941
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 188808,
+    "total_refundable_resource_fee_charged": 94893,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 261029927,
+    "mem_byte": 66889315,
+    "read_entry": 64,
+    "write_entry": 40,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 15156,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 15156,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 155,
+    "emit_event_byte": 38868,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 69016231
+   },
+   "calls": {
+    "balance": 132,
+    "transfer": 72,
+    "base": 70,
+    "decimals": 70,
+    "resolution": 70,
+    "lastprice": 70,
+    "mark": 35,
+    "swap_exact_tokens_for_tokens": 24,
+    "get_reserves": 24,
+    "swap": 24,
+    "swap_exact_in": 8,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1
+   },
+   "name": "S5-8",
+   "shape": "8 swaps split over a direct and a via-XLM route",
+   "actions": 8,
+   "simulation": {
+    "instructions": 276370998,
+    "min_resource_fee": 306942
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 261029927,
+     "limit": 400000000,
+     "pct": 65.3
+    },
+    "memory": {
+     "used": 66889315,
+     "limit": 41943040,
+     "pct": 159.5
+    },
+    "read_entries": {
+     "used": 64,
+     "limit": 200,
+     "pct": 32.0
+    },
+    "write_entries": {
+     "used": 40,
+     "limit": 200,
+     "pct": 20.0
+    },
+    "footprint": {
+     "used": 64,
+     "limit": 400,
+     "pct": 16.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 15156,
+     "limit": 132096,
+     "pct": 11.5
+    },
+    "events_bytes": {
+     "used": 38868,
+     "limit": 16384,
+     "pct": 237.2
+    },
+    "tx_size": {
+     "used": 22404,
+     "limit": 132096,
+     "pct": 17.0
+    }
+   }
+  },
+  {
+   "hash": "7f86a9e3785a58ffed4d4bfee25fdd90f2bb767bd79bcea7b531b58b6e6b2bd4",
+   "status": "SUCCESS",
+   "ledger": 243,
+   "envelope_bytes": 11928,
+   "fee_bid": 189438,
+   "fee_charged": 176873,
+   "declared": {
+    "instructions": 219726911,
+    "disk_read_bytes": 0,
+    "write_bytes": 12424,
+    "footprint_read_only": 22,
+    "footprint_read_write": 32,
+    "resource_fee": 189338
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 137817,
+    "total_refundable_resource_fee_charged": 38956,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 209068633,
+    "mem_byte": 55070923,
+    "read_entry": 54,
+    "write_entry": 32,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 12424,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 12424,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 63,
+    "emit_event_byte": 15956,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 47613096
+   },
+   "calls": {
+    "balance": 70,
+    "base": 66,
+    "decimals": 66,
+    "resolution": 66,
+    "lastprice": 66,
+    "mark": 33,
+    "transfer": 32,
+    "get_positions": 7,
+    "swap_exact_in": 6,
+    "swap_exact_tokens_for_tokens": 6,
+    "get_reserves": 6,
+    "swap": 6,
+    "get_reserve": 4,
+    "get_reserve_emissions": 4,
+    "submit": 2,
+    "execute": 1
+   },
+   "name": "S6-6",
+   "shape": "Blend Withdraw + 6 one-hop swaps + Blend Supply",
+   "actions": 8,
+   "simulation": {
+    "instructions": 219726911,
+    "min_resource_fee": 189338
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 209068633,
+     "limit": 400000000,
+     "pct": 52.3
+    },
+    "memory": {
+     "used": 55070923,
+     "limit": 41943040,
+     "pct": 131.3
+    },
+    "read_entries": {
+     "used": 54,
+     "limit": 200,
+     "pct": 27.0
+    },
+    "write_entries": {
+     "used": 32,
+     "limit": 200,
+     "pct": 16.0
+    },
+    "footprint": {
+     "used": 54,
+     "limit": 400,
+     "pct": 13.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 12424,
+     "limit": 132096,
+     "pct": 9.4
+    },
+    "events_bytes": {
+     "used": 15956,
+     "limit": 16384,
+     "pct": 97.4
+    },
+    "tx_size": {
+     "used": 11928,
+     "limit": 132096,
+     "pct": 9.0
+    }
+   }
+  },
+  {
+   "hash": "3dd2c87e618d05dd1cf66c9b406f8c7b8129cc8ff11ebb9902129bd218f10858",
+   "status": "SUCCESS",
+   "ledger": 253,
+   "envelope_bytes": 12824,
+   "fee_bid": 197320,
+   "fee_charged": 184032,
+   "declared": {
+    "instructions": 225366369,
+    "disk_read_bytes": 0,
+    "write_bytes": 12424,
+    "footprint_read_only": 22,
+    "footprint_read_write": 32,
+    "resource_fee": 197220
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 141461,
+    "total_refundable_resource_fee_charged": 42471,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 214376914,
+    "mem_byte": 56477956,
+    "read_entry": 54,
+    "write_entry": 32,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 12424,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 12424,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 69,
+    "emit_event_byte": 17396,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 42292508
+   },
+   "calls": {
+    "balance": 77,
+    "base": 68,
+    "decimals": 68,
+    "resolution": 68,
+    "lastprice": 68,
+    "transfer": 36,
+    "mark": 34,
+    "swap_exact_in": 7,
+    "swap_exact_tokens_for_tokens": 7,
+    "get_reserves": 7,
+    "swap": 7,
+    "get_positions": 5,
+    "get_reserve_emissions": 4,
+    "get_reserve": 3,
+    "execute": 1,
+    "submit": 1
+   },
+   "name": "S7-7",
+   "shape": "7 one-hop swaps + Blend Supply",
+   "actions": 8,
+   "simulation": {
+    "instructions": 225366369,
+    "min_resource_fee": 197220
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 214376914,
+     "limit": 400000000,
+     "pct": 53.6
+    },
+    "memory": {
+     "used": 56477956,
+     "limit": 41943040,
+     "pct": 134.7
+    },
+    "read_entries": {
+     "used": 54,
+     "limit": 200,
+     "pct": 27.0
+    },
+    "write_entries": {
+     "used": 32,
+     "limit": 200,
+     "pct": 16.0
+    },
+    "footprint": {
+     "used": 54,
+     "limit": 400,
+     "pct": 13.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 12424,
+     "limit": 132096,
+     "pct": 9.4
+    },
+    "events_bytes": {
+     "used": 17396,
+     "limit": 16384,
+     "pct": 106.2
+    },
+    "tx_size": {
+     "used": 12824,
+     "limit": 132096,
+     "pct": 9.7
+    }
+   }
+  },
+  {
+   "hash": "b112bf51c8db96f9db146bf7f821c8efe98cc8c3f97a87965a1188567d30d48f",
+   "status": "SUCCESS",
+   "ledger": 262,
+   "envelope_bytes": 10228,
+   "fee_bid": 164755,
+   "fee_charged": 153991,
+   "declared": {
+    "instructions": 201358640,
+    "disk_read_bytes": 0,
+    "write_bytes": 11548,
+    "footprint_read_only": 23,
+    "footprint_read_write": 29,
+    "resource_fee": 164655
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 124476,
+    "total_refundable_resource_fee_charged": 29415,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 192019142,
+    "mem_byte": 51369152,
+    "read_entry": 52,
+    "write_entry": 29,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 11548,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 11548,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 48,
+    "emit_event_byte": 12048,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 35234502
+   },
+   "calls": {
+    "base": 64,
+    "decimals": 64,
+    "resolution": 64,
+    "lastprice": 64,
+    "balance": 57,
+    "mark": 32,
+    "transfer": 25,
+    "swap_exact_in": 5,
+    "swap_exact_tokens_for_tokens": 5,
+    "get_reserves": 5,
+    "swap": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1
+   },
+   "name": "C1",
+   "shape": "5 one-hop swaps",
+   "actions": 5,
+   "simulation": {
+    "instructions": 201358640,
+    "min_resource_fee": 164655
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 192019142,
+     "limit": 400000000,
+     "pct": 48.0
+    },
+    "memory": {
+     "used": 51369152,
+     "limit": 41943040,
+     "pct": 122.5
+    },
+    "read_entries": {
+     "used": 52,
+     "limit": 200,
+     "pct": 26.0
+    },
+    "write_entries": {
+     "used": 29,
+     "limit": 200,
+     "pct": 14.5
+    },
+    "footprint": {
+     "used": 52,
+     "limit": 400,
+     "pct": 13.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 11548,
+     "limit": 132096,
+     "pct": 8.7
+    },
+    "events_bytes": {
+     "used": 12048,
+     "limit": 16384,
+     "pct": 73.5
+    },
+    "tx_size": {
+     "used": 10228,
+     "limit": 132096,
+     "pct": 7.7
+    }
+   }
+  },
+  {
+   "hash": "ab7f730e1a8b776a696a319b139c8cb0270e9f56fc76c1b4f7ea72a82e2dd42a",
+   "status": "SUCCESS",
+   "ledger": 272,
+   "envelope_bytes": 8948,
+   "fee_bid": 147380,
+   "fee_charged": 137235,
+   "declared": {
+    "instructions": 189652617,
+    "disk_read_bytes": 0,
+    "write_bytes": 9936,
+    "footprint_read_only": 25,
+    "footprint_read_write": 23,
+    "resource_fee": 147280
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 109986,
+    "total_refundable_resource_fee_charged": 27149,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 180815196,
+    "mem_byte": 48504057,
+    "read_entry": 48,
+    "write_entry": 23,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 9936,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 9936,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 45,
+    "emit_event_byte": 11120,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 41062365
+   },
+   "calls": {
+    "base": 60,
+    "decimals": 60,
+    "resolution": 60,
+    "lastprice": 60,
+    "balance": 51,
+    "mark": 30,
+    "transfer": 21,
+    "swap_exact_tokens_for_tokens": 6,
+    "get_reserves": 6,
+    "swap": 6,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "swap_exact_in": 3,
+    "get_reserve": 2,
+    "execute": 1
+   },
+   "name": "C2",
+   "shape": "3 two-hop swaps",
+   "actions": 3,
+   "simulation": {
+    "instructions": 189652617,
+    "min_resource_fee": 147280
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 180815196,
+     "limit": 400000000,
+     "pct": 45.2
+    },
+    "memory": {
+     "used": 48504057,
+     "limit": 41943040,
+     "pct": 115.6
+    },
+    "read_entries": {
+     "used": 48,
+     "limit": 200,
+     "pct": 24.0
+    },
+    "write_entries": {
+     "used": 23,
+     "limit": 200,
+     "pct": 11.5
+    },
+    "footprint": {
+     "used": 48,
+     "limit": 400,
+     "pct": 12.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 9936,
+     "limit": 132096,
+     "pct": 7.5
+    },
+    "events_bytes": {
+     "used": 11120,
+     "limit": 16384,
+     "pct": 67.9
+    },
+    "tx_size": {
+     "used": 8948,
+     "limit": 132096,
+     "pct": 6.8
+    }
+   }
+  },
+  {
+   "hash": "a264e103ca13703b0d779652fe770751f7d4f97bb890c2ec075f25c640eb70f9",
+   "status": "SUCCESS",
+   "ledger": 283,
+   "envelope_bytes": 7944,
+   "fee_bid": 138079,
+   "fee_charged": 128864,
+   "declared": {
+    "instructions": 189479009,
+    "disk_read_bytes": 0,
+    "write_bytes": 9620,
+    "footprint_read_only": 24,
+    "footprint_read_write": 22,
+    "resource_fee": 137979
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 106361,
+    "total_refundable_resource_fee_charged": 22403,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 180943768,
+    "mem_byte": 48354686,
+    "read_entry": 46,
+    "write_entry": 22,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 9620,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 9620,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 36,
+    "emit_event_byte": 9176,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 38074810
+   },
+   "calls": {
+    "base": 60,
+    "decimals": 60,
+    "resolution": 60,
+    "lastprice": 60,
+    "balance": 43,
+    "mark": 30,
+    "transfer": 17,
+    "get_positions": 7,
+    "get_reserve": 4,
+    "get_reserve_emissions": 4,
+    "swap_exact_in": 3,
+    "swap_exact_tokens_for_tokens": 3,
+    "get_reserves": 3,
+    "swap": 3,
+    "submit": 2,
+    "execute": 1
+   },
+   "name": "C3",
+   "shape": "Blend Withdraw + 3 one-hop swaps + Blend Supply",
+   "actions": 5,
+   "simulation": {
+    "instructions": 189479387,
+    "min_resource_fee": 137979
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 180943768,
+     "limit": 400000000,
+     "pct": 45.2
+    },
+    "memory": {
+     "used": 48354686,
+     "limit": 41943040,
+     "pct": 115.3
+    },
+    "read_entries": {
+     "used": 46,
+     "limit": 200,
+     "pct": 23.0
+    },
+    "write_entries": {
+     "used": 22,
+     "limit": 200,
+     "pct": 11.0
+    },
+    "footprint": {
+     "used": 46,
+     "limit": 400,
+     "pct": 11.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 9620,
+     "limit": 132096,
+     "pct": 7.3
+    },
+    "events_bytes": {
+     "used": 9176,
+     "limit": 16384,
+     "pct": 56.0
+    },
+    "tx_size": {
+     "used": 7944,
+     "limit": 132096,
+     "pct": 6.0
+    }
+   }
+  },
+  {
+   "hash": "c5badac6a57f9d6ede2f3f71b02f0a900048892a59f24d276520591c12cc680d",
+   "status": "SUCCESS",
+   "ledger": 293,
+   "envelope_bytes": 7704,
+   "fee_bid": 135481,
+   "fee_charged": 126253,
+   "declared": {
+    "instructions": 185529554,
+    "disk_read_bytes": 0,
+    "write_bytes": 9404,
+    "footprint_read_only": 25,
+    "footprint_read_write": 21,
+    "resource_fee": 135381
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 103311,
+    "total_refundable_resource_fee_charged": 22842,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 177076781,
+    "mem_byte": 47266957,
+    "read_entry": 46,
+    "write_entry": 21,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 9404,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 9404,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 37,
+    "emit_event_byte": 9356,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 49479474
+   },
+   "calls": {
+    "base": 58,
+    "decimals": 58,
+    "resolution": 58,
+    "lastprice": 58,
+    "balance": 42,
+    "mark": 29,
+    "transfer": 16,
+    "get_positions": 7,
+    "get_reserve": 4,
+    "get_reserve_emissions": 4,
+    "swap_exact_tokens_for_tokens": 4,
+    "get_reserves": 4,
+    "swap": 4,
+    "submit": 2,
+    "swap_exact_in": 2,
+    "execute": 1
+   },
+   "name": "C4",
+   "shape": "Blend Withdraw + 2 two-hop swaps + Blend Supply",
+   "actions": 4,
+   "simulation": {
+    "instructions": 185529932,
+    "min_resource_fee": 135381
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 177076781,
+     "limit": 400000000,
+     "pct": 44.3
+    },
+    "memory": {
+     "used": 47266957,
+     "limit": 41943040,
+     "pct": 112.7
+    },
+    "read_entries": {
+     "used": 46,
+     "limit": 200,
+     "pct": 23.0
+    },
+    "write_entries": {
+     "used": 21,
+     "limit": 200,
+     "pct": 10.5
+    },
+    "footprint": {
+     "used": 46,
+     "limit": 400,
+     "pct": 11.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 9404,
+     "limit": 132096,
+     "pct": 7.1
+    },
+    "events_bytes": {
+     "used": 9356,
+     "limit": 16384,
+     "pct": 57.1
+    },
+    "tx_size": {
+     "used": 7704,
+     "limit": 132096,
+     "pct": 5.8
+    }
+   }
+  }
+ ],
+ "mark_simulated_instructions": 5033987,
+ "held_non_usdc_assets": [
+  "XLM",
+  "AQUA",
+  "ETH",
+  "BTC",
+  "USTRY"
+ ],
+ "largest": {
+  "one_hop": 8,
+  "two_hop": 8,
+  "two_hop_supply": 7,
+  "withdraw_two_hop_supply": 6,
+  "split_two_routes": 8,
+  "withdraw_one_hop_supply": 6,
+  "one_hop_supply": 7
+ },
+ "caps": {
+  "C1": true,
+  "C2": true,
+  "C3": true,
+  "C4": true
+ },
+ "transferred_holdings": {},
+ "vault": "CBNVSDY7ZUBASEQH3HOOMOBP2WKHT5PJK57SPVOG2ZG7DVUDPCCHLXXK",
+ "provider": "CDJJB63JE5RCOAR52N6H5BQCZOZ7Y6YLTQWZ7SUI2W7WSJQI47LTDBLG",
+ "feed": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+ "router": "CCX2WITU7B7Y2KNOSPJH2QJF36WZOF7LGOVQBQEMDBR2GZDRB3S7L74A",
+ "factory": "CDB7Z7562TNC2RNCLWBQXHEQXUGRDAUSEHQVOF7A6BW57IOULSKR2ZLS",
+ "soroswap_router": "CDBPMYPTEMKCG6FL4TI6HKIX2DTWPOFKH6V74YVRFXPUSB2SN3AA6DFQ",
+ "pool": "CAWYSVYFC7AQTYGM5EFQV5GSM4RR53C7CFIVBXTUHZRBGKTLOKZ7J3RX",
+ "backstop": "CC2NZ2ADD7VIWDXJTVMWHYAAFTA6O2YBUDQBBW6TUNNGFCUDVBPZRODR",
+ "comet": "CA6ELOHZCGJGR72S66EX3QXHNIOGZ6ZGFK6LAE32XL6PVK7ASDEDTRK7",
+ "config": {
+  "assets": [
+   {
+    "address": "CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3",
+    "decimals": 7,
+    "kind": "Risk"
+   },
+   {
+    "address": "CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL",
+    "decimals": 7,
+    "kind": "Risk"
+   },
+   {
+    "address": "CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE",
+    "decimals": 7,
+    "kind": "Xlm"
+   },
+   {
+    "address": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG",
+    "decimals": 7,
+    "kind": "Settlement"
+   },
+   {
+    "address": "CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG",
+    "decimals": 7,
+    "kind": "Risk"
+   },
+   {
+    "address": "CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C",
+    "decimals": 7,
+    "kind": "Reserve"
+   }
+  ],
+  "usdc": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG",
+  "oracle": "CDJJB63JE5RCOAR52N6H5BQCZOZ7Y6YLTQWZ7SUI2W7WSJQI47LTDBLG",
+  "router": "CCX2WITU7B7Y2KNOSPJH2QJF36WZOF7LGOVQBQEMDBR2GZDRB3S7L74A",
+  "route_contracts": [
+   "CA35TNRRQCUQO2R7V6RTH7QDEFTTQ224UMRQO3OY2LWNJVTEWDHW2JPZ",
+   "CA3GLPLLWP3FUBHKTDNDNY5CHLKCYGU6GTCOOI2FXVVZEQRZEDHDR2VD",
+   "CAEIN3XIGXFMZRDKTUVEK33B4ASQDHHYMTUWA56ZHYSGY6ZXB7GJ454H",
+   "CAOLYZSJ4YA7VXOOQSDNLZGLTHMZAZWBA4K6AA3RVW2N6V3IQN2AVXPV",
+   "CBOQGJ2366UOJD42AKCL5ZWMS2YY5EPYIQ53MYGGRN53O26MROO3BBTM",
+   "CBYLXX5HKDSKURER2EGBGF5AGIPUYPMNEW2PYOWSRBEXC64BHJJIDFIV",
+   "CC5JGKES72RLOLKOFDLLUFNOVMDKN7IW3WXLP6CJ3JPVKN3BOSZA4TZ7",
+   "CCPEHZV4HPPTIDZYKJF77VNUN22FUIHS6C5DALNA5YLSNNMFNIVJWK5J",
+   "CCRN576AZGI2NL2AJKATLLJONP7DPJOUORTAKXIR3EK7ZPGPPIGFNDWY",
+   "CCUVAXTK46CPFVRDDWM2JDAYPDA5P6NJUQIXU2LGAHDZFNXC6EHU43RO",
+   "CCXA3Q3ADPEYNDGYQYQDFAZHAXWAJ57YN7D4FVHO3MQ5N5ITJTLMRL7I",
+   "CDAXKRZCMMM3OQLR3MVCXUX44Q7ZM7ZAWFY6OFQGG6XQX5CR7BVDHJCI",
+   "CDEECBVCGN7JMKFFCCAHSDKBDNFYEECQQF7SQ3PET34ADVCQ6THVE7CW",
+   "CDPZHT62VULSFMOV6M3ND7MIYJ5M6RWEQ73LN3KZIIYTX4DCQ3E7CWCK",
+   "CDRIEFMIGB7TDPVDZ7QKCQE32J7NB3AK5THOTHIDDZMZ6Q5BBYCSL2AK"
+  ],
+  "pool": "CAWYSVYFC7AQTYGM5EFQV5GSM4RR53C7CFIVBXTUHZRBGKTLOKZ7J3RX",
+  "pool_assets": [
+   "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+  ],
+  "admin": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+  "executor": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+  "guardian": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+  "fees": {
+   "management_bps": 100,
+   "performance_bps": 1000,
+   "recipient": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5"
+  },
+  "borrowing": false,
+  "max_price_age": 3600,
+  "max_slippage_bps": 100,
+  "max_leg_bps": 2000,
+  "max_turnover_bps": 10000,
+  "max_loss_bps": 200,
+  "cooldown": 1,
+  "max_debt_bps": 0,
+  "min_health_bps": 12500
+ },
+ "provider_config": {
+  "usdc": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG",
+  "sources": [
+   {
+    "asset": "CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE",
+    "numerator": {
+     "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+     "asset": {
+      "Stellar": "CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG",
+    "numerator": {
+     "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+     "asset": {
+      "Stellar": "CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3",
+    "numerator": {
+     "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+     "asset": {
+      "Stellar": "CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL",
+    "numerator": {
+     "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+     "asset": {
+      "Stellar": "CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C",
+    "numerator": {
+     "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+     "asset": {
+      "Stellar": "CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CDV57A67IZ7MMBMZAEWQBLWUPINYBVYQS35L35F77HEK5WERJQTKIYWT",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   }
+  ]
+ },
+ "pairs": {
+  "USDC/XLM": "CDAXKRZCMMM3OQLR3MVCXUX44Q7ZM7ZAWFY6OFQGG6XQX5CR7BVDHJCI",
+  "AQUA/USDC": "CDPZHT62VULSFMOV6M3ND7MIYJ5M6RWEQ73LN3KZIIYTX4DCQ3E7CWCK",
+  "ETH/USDC": "CBYLXX5HKDSKURER2EGBGF5AGIPUYPMNEW2PYOWSRBEXC64BHJJIDFIV",
+  "BTC/USDC": "CCXA3Q3ADPEYNDGYQYQDFAZHAXWAJ57YN7D4FVHO3MQ5N5ITJTLMRL7I",
+  "USDC/USTRY": "CCPEHZV4HPPTIDZYKJF77VNUN22FUIHS6C5DALNA5YLSNNMFNIVJWK5J",
+  "AQUA/XLM": "CDEECBVCGN7JMKFFCCAHSDKBDNFYEECQQF7SQ3PET34ADVCQ6THVE7CW",
+  "ETH/XLM": "CC5JGKES72RLOLKOFDLLUFNOVMDKN7IW3WXLP6CJ3JPVKN3BOSZA4TZ7",
+  "BTC/XLM": "CDRIEFMIGB7TDPVDZ7QKCQE32J7NB3AK5THOTHIDDZMZ6Q5BBYCSL2AK",
+  "USTRY/XLM": "CAEIN3XIGXFMZRDKTUVEK33B4ASQDHHYMTUWA56ZHYSGY6ZXB7GJ454H",
+  "AQUA/ETH": "CCUVAXTK46CPFVRDDWM2JDAYPDA5P6NJUQIXU2LGAHDZFNXC6EHU43RO",
+  "AQUA/BTC": "CBOQGJ2366UOJD42AKCL5ZWMS2YY5EPYIQ53MYGGRN53O26MROO3BBTM",
+  "AQUA/USTRY": "CA35TNRRQCUQO2R7V6RTH7QDEFTTQ224UMRQO3OY2LWNJVTEWDHW2JPZ",
+  "BTC/ETH": "CAOLYZSJ4YA7VXOOQSDNLZGLTHMZAZWBA4K6AA3RVW2N6V3IQN2AVXPV",
+  "ETH/USTRY": "CA3GLPLLWP3FUBHKTDNDNY5CHLKCYGU6GTCOOI2FXVVZEQRZEDHDR2VD",
+  "BTC/USTRY": "CCRN576AZGI2NL2AJKATLLJONP7DPJOUORTAKXIR3EK7ZPGPPIGFNDWY"
+ },
+ "wasm_sha256": {
+  "etesia_vault.wasm": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+  "etesia_pricing.wasm": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c",
+  "soroswap_factory.wasm": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae",
+  "soroswap_router.wasm": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07",
+  "soroswap_aggregator_v3.wasm": "437653282e9c93b0b4d736d8fde01bf002adefb61bfb75917e609f5336ee3190",
+  "soroswap_pair.wasm": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+  "reflector.wasm": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439",
+  "pool.wasm": "a41fc53d6753b6c04eb15b021c55052366a4c8e0e21bc72700f461264ec1350e",
+  "backstop.wasm": "c1f4502a757e25c611f5a159bc1ab0eef64085adac6c68123dca66e87faffbc2",
+  "comet.wasm": "8abc28913035c07411ed5d134e6bfeab4723d97ddd4d1a22a0605d35c94d1a36"
+ }
+}
