@@ -2,10 +2,10 @@
 
 Envelope, result, meta and diagnostic-event XDR of every Tranche 2 testnet transaction not already archived with its XDR, recorded before SDF testnet RPC retention (120,960 ledgers, about 7 days) drops them. All are in the pre-2026-12-16-reset epoch ([A76](../../../doc/wiki/decisions.md)).
 
-- **Command:** `python3 scripts/record-evidence.py --testnet docs/evidence/<file> <hash>...`, one run per file, on 2026-11-11 (15:38 UTC; `t2-d4-10-step2b.json` at 15:49 UTC). Each run asserts the RPC passphrase and `SUCCESS` for every hash.
+- **Command:** `python3 scripts/record-evidence.py --testnet docs/evidence/<file> <hash>...`, one run per file, on 2026-11-11 (15:38 UTC; `t2-d4-10-step2b.json` at 15:49 UTC, `t2-d4-10-step2c-drill.json` at 16:32 UTC, `t2-d5-user-deposit-1.json` at 18:09 UTC, `t2-keeper-cycles-2026-11-11-evening.json` at 19:58 UTC). Each run asserts the RPC passphrase and `SUCCESS` for every hash.
 - **Endpoint:** `https://soroban-testnet.stellar.org`. **Manifest:** `deploy/testnet/pre-2026-12-16-reset.json`, SHA-256 `cfa30d48adb6c5559dfbed446a4a0763c67ed0672305b18910e493b1920c2220`.
-- **Hashes:** resolved in full from Horizon operations of the flagship executor `GDGCL46K…JT7N`, `etesia-admin` `GAQKH3PL…DUVY`, `etesia-realign` `GDRVYVG3…ZM3R`, `etesia-v3-treasury`, the guard keys and the faucet wallets, from ledger 5,650,000 (failed included). The only failed one is the D4-02 failed swap, archived elsewhere (below).
-- **Check:** every archived envelope hashes (testnet passphrase) to its recorded hash, and every result and meta XDR decodes (stellar-sdk, 166 of 166). Execute actions below are read from the meta's contract events.
+- **Hashes:** resolved in full from Horizon operations of the flagship executor `GDGCL46K…JT7N`, `etesia-admin` `GAQKH3PL…DUVY`, `etesia-realign` `GDRVYVG3…ZM3R`, `etesia-v3-treasury`, the guard keys, the faucet wallets and the user browser wallets, from ledger 5,650,000 (failed included); last read 2026-11-11 19:58 UTC at ledger 5,680,691, when all 229 were archived. The 14 failed ones are the D4-02 failed swap and the 13 D4-09 failing executes, archived elsewhere (below).
+- **Check:** every archived envelope hashes (testnet passphrase) to its recorded hash, and every result and meta XDR decodes (stellar-sdk, 206 of 206 entries in the twelve `t2-*.json` files). Execute actions below are read from the meta's contract events.
 
 | File | Scope | Txs | Ledgers | Closes (UTC) |
 | --- | --- | --- | --- | --- |
@@ -18,6 +18,7 @@ Envelope, result, meta and diagnostic-event XDR of every Tranche 2 testnet trans
 | [`t2-d4-10-step2.json`](t2-d4-10-step2.json) | D4-10 step 2 from ledger 5,677,423 as of ledger 5,677,483 (recorded 15:38 UTC): the XLM realign, the publish and the Withdraw `8e6056c7…`. Step 2 continues in `t2-d4-10-step2b.json`. | 3 | 5,677,455–5,677,483 | 2026-11-11 15:28 – 2026-11-11 15:30 |
 | [`t2-d4-10-step2b.json`](t2-d4-10-step2b.json) | D4-10 step 2 as of ledger 5,677,678 (recorded 15:49 UTC): two XLM realigns, a publish and a Swap execute. Step 2 continues; later receipts go in a new file. | 4 | 5,677,637–5,677,678 | 2026-11-11 15:43 – 2026-11-11 15:47 |
 | [`t2-faucet-a81.json`](t2-faucet-a81.json) | A81 faucet float: the three fresh `etesia-faucet-1`–`3` keys (friendbot), their Blend faucet claims and the 1,000-USDC payments. | 9 | 5,677,274–5,677,299 | 2026-11-11 15:13 – 2026-11-11 15:15 |
+| [`t2-keeper-cycles-2026-11-11-evening.json`](t2-keeper-cycles-2026-11-11-evening.json) | Every tracked-account transaction after `t2-d4-10-step2c-drill.json` up to ledger 5,680,691 (19:58 UTC) not archived elsewhere: keeper cycles 72–87, the XLM realign during D4-09, and the user wallet's funding, `withdraw_bounded` and `redeem_bounded` after the hosted-page deposit. | 31 | 5,678,145–5,680,678 | 2026-11-11 16:26 – 2026-11-11 19:57 |
 
 **Archived elsewhere, not repeated:** D4-02 direct proof `e58ed4546ea00938b83f512ba8fec968e3b5e994e0010d6fb4420f2900991e35` and failed swap `4c55ed60dc50e7eaf29d6a0cd9bfe47d2aaf085e8eb641a236826103637c37bf` (FAILED by design) in `d4-testnet-probes.json` keys `direct_proof` and `failed_swap`; flagship deploy `35ca57046571f19315aa19fbb20f864328c0d04735d8034dac03f77b153b614d`, D4-03 publish `d89fe72583d47db84521c19c30a087bd2928da9a7f4efc028fd8dfd25e05630b`, D4-04 publish `f76c3c1a0e6eba91a3c7b12af3e5b8bc011f4e420bc0b012570ba122d68d09a5`, D4-05 publish `d24e9f3363fb107038be5c477f80f895109dfe12ddc40ce0f12261844eb380f9` and execute `7b7bf088079423e92fc5c3df2f31683fd11a8b4ae408a08bb81a0bd4203fd408` in `fixtures/d5-04-testnet/00`–`05`.
 
@@ -241,3 +242,41 @@ D4-10 step 2 tail and the kill/restart drill (2026-11-11 15:44–16:11 UTC, ledg
 ## t2-d5-user-deposit-1.json
 
 First user wallet transaction on the hosted testnet vault page (`/stellar_tf_vault/testnet`, builder `0e49ac1`): `deposit_bounded` `633e4a6f…0406`, ledger 5,679,344 (2026-11-11 18:06:03 UTC), signed by the user's browser wallet `GA6LXX26…5CJP`: 10 USDC (100,000,000 base units) for 9.99155693881 shares, with the deposit-time fee-share mint of 65,016,424 to `etesia-admin`. Pre-reset deployment per A76.
+
+## t2-keeper-cycles-2026-11-11-evening.json
+
+Cycle numbers are derived, not read from the journal: from cycle 71 (`ff7bbe22…e44b`, 16:10:53) at the keeper's cadence of about 15 minutes, with the 2026-11-11 log anchors cycle 78 (before the 18:03 overrides deploy), cycle 80 (before the 18:21 unset deploy) and nonce 64 in cycle 84 (journal read). Cycles 79 and 81 sent no transaction. That they were the boot cycles of those two deploys is an inference; why they sent nothing is not read from the journal. Execute nonces are from the plan argument and the vault's `plan` event; actions from the meta's contract events. Whether the user wallet transactions count toward D5-07 is for the user to confirm. Pre-reset deployment per A76.
+
+| Ledger | Close (UTC) | Hash | Label |
+| --- | --- | --- | --- |
+| 5,678,145 | 2026-11-11 16:26:08 | `95f32411c35ef5019f5cdbdc7745040c59bd21999cd84a2fd790dc7421872407` | Keeper `publish_target` (cycle 72) |
+| 5,678,334 | 2026-11-11 16:41:53 | `5701882b901f4fb50a48e81c8d9d7c08b989cae486fc52903abcde610a53476a` | Keeper `publish_target` (cycle 73) |
+| 5,678,337 | 2026-11-11 16:42:08 | `7481920e66105f3e07cb5e1cdd14aa5ea564e4c6781056e43a32ec9d4c9a3ff7` | Keeper `execute`: Blend Withdraw 0.0265 USDC (cycle 73, nonce 55) |
+| 5,678,519 | 2026-11-11 16:57:18 | `7d5a5250693111082bdde9a645c9d23996a23720c1f4be2fc545d2de843fc9dc` | Keeper `publish_target` (cycle 74) |
+| 5,678,521 | 2026-11-11 16:57:28 | `8bfc86fc6627e55b0daa2590b5a10035196f31913cf54a2aaa782377777c3765` | Keeper `execute`: Blend Supply 0.0157 USDC (cycle 74, nonce 56) |
+| 5,678,740 | 2026-11-11 17:15:43 | `d4cc8bb535fa5413535731c716e9e92c4d06f470cd8ab1829dcf21b739c55472` | Keeper `publish_target` (cycle 75) |
+| 5,678,743 | 2026-11-11 17:15:58 | `4713f33ee2c5dc7fb7dfb2c256e6e7555330d301c68c9a71cb19377efd890423` | Keeper `execute`: Blend Withdraw 0.0133 USDC (cycle 75, nonce 57) |
+| 5,678,926 | 2026-11-11 17:31:13 | `e097c1f551060447423377bf54efc5150d2b43690289b82b6d8a206bdca9233a` | Keeper `publish_target` (cycle 76) |
+| 5,678,929 | 2026-11-11 17:31:28 | `7a6418ce64d93ec2998622dd572ba672e83d6d8e0b573da8a5b5e0bd253371c5` | Keeper `execute`: Blend Supply 0.0106 USDC (cycle 76, nonce 58) |
+| 5,678,987 | 2026-11-11 17:36:18 | `cc2f4ad935d56f15a60f41b253f462382166377b59e81d621d3ad1526d766949` | XLM pair realign (−25.5 bps → 0; 11.91 USDC → 78.76 XLM) before the D4-09 Turnover and Minimum-below-floor cases; logged without XDR in `d4-realign-pre-2026-12-16-reset.jsonl` |
+| 5,679,112 | 2026-11-11 17:46:43 | `0714a9583a1c96d17adf0c867eb73101a59cfc163acf966ccf195c7ea214ddb3` | Keeper `publish_target` (cycle 77) |
+| 5,679,114 | 2026-11-11 17:46:53 | `7939c7d606381c4e6eb9073a6e0c4e4d1c0df0b0e7a9fb0e2414e55ed7805b1f` | Keeper `execute`: Blend Withdraw 0.0036 USDC (cycle 77, nonce 59) |
+| 5,679,297 | 2026-11-11 18:02:08 | `ee3dd2046c58c927114f8d138e3695b4b67f778adeac445d8b1186e046d31255` | Keeper `publish_target` (cycle 78) |
+| 5,679,303 | 2026-11-11 18:02:38 | `19b2c486142c7f95a49985f4c3b3a905b715f90997bdfdad9ef1252e5d88242a` | Keeper `execute`: Blend Withdraw 0.0103 USDC (cycle 78, nonce 60) |
+| 5,679,336 | 2026-11-11 18:05:23 | `05bca65c3e5a098ffb9243a0958ef6dbd212e6dcf80323242ccd0a94dd6fd5ab` | 100 USDC `etesia-realign` → user browser wallet `GA6LXX26…5CJP` |
+| 5,679,521 | 2026-11-11 18:20:48 | `d978f934edbff43c8d440d1b157bc5f3d2a2ce89e23a3167a612629309719219` | Keeper `publish_target` (cycle 80) |
+| 5,679,524 | 2026-11-11 18:21:03 | `8007d56ff376ce97ad70fe5540166683b4559213614b2e7d9a802a91e10fe4d7` | Keeper `execute`: Swap 12.32 USDC→81.21 XLM through the v3 copy (cycle 80, nonce 61) |
+| 5,679,525 | 2026-11-11 18:21:08 | `1962623e2cdd0d72a8a8d57aea2c9429dc7dd144bafeb9db9367158a17bc04b3` | `withdraw_bounded` 5 USDC (4.996422328101 shares burned), user browser wallet `GA6LXX26…5CJP` |
+| 5,679,535 | 2026-11-11 18:21:58 | `3bfee4b99b08b2b5a237ea8a09afd4e6679338bceb23ff277665351a64c84e5a` | `redeem_bounded` 4.995134610709 shares for 4.9987113 USDC, user browser wallet `GA6LXX26…5CJP`; with the withdraw, the burns equal the 9.99155693881 shares minted by `633e4a6f…0406` |
+| 5,679,716 | 2026-11-11 18:37:03 | `98c5b12af962949227a274030ecc64aa5daf7759e8f126beb60cf4b28902da65` | Keeper `publish_target` (cycle 82) |
+| 5,679,718 | 2026-11-11 18:37:13 | `7d546ab1ee7dad8a4c1fe2a32350ebb0c82a4c281c697815130c2b6dccea8993` | Keeper `execute`: Blend Withdraw 0.0354 USDC (cycle 82, nonce 62) |
+| 5,679,901 | 2026-11-11 18:52:28 | `c6d862fda202ad6c2685deda43cbb73bbd7c07f601b5e12e577722f004494ced` | Keeper `publish_target` (cycle 83) |
+| 5,679,903 | 2026-11-11 18:52:38 | `2398d3b3fcd9e5c75b6ca9c6e62dd2564d7cc069325d606913cedf18bfe756cd` | Keeper `execute`: Blend Supply 0.0045 USDC (cycle 83, nonce 63) |
+| 5,680,120 | 2026-11-11 19:10:43 | `89a1630a90b80609a16bf5f7cc33c38f4ae448e8e26b6de00b42ab2accd0b173` | Keeper `publish_target` (cycle 84) |
+| 5,680,122 | 2026-11-11 19:10:53 | `56781591c87336ac225d03e6ff9453548327d8a436a8e33859aeeeb1e69ae9a1` | Keeper `execute`: Blend Withdraw 0.0291 USDC (cycle 84, nonce 64) |
+| 5,680,305 | 2026-11-11 19:26:08 | `ee19cf153196907b74d4e5e2a3248ea1e0db3c62dc6c0680004ed8fe824fc7a4` | Keeper `publish_target` (cycle 85) |
+| 5,680,308 | 2026-11-11 19:26:23 | `7662521aa755e97dc903f1a95b3b3dbb3c85180b4f6ad05163c23d83f169ddf6` | Keeper `execute`: Blend Withdraw 0.0046 USDC (cycle 85, nonce 65) |
+| 5,680,490 | 2026-11-11 19:41:33 | `2be172e0ba3e02e9d265301b36ba07bc394ababa13f9d08b8733667651d47017` | Keeper `publish_target` (cycle 86) |
+| 5,680,492 | 2026-11-11 19:41:43 | `757e2f821296bafe63964cff6f66c19f2984b71b1462298f1b828a4a6e6783e3` | Keeper `execute`: Blend Supply 0.0071 USDC (cycle 86, nonce 66) |
+| 5,680,675 | 2026-11-11 19:56:58 | `c64d86f4dff0e8a3da454a9858ef8e6c0e215e087ad2ed8857768b8a078fac7a` | Keeper `publish_target` (cycle 87) |
+| 5,680,678 | 2026-11-11 19:57:13 | `f37c998f75051c06377b831c2339b7615d7d0a363fdc77e82b37bce7120dbbef` | Keeper `execute`: Blend Withdraw 0.0033 USDC (cycle 87, nonce 67) |
