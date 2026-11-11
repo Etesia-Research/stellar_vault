@@ -233,3 +233,7 @@ Envelope, result, meta and diagnostic-event XDR of every Tranche 2 testnet trans
 | 5,677,295 | 2026-11-11 15:15:18 | `a0376dfe60b232dfb937d1a2180f8baa549d4bb0dec64348137c2e5caff8fe78` | Friendbot creates faucet key `GBPUJJ…EQIS` |
 | 5,677,297 | 2026-11-11 15:15:28 | `7e2d1970c61795239c5901d04a79420e46c12f41600c8c4f6ac9f62c068ef332` | Blend faucet claim, `GBPUJJ…EQIS` |
 | 5,677,299 | 2026-11-11 15:15:38 | `8d4663df2a82fabc4f1685688332bfd6a6fa06f3bac9565445cbee48d60a0b2c` | 1,000 USDC `GBPUJJ…EQIS` → `etesia-admin` |
+
+## t2-d4-10-step2c-drill.json
+
+D4-10 step 2 tail and the kill/restart drill (2026-11-11 15:44–16:11 UTC, ledgers 5,677,637–5,677,962): XLM realigns `79149abf…95b3` and `b64c6e66…58c3`; keeper publishes `11726d45…f218` (cycle 68, fault armed, skipped), `51c5cc00…95e1` (cycle 69, skipped), `240ee2f0…5565` (cycle 70); the dropped-response execute `312ead0e…8a19` (nonce 53, resolved as included in cycle 71); the restart's publish `dbb68ff3…f661` and execute `ff7bbe22…e44b` (nonce 54). Pre-reset deployment per A76; archived XDR is the record.
