@@ -237,3 +237,7 @@ Envelope, result, meta and diagnostic-event XDR of every Tranche 2 testnet trans
 ## t2-d4-10-step2c-drill.json
 
 D4-10 step 2 tail and the kill/restart drill (2026-11-11 15:44–16:11 UTC, ledgers 5,677,637–5,677,962): XLM realigns `79149abf…95b3` and `b64c6e66…58c3`; keeper publishes `11726d45…f218` (cycle 68, fault armed, skipped), `51c5cc00…95e1` (cycle 69, skipped), `240ee2f0…5565` (cycle 70); the dropped-response execute `312ead0e…8a19` (nonce 53, resolved as included in cycle 71); the restart's publish `dbb68ff3…f661` and execute `ff7bbe22…e44b` (nonce 54). Pre-reset deployment per A76; archived XDR is the record.
+
+## t2-d5-user-deposit-1.json
+
+First user wallet transaction on the hosted testnet vault page (`/stellar_tf_vault/testnet`, builder `0e49ac1`): `deposit_bounded` `633e4a6f…0406`, ledger 5,679,344 (2026-11-11 18:06:03 UTC), signed by the user's browser wallet `GA6LXX26…5CJP`: 10 USDC (100,000,000 base units) for 9.99155693881 shares, with the deposit-time fee-share mint of 65,016,424 to `etesia-admin`. Pre-reset deployment per A76.
