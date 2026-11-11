@@ -1,0 +1,2162 @@
+{
+ "captured_at": "2026-11-11T15:01:33+00:00",
+ "network": "local-only",
+ "passphrase": "Standalone Network ; September 2026",
+ "rpc": "http://127.0.0.1:8003",
+ "protocol": 30,
+ "revisions": {
+  "vault": {
+   "commit": "6c8a72382d4dae41a9d43e3c73a5c65d49f8ecbc",
+   "dirty": true
+  },
+  "script_sha256": "027404eee0aebda8ac0dab145873dfb0a2335174ad2756419bdbeb85e417ca19"
+ },
+ "tools": {
+  "stellar_cli": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)",
+  "rpc": {
+   "version": "30.0.0-13e53516633c3ce1281c7edbacb607107d3a4e55",
+   "commitHash": "13e53516633c3ce1281c7edbacb607107d3a4e55",
+   "buildTimestamp": "2026-10-20T22:36:51",
+   "captiveCoreVersion": "stellar-core 30.0.0 (0e49751aa9ddf892302cca02cea7f3f5d97df9f1)",
+   "protocolVersion": 30
+  }
+ },
+ "label": "Isolated local protocol-30 network; not Stellar Testnet or Mainnet",
+ "node_limits": {
+  "fee_contract_events_size_1kb": 2500,
+  "fee_historical_1kb": 2029,
+  "fee_rate_per_instructions_increment": 3,
+  "fee_read_1kb": 223,
+  "fee_read_ledger_entry": 781,
+  "fee_transaction_size_1kb": 203,
+  "fee_write_1kb": 1000,
+  "fee_write_ledger_entry": 1250,
+  "ledger": {
+   "max_instructions": 580000000,
+   "max_read_bytes": 400000,
+   "max_read_ledger_entries": 2000,
+   "max_tx_count": 2000,
+   "max_tx_size_bytes": 864000,
+   "max_write_bytes": 297000,
+   "max_write_ledger_entries": 2000
+  },
+  "max_contract_data_entry_size": 65536,
+  "max_contract_data_key_size": 250,
+  "max_contract_size": 131072,
+  "max_dependent_tx_clusters": 3,
+  "scp": {
+   "ballot_timeout_inc_ms": 1000,
+   "ballot_timeout_ms": 1000,
+   "ledger_close_time_ms": 5000,
+   "nomination_timeout_inc_ms": 1000,
+   "nomination_timeout_ms": 1000
+  },
+  "state_archival": {
+   "average_bucket_list_size": 33460,
+   "bucket_list_size_snapshot_period": 30,
+   "bucketlist_size_window_sample_size": 30,
+   "eviction_scan_size": 500000,
+   "max_entries_to_archive": 1000,
+   "max_entry_ttl": 3110400,
+   "min_persistent_ttl": 120960,
+   "min_temporary_ttl": 720,
+   "persistent_rent_rate_denominator": 1215,
+   "starting_eviction_scan_level": 7,
+   "temp_rent_rate_denominator": 2430
+  },
+  "tx": {
+   "max_contract_events_size_bytes": 16384,
+   "max_footprint_size": 400,
+   "max_instructions": 400000000,
+   "max_read_bytes": 200000,
+   "max_read_ledger_entries": 200,
+   "max_size_bytes": 132096,
+   "max_write_bytes": 132096,
+   "max_write_ledger_entries": 200,
+   "memory_limit": 41943040
+  }
+ },
+ "raised_limits": false,
+ "scenarios": [
+  {
+   "hash": "2b723dff08b8687d4e60714da6c706f189ca6a37a875eaef244d8116bb61fd89",
+   "status": "SUCCESS",
+   "ledger": 135,
+   "envelope_bytes": 2956,
+   "fee_bid": 641009,
+   "fee_charged": 556237,
+   "declared": {
+    "instructions": 18936134,
+    "disk_read_bytes": 144,
+    "write_bytes": 5184,
+    "footprint_read_only": 19,
+    "footprint_read_write": 6,
+    "resource_fee": 640909
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 23246,
+    "total_refundable_resource_fee_charged": 532891,
+    "rent_fee_charged": 529209
+   },
+   "core_metrics": {
+    "cpu_insn": 17938503,
+    "mem_byte": 5053634,
+    "read_entry": 25,
+    "write_entry": 6,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5184,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5184,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 6,
+    "emit_event_byte": 1508,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 392,
+    "invoke_time_nsecs": 5089531
+   },
+   "calls": {
+    "balance": 14,
+    "get_positions": 5,
+    "get_reserve_emissions": 4,
+    "get_reserve": 3,
+    "execute": 1,
+    "submit": 1,
+    "transfer": 1
+   },
+   "name": "W0",
+   "shape": "warm-up: Blend Supply",
+   "actions": 1,
+   "simulation": {
+    "instructions": 18936134,
+    "min_resource_fee": 640909
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 17938503,
+     "limit": 400000000,
+     "pct": 4.5
+    },
+    "memory": {
+     "used": 5053634,
+     "limit": 41943040,
+     "pct": 12.0
+    },
+    "read_entries": {
+     "used": 25,
+     "limit": 200,
+     "pct": 12.5
+    },
+    "write_entries": {
+     "used": 6,
+     "limit": 200,
+     "pct": 3.0
+    },
+    "footprint": {
+     "used": 25,
+     "limit": 400,
+     "pct": 6.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5184,
+     "limit": 132096,
+     "pct": 3.9
+    },
+    "events_bytes": {
+     "used": 1508,
+     "limit": 16384,
+     "pct": 9.2
+    },
+    "tx_size": {
+     "used": 2956,
+     "limit": 132096,
+     "pct": 2.2
+    }
+   }
+  },
+  {
+   "hash": "3011a401a80b102a2390861e1dc1e72627a1bfc148defb3d82186c1269c57667",
+   "status": "SUCCESS",
+   "ledger": 140,
+   "envelope_bytes": 4444,
+   "fee_bid": 377957,
+   "fee_charged": 329243,
+   "declared": {
+    "instructions": 44856277,
+    "disk_read_bytes": 144,
+    "write_bytes": 5940,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 377857
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 38336,
+    "total_refundable_resource_fee_charged": 290807,
+    "rent_fee_charged": 283814
+   },
+   "core_metrics": {
+    "cpu_insn": 42678946,
+    "mem_byte": 11921586,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5940,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5940,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2864,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 14130795
+   },
+   "calls": {
+    "balance": 21,
+    "base": 10,
+    "decimals": 10,
+    "resolution": 10,
+    "lastprice": 10,
+    "mark": 5,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W1",
+   "shape": "one-hop swap to XLM, holding 0 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 44856277,
+    "min_resource_fee": 377857
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 42678946,
+     "limit": 400000000,
+     "pct": 10.7
+    },
+    "memory": {
+     "used": 11921586,
+     "limit": 41943040,
+     "pct": 28.4
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5940,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2864,
+     "limit": 16384,
+     "pct": 17.5
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "hash": "187058feba6775f7d8b46196b994c0d0ab02ad11b5ddb6e4826ebdbfa491c9ca",
+   "status": "SUCCESS",
+   "ledger": 145,
+   "envelope_bytes": 4444,
+   "fee_bid": 278507,
+   "fee_charged": 243943,
+   "declared": {
+    "instructions": 74966295,
+    "disk_read_bytes": 144,
+    "write_bytes": 5936,
+    "footprint_read_only": 28,
+    "footprint_read_write": 9,
+    "resource_fee": 278407
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 47368,
+    "total_refundable_resource_fee_charged": 196475,
+    "rent_fee_charged": 189209
+   },
+   "core_metrics": {
+    "cpu_insn": 71630370,
+    "mem_byte": 19877617,
+    "read_entry": 37,
+    "write_entry": 9,
+    "ledger_read_byte": 144,
+    "ledger_write_byte": 5936,
+    "read_key_byte": 40,
+    "write_key_byte": 0,
+    "read_data_byte": 144,
+    "write_data_byte": 5936,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2976,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 18765348
+   },
+   "calls": {
+    "base": 22,
+    "decimals": 22,
+    "resolution": 22,
+    "lastprice": 22,
+    "balance": 21,
+    "mark": 11,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "W2",
+   "shape": "one-hop swap to AQUA, holding 1 non-USDC assets",
+   "actions": 1,
+   "simulation": {
+    "instructions": 74966295,
+    "min_resource_fee": 278407
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 71630370,
+     "limit": 400000000,
+     "pct": 17.9
+    },
+    "memory": {
+     "used": 19877617,
+     "limit": 41943040,
+     "pct": 47.4
+    },
+    "read_entries": {
+     "used": 37,
+     "limit": 200,
+     "pct": 18.5
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 37,
+     "limit": 400,
+     "pct": 9.2
+    },
+    "read_bytes": {
+     "used": 144,
+     "limit": 200000,
+     "pct": 0.1
+    },
+    "write_bytes": {
+     "used": 5936,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2976,
+     "limit": 16384,
+     "pct": 18.2
+    },
+    "tx_size": {
+     "used": 4444,
+     "limit": 132096,
+     "pct": 3.4
+    }
+   }
+  },
+  {
+   "name": "W3",
+   "shape": "one-hop swap to ETH, holding 2 non-USDC assets",
+   "actions": 1,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVL3EEOQFE2XX2WJVGGM26Q4CTADXHRMH5J6NDL2HUQM7MDEMEUJMW7\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ"
+   ]
+  },
+  {
+   "name": "S1-8",
+   "shape": "8 one-hop swaps",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVL3EEOQFE2XX2WJVGGM26Q4CTADXHRMH5J6NDL2HUQM7MDEMEUJMW7\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ"
+   ]
+  },
+  {
+   "name": "S1-7",
+   "shape": "7 one-hop swaps",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCI6TCT3WSMXDAK3LF66QW42WGBBSV7F5MV4DXBQ7UEB2CUNVHASUCAJ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH"
+   ]
+  },
+  {
+   "name": "S1-6",
+   "shape": "6 one-hop swaps",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT"
+   ]
+  },
+  {
+   "name": "S1-5",
+   "shape": "5 one-hop swaps",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDWF6PLQB3JUIR3JB74KX4ULSCFZ23DC7DTDMUKVQUQSEYCEBJMCPMRZ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC"
+   ]
+  },
+  {
+   "name": "S1-4",
+   "shape": "4 one-hop swaps",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBYMBPOMBI6FEP76Y6OTRA4RQ57OVOUYBWSGM5LPR4MMTSVLIDDYWSOS\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S1-3",
+   "shape": "3 one-hop swaps",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVL3EEOQFE2XX2WJVGGM26Q4CTADXHRMH5J6NDL2HUQM7MDEMEUJMW7\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ"
+   ]
+  },
+  {
+   "name": "S1-2",
+   "shape": "2 one-hop swaps",
+   "actions": 2,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCI6TCT3WSMXDAK3LF66QW42WGBBSV7F5MV4DXBQ7UEB2CUNVHASUCAJ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH"
+   ]
+  },
+  {
+   "hash": "7517497aa626725b327dd7dad55750bd918b4fd426490daf6bc58e105a3c2d6b",
+   "status": "SUCCESS",
+   "ledger": 181,
+   "envelope_bytes": 4404,
+   "fee_bid": 62664,
+   "fee_charged": 56533,
+   "declared": {
+    "instructions": 84866067,
+    "disk_read_bytes": 0,
+    "write_bytes": 5940,
+    "footprint_read_only": 27,
+    "footprint_read_write": 9,
+    "resource_fee": 62564
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 49440,
+    "total_refundable_resource_fee_charged": 6993,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 81134931,
+    "mem_byte": 22493903,
+    "read_entry": 36,
+    "write_entry": 9,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 5940,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 5940,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 12,
+    "emit_event_byte": 2864,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 328,
+    "invoke_time_nsecs": 33229919
+   },
+   "calls": {
+    "base": 26,
+    "decimals": 26,
+    "resolution": 26,
+    "lastprice": 26,
+    "balance": 21,
+    "mark": 13,
+    "transfer": 5,
+    "get_reserve_emissions": 4,
+    "get_positions": 3,
+    "get_reserve": 2,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1
+   },
+   "name": "S1-1",
+   "shape": "1 one-hop swaps",
+   "actions": 1,
+   "simulation": {
+    "instructions": 84862963,
+    "min_resource_fee": 62563
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 81134931,
+     "limit": 400000000,
+     "pct": 20.3
+    },
+    "memory": {
+     "used": 22493903,
+     "limit": 41943040,
+     "pct": 53.6
+    },
+    "read_entries": {
+     "used": 36,
+     "limit": 200,
+     "pct": 18.0
+    },
+    "write_entries": {
+     "used": 9,
+     "limit": 200,
+     "pct": 4.5
+    },
+    "footprint": {
+     "used": 36,
+     "limit": 400,
+     "pct": 9.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 5940,
+     "limit": 132096,
+     "pct": 4.5
+    },
+    "events_bytes": {
+     "used": 2864,
+     "limit": 16384,
+     "pct": 17.5
+    },
+    "tx_size": {
+     "used": 4404,
+     "limit": 132096,
+     "pct": 3.3
+    }
+   }
+  },
+  {
+   "name": "S2-8",
+   "shape": "8 two-hop swaps (via XLM)",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CDA7T7",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"burn\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"string\": \"USDC:GCEN7M"
+   ]
+  },
+  {
+   "name": "S2-7",
+   "shape": "7 two-hop swaps (via XLM)",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CDA7T7",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"burn\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"string\": \"USDC:GCEN7M"
+   ]
+  },
+  {
+   "name": "S2-6",
+   "shape": "6 two-hop swaps (via XLM)",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDUJMWC6U3YDNDXC5HE35PXASTGTXFO3LWPBYRR46OVPMCW7G5XWUSOQ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC"
+   ]
+  },
+  {
+   "name": "S2-5",
+   "shape": "5 two-hop swaps (via XLM)",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S2-4",
+   "shape": "4 two-hop swaps (via XLM)",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBND6DODTR7IIKSLSGB2DXXXTW7AIHWQG75634VM7BW3A75372JLWA3E\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ"
+   ]
+  },
+  {
+   "name": "S2-3",
+   "shape": "3 two-hop swaps (via XLM)",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCCKHBJVVWCEA27M773NUXJIKYKRSRKXXGPV5XIED3J7VXDZYZDFDOYM\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH"
+   ]
+  },
+  {
+   "name": "S2-2",
+   "shape": "2 two-hop swaps (via XLM)",
+   "actions": 2,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDUJMWC6U3YDNDXC5HE35PXASTGTXFO3LWPBYRR46OVPMCW7G5XWUSOQ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC"
+   ]
+  },
+  {
+   "name": "S2-1",
+   "shape": "1 two-hop swaps (via XLM)",
+   "actions": 1,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S3-7",
+   "shape": "7 two-hop swaps + Blend Supply",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CDA7T7",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"burn\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"string\": \"USDC:GCEN7M"
+   ]
+  },
+  {
+   "name": "S3-6",
+   "shape": "6 two-hop swaps + Blend Supply",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37"
+   ]
+  },
+  {
+   "name": "S3-5",
+   "shape": "5 two-hop swaps + Blend Supply",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S3-4",
+   "shape": "4 two-hop swaps + Blend Supply",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S3-3",
+   "shape": "3 two-hop swaps + Blend Supply",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S3-2",
+   "shape": "2 two-hop swaps + Blend Supply",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S3-1",
+   "shape": "1 two-hop swaps + Blend Supply",
+   "actions": 2,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "hash": "f9800917ca87793e122be16fd400a113dc3b5a95933f73ecaeb3c2ef9ca0b721",
+   "status": "SUCCESS",
+   "ledger": 239,
+   "envelope_bytes": 3084,
+   "fee_bid": 50005,
+   "fee_charged": 44604,
+   "declared": {
+    "instructions": 79076483,
+    "disk_read_bytes": 0,
+    "write_bytes": 5184,
+    "footprint_read_only": 22,
+    "footprint_read_write": 6,
+    "resource_fee": 49905
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 40754,
+    "total_refundable_resource_fee_charged": 3750,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 75740850,
+    "mem_byte": 20936683,
+    "read_entry": 28,
+    "write_entry": 6,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 5184,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 5184,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 6,
+    "emit_event_byte": 1536,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 18601758
+   },
+   "calls": {
+    "base": 24,
+    "decimals": 24,
+    "resolution": 24,
+    "lastprice": 24,
+    "balance": 14,
+    "mark": 12,
+    "get_positions": 5,
+    "get_reserve_emissions": 4,
+    "get_reserve": 3,
+    "execute": 1,
+    "submit": 1,
+    "transfer": 1
+   },
+   "name": "S3-0",
+   "shape": "0 two-hop swaps + Blend Supply",
+   "actions": 1,
+   "simulation": {
+    "instructions": 79076483,
+    "min_resource_fee": 49905
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 75740850,
+     "limit": 400000000,
+     "pct": 18.9
+    },
+    "memory": {
+     "used": 20936683,
+     "limit": 41943040,
+     "pct": 49.9
+    },
+    "read_entries": {
+     "used": 28,
+     "limit": 200,
+     "pct": 14.0
+    },
+    "write_entries": {
+     "used": 6,
+     "limit": 200,
+     "pct": 3.0
+    },
+    "footprint": {
+     "used": 28,
+     "limit": 400,
+     "pct": 7.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 5184,
+     "limit": 132096,
+     "pct": 3.9
+    },
+    "events_bytes": {
+     "used": 1536,
+     "limit": 16384,
+     "pct": 9.4
+    },
+    "tx_size": {
+     "used": 3084,
+     "limit": 132096,
+     "pct": 2.3
+    }
+   }
+  },
+  {
+   "name": "S4-6",
+   "shape": "Blend Withdraw + 6 two-hop swaps + Blend Supply",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"sync\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"new_reserve_0\"}, \"val\": {\"i128",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CDUJMW"
+   ]
+  },
+  {
+   "name": "S4-5",
+   "shape": "Blend Withdraw + 5 two-hop swaps + Blend Supply",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S4-4",
+   "shape": "Blend Withdraw + 4 two-hop swaps + Blend Supply",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S4-3",
+   "shape": "Blend Withdraw + 3 two-hop swaps + Blend Supply",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S4-2",
+   "shape": "Blend Withdraw + 2 two-hop swaps + Blend Supply",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S4-1",
+   "shape": "Blend Withdraw + 1 two-hop swaps + Blend Supply",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "hash": "07b06351c0f0d0ce33a13fb30e220715205c1a9b7021ec7f40101b414f7969b5",
+   "status": "SUCCESS",
+   "ledger": 267,
+   "envelope_bytes": 3260,
+   "fee_bid": 54051,
+   "fee_charged": 48335,
+   "declared": {
+    "instructions": 83234466,
+    "disk_read_bytes": 0,
+    "write_bytes": 5184,
+    "footprint_read_only": 22,
+    "footprint_read_write": 6,
+    "resource_fee": 53951
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 42385,
+    "total_refundable_resource_fee_charged": 5850,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 79620446,
+    "mem_byte": 21661777,
+    "read_entry": 28,
+    "write_entry": 6,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 5184,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 5184,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 9,
+    "emit_event_byte": 2396,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 13806666
+   },
+   "calls": {
+    "base": 24,
+    "decimals": 24,
+    "resolution": 24,
+    "lastprice": 24,
+    "balance": 16,
+    "mark": 12,
+    "get_positions": 7,
+    "get_reserve": 4,
+    "get_reserve_emissions": 4,
+    "submit": 2,
+    "transfer": 2,
+    "execute": 1
+   },
+   "name": "S4-0",
+   "shape": "Blend Withdraw + 0 two-hop swaps + Blend Supply",
+   "actions": 2,
+   "simulation": {
+    "instructions": 83234466,
+    "min_resource_fee": 53951
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 79620446,
+     "limit": 400000000,
+     "pct": 19.9
+    },
+    "memory": {
+     "used": 21661777,
+     "limit": 41943040,
+     "pct": 51.6
+    },
+    "read_entries": {
+     "used": 28,
+     "limit": 200,
+     "pct": 14.0
+    },
+    "write_entries": {
+     "used": 6,
+     "limit": 200,
+     "pct": 3.0
+    },
+    "footprint": {
+     "used": 28,
+     "limit": 400,
+     "pct": 7.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 5184,
+     "limit": 132096,
+     "pct": 3.9
+    },
+    "events_bytes": {
+     "used": 2396,
+     "limit": 16384,
+     "pct": 14.6
+    },
+    "tx_size": {
+     "used": 3260,
+     "limit": 132096,
+     "pct": 2.5
+    }
+   }
+  },
+  {
+   "name": "S5-8",
+   "shape": "8 swaps split over a direct and a via-XLM route",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S5-7",
+   "shape": "7 swaps split over a direct and a via-XLM route",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S5-6",
+   "shape": "6 swaps split over a direct and a via-XLM route",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S5-5",
+   "shape": "5 swaps split over a direct and a via-XLM route",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S5-4",
+   "shape": "4 swaps split over a direct and a via-XLM route",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBND6DODTR7IIKSLSGB2DXXXTW7AIHWQG75634VM7BW3A75372JLWA3E\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ"
+   ]
+  },
+  {
+   "name": "S5-3",
+   "shape": "3 swaps split over a direct and a via-XLM route",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCCKHBJVVWCEA27M773NUXJIKYKRSRKXXGPV5XIED3J7VXDZYZDFDOYM\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH"
+   ]
+  },
+  {
+   "name": "S5-2",
+   "shape": "2 swaps split over a direct and a via-XLM route",
+   "actions": 2,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDUJMWC6U3YDNDXC5HE35PXASTGTXFO3LWPBYRR46OVPMCW7G5XWUSOQ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC"
+   ]
+  },
+  {
+   "name": "S5-1",
+   "shape": "1 swaps split over a direct and a via-XLM route",
+   "actions": 1,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE"
+   ]
+  },
+  {
+   "name": "S6-6",
+   "shape": "Blend Withdraw + 6 one-hop swaps + Blend Supply",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S6-5",
+   "shape": "Blend Withdraw + 5 one-hop swaps + Blend Supply",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S6-4",
+   "shape": "Blend Withdraw + 4 one-hop swaps + Blend Supply",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S6-3",
+   "shape": "Blend Withdraw + 3 one-hop swaps + Blend Supply",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S6-2",
+   "shape": "Blend Withdraw + 2 one-hop swaps + Blend Supply",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S6-1",
+   "shape": "Blend Withdraw + 1 one-hop swaps + Blend Supply",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "hash": "a050644a7bb7fa9fa41a2e8ceafdf8d824c86dadec36298ab3d62f87cb478715",
+   "status": "SUCCESS",
+   "ledger": 320,
+   "envelope_bytes": 3260,
+   "fee_bid": 54051,
+   "fee_charged": 48335,
+   "declared": {
+    "instructions": 83234138,
+    "disk_read_bytes": 0,
+    "write_bytes": 5184,
+    "footprint_read_only": 22,
+    "footprint_read_write": 6,
+    "resource_fee": 53951
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 42385,
+    "total_refundable_resource_fee_charged": 5850,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 79620130,
+    "mem_byte": 21661777,
+    "read_entry": 28,
+    "write_entry": 6,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 5184,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 5184,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 9,
+    "emit_event_byte": 2396,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 23898113
+   },
+   "calls": {
+    "base": 24,
+    "decimals": 24,
+    "resolution": 24,
+    "lastprice": 24,
+    "balance": 16,
+    "mark": 12,
+    "get_positions": 7,
+    "get_reserve": 4,
+    "get_reserve_emissions": 4,
+    "submit": 2,
+    "transfer": 2,
+    "execute": 1
+   },
+   "name": "S6-0",
+   "shape": "Blend Withdraw + 0 one-hop swaps + Blend Supply",
+   "actions": 2,
+   "simulation": {
+    "instructions": 83234138,
+    "min_resource_fee": 53951
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 79620130,
+     "limit": 400000000,
+     "pct": 19.9
+    },
+    "memory": {
+     "used": 21661777,
+     "limit": 41943040,
+     "pct": 51.6
+    },
+    "read_entries": {
+     "used": 28,
+     "limit": 200,
+     "pct": 14.0
+    },
+    "write_entries": {
+     "used": 6,
+     "limit": 200,
+     "pct": 3.0
+    },
+    "footprint": {
+     "used": 28,
+     "limit": 400,
+     "pct": 7.0
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 5184,
+     "limit": 132096,
+     "pct": 3.9
+    },
+    "events_bytes": {
+     "used": 2396,
+     "limit": 16384,
+     "pct": 14.6
+    },
+    "tx_size": {
+     "used": 3260,
+     "limit": 132096,
+     "pct": 2.5
+    }
+   }
+  },
+  {
+   "name": "S7-7",
+   "shape": "7 one-hop swaps + Blend Supply",
+   "actions": 8,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S7-6",
+   "shape": "6 one-hop swaps + Blend Supply",
+   "actions": 7,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S7-5",
+   "shape": "5 one-hop swaps + Blend Supply",
+   "actions": 6,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S7-4",
+   "shape": "4 one-hop swaps + Blend Supply",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBEJYNVZKE",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S7-3",
+   "shape": "3 one-hop swaps + Blend Supply",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "S7-2",
+   "shape": "2 one-hop swaps + Blend Supply",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "hash": "1ac8c5d139ac738fe01fc5d8edf15d133b3c31ed600dbaed5877083166ba2354",
+   "status": "SUCCESS",
+   "ledger": 350,
+   "envelope_bytes": 4856,
+   "fee_bid": 71603,
+   "fee_charged": 65059,
+   "declared": {
+    "instructions": 89259280,
+    "disk_read_bytes": 0,
+    "write_bytes": 6816,
+    "footprint_read_only": 26,
+    "footprint_read_write": 12,
+    "resource_fee": 71503
+   },
+   "charged": {
+    "total_non_refundable_resource_fee_charged": 55867,
+    "total_refundable_resource_fee_charged": 9092,
+    "rent_fee_charged": 0
+   },
+   "core_metrics": {
+    "cpu_insn": 85214691,
+    "mem_byte": 23263089,
+    "read_entry": 38,
+    "write_entry": 12,
+    "ledger_read_byte": 0,
+    "ledger_write_byte": 6816,
+    "read_key_byte": 0,
+    "write_key_byte": 0,
+    "read_data_byte": 0,
+    "write_data_byte": 6816,
+    "read_code_byte": 0,
+    "write_code_byte": 0,
+    "emit_event": 15,
+    "emit_event_byte": 3724,
+    "max_rw_key_byte": 116,
+    "max_rw_data_byte": 3936,
+    "max_rw_code_byte": 0,
+    "max_emit_event_byte": 420,
+    "invoke_time_nsecs": 22678884
+   },
+   "calls": {
+    "base": 26,
+    "decimals": 26,
+    "resolution": 26,
+    "lastprice": 26,
+    "balance": 23,
+    "mark": 13,
+    "transfer": 6,
+    "get_positions": 5,
+    "get_reserve_emissions": 4,
+    "get_reserve": 3,
+    "execute": 1,
+    "swap_exact_in": 1,
+    "swap_exact_tokens_for_tokens": 1,
+    "get_reserves": 1,
+    "swap": 1,
+    "submit": 1
+   },
+   "name": "S7-1",
+   "shape": "1 one-hop swaps + Blend Supply",
+   "actions": 2,
+   "simulation": {
+    "instructions": 89262384,
+    "min_resource_fee": 71504
+   },
+   "cli_error": [],
+   "headroom": {
+    "instructions": {
+     "used": 85214691,
+     "limit": 400000000,
+     "pct": 21.3
+    },
+    "memory": {
+     "used": 23263089,
+     "limit": 41943040,
+     "pct": 55.5
+    },
+    "read_entries": {
+     "used": 38,
+     "limit": 200,
+     "pct": 19.0
+    },
+    "write_entries": {
+     "used": 12,
+     "limit": 200,
+     "pct": 6.0
+    },
+    "footprint": {
+     "used": 38,
+     "limit": 400,
+     "pct": 9.5
+    },
+    "read_bytes": {
+     "used": 0,
+     "limit": 200000,
+     "pct": 0.0
+    },
+    "write_bytes": {
+     "used": 6816,
+     "limit": 132096,
+     "pct": 5.2
+    },
+    "events_bytes": {
+     "used": 3724,
+     "limit": 16384,
+     "pct": 22.7
+    },
+    "tx_size": {
+     "used": 4856,
+     "limit": 132096,
+     "pct": 3.7
+    }
+   }
+  },
+  {
+   "name": "C1",
+   "shape": "5 one-hop swaps",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDWF6PLQB3JUIR3JB74KX4ULSCFZ23DC7DTDMUKVQUQSEYCEBJMCPMRZ\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC"
+   ]
+  },
+  {
+   "name": "C2",
+   "shape": "3 two-hop swaps",
+   "actions": 3,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCCKHBJVVWCEA27M773NUXJIKYKRSRKXXGPV5XIED3J7VXDZYZDFDOYM\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDJSODL6UH"
+   ]
+  },
+  {
+   "name": "C3",
+   "shape": "Blend Withdraw + 3 one-hop swaps + Blend Supply",
+   "actions": 5,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CBD7OTHVFZ",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "C4",
+   "shape": "Blend Withdraw + 2 two-hop swaps + Blend Supply",
+   "actions": 4,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CDZB4P4CWC",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"supply\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC2CPVHR",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\"}, {\"address\": \"CCVG37",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"position\"}, {\"u32\": 1}], \"data\": {\"vec\": [{\"u32\": 0}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QB"
+   ]
+  },
+  {
+   "name": "T3",
+   "shape": "one-hop swap to XLM, holding 3 non-USDC assets (ETH transferred in)",
+   "actions": 1,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT"
+   ]
+  },
+  {
+   "name": "T4",
+   "shape": "one-hop swap to XLM, holding 4 non-USDC assets (BTC transferred in)",
+   "actions": 1,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT"
+   ]
+  },
+  {
+   "name": "T5",
+   "shape": "one-hop swap to XLM, holding 5 non-USDC assets (USTRY transferred in)",
+   "actions": 1,
+   "status": "SIMULATION_EXCEEDED_BUDGET",
+   "cli_error": [
+    "\u274c error: transaction simulation failed: HostError: Error(Budget, ExceededLimit)"
+   ],
+   "rpc_error": "HostError: Error(Budget, ExceededLimit)\nDebugInfo not available\n",
+   "last_events": [
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapPair\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amount_0_in\"}, \"val\": {\"i128\":",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"string\": \"SoroswapRouter\"}, {\"symbol\": \"swap\"}], \"data\": {\"map\": [{\"key\": {\"symbol\": \"amounts\"}, \"val\": {\"vec\": [{",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"transfer\"}, {\"address\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\"}, {\"address\": \"CC2CPV",
+    "{\"in_successful_contract_call\": false, \"event\": {\"ext\": \"v0\", \"contract_id\": \"CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU\", \"type\": \"contract\", \"body\": {\"v0\": {\"topics\": [{\"symbol\": \"swap\"}, {\"address\": \"CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG\"}, {\"address\": \"CC5IKQ6UPT"
+   ]
+  }
+ ],
+ "mark_simulated_instructions": 5033987,
+ "held_non_usdc_assets": [
+  "XLM",
+  "AQUA"
+ ],
+ "largest": {
+  "one_hop": 1,
+  "two_hop": null,
+  "two_hop_supply": 0,
+  "withdraw_two_hop_supply": 0,
+  "split_two_routes": null,
+  "withdraw_one_hop_supply": 0,
+  "one_hop_supply": 1
+ },
+ "caps": {
+  "C1": false,
+  "C2": false,
+  "C3": false,
+  "C4": false
+ },
+ "transferred_holdings": {
+  "ETH": false,
+  "BTC": false,
+  "USTRY": false
+ },
+ "vault": "CC2CPVHRDJPYMZIFYI3YQLU26TQICMA5DJ75A4O65DLPDYI7V4Y5OWPR",
+ "provider": "CAVKBAGCT7SKT5WGWBSIKVRLWRQZXLIZQBIAFXPOUZ5LZ4F7P4QIMNFM",
+ "feed": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+ "router": "CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU",
+ "factory": "CCU5LU2GBAIUCMBY7E7YTUA3LIIP77PEQARNTVY2V4ESVVRE5PQIKQGP",
+ "soroswap_router": "CAY2LCWDOM6DQKK57WSZF3GXSUBQ2A5E73HKPBJQ4EW2ILOPYY72LOW3",
+ "pool": "CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5",
+ "backstop": "CD3ZK45AC4TELJVLQBZ3COH3RA6366MPXLWRKYLOHZ4RGFXGYXYGTGQI",
+ "comet": "CANU6M42YCDHVBOOAWPDF3QKD4DOFC2F4KCAEHKZQKPQGOFA7Q53ZNB7",
+ "config": {
+  "assets": [
+   {
+    "address": "CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3",
+    "decimals": 7,
+    "kind": "Risk"
+   },
+   {
+    "address": "CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL",
+    "decimals": 7,
+    "kind": "Risk"
+   },
+   {
+    "address": "CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE",
+    "decimals": 7,
+    "kind": "Xlm"
+   },
+   {
+    "address": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG",
+    "decimals": 7,
+    "kind": "Settlement"
+   },
+   {
+    "address": "CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG",
+    "decimals": 7,
+    "kind": "Risk"
+   },
+   {
+    "address": "CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C",
+    "decimals": 7,
+    "kind": "Reserve"
+   }
+  ],
+  "usdc": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG",
+  "oracle": "CAVKBAGCT7SKT5WGWBSIKVRLWRQZXLIZQBIAFXPOUZ5LZ4F7P4QIMNFM",
+  "router": "CDA7T7MOFPNQ24V3NONAN65N2VF2QLA4VY6MUOHRBVRYNXT3PSQJGEFU",
+  "route_contracts": [
+   "CAR4RWTPKDSUXJKOAK6L5BZ23NHSOLLUSSDRV2SXQCTAPCTEO2PCEIPV",
+   "CBKUDP5264ZOQAWCLUNFW4IWYB55IDF44WFTIBWJ7NMGLTXCVRP56UIZ",
+   "CBND6DODTR7IIKSLSGB2DXXXTW7AIHWQG75634VM7BW3A75372JLWA3E",
+   "CBXGXVENQVHCHFS2PC2KVN7LTLHFLSAR5UV4PNPQ5SZ2M5FVIK7QHBAL",
+   "CBYMBPOMBI6FEP76Y6OTRA4RQ57OVOUYBWSGM5LPR4MMTSVLIDDYWSOS",
+   "CCCKHBJVVWCEA27M773NUXJIKYKRSRKXXGPV5XIED3J7VXDZYZDFDOYM",
+   "CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6",
+   "CCFQCE5WKGYPLISYHFOQ3XA2U576VJPVV5FE3KHIG2US7KVZMRELNKLB",
+   "CCI6TCT3WSMXDAK3LF66QW42WGBBSV7F5MV4DXBQ7UEB2CUNVHASUCAJ",
+   "CCVL3EEOQFE2XX2WJVGGM26Q4CTADXHRMH5J6NDL2HUQM7MDEMEUJMW7",
+   "CDFOM5B5F53FKSVRZAZRD5MQYNQSC6X65VNWP4IHUQLRHXHZWWSVV2YS",
+   "CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA",
+   "CDLJYPQ7XVBM73H6ATINGPCJFPRW3WASBC24JPUJJ4MWA57GM5B6SIWS",
+   "CDUJMWC6U3YDNDXC5HE35PXASTGTXFO3LWPBYRR46OVPMCW7G5XWUSOQ",
+   "CDWF6PLQB3JUIR3JB74KX4ULSCFZ23DC7DTDMUKVQUQSEYCEBJMCPMRZ"
+  ],
+  "pool": "CCVG37ELKKM2XUXBTEE6JUI5ZFWNJGLWRCCWDIQV26MLC4DPY745SOJ5",
+  "pool_assets": [
+   "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+  ],
+  "admin": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+  "executor": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+  "guardian": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5",
+  "fees": {
+   "management_bps": 100,
+   "performance_bps": 1000,
+   "recipient": "GCEN7MAALPWKWZVZVA27FJFSK2ZSWZHUNWDWCRO45JPZ27EEQG6VW5K5"
+  },
+  "borrowing": false,
+  "max_price_age": 3600,
+  "max_slippage_bps": 100,
+  "max_leg_bps": 2000,
+  "max_turnover_bps": 10000,
+  "max_loss_bps": 200,
+  "cooldown": 1,
+  "max_debt_bps": 0,
+  "min_health_bps": 12500
+ },
+ "provider_config": {
+  "usdc": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG",
+  "sources": [
+   {
+    "asset": "CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE",
+    "numerator": {
+     "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+     "asset": {
+      "Stellar": "CC5IKQ6UPT6ARJD2N6FII6HWM43B5CTJGTQPZRASYEIPCNBP5SKX4MQE"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG",
+    "numerator": {
+     "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+     "asset": {
+      "Stellar": "CDJSODL6UHN6QJFDNPQ5JAGWL5H535NE24Q4GLO67N76YWKNGJC5FPOG"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3",
+    "numerator": {
+     "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+     "asset": {
+      "Stellar": "CBD7OTHVFZ6IIBX42XNAECQJ4NLDHAQOBUUTBFYA6ZYVRKEE5VGT4EU3"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL",
+    "numerator": {
+     "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+     "asset": {
+      "Stellar": "CBEJYNVZKE6OQBCZJEXQD2IJ22SMGHCDTYQZVKHAENWD43ZUWPRMTZXL"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   },
+   {
+    "asset": "CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C",
+    "numerator": {
+     "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+     "asset": {
+      "Stellar": "CDZB4P4CWCGUGUZ3QLS62HJUKKNMJMXKIEXFXPIXPEPHPGCE2K7E6B3C"
+     },
+     "base": {
+      "Other": "USD"
+     },
+     "decimals": 14,
+     "resolution": 300,
+     "max_age": 3600
+    },
+    "denominator": [
+     {
+      "contract": "CBKCSQLYSG6UKIKXDDIAGACZIBYCEQ4FNJZ32D42RBILW4TKDUNVNRNX",
+      "asset": {
+       "Stellar": "CC5WJXBK4JCAEAT5Y5VTGNBO2NU5DGBIH53QBLGFIX3CPXZ7Y2RZYQAG"
+      },
+      "base": {
+       "Other": "USD"
+      },
+      "decimals": 14,
+      "resolution": 300,
+      "max_age": 3600
+     }
+    ]
+   }
+  ]
+ },
+ "pairs": {
+  "USDC/XLM": "CCEO6AN6DRWCHO2MLTFZKLOZD4ZO2AQKMXUCBWXGGKUDF25HKHVZ5BA6",
+  "AQUA/USDC": "CCI6TCT3WSMXDAK3LF66QW42WGBBSV7F5MV4DXBQ7UEB2CUNVHASUCAJ",
+  "ETH/USDC": "CCVL3EEOQFE2XX2WJVGGM26Q4CTADXHRMH5J6NDL2HUQM7MDEMEUJMW7",
+  "BTC/USDC": "CBYMBPOMBI6FEP76Y6OTRA4RQ57OVOUYBWSGM5LPR4MMTSVLIDDYWSOS",
+  "USDC/USTRY": "CDWF6PLQB3JUIR3JB74KX4ULSCFZ23DC7DTDMUKVQUQSEYCEBJMCPMRZ",
+  "AQUA/XLM": "CCCKHBJVVWCEA27M773NUXJIKYKRSRKXXGPV5XIED3J7VXDZYZDFDOYM",
+  "ETH/XLM": "CBND6DODTR7IIKSLSGB2DXXXTW7AIHWQG75634VM7BW3A75372JLWA3E",
+  "BTC/XLM": "CDHG5NG3ECYFQVSDWWXIEEKFYD2VXGLQGXYRCIEN6N6EZ7SN4QNNZWQA",
+  "USTRY/XLM": "CDUJMWC6U3YDNDXC5HE35PXASTGTXFO3LWPBYRR46OVPMCW7G5XWUSOQ",
+  "AQUA/ETH": "CDFOM5B5F53FKSVRZAZRD5MQYNQSC6X65VNWP4IHUQLRHXHZWWSVV2YS",
+  "AQUA/BTC": "CDLJYPQ7XVBM73H6ATINGPCJFPRW3WASBC24JPUJJ4MWA57GM5B6SIWS",
+  "AQUA/USTRY": "CBKUDP5264ZOQAWCLUNFW4IWYB55IDF44WFTIBWJ7NMGLTXCVRP56UIZ",
+  "BTC/ETH": "CAR4RWTPKDSUXJKOAK6L5BZ23NHSOLLUSSDRV2SXQCTAPCTEO2PCEIPV",
+  "ETH/USTRY": "CBXGXVENQVHCHFS2PC2KVN7LTLHFLSAR5UV4PNPQ5SZ2M5FVIK7QHBAL",
+  "BTC/USTRY": "CCFQCE5WKGYPLISYHFOQ3XA2U576VJPVV5FE3KHIG2US7KVZMRELNKLB"
+ },
+ "wasm_sha256": {
+  "etesia_vault.wasm": "ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47",
+  "etesia_pricing.wasm": "3070b68c3ec31a8f200646c42a3305d92ff42ed83785d234572457c03733201c",
+  "soroswap_factory.wasm": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae",
+  "soroswap_router.wasm": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07",
+  "soroswap_aggregator_v3.wasm": "437653282e9c93b0b4d736d8fde01bf002adefb61bfb75917e609f5336ee3190",
+  "soroswap_pair.wasm": "18051456816b66f12e773a56f77c5794fac1b1fb7ab6e22d4fad5a412770f73e",
+  "reflector.wasm": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439",
+  "pool.wasm": "a41fc53d6753b6c04eb15b021c55052366a4c8e0e21bc72700f461264ec1350e",
+  "backstop.wasm": "c1f4502a757e25c611f5a159bc1ab0eef64085adac6c68123dca66e87faffbc2",
+  "comet.wasm": "8abc28913035c07411ed5d134e6bfeab4723d97ddd4d1a22a0605d35c94d1a36"
+ }
+}
