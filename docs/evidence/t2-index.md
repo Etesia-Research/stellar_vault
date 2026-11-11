@@ -21,7 +21,7 @@ Envelope, result, meta and diagnostic-event XDR of every Tranche 2 testnet trans
 
 **Archived elsewhere, not repeated:** D4-02 direct proof `e58ed4546ea00938b83f512ba8fec968e3b5e994e0010d6fb4420f2900991e35` and failed swap `4c55ed60dc50e7eaf29d6a0cd9bfe47d2aaf085e8eb641a236826103637c37bf` (FAILED by design) in `d4-testnet-probes.json` keys `direct_proof` and `failed_swap`; flagship deploy `35ca57046571f19315aa19fbb20f864328c0d04735d8034dac03f77b153b614d`, D4-03 publish `d89fe72583d47db84521c19c30a087bd2928da9a7f4efc028fd8dfd25e05630b`, D4-04 publish `f76c3c1a0e6eba91a3c7b12af3e5b8bc011f4e420bc0b012570ba122d68d09a5`, D4-05 publish `d24e9f3363fb107038be5c477f80f895109dfe12ddc40ce0f12261844eb380f9` and execute `7b7bf088079423e92fc5c3df2f31683fd11a8b4ae408a08bb81a0bd4203fd408` in `fixtures/d5-04-testnet/00`–`05`.
 
-**Not archived:** the third-party v3 copy deploy `a383fe94…c91e` (2026-10-16, before Tranche 2 and outside retention). No D4-09 guard case has been sent yet. Records are written once, so later D4-10 step 2 or keeper transactions go in a new file, recorded before about 2026-11-18 (retention).
+**Not archived:** the third-party v3 copy deploy `a383fe94…c91e` (2026-10-16, before Tranche 2 and outside retention). The D4-09 guard cases are archived by their harness in [d4-09-guard-pre-2026-12-16-reset.jsonl](d4-09-guard-pre-2026-12-16-reset.jsonl) (vault `602ef34`). Records are written once, so later D4-10 step 2 or keeper transactions go in a new file, recorded before about 2026-11-18 (retention).
 
 ## t2-d4-02-03-setup.json
 
