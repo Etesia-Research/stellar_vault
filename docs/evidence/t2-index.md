@@ -243,6 +243,15 @@ D4-10 step 2 tail and the kill/restart drill (2026-11-11 15:44–16:11 UTC, ledg
 
 First user wallet transaction on the hosted testnet vault page (`/stellar_tf_vault/testnet`, builder `0e49ac1`): `deposit_bounded` `633e4a6f…0406`, ledger 5,679,344 (2026-11-11 18:06:03 UTC), signed by the user's browser wallet `GA6LXX26…5CJP`: 10 USDC (100,000,000 base units) for 9.99155693881 shares, with the deposit-time fee-share mint of 65,016,424 to `etesia-admin`. Pre-reset deployment per A76.
 
+## t2-d5-allocation-run-2026-11-12.json
+
+First Builder allocation executed on testnet (hosted `/?network=testnet`, builder `d180e6b`, swaps quoted and built by the Soroswap Aggregator API), signed by the user's browser wallet `GA6LXX26…5CJP` (xBull, user-reported) and archived on 2026-11-12 at 08:53 UTC. Basket XLM + ETESIA-TF with the USTRY reserve, 100 USDC, 25% volatility budget: the gross allocation cap bound, so the reserve was 0 and the run had no tRESERVE trustline or swap leg. Pre-reset deployment per A76.
+
+| Ledger | Close (UTC) | Hash | Label |
+| --- | --- | --- | --- |
+| 5,689,836 | 2026-11-12 08:40:23 | `bea80542f4db5237254614ba19a73b538d08ac358f19140d35a59e38776ae736` | Router `swap_exact_tokens_for_tokens` 15.6470783 USDC → 115.2191255 XLM (minimum 114.6430302) |
+| 5,689,838 | 2026-11-12 08:40:33 | `e48eeda45a153b475f15f95c7d8787928e7aaa22dc43b6fc8ffd76cea43ee016` | Flagship `deposit_bounded` 81.851665 USDC → 81.331753576578 shares (minimum 80.927716236381) |
+
 ## t2-keeper-cycles-2026-11-11-evening.json
 
 Cycle numbers are derived, not read from the journal: from cycle 71 (`ff7bbe22…e44b`, 16:10:53) at the keeper's cadence of about 15 minutes, with the 2026-11-11 log anchors cycle 78 (before the 18:03 overrides deploy), cycle 80 (before the 18:21 unset deploy) and nonce 64 in cycle 84 (journal read). Cycles 79 and 81 sent no transaction. That they were the boot cycles of those two deploys is an inference; why they sent nothing is not read from the journal. Execute nonces are from the plan argument and the vault's `plan` event; actions from the meta's contract events. Whether the user wallet transactions count toward D5-07 is for the user to confirm. Pre-reset deployment per A76.
