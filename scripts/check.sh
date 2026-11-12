@@ -10,6 +10,7 @@ done
 (cd fixtures/wasm && sha256sum --quiet -c SHA256SUMS)
 cargo fmt --check
 python3 scripts/d3-vectors.py
+python3 scripts/testnet-deploy-checks.py
 RUSTUP_TOOLCHAIN=1.84.1 cargo build --manifest-path vendor/defindex/Cargo.toml -p defindex-vault --locked --release --target wasm32-unknown-unknown
 stellar contract optimize --wasm vendor/defindex/target/wasm32-unknown-unknown/release/defindex_vault.wasm
 stellar contract build --locked --optimize

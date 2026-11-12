@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Testnet only: the D4-02 accounts, the realign trustline and the Etesia-deployed copy of Soroswap's mainnet v3 WASM;
-the D4-03 keys, trustlines, tRESERVE SAC and pair, pricing provider, vaults, manifest, realigns and records.
+the D4-03 keys, trustlines, tRESERVE SAC and pair, pricing provider, vaults, manifest, realigns and records;
+the A98/A99 liquidity account, tRESERVE mint, faucet claims and pair seed, each sent only with --yes.
 Run from etesia-vault/: python3 scripts/testnet-deploy.py <mode>; modes in USAGE, steps in doc/d4-03-implementation-plan.md.
 
 No secret is read: `keys secret` is never run, and command() logs stdout and stderr to the gitignored
@@ -11,8 +12,10 @@ transactions instead of sending new ones. The fixed salt also makes a second dep
 import base64
 from datetime import UTC, datetime
 from decimal import Decimal, getcontext
+from fractions import Fraction
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -53,7 +56,7 @@ LOCAL_WASM = json.loads((ROOT / "docs/evidence/d4-local-rpc.json").read_text())[
 SEED = 10_000_000_000  # 1,000 USDC: the vault constructor's SEED_ASSETS (contracts/vault/src/types.rs)
 PAIR_DEPTH = 10_000_000_000  # 1,000 USDC + 1,000 tRESERVE (D4-03-Q6, A71)
 SOROSWAP_API = "https://api.soroswap.finance"
-USAGE = "usage: testnet-deploy.py <accounts|v3|assets [--funding <hash>...]|quote|vaults|realign <xlm|treserve>|record>"
+USAGE = "usage: testnet-deploy.py <accounts|v3|assets [--funding <hash>...]|quote|vaults|realign <xlm|treserve>|record|liquidity <account|mint|claims N|seed> [--yes]>"
 inputs = json.loads(INPUT.read_text())
 USDC, XLM = inputs["assets"]["USDC"]["sac"], inputs["assets"]["XLM"]["sac"]
 ROUTER, FACTORY, REFLECTOR = inputs["soroswap"]["router"], inputs["soroswap"]["factory"], inputs["reflector"]["id"]
@@ -131,10 +134,10 @@ def save():
     STATE.write_text(json.dumps(state, indent=2) + "\n")
 
 
-def step(key, run):
+def step(key, run, signed=lambda hashes, cli_error=None: None):
     """Send a step's transactions once. Its hashes are saved before inclusion is checked, also when the CLI fails,
     so a rerun checks them instead of sending again. A step whose transaction failed or never landed is forgotten
-    and sent again on the next run."""
+    and sent again on the next run. `signed` sees the hashes of each send at that point, before inclusion is checked."""
     if key not in state:
         try:
             state[key] = run()
@@ -142,8 +145,10 @@ def step(key, run):
             if error.hashes:
                 state[key] = {"hashes": error.hashes, "cli_error": str(error)[-2000:]}
                 save()
+            signed(error.hashes, str(error)[-2000:])
             raise
         save()
+        signed(state[key]["hashes"])
     if "transactions" not in state[key]:
         assert state[key]["hashes"], f"{key}: no transaction hash in the CLI output; see {log}"
         rows = included(state[key]["hashes"])
@@ -190,13 +195,13 @@ def identities(names, key):
         print("funded", name, state[key][name], flush=True)
 
 
-def trustline(key, name):
-    """The Blend USDC trustline of `name`, sent once."""
-    line = inputs["assets"]["USDC"]["classic"]
+def trustline(key, name, line=None, signed=lambda hashes, cli_error=None: None):
+    """The Blend USDC (or `line`) trustline of `name`, sent once; `signed` as in step()."""
+    line = line or inputs["assets"]["USDC"]["classic"]
     if key not in state and fetch("trustline", "--account", name, "--asset", line):
         sys.exit(f"the {name} trustline exists but its tx hash is not in {STATE}; recover it from {log}")
     step(key, lambda: {"line": line, "hashes": command(
-        ["tx", "new", "change-trust", "--source-account", name, "--line", line, "--network", "testnet"])[1]})
+        ["tx", "new", "change-trust", "--source-account", name, "--line", line, "--network", "testnet"])[1]}, signed)
     print("trustline", name, line, state[key]["hashes"])
 
 
@@ -673,16 +678,332 @@ def record():
     write_evidence(evidence)
 
 
+# A98/A99 testnet liquidity (doc/a98-testnet-liquidity-plan.md). Each mode prints what it would send; only --yes sends.
+LIQUIDITY = "etesia-liquidity"
+LIQUIDITY_LOG = ROOT / f"docs/evidence/d4-liquidity-{EPOCH}.jsonl"
+MINT = 500_000_000_000  # 50,000 tRESERVE from etesia-realign, once (A99)
+FAUCET = "https://ewqw4hx7oa.execute-api.us-east-1.amazonaws.com/getAssets"  # the Blend faucet of A81 and A99
+FAUCET_CODES = ("USDC", "BLND", "wETH", "wBTC")
+CLAIMS_PER_DAY, CLAIM_SPACING = 10, 900  # A99: at most 10 claims a day; at least 15 min apart (liquidity spec (7))
+SEED_TRADE, SEED_IMPACT_BPS, SEED_SLACK_BPS = 1_000_000_000, 100, 10  # a 100 USDC trade moves a seeded pair at most 1% (A98)
+SEED_USDC_RESERVE = 99_000_000_000  # 9,900 USDC (A99): headroom above the 9,870.3 USDC minimum, so a pool a trade drained stays within 1%
+REALIGN_FRESH = 600  # seconds: seed only right after both pairs were realigned
+XLM_KEEP = 1_000_000_000  # 100 XLM left on etesia-liquidity for fees and reserves
+GAMMA = Fraction(997, 1000)
+
+
+def impact(amount_in, reserve_in):
+    """The Builder's price impact of a swap, γa/(R_in+γa) with γ = 0.997: its output against a tiny reference quote."""
+    return GAMMA * amount_in / (reserve_in + GAMMA * amount_in)
+
+
+def depth_needed(amount, bps):
+    """The smallest USDC reserve at which `amount` USDC moves the pair at most `bps`, R ≥ γa(1−p)/p. At the pair's mid
+    the other reserve is worth the same, so a sale of the other token worth `amount` needs the same USDC reserve."""
+    p = Fraction(bps, 10_000)
+    return math.ceil(GAMMA * amount * (1 - p) / p)
+
+
+def seed_adds(usdc, other, need):
+    """(USDC, other) to add at the pair's ratio, so the mid stays put and the USDC reserve reaches `need`; None when it does."""
+    if usdc >= need:
+        return None
+    add = need - usdc
+    return add, -(-add * other // usdc)  # the router takes floor(add·other/usdc) of the other token
+
+
+def minimum(amount):
+    return amount * (10_000 - SEED_SLACK_BPS) // 10_000
+
+
+def realigned(lines, now):
+    """The last realign record of each pair, kept when it was included (or needed no trade) at most REALIGN_FRESH ago."""
+    last = {line["pair"]: line for line in lines}
+    return {pair: r for pair, r in last.items() if r["status"] in ("included", "no trade")
+            and (now - datetime.fromisoformat(r["written_at"])).total_seconds() <= REALIGN_FRESH}
+
+
+def strip_envelope(body):
+    """The faucet answers text/plain holding the envelope in JSON quotes (doc/d4-03-implementation-plan.md:352)."""
+    body = body.strip()
+    return json.loads(body) if body.startswith('"') else body
+
+
+def claim_problems(decoded, fresh, issuer):
+    """Why a decoded faucet envelope must not be signed; [] when the issuer is its source and fee payer and it holds only
+    `fresh`'s change_trust and the issuer's payments to `fresh`, of USDC, BLND, wETH or wBTC, with a USDC payment."""
+    if set(decoded) != {"tx"}:
+        return [f"not a plain transaction envelope: {sorted(decoded)}"]
+    tx = decoded["tx"]["tx"]
+    problems = [] if tx["source_account"] == issuer else [f"source and fee payer {tx['source_account']} is not the issuer {issuer}"]
+    assets = [{"credit_alphanum4": {"asset_code": code, "issuer": issuer}} for code in FAUCET_CODES]
+    usdc = False
+    for n, op in enumerate(tx["operations"]):
+        source = op["source_account"] or tx["source_account"]
+        kind, body = next(iter(op["body"].items())) if isinstance(op["body"], dict) else (op["body"], None)
+        if kind == "change_trust" and source == fresh and body["line"] in assets:
+            continue
+        if kind == "payment" and source == issuer and body["destination"] == fresh and body["asset"] in assets:
+            usdc = usdc or body["asset"] == assets[0]
+            continue
+        problems.append(f"operation {n}: {kind} from {source}")
+    return problems + ([] if usdc else ["no USDC payment to the claimant"])
+
+
+def bad_seq(sent):
+    """True when sendTransaction rejected the envelope with tx_bad_seq (TransactionResult code -5 after the int64 fee)."""
+    xdr = sent.get("errorResultXdr")
+    return bool(xdr) and int.from_bytes(base64.b64decode(xdr)[8:12], "big", signed=True) == -5
+
+
+def merge_ops(liquidity_address, issuer, balances):
+    """The forward-and-merge operations of a claimed key, given its {code: balance} trustlines: all USDC to
+    etesia-liquidity, BLND, wETH and wBTC paid back to their issuer, the trustlines removed, the account merged."""
+    ops = [["payment", "--destination", liquidity_address if code == "USDC" else issuer, "--asset", f"{code}:{issuer}",
+            "--amount", str(balances[code])] for code in FAUCET_CODES if balances.get(code)]
+    ops += [["change-trust", "--line", f"{code}:{issuer}", "--limit", "0"] for code in FAUCET_CODES if code in balances]
+    return ops + [["account-merge", "--account", liquidity_address]]
+
+
+def archive(line):
+    with LIQUIDITY_LOG.open("a") as stream:
+        stream.write(json.dumps({"label": "Etesia testnet liquidity (A98, A99)", "network_epoch": EPOCH, **line,
+                                 "written_at": datetime.now(UTC).isoformat()}) + "\n")
+
+
+def archive_signed(record):
+    """step()'s `signed` hook: archive a liquidity step's hashes before inclusion is checked, also when the CLI fails
+    after signing, like realign()."""
+    return lambda hashes, cli_error=None: archive({**record, "status": "signed", "hashes": hashes, "cli_error": cli_error})
+
+
+def archive_included(record):
+    """Archive an included liquidity step unless the log holds it already: decided from the log, not from this run
+    having sent it, so a rerun archives a step whose CLI failed after signing or whose inclusion check was interrupted."""
+    lines = [json.loads(line) for line in LIQUIDITY_LOG.read_text().splitlines()] if LIQUIDITY_LOG.exists() else []
+    if not any(line.get("status") == "included" and line.get("hashes") == record["hashes"] for line in lines):
+        archive({**record, "status": "included"})
+
+
+def send(record, signed):
+    """Archive a signed envelope and its hash, then send it through RPC: (inclusion row or None, sendTransaction reply)."""
+    tx_hash = command(["tx", "hash", signed, "--network", "testnet"])[0]
+    archive({**record, "status": "signed", "hashes": [tx_hash], "envelope": signed})
+    sent = rpc("sendTransaction", transaction=signed)
+    rows = None if sent["status"] in ("ERROR", "TRY_AGAIN_LATER") else included([tx_hash])
+    archive({**record, "status": "included" if rows else "failed or never landed", "hashes": [tx_hash], "send": sent,
+             "transactions": rows})
+    return (rows[0] if rows else None), sent
+
+
+def pool_reserves(pair):
+    """(USDC, other) reserves of a pair, as realign() reads them."""
+    r = [int(x) for x in view(pair, "get_reserves")]
+    return (r[0], r[1]) if view(pair, "token_0") == USDC else (r[1], r[0])
+
+
+def liquidity_address():
+    assert LIQUIDITY in state.get("identities", {}), "run `liquidity account --yes` first"
+    return address(LIQUIDITY)
+
+
+def liquidity_account(yes):
+    lines = {"liquidity_usdc_trustline": inputs["assets"]["USDC"]["classic"], "liquidity_treserve_trustline": state["treserve_sac"]["asset"]}
+    new = LIQUIDITY not in state.get("identities", {})
+    if new:
+        print("plan: keys generate", LIQUIDITY, "--fund (friendbot)")
+    for key, line in lines.items():
+        print("plan: change-trust", line, "from", LIQUIDITY, *(["(recorded)"] if key in state else []))
+    if not yes:
+        return print("nothing sent; rerun with --yes to send")
+    identities((LIQUIDITY,), "identities")
+    if new:
+        archive({"kind": "account", "account": LIQUIDITY, "address": address(LIQUIDITY)})
+    for key, line in lines.items():
+        record = {"kind": "trustline", "account": LIQUIDITY, "line": line}
+        trustline(key, LIQUIDITY, line, archive_signed(record))
+        archive_included({**record, **state[key]})
+
+
+def liquidity_mint(yes):
+    asset = state["treserve_sac"]["asset"]
+    to = liquidity_address()
+    print("plan: payment", MINT, asset, "from", REALIGN, address(REALIGN), "to", LIQUIDITY, to,
+          *(["(recorded)"] if "liquidity_mint" in state else []))
+    if not yes:
+        return print("nothing sent; rerun with --yes to send")
+    assert fetch("trustline", "--account", LIQUIDITY, "--asset", asset), f"{LIQUIDITY} has no {asset} trustline"
+    record = {"kind": "mint", "asset": asset, "amount": MINT, "to": to}
+    done = step("liquidity_mint", lambda: {"asset": asset, "amount": MINT, "to": to, "hashes": command(
+        ["tx", "new", "payment", "--source-account", REALIGN, "--destination", to, "--asset", asset, "--amount", str(MINT),
+         "--network", "testnet"])[1]}, archive_signed(record))
+    archive_included({**record, **done})
+    print("minted", done["transactions"])
+
+
+def claim(name, issuer):
+    """One Blend faucet claim by the fresh key `name`: GET, validate, sign, send; on tx_bad_seq one fresh envelope."""
+    fresh = state["faucet"][name]
+    if fetch("trustline", "--account", name, "--asset", f"USDC:{issuer}"):
+        return {"recovered": "the USDC trustline exists: an earlier claim landed", "created_at": datetime.now(UTC).isoformat()}
+    for attempt in (1, 2):
+        request = urllib.request.Request(f"{FAUCET}?userId={fresh}", headers={"User-Agent": "etesia-testnet-deploy"})
+        envelope = strip_envelope(urllib.request.urlopen(request, timeout=30).read().decode())
+        decoded = json.loads(command(["tx", "decode", envelope, "--output", "json"])[0])
+        record = {"kind": "claim", "account": name, "address": fresh, "faucet": FAUCET, "attempt": attempt}
+        if problems := claim_problems(decoded, fresh, issuer):
+            archive({**record, "status": "refused, not signed", "problems": problems, "envelope": envelope})
+            sys.exit(f"{name}: faucet envelope refused, nothing signed: {problems}")
+        for op in decoded["tx"]["tx"]["operations"]:
+            print("claim op", json.dumps(op, separators=(",", ":")), flush=True)
+        row, sent = send(record, command(["tx", "sign", envelope, "--sign-with-key", name, "--network", "testnet"])[0])
+        if row:
+            return row
+        if attempt == 1 and bad_seq(sent):
+            print("tx_bad_seq: another claim used the issuer's sequence; fetching one new envelope", flush=True)
+            continue
+        sys.exit(f"{name}: the claim failed or never landed: {sent}")
+
+
+def forward(name, issuer):
+    """One transaction from `name`: USDC to etesia-liquidity, the rest back to the issuer, trustlines removed, merged."""
+    if not fetch("account", "--account", name):
+        return {"recovered": "the account is merged already", "created_at": datetime.now(UTC).isoformat()}
+    balances = {}
+    for code in FAUCET_CODES:
+        if entries := fetch("trustline", "--account", name, "--asset", f"{code}:{issuer}"):
+            balances[code] = int(entries[0]["val"]["trustline"]["balance"])
+    ops = merge_ops(liquidity_address(), issuer, balances)
+    for op in ops:
+        print("forward op", *op, flush=True)
+    xdr = command(["tx", "new", *ops[0], "--source-account", name, "--inclusion-fee", "10000", "--build-only", "--network", "testnet"])[0]
+    for op in ops[1:]:
+        xdr = command(["tx", "op", "add", *op, "--source-account", name, "--build-only", "--network", "testnet", xdr])[0]
+    record = {"kind": "forward", "account": name, "address": state["faucet"][name], "balances": balances, "operations": ops}
+    row, sent = send(record, command(["tx", "sign", xdr, "--sign-with-key", name, "--network", "testnet"])[0])
+    if not row:
+        sys.exit(f"{name}: the forward-and-merge failed or never landed: {sent}")
+    return {**row, "balances": balances}
+
+
+def liquidity_claims(n, yes):
+    """`n` faucet claims from fresh keys etesia-faucet-4… (after A81's 1–3), unfinished ones first. Claims are at
+    least CLAIM_SPACING apart, so this command sleeps up to 15 min before each claim after the first."""
+    issuer = inputs["assets"]["USDC"]["classic"].split(":")[1]
+    claims = state.get("liquidity_faucet", {})
+    today = datetime.now(UTC).date().isoformat()
+    done_today = sum(c.get("claim", {}).get("created_at", "").startswith(today) for c in claims.values())
+    if not 1 <= n <= CLAIMS_PER_DAY - done_today:
+        sys.exit(f"claims: {done_today} made today (UTC); at most {CLAIMS_PER_DAY} a day")
+    used = [int(p.stem.rsplit("-", 1)[1]) for p in (Path(os.environ["STELLAR_CONFIG_HOME"]) / "identity").glob("etesia-faucet-*.toml")]
+    start = max(used + [3]) + 1
+    names = ([name for name, c in claims.items() if "forward" not in c] + [f"etesia-faucet-{i}" for i in range(start, start + n)])[:n]
+    for name in names:
+        print("plan:", name, "friendbot funding, GET", FAUCET, "and sign it only if it holds the issuer's USDC/BLND/wETH/wBTC"
+              " change_trust and payments; then all USDC to", LIQUIDITY, "BLND/wETH/wBTC back to", issuer,
+              "trustlines removed, account merged into", LIQUIDITY)
+    print(f"claims are at least {CLAIM_SPACING} s apart: this run waits between them; {done_today} made today (UTC)")
+    if not yes:
+        return print("nothing sent; rerun with --yes to send")
+    liquidity_address()
+    claims = state.setdefault("liquidity_faucet", {})
+    for name in names:
+        entry = claims.setdefault(name, {})
+        if "claim" not in entry:
+            last = max((datetime.fromisoformat(c["claim"]["created_at"]) for c in claims.values() if "claim" in c), default=None)
+            if last and (wait := CLAIM_SPACING - (datetime.now(UTC) - last).total_seconds()) > 0:
+                print(f"waiting {wait:.0f} s before the next claim", flush=True)
+                time.sleep(wait)
+            identities((name,), "faucet")
+            entry["claim"] = claim(name, issuer)
+            save()
+        if "forward" not in entry:
+            entry["forward"] = forward(name, issuer)
+            save()
+        print("claimed", name, entry, flush=True)
+
+
+def liquidity_seed(yes):
+    """Deepen both pairs at their live ratio until a 100 USDC trade, bought or sold, moves each at most 1%."""
+    lines = [json.loads(line) for line in REALIGNS.read_text().splitlines()] if REALIGNS.exists() else []
+    fresh = realigned(lines, datetime.now(UTC))
+    need = max(depth_needed(SEED_TRADE, SEED_IMPACT_BPS), SEED_USDC_RESERVE)
+    pairs = {"xlm": (evidence_file()["xlm_pair"]["pair"], XLM), "treserve": (state["treserve_pair"]["pair"], state["treserve_sac"]["contract"])}
+    plan, total = {}, {USDC: 0, XLM: XLM_KEEP, pairs["treserve"][1]: 0}
+    for which, (pair, other) in pairs.items():
+        u, x = pool_reserves(pair)
+        adds = seed_adds(u, x, need)
+        row = {"pair": which, "pair_address": pair, "other": other, "need_usdc_reserve": need, "ledger": latest()[0],
+               "before": {"usdc_reserve": u, "other_reserve": x, "impact_bps_100_usdc": float(impact(SEED_TRADE, u) * 10_000)}}
+        if which in fresh:
+            row["before"]["deviation_bps"] = str((Decimal(u) / Decimal(x) / Decimal(fresh[which]["target_usdc_per_unit"]) - 1) * 10_000)
+        if adds:
+            u2, x2 = u + adds[0], x + adds[0] * x // u
+            row["add"] = {"usdc": adds[0], "other": adds[1], "usdc_min": minimum(adds[0]), "other_min": minimum(adds[1]),
+                          "impact_bps_after": {"buy": float(impact(SEED_TRADE, u2) * 10_000),
+                                               "sell": float(impact(Fraction(SEED_TRADE * x2, u2), x2) * 10_000)}}
+            total[USDC] += adds[0]
+            total[other] += adds[1]
+        plan[which] = row
+        print("plan:", json.dumps(row), flush=True)
+    if set(fresh) != {"xlm", "treserve"}:
+        sys.exit(f"refuse: realign both pairs (realign xlm, realign treserve) less than {REALIGN_FRESH} s before seeding; nothing sent")
+    me = liquidity_address()
+    held = {token: int(view(token, "balance", id=me)) for token in total}
+    if any(held[token] < total[token] for token in total):
+        sys.exit(f"stop: {LIQUIDITY} holds {held}, the seed needs {total} (base units, XLM incl. {XLM_KEEP} kept); nothing sent")
+    if not yes:
+        return print("nothing sent; rerun with --yes to send")
+    for which, row in plan.items():
+        if "add" not in row:
+            print("deep enough", which)
+            continue
+        add, deadline = row["add"], latest()[1] + 300
+        record = {"kind": "seed", **row, "venue": ROUTER, "deadline": deadline, "source": me}
+        try:
+            returned, hashes = invoke(ROUTER, "add_liquidity", source=LIQUIDITY, token_a=USDC, token_b=row["other"],
+                                      amount_a_desired=add["usdc"], amount_b_desired=add["other"], amount_a_min=add["usdc_min"],
+                                      amount_b_min=add["other_min"], to=me, deadline=deadline)
+            failure = None
+        except CliError as error:
+            returned, hashes, failure = None, error.hashes, str(error)[-2000:]
+        archive({**record, "status": "signed", "hashes": hashes, "cli_error": failure})
+        if not hashes:
+            sys.exit(f"no transaction signed: {failure}")
+        rows = included(hashes)
+        if rows is None:
+            archive({**record, "status": "failed or never landed", "hashes": hashes})
+            sys.exit(f"the {which} seed failed or never landed")
+        u, x = pool_reserves(row["pair_address"])
+        archive({**record, "status": "included", "returned": returned, "transactions": rows, "lp_held": view(row["pair_address"], "balance", id=me),
+                 "after": {"usdc_reserve": u, "other_reserve": x, "impact_bps_100_usdc": float(impact(SEED_TRADE, u) * 10_000), "ledger": latest()[0]}})
+        print("seeded", which, returned, rows)
+
+
+def liquidity(rest):
+    yes = "--yes" in rest
+    args = [a for a in rest if a != "--yes"]
+    if args in (["account"], ["mint"], ["seed"]):
+        {"account": liquidity_account, "mint": liquidity_mint, "seed": liquidity_seed}[args[0]](yes)
+    elif len(args) == 2 and args[0] == "claims" and args[1].isdigit():
+        liquidity_claims(int(args[1]), yes)
+    else:
+        sys.exit(USAGE)
+
+
 # Both the RPC this script reads and the network the CLI signs for must be testnet.
-cli_network = json.loads(command(["network", "info", "--network", "testnet", "--output", "json"])[0])
-if PASSPHRASE != rpc("getNetwork")["passphrase"] or PASSPHRASE != inputs["passphrase"] or PASSPHRASE != cli_network["passphrase"]:
-    sys.exit("Refuse: testnet only")
-mode, rest = (sys.argv[1], sys.argv[2:]) if len(sys.argv) > 1 else (None, [])
-if mode == "assets" and (not rest or rest[0] == "--funding"):
-    assets(rest[1:])
-elif mode == "realign" and rest in (["xlm"], ["treserve"]):
-    realign(rest[0])
-elif mode in ("accounts", "v3", "quote", "vaults", "record") and not rest:
-    {"accounts": accounts, "v3": v3, "quote": quote, "vaults": vaults, "record": record}[mode]()
-else:
-    sys.exit(USAGE)
+if __name__ == "__main__":  # scripts/testnet-deploy-checks.py imports the pure parts
+    cli_network = json.loads(command(["network", "info", "--network", "testnet", "--output", "json"])[0])
+    if PASSPHRASE != rpc("getNetwork")["passphrase"] or PASSPHRASE != inputs["passphrase"] or PASSPHRASE != cli_network["passphrase"]:
+        sys.exit("Refuse: testnet only")
+    mode, rest = (sys.argv[1], sys.argv[2:]) if len(sys.argv) > 1 else (None, [])
+    if mode == "assets" and (not rest or rest[0] == "--funding"):
+        assets(rest[1:])
+    elif mode == "realign" and rest in (["xlm"], ["treserve"]):
+        realign(rest[0])
+    elif mode in ("accounts", "v3", "quote", "vaults", "record") and not rest:
+        {"accounts": accounts, "v3": v3, "quote": quote, "vaults": vaults, "record": record}[mode]()
+    elif mode == "liquidity":
+        liquidity(rest)
+    else:
+        sys.exit(USAGE)
