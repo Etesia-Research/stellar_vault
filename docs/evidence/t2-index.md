@@ -579,3 +579,28 @@ The A99 refill claims after the three in `t2-liquidity-refills-2026-11-13.json` 
 | 5,706,686 | 2026-11-13 08:04:34 | `f119b5b583019333d2267f9308327cb8524a7c48f288221ca52188d95b3a58ff` | `faucet:5`: Blend faucet claim |
 | 5,706,687 | 2026-11-13 08:04:39 | `8ba82b699d226d9cabaaa43bd99bf5de91a671dea7ad1701df3646f4aee811de` | `faucet:5`: 1,000 USDC to `etesia-liquidity`, then `account_merge` |
 | 5,707,729 | 2026-11-13 09:31:29 | `e3f7236c24b053d1e1192ef530580bc6b57220579394f4e6cb7d408beb24a050` | Router swap on XLM/USDC `CBR76WMT…YM3V` from `etesia-liquidity`, requester `api:GA6LXX26…5CJP`: 403.7608231 USDC → 2,881.5501593 XLM; deviation -791 → 0 bps |
+
+## t2-d4-10-reconciliation/
+
+The D4-10 reconciliation records (A104, user decision 2026-11-13): the flagship keeper's archived `d4-keeper-attempt` record of every `execute` at nonces 47–64 (cycles 54–84, 2026-11-11 13:01–19:10 UTC), copied byte for byte from the keeper's `/data/keeper/evidence/` over `railway ssh` by the agent on 2026-11-13; each file name is its SHA-256. Each record has `outcome` `success` and `reconciliation.problems` `[]`; the only non-zero residuals are Blend USDC supply accrual, in base units. Each hash and ledger was checked on Horizon (successful, same ledger). They replace the user's 2026-11-11 journal read as the D4-10 reconciliation evidence. Pre-reset deployment per A76.
+
+| Nonce | Ledger | Hash | Record | USDC supply residual |
+| --- | --- | --- | --- | --- |
+| 47 | 5,675,691 | `3ec9caeb31816521c728dd092797b49941919499fa65339d4ede348fb881ef81` | `6cb51a9a65ed…json` | 36 |
+| 48 | 5,677,199 | `3b03a8eac8fe824c2bba7476f1ec0ed43b8a6e93d121ed9db25a67d3226f3de5` | `4e49d321ba46…json` | 55 |
+| 49 | 5,677,384 | `4a5e3b219f3308d119d3eae1f1a6e21d85f29c00e3e6ba922d759313f2787d66` | `17fdfd8fce66…json` | 36 |
+| 50 | 5,677,422 | `db9b81f0abaa925d21fe421a7f017b132f4ad7c4c8e86165cd8178b9d5a91211` | `0d9ee3d8851f…json` | 36 |
+| 51 | 5,677,483 | `8e6056c7beb50e0659d9b04f71a2d8d3e4562ae5d291fc0c3fbdce6cbc255c7d` | `6fe42471f72a…json` | 47 |
+| 52 | 5,677,668 | `9ca779f1ea97dd6f0bbee629288a32f606eda76a1711c938d297a905ef893812` | `1c1de1655b96…json` | 48 |
+| 53 | 5,677,922 | `312ead0e178202ba9586caf82cd00a28e9f6c4cd4fab9f079fe26ed01f648a19` | `cf490d6968a7…json` | 335 |
+| 54 | 5,677,962 | `ff7bbe228e09da0d11794729df6980c10bebc13cde31b85d26827c8652c7e44b` | `8e452e9ff02e…json` | 32 |
+| 55 | 5,678,337 | `7481920e66105f3e07cb5e1cdd14aa5ea564e4c6781056e43a32ec9d4c9a3ff7` | `041b10da0e87…json` | 32 |
+| 56 | 5,678,521 | `8bfc86fc6627e55b0daa2590b5a10035196f31913cf54a2aaa782377777c3765` | `d49cd2acfc05…json` | 32 |
+| 57 | 5,678,743 | `4713f33ee2c5dc7fb7dfb2c256e6e7555330d301c68c9a71cb19377efd890423` | `f9da42d882de…json` | 63 |
+| 58 | 5,678,929 | `7a6418ce64d93ec2998622dd572ba672e83d6d8e0b573da8a5b5e0bd253371c5` | `4f0751e210c9…json` | 48 |
+| 59 | 5,679,114 | `7939c7d606381c4e6eb9073a6e0c4e4d1c0df0b0e7a9fb0e2414e55ed7805b1f` | `a51343038231…json` | 32 |
+| 60 | 5,679,303 | `19b2c486142c7f95a49985f4c3b3a905b715f90997bdfdad9ef1252e5d88242a` | `a0ed30e7d60f…json` | 80 |
+| 61 | 5,679,524 | `8007d56ff376ce97ad70fe5540166683b4559213614b2e7d9a802a91e10fe4d7` | `455a5cdb87a8…json` | 32 |
+| 62 | 5,679,718 | `7d546ab1ee7dad8a4c1fe2a32350ebb0c82a4c281c697815130c2b6dccea8993` | `9e101b80add1…json` | 32 |
+| 63 | 5,679,903 | `2398d3b3fcd9e5c75b6ca9c6e62dd2564d7cc069325d606913cedf18bfe756cd` | `f18d1aa0a0a4…json` | 32 |
+| 64 | 5,680,122 | `56781591c87336ac225d03e6ff9453548327d8a436a8e33859aeeeb1e69ae9a1` | `432af73b6140…json` | 32 |
