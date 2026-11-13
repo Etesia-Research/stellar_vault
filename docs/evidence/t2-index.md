@@ -545,3 +545,20 @@ The first A102 just-in-time realign, sent by the flagship keeper's liquidity hoo
 | Ledger | Close (UTC) | Hash | Label |
 | --- | --- | --- | --- |
 | 5,706,941 | 2026-11-13 08:25:49 | `7da2876a46a17a578b6ab57a1092e070d3d99e217dda310fcde0f729f01f0097` | Router `swap_exact_tokens_for_tokens` on XLM/USDC `CBR76WMT…YM3V`: 1,000 USDC → 8,303.1641621 XLM to `etesia-liquidity`; deviation -2,596 → -773 bps |
+
+## t2-d4-07-scheduled-0100-2026-11-12.json and t2-d4-07-scheduled-decision-2026-11-12.json
+
+The D4-07 live record-only Scheduled decision: the flagship keeper's 01:00 UTC Scheduled trigger on 2026-11-12, cycle 106 (01:01:44–01:02:07 UTC), Railway deployment `0f7700e4` (quant `171f7a4`, active 2026-11-11 18:21:32 to 2026-11-12 07:15:41 UTC) with `ETESIA_KEEPER_SCENARIO=xlm-1500` (D4-10 step 4). The decision record is copied byte for byte from the keeper's `/data/keeper/evidence/`; its SHA-256 `fa7af3fa27010ebc6cca155285ea50dd5c5d212d13999dd0b811fdf2956f32e0` is its file name there. It records `decision_time` 2026-11-12T01:00:00+00:00, dataset `ded5e831…d364`, labels Scheduled, Signal and Drift, `scenario` `xlm-1500` and `published: false`; the decision target hash is `c4bf05311519b1021c4f02e9c521b0654a3d0146e9ef06f33479b5ed154634d9`. Horizon lists only the two transactions below from the executor `GDGCL46K…JT7N` in ledgers 5,684,300–5,684,400. The publish's result meta carries the scenario target hash `f29114d0…` and not the decision hash, which also appears in no journal attempt. Pre-reset deployment per A76.
+
+| Ledger | Close (UTC) | Hash | Label |
+| --- | --- | --- | --- |
+| 5,684,334 | 2026-11-12 01:01:53 | `e1636e5017315c9b00829a82cbd585e9ae477e995cbc3c5826cf8c4b37499dba` | Flagship `publish_target` of the `xlm-1500` scenario target `f29114d0…`, cycle 106 |
+| 5,684,336 | 2026-11-12 01:02:03 | `7c22279e95751d011c0d3d69fa8204f691d48ecc60c92563607d95f46f3c49a2` | Flagship `execute` under that target, cycle 106 |
+
+## t2-d6-04-apply-change-2026-11-13.json and t2-d6-04-apply-change-readback-2026-11-13.json
+
+D4-09 step 12 and D6-04 row 2b: the guard vault's timelocked `Resume`, announced in `801123cb…85ad` (A77) with earliest ledger 5,709,886, applied by `etesia-admin` (`apply_change` is permissionless at or after `earliest`) after a passing simulation at ledger 5,709,895. The receipt's `config` event carries version 2 and the change `Resume` with hash `987835d96b7b1571e169a1a241217a584c84abcb8e86cbdbd63f0fc1b17f6792`. The read-back file holds simulated `state()` and `pending_change()` reads at ledger 5,709,903: `paused` false, `version` 2, no pending change. Pre-reset deployment per A76.
+
+| Ledger | Close (UTC) | Hash | Label |
+| --- | --- | --- | --- |
+| 5,709,899 | 2026-11-13 12:32:19 | `6f4a0e63ce187c5c1c6c67d97893d5817c7ff88db30af566d0e58e4aff47d2aa` | Guard `apply_change(987835d9…6792)`: `Resume`, paused → false, version 1 → 2 |

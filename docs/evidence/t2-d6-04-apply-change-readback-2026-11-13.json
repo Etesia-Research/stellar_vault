@@ -1,0 +1,23 @@
+{
+  "label": "Guard vault read-back after apply_change 6f4a0e63\u2026d2aa (D4-09 step 12, D6-04 row 2b); simulated reads, no transaction",
+  "vault": "CCUHQJ3FSGC26UOCLN3EK2DUO725ZLBVRUF5B7N36W6MB3DM4JEOC6VO",
+  "network": "Test SDF Network ; September 2015",
+  "read_at": "2026-11-13T12:32:45+00:00",
+  "latest_ledger": 5709903,
+  "state": {
+    "high_water": "10000000000000",
+    "last_execution": 5679002,
+    "last_fee": 1794418653,
+    "loss": "2",
+    "management_dust": "100074356725535742",
+    "nonce": 2,
+    "paused": false,
+    "performance_dust": "0",
+    "supply": "1000028680709192",
+    "turnover": "300000000",
+    "version": 2,
+    "window_equity": "10000000000",
+    "window_ledger": 5678203
+  },
+  "pending_change": null
+}
