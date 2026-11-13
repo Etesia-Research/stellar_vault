@@ -449,7 +449,14 @@ fn run(e: &Env, actions: &Vec<Action>, recovery: bool, before: i128) -> (i128, M
     (turnover, purchases)
 }
 #[inline(never)]
-fn check_positions(e: &Env, equity: i128, t: &Target, holdings: &Vec<Holding>) {
+fn check_positions(
+    e: &Env,
+    equity: i128,
+    t: &Target,
+    holdings: &Vec<Holding>,
+    supplies: bool,
+    withdraw_only: bool,
+) {
     let c = storage::config(e);
     let mut debt = 0;
     for h in holdings.iter() {
@@ -467,8 +474,22 @@ fn check_positions(e: &Env, equity: i128, t: &Target, holdings: &Vec<Holding>) {
         {
             panic_with_error!(e, Error::Limit);
         }
-        if h.supply > 0 && (h.asset != c.usdc || h.supply > yield_limit(e, t, equity)) {
+        if h.supply > 0 && h.asset != c.usdc {
             panic_with_error!(e, Error::Limit);
+        }
+        if h.supply > 0 && h.asset == c.usdc {
+            // No execute that supplies may leave the supply above the yield limit. One that does not may leave it
+            // above a limit its fills, the marks or flows lowered, by at most the slippage share of the limit, unless
+            // it only withdraws (D2: block new supply above the cap, prioritize withdrawals).
+            let limit = yield_limit(e, t, equity);
+            let over = h.supply - limit;
+            if over > 0
+                && (supplies
+                    || (over > mul_div(e, limit, i128::from(c.max_slippage_bps), BPS, false)
+                        && !withdraw_only))
+            {
+                panic_with_error!(e, Error::Limit);
+            }
         }
     }
     if debt > mul_div(e, equity, i128::from(c.max_debt_bps), BPS, false) {
@@ -594,7 +615,12 @@ impl Vault {
                 }
             }
         }
-        check_positions(&e, after, &target, &new);
+        let supplies = plan.actions.iter().any(|a| matches!(a, Action::Supply(..)));
+        let withdraw_only = plan
+            .actions
+            .iter()
+            .all(|a| matches!(a, Action::Withdraw(..)));
+        check_positions(&e, after, &target, &new, supplies, withdraw_only);
         limits(&e, before, after, turnover);
         #[allow(deprecated)]
         e.events().publish(

@@ -1073,6 +1073,133 @@ fn shrinking_residual_blocks_allocations_until_pool_recovery_and_allows_reentry(
 }
 
 #[test]
+fn a_lossy_swap_may_leave_supply_above_the_limit_within_one_percent_of_it_until_it_is_withdrawn() {
+    let f = Fixture::new(true, false);
+    let c = f.client();
+    let e = &f.e;
+    let usdc = f.usdc.clone();
+    let run = |epoch: u64, yield_bps: u32, actions: soroban_sdk::Vec<Action>| {
+        f.advance(0, 1);
+        let mut t = f.target(yield_bps);
+        t.epoch = epoch;
+        f.auth(&f.executor, "publish_target", (t.clone(),).into_val(e));
+        let p = Plan {
+            target: c.publish_target(&t),
+            epoch,
+            nonce: c.state().nonce,
+            version: 1,
+            deadline: t.expiry,
+            actions,
+        };
+        f.auth(&f.executor, "execute", (p.clone(),).into_val(e));
+        c.try_execute(&p).map(|_| ()).map_err(|err| err.unwrap())
+    };
+    let supply = || {
+        c.holdings()
+            .iter()
+            .find(|h| h.asset == usdc)
+            .unwrap()
+            .supply
+    };
+    let limit = || c.total_assets() * 95 / 1000; // the flat target's 9.5% limit
+    let excess = || supply() - limit();
+    // A swap into the reserve, marked at `price` basis points, that fills at its 1% floor.
+    let swap = |amount: i128, price: i128| {
+        let mut s = f.swap(&usdc, &f.reserve, amount);
+        s.minimum = (amount * 9_900 + price - 1) / price;
+        e.as_contract(&f.router, || {
+            e.storage()
+                .instance()
+                .set(&symbol_short!("output"), &s.minimum)
+        });
+        Action::Swap(s)
+    };
+    // The keeper's position: the limit less its accrual margin.
+    let margin = limit() / 100_000 + 1;
+    assert_eq!(
+        run(
+            1,
+            1000,
+            vec![e, Action::Supply(usdc.clone(), limit() - margin)]
+        ),
+        Ok(())
+    );
+    // Each 19% swap loses 1.9 USDC and lowers the limit by 9.5% of it. Four of them leave the supply above the
+    // lowered limit, within 1% of it.
+    for (epoch, expected) in (2..6).zip([1_795_499, 3_600_499, 5_405_499, 7_210_499]) {
+        assert_eq!(
+            run(epoch, 1000, vec![e, swap(SEED_ASSETS / 100 * 19, 10_000)]),
+            Ok(())
+        );
+        assert_eq!(excess(), expected);
+    }
+    assert_eq!(limit() / 100, 9_427_800);
+    // Within the tolerance, new supply is still refused, even beside a swap that lowers the distance.
+    assert_eq!(
+        run(
+            6,
+            1000,
+            vec![
+                e,
+                swap(SEED_ASSETS / 100, 10_000),
+                Action::Supply(usdc.clone(), 1)
+            ]
+        ),
+        Err(Error::Limit.into())
+    );
+    // A lower reserve mark brings the supply close to the tolerance: a swap that would cross it is refused, a smaller
+    // one passes.
+    f.mark(&f.reserve, PRICE_SCALE * 9_975 / 10_000, true);
+    assert_eq!(excess(), 8_997_449);
+    assert_eq!(
+        run(7, 1000, vec![e, swap(SEED_ASSETS / 10, 9_975)]),
+        Err(Error::Limit.into())
+    );
+    assert_eq!(
+        run(8, 1000, vec![e, swap(SEED_ASSETS / 100, 9_975)]),
+        Ok(())
+    );
+    assert_eq!((excess(), limit() / 100), (9_092_449, 9_408_980));
+    // Beyond the tolerance only withdrawals pass, and a partial one may stay beyond it.
+    f.mark(&f.reserve, PRICE_SCALE * 9_950 / 10_000, true);
+    assert_eq!((excess(), limit() / 100), (10_902_971, 9_390_875));
+    assert_eq!(
+        run(9, 1000, vec![e, swap(SEED_ASSETS / 100, 9_950)]),
+        Err(Error::Limit.into())
+    );
+    assert_eq!(
+        run(10, 1000, vec![e, Action::Withdraw(usdc.clone(), 1_000_000)]),
+        Ok(())
+    );
+    assert_eq!(excess(), 9_902_971);
+    assert_eq!(
+        run(
+            11,
+            1000,
+            vec![e, Action::Withdraw(usdc.clone(), 9_902_971 + margin)]
+        ),
+        Ok(())
+    );
+    assert!(excess() < 0);
+    // A target that allows no lending gives no tolerance: the parked supply blocks swaps until it is withdrawn,
+    // and it can be withdrawn in parts.
+    assert_eq!(
+        run(12, 0, vec![e, swap(SEED_ASSETS / 100, 9_950)]),
+        Err(Error::Limit.into())
+    );
+    let parked = supply();
+    assert_eq!(
+        run(13, 0, vec![e, Action::Withdraw(usdc.clone(), parked / 2)]),
+        Ok(())
+    );
+    assert_eq!(
+        run(14, 0, vec![e, Action::Withdraw(usdc.clone(), supply())]),
+        Ok(())
+    );
+    assert_eq!(run(15, 0, vec![e, swap(SEED_ASSETS / 100, 9_950)]), Ok(()));
+}
+
+#[test]
 fn prefunded_donations_cannot_rebootstrap_or_steal_rounding_from_bounded_deposits() {
     use soroban_sdk::{testutils::Address as _, token::StellarAssetClient, Address};
     let f = Fixture::new(false, false);
