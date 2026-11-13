@@ -562,3 +562,20 @@ D4-09 step 12 and D6-04 row 2b: the guard vault's timelocked `Resume`, announced
 | Ledger | Close (UTC) | Hash | Label |
 | --- | --- | --- | --- |
 | 5,709,899 | 2026-11-13 12:32:19 | `6f4a0e63ce187c5c1c6c67d97893d5817c7ff88db30af566d0e58e4aff47d2aa` | Guard `apply_change(987835d9…6792)`: `Resume`, paused → false, version 1 → 2 |
+
+## t2-liquidity-refills-and-builder-realign-2026-11-13.json
+
+The A99 refill claims after the three in `t2-liquidity-refills-2026-11-13.json` (`faucet:3`–`faucet:5`, the same quant service and pattern: Friendbot `create_account`, Blend faucet claim with an issuer-signed envelope, then 1,000 USDC to `etesia-liquidity` and `account_merge`), and the first A102 realign requested through the Builder's liquidity API. Hashes from Horizon (each fresh key's transactions and the float's operations, read about 12:45 UTC); labels from Horizon operation types and the liquidity ledger (`attempts` and `requests`, read over `railway ssh` by the agent). No claim followed `faucet:5`: the float stayed above the 3,000 USDC refill threshold (4,895.51 USDC in the 09:31 request's response). The realign was requested for owner `GA6LXX26…5CJP` (the user's wallet) by request `7267ca55…58df` at 09:31:24 UTC, status `topped_up`, with no addition; it moved XLM/USDC from -791 to 0 bps against the Reflector mid. The wallet signed no transaction after it (its latest on Horizon is 2026-11-12 20:19:49 UTC). Pre-reset deployment per A76.
+
+| Ledger | Close (UTC) | Hash | Label |
+| --- | --- | --- | --- |
+| 5,706,324 | 2026-11-13 07:34:24 | `dc8acb754e2c632b980ed85336eb4abc22a4656197f3ca75aadf8ba30b342bd7` | Key `GAXHL5YU…` (`faucet:3`): Friendbot `create_account` |
+| 5,706,325 | 2026-11-13 07:34:29 | `5b56ce8bc2d4c0135df9bec4768d558cb7153db53c0e2a23d4a2de52114d2ea8` | `faucet:3`: Blend faucet claim |
+| 5,706,326 | 2026-11-13 07:34:34 | `f68104697e9eb3cc6933a88cd846a30c695b0cc7a35d8e7180252a6904854552` | `faucet:3`: 1,000 USDC to `etesia-liquidity`, then `account_merge` |
+| 5,706,504 | 2026-11-13 07:49:24 | `391faec0ac125d304688c0d99797d2a85460be3db4823bde1e2af668bf4296e2` | Key `GAAOAJMN…` (`faucet:4`): Friendbot `create_account` |
+| 5,706,506 | 2026-11-13 07:49:34 | `9800e4e1eb1fcd08ef1a531f920765f819827a26c131096553f05e5a0fc2b279` | `faucet:4`: Blend faucet claim |
+| 5,706,508 | 2026-11-13 07:49:44 | `bf48456c3e2d15e4065cf3869ed33c049545e2263197d176eddbe43377db1e8e` | `faucet:4`: 1,000 USDC to `etesia-liquidity`, then `account_merge` |
+| 5,706,684 | 2026-11-13 08:04:24 | `a2a708e029cdbad0227114e0904a30d0b5ffa74eea17d4642ebbd279930938e4` | Key `GBIJMSUG…` (`faucet:5`): Friendbot `create_account` |
+| 5,706,686 | 2026-11-13 08:04:34 | `f119b5b583019333d2267f9308327cb8524a7c48f288221ca52188d95b3a58ff` | `faucet:5`: Blend faucet claim |
+| 5,706,687 | 2026-11-13 08:04:39 | `8ba82b699d226d9cabaaa43bd99bf5de91a671dea7ad1701df3646f4aee811de` | `faucet:5`: 1,000 USDC to `etesia-liquidity`, then `account_merge` |
+| 5,707,729 | 2026-11-13 09:31:29 | `e3f7236c24b053d1e1192ef530580bc6b57220579394f4e6cb7d408beb24a050` | Router swap on XLM/USDC `CBR76WMT…YM3V` from `etesia-liquidity`, requester `api:GA6LXX26…5CJP`: 403.7608231 USDC → 2,881.5501593 XLM; deviation -791 → 0 bps |
