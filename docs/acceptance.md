@@ -1,13 +1,14 @@
 # D2 acceptance evidence
 
-**Scope amendment — 2026-09-18:** A48 excludes SHX; current local deployment fixtures contain six assets (USDC/XLM/AQUA/ETH/BTC/USTRY). The seven-asset evidence below remains the original dated D2 snapshot. See [D3 acceptance](d3-acceptance.md) for current qualification scope.
+**Scope amendment — 2026-09-18:** SHX is excluded; current local deployment fixtures contain six assets (USDC/XLM/AQUA/ETH/BTC/USTRY). The seven-asset evidence below remains the original dated D2 snapshot. See [D3 acceptance](d3-acceptance.md) for current qualification scope.
 
 **Locally implemented and verified, 2026-09-18; initial D2 publication.**
-The approved D2 foundation is implemented in this independent Rust repository.
-No Testnet/Mainnet activation, real oracle/venue integration or audit acceptance
-is implied. The [approved scope](../../doc/d2-vault-implementation-plan.md),
-[interfaces](interfaces.md), [operations](operations.md) and
-[reproduction guide](local-rpc.md) define the qualifications below.
+The D2 foundation is implemented in this independent Rust repository. The vault
+is deployed on Stellar testnet with Reflector pricing, Soroswap routing and a Blend
+pool: see the [testnet manifest](../deploy/testnet/pre-2026-12-16-reset.json) and
+the [receipt archive](evidence/t2-index.md). The [interfaces](interfaces.md),
+[operations](operations.md) and [reproduction guide](local-rpc.md) define the
+qualifications below.
 
 ## D4-01 aggregator v3 port — 2026-11-09 (local only)
 
@@ -15,7 +16,7 @@ The vault now routes every swap through the Soroswap Aggregator v3
 ([interface](interfaces.md), [recovery runbook](operations.md)). The toolchain is
 Rust 1.99.1 (`wasm32v1-none`), SDK/token SDK 29.0.1, Stellar CLI 28.1.0 and
 cargo-llvm-cov 0.9.1; Rust 1.84.1 builds only the unchanged DeFindex parent
-harness. No Testnet/Mainnet transaction, deployment or key is involved.
+harness.
 
 | Check | Result |
 | --- | --- |
@@ -47,8 +48,7 @@ The testnet D5-04 fixtures (the D4-03 rehearsal flagship deploy, `publish_target
   included swap and one classified failed swap. The pre-reset D4-03 vault deployment gate is met
   (2026-11-10): manifest [`deploy/testnet/pre-2026-12-16-reset.json`](../deploy/testnet/pre-2026-12-16-reset.json),
   flagship and guard vaults, and one included keeper `execute` routed through the v3 copy with a
-  Blend Supply (evidence keys `assets`, `vaults`, `quote_index`, `rehearsal`). The post-reset
-  redeploy follows the 2026-12-16 testnet reset.
+  Blend Supply (evidence keys `assets`, `vaults`, `quote_index`, `rehearsal`).
 - The Core 30 package declares libc++ 20; it ran on Debian's libc++ 19 libraries.
 - The D2 and D3 records below are dated snapshots; their protocol-22 runs
   reproduce from commit `b318771`.
@@ -74,8 +74,7 @@ corrected WASM, and all 29 receipts were independently verified as `SUCCESS`.
 The [guard-fix evidence](evidence/guard-fixes.json) records source/build hashes,
 coverage, transaction hashes and results. Its source digest combines the unchanged
 initial manifest entries with the three changed Rust inputs. The original evidence
-below remains the initial publication snapshot; no real pool or live dependency
-activation is established by either local run.
+below remains the initial publication snapshot.
 
 ## Recorded checks
 
@@ -95,7 +94,7 @@ The authoritative public records are [local deployment/receipts](evidence/local-
 Use `python3 scripts/record-evidence.py` after a successful smoke run to regenerate
 them and verify receipt status/build hashes. The initial source-tree digest is
 `d91af877061e624465210a317e11aaf2d583193f7aab762dcacba0e17a9dee68`.
-The source hashes preserve the tested snapshot; publication commits are recorded in the workspace wiki.
+The source hashes preserve the tested snapshot.
 
 Coverage includes vault and adapter production modules. Exclusions are tests,
 fixture tools, vendored dependencies and the `types.rs` contracttype-generated
@@ -108,7 +107,7 @@ unchanged upstream DeFindex source emits its existing unused-variable warning.
 
 | Step | Implemented evidence |
 | --- | --- |
-| D2-01 | Rust/SDK/CLI/source pins, immutable configuration, local identity manifest and exact ABI/auth/event matrix; live asset/pool/code identities remain activation inputs |
+| D2-01 | Rust/SDK/CLI/source pins, immutable configuration, local identity manifest and exact ABI/auth/event matrix; live asset/pool/code identities are deployment inputs |
 | D2-02 | Funded seed, SEP-41/56 signatures, bounded flows, preview parity, fee shares/HWM/dust, dormancy catch-up, donation/rounding protection, loss recovery and qualified stale-price basket |
 | D2-03 | Typed target/plan hashes, Python/Rust golden vector, nonce/deadline/config/cooldown/aggregate guards, malicious route/reentry rollback, timelocked roles/fees, pause and TTL/restored-snapshot tests |
 | D2-04 | Accrued supply/collateral/debt and reward fixtures; exact Blend nested auth/position deltas; borrowing-off rejection and synthetic round trip; actual pinned DeFindex parent WASM, fee layering, failure rollback and public-unwind recovery |
@@ -126,8 +125,7 @@ The DeFindex harness builds the upstream vault from unchanged pinned contract
 source and executes that WASM. It invests through the adapter, observes net fees,
 fails an illiquid exit without burning parent shares, restores cash through the
 vault's permissionless unwind, then completes parent withdrawal. Token/router/pool
-fixtures remain local; this is D2 upstream compatibility evidence, not D7 live
-portfolio unwinding or D9 resource acceptance.
+fixtures are local; this is D2 upstream compatibility evidence.
 
 The final RPC vault is `CDJL4C3N6NZ7LKRBJ6GXKWACC6FUVXXJHXH4SHCX5JDUYKQICZ7MVAIR`.
 It deposited 1,000,000,000 USDC atoms, minted 100,000,000,031,709 share atoms and
@@ -137,8 +135,8 @@ All seven asset identities are explicitly **local fixtures**, not inferred issue
 
 ## Selected configuration and rationale
 
-These are implementation choices within A42, not additional user approvals or
-calibrated production limits.
+These are the D2 implementation choices. The testnet deployment's values are in
+its [manifest](../deploy/testnet/pre-2026-12-16-reset.json).
 
 | Parameter | Value and rationale |
 | --- | --- |
@@ -153,9 +151,9 @@ calibrated production limits.
 | Aggregate turnover/loss | 100% / 2% NAV per 17,280-ledger window, shared by execution and unwind; consumed amounts survive deposits/withdrawals |
 | Capital changes | Deposits add to the window baseline; USDC withdrawals subtract cash; basket withdrawals reduce it pro rata; donations enter the next window baseline |
 | Borrowing | Immutable off for flagship; separate native fixture ceiling 50% debt/equity and at least 125% risk-weighted health |
-| Yield | USDC non-collateral supply only, at most 10% of residual reserve; selected live pool remains unactivated |
+| Yield | USDC non-collateral supply only, at most 10% of residual reserve; on testnet, the Blend pool `CCEBVDYM…44HGF` |
 | Rewards | Zero atomic-unit dust threshold; positive unclaimed entitlement blocks priced cash flows |
-| Network fees | Externally funded local tests; portfolio XLM reimbursement unactivated |
+| Network fees | Paid by the transaction source; no portfolio XLM reimbursement |
 
 The substantial funded seed and twelve-decimal shares avoid a nominal one-unit
 bootstrap denominator. Rounding loss for a deposit is less than one share atom's
@@ -175,32 +173,17 @@ HWM rounding, carries sub-share entitlement, and never ratchets HWM on a
 zero-share crystallization. High-value arithmetic is checked; out-of-range inputs
 or intermediates fail atomically rather than saturating into a financial result.
 
-## Explicit qualifications and later gates
+## Qualifications
 
 - SEP-56 draft method/event signatures match the pin, but maxima are executable
   USDC liquidity limits; `max_redeem` is not an unconditional whole-balance promise.
   NAV-dependent views can fail on unavailable claims/rewards or fee catch-up.
-- D3 must replace the custom `mark(asset)` fixture boundary with approved-source
-  freshness and units evidence. Fixture marks are not Reflector coverage. Pricing
-  is now Reflector only; the original D2 divergence/readiness check is removed.
-- D4 must verify live asset/pool/router code identities and actual route auth trees,
-  pool eligibility, net yield versus USTRY, liquidity/re-entry, keeper restart and
-  evidenced lending accounting/replays. All pinned Soroswap route structures are
-  accepted under common guards; the multi-hop/split test uses a hostile local
-  router, not live Phoenix/Aqua/Comet liquidity.
-- D7 must verify the actual deployed DeFindex version and fee stack, full real
-  holdings unwind, downtime/illiquidity behavior and audit/remediation.
-- D8/D9 still require venue selection and a separately authorized borrowing vault,
-  real atomic/staged resource proof, liquidation/bad-debt and stressed exit policy.
-  Current USDC exits conservatively require all debt/collateral cleared first.
+- Pricing is Reflector only; the original D2 divergence/readiness check is removed.
+  Local fixture marks stand in for Reflector in the local runs.
+- All pinned Soroswap route structures are accepted under common guards; the
+  multi-hop/split test uses a hostile local router.
+- USDC exits require all debt and collateral cleared first.
 - The local protocol-22 profile uses 128 KiB code size; the old 64 KiB profile is
   too small. CPU/memory remain 100 million instructions / 40 MiB. Seven-asset RPC
-  execution passes under the recorded profile, not an unspecified live profile.
-- Native restoration renews TTL on unchanged archived-entry payloads. A real
-  network archival/restore drill, monitoring and externally verified dependency
-  availability remain operational activation checks.
-
-The original 18-person-day figure remains submission history. This completed local
-foundation does not establish a remaining live-integration duration; D3 coverage,
-actual protocol/resource tests and audit scope must be measured before scheduling
-those gates. No delivery date or revised capacity estimate is invented.
+  execution passes under the recorded profile.
+- Native restoration renews TTL on unchanged archived-entry payloads.

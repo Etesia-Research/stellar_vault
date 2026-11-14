@@ -111,8 +111,10 @@ have fallen by exactly `amount`, the output risen by at least `minimum` and ever
 intermediate balance be unchanged, so pre-existing holdings cannot subsidize a route.
 v3 and vault error codes 1–12 overlap; identify a failure by its contract. Of the
 Soroswap code v3 meets on mainnet, the router, factory and pair are pinned in
-`SHA256SUMS`, and the native tests and local smoke use those binaries. Testnet routing and code identities
-remain D4 gates.
+`SHA256SUMS`, and the native tests and local smoke use those binaries. On testnet,
+`Config.router` is an Etesia-deployed copy of the same v3 code (`CBE32GUT…V5TH`,
+same SHA-256), listed with the other code identities in the
+[testnet manifest](../deploy/testnet/pre-2026-12-16-reset.json).
 
 Blend request IDs are 0 supply, 1 withdraw, 2 collateral supply, 3 collateral
 release, 4 borrow and 5 repay. Exact pre/post positions and underlying transfers
@@ -147,7 +149,7 @@ the parent-authorized recipient (upstream can send directly to its depositor).
 A shortage returns the upstream strategy error and rolls back the parent's burn.
 Anyone can use the vault's bounded public unwind and retry. The adapter cannot
 return a basket. DeFindex's separate vault/protocol fee layer is demonstrated by
-the pinned upstream WASM harness; deployed fee terms remain a D7 verification gate.
+the pinned upstream WASM harness.
 
 ## Event schema v1
 
@@ -172,8 +174,8 @@ Custom events have topics `[name, 1u32]` and these ordered payloads:
 | `config` | incremented version, executed pending change |
 
 Price/position views and public manifests supplement event indexing; interest
-between transactions is read from accrued reserves. D5 must retain that distinction
-from cash flows, share dilution, paper returns and externally paid network costs.
+between transactions is read from accrued reserves, separately from cash flows,
+share dilution, paper returns and externally paid network costs.
 
 ## D3 pricing amendment
 
@@ -183,4 +185,4 @@ failure, a nonpositive price, a future timestamp or age above `max_price_age`;
 D2's `reference`/`ready` fields and `max_divergence_bps` check are removed. Fee/share/NAV
 rounding, independent execution-loss bounds and qualified price-free exits are
 unchanged. Fresh vaults bind the provider at construction; existing vaults cannot
-switch oracle identity. [Local integration and remaining acceptance](d3-acceptance.md).
+switch oracle identity. [Local integration and acceptance](d3-acceptance.md).

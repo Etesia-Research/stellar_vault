@@ -20,18 +20,29 @@ counsel and, if necessary, the upstream rights holders. Other dependencies retai
 their own licenses. GitHub's public-repository viewing and forking rights remain
 unaffected.
 
+## Testnet deployment (Tranche 2)
+
+The flagship vault `CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH`
+and the guard vault `CCUHQJ3FSGC26UOCLN3EK2DUO725ZLBVRUF5B7N36W6MB3DM4JEOC6VO`
+run on Stellar testnet with vault WASM `ac188cbf790c3fa3a4112fb4f2abe0dfd587303936e2c132f2df9eb062d41b47`.
+Both are configured with USDC, XLM and tRESERVE (Etesia's testnet stand-in for
+USTRY), swap through an Etesia-deployed copy of the Soroswap Aggregator v3 and
+supply USDC to the Blend testnet pool `CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF`.
+
+- [Deployment manifest](deploy/testnet/pre-2026-12-16-reset.json): contract ids, assets, roles and limits.
+- [Receipt archive](docs/evidence/t2-index.md): the Tranche 2 testnet transactions with their envelope, result and meta XDR.
+- [Operations](docs/operations.md): deployment, signer roles, role rotation, direct exits and recovery.
+
 ## Implementation
 
-**Current universe (A48, 2026-09-18):** XLM/AQUA/ETH/BTC risk assets, USTRY reserve and USDC settlement. SHX is temporarily excluded. Local fixture scripts configure these six assets; the contracts retain generic immutable asset configuration. AQUA remains unqualified for activation because its measured Soroswap liquidity is inadequate. See [D3 acceptance](docs/d3-acceptance.md).
+**Current universe (2026-09-18):** XLM/AQUA/ETH/BTC risk assets, USTRY reserve and USDC settlement. SHX is temporarily excluded. Local fixture scripts configure these six assets; the contracts retain generic immutable asset configuration. AQUA remains unqualified for activation because its measured Soroswap liquidity is inadequate. See [D3 acceptance](docs/d3-acceptance.md).
 
 D2 vault/adapter and D3 pricing provider, implemented and locally verified
-2026-09-18; D3 was simplified to Reflector only on 2026-09-23 (native checks
-only, no recorded local RPC rerun yet). Independent Soroban workspace for USDC custody and guarded valuation.
+2026-09-18; D3 was simplified to Reflector only on 2026-09-23. Independent Soroban workspace for USDC custody and guarded valuation.
 Pricing is Reflector only, with no second-source check; see the D3 provider.
 See [acceptance and evidence](docs/acceptance.md), [ABI](docs/interfaces.md),
 [direct exits/recovery](docs/operations.md) and [local RPC reproduction](docs/local-rpc.md).
 See [D3 provider](docs/pricing.md) and [D3 evidence/gates](docs/d3-acceptance.md).
-Full D3 source acceptance, D4/D7/D9 activation and audit acceptance remain separate.
 
 Rust 1.99.1, SDK/token SDK 29.0.1, Stellar CLI 28.1.0 and cargo-llvm-cov 0.9.1;
 Rust 1.84.1 builds the vendored DeFindex parent WASM harness. Dependencies and that

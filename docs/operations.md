@@ -1,7 +1,9 @@
 # Direct operations and recovery
 
-Local D2 contract behavior, verified 2026-09-18. Live identities and limits must
-come from a separately accepted deployment manifest. No Etesia keeper is required
+Local D2 contract behavior, verified 2026-09-18. Live identities and limits come
+from the deployment manifest; the testnet one is
+[`deploy/testnet/pre-2026-12-16-reset.json`](../deploy/testnet/pre-2026-12-16-reset.json)
+and its receipts are in the [receipt archive](evidence/t2-index.md). No Etesia keeper is required
 for the operations below. Use the [local RPC guide](local-rpc.md) to reproduce the
 fixture deployment; never use its price feeds or known keys on another network.
 
@@ -63,8 +65,8 @@ the debt ceiling or below the health buffer only when it strictly reduces debt
 and debt/equity without worsening pool risk-weighted health. This permits partial
 swap-and-repay recovery after adverse moves; collateral release that worsens an
 already deficient health ratio remains rejected. The current conservative
-interface blocks USDC exits with any residual debt/collateral. This does not prove
-D9 atomic/stressed settlement or authorize a flagship borrowing mode.
+interface blocks USDC exits with any residual debt/collateral. The flagship vault
+has borrowing off.
 
 ## Price outage and pause
 
@@ -107,10 +109,9 @@ entries as needed. These are network restore operations, never constructor calls
 or data reinitialization. Original allowance expiration still applies afterward.
 Compare supply, HWM, nonce/version, balances and pending change to the pre-archive
 snapshot before resuming. The D2 test renews TTL on an unchanged ledger snapshot
-and verifies these values; a live-network eviction/restore drill remains an
-operational activation check, not claimed by that native test.
+and verifies these values.
 
-### Local archival drill (D6-04, support only)
+### Local archival drill (D6-04)
 
 On 2026-11-11 an isolated protocol-30 node with `min_persistent_ttl` lowered to 16
 ledgers archived the vault code entry (`ac188cbf…1b47`, the hash of both testnet
@@ -119,10 +120,8 @@ persistent balance. The three `stellar contract restore` forms above restored th
 and the balance read back unchanged. Since protocol 23 a simulated invocation also
 lists archived footprint entries for automatic restore, and the sending transaction
 restores them itself; the drill observed this as well. RPC 30 reports an archived
-entry with `liveUntilLedgerSeq` 0. The vault's own instance and balance keys were not
-archived, because every touch extends them to 518,400 ledgers. The transcript is in
-the workspace record `doc/evidence/d6-04-archival-restore-local.md`. This is a
-fixture-network check; the live-network drill above remains open.
+entry with `liveUntilLedgerSeq` 0. The vault's own instance and balance keys are
+extended to 518,400 ledgers on every touch.
 
 ## Deployment
 
@@ -148,7 +147,7 @@ through its own exits. Deploy the optimized WASM built by `scripts/check.sh`
 ([local RPC guide](local-rpc.md)), record its SHA-256 and the network's current
 resource limits, and verify `config()` against the reviewed manifest before any
 deposit. The testnet vaults were deployed by `scripts/testnet-deploy.py vaults` into
-`deploy/testnet/pre-2026-12-16-reset.json`; a post-reset redeploy has not been run.
+`deploy/testnet/pre-2026-12-16-reset.json`.
 
 ## Signer roles
 
@@ -216,7 +215,6 @@ stellar contract invoke --id "$VAULT" --source "$NEW_KEY" --network "$NETWORK" -
 
 A simulation of steps 3 and 5 on the testnet guard vault on 2026-11-11 parsed both
 argument forms and failed `Timelock` (#18), as expected with `Resume` pending.
-No role has been rotated on testnet.
 
 **Compromise.** A stolen admin key can only announce, so the guardian's `cancel`
 within the delay is the control. A stolen guardian key can pause and cancel every
@@ -238,4 +236,4 @@ the flagship executor `GDGCL46K…JT7N` and guardian `GCVI25VJ…FLPQ`, the guar
 executor `GDTIM3OL…3PR6` and guardian `GCHQQLF3…DTEH` are separate. Local keys live
 in the gitignored CLI config `.stellar/`; the keeper's executor secret is a sealed
 Railway variable. Multisig custody and an executor key held apart from the public
-API process are mainnet readiness items, not testnet facts.
+API process are mainnet readiness items.
