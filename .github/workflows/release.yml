@@ -1,0 +1,22 @@
+name: Release vault wasm
+
+# Builds the vault wasm, publishes it as a GitHub release with a build attestation and
+# submits its hash to StellarExpert. Deploy the release asset itself: a local build has a different hash.
+on:
+  push:
+    tags: ['v*']  # tag the master head only
+
+permissions:
+  id-token: write
+  contents: write
+  attestations: write
+
+jobs:
+  vault:
+    uses: stellar-expert/soroban-build-workflow/.github/workflows/release.yml@main
+    with:
+      release_name: ${{ github.ref_name }}
+      release_description: 'etesia-vault ${{ github.ref_name }}'
+      package: etesia-vault  # required: the root Cargo.toml is a virtual manifest
+    secrets:
+      release_token: ${{ secrets.GITHUB_TOKEN }}  # never a personal token: its tags would retrigger this workflow
