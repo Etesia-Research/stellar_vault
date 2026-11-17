@@ -88,7 +88,7 @@ The vault accepts only `Hop::Soroswap`; any other hop fails `Unauthorized`. On 2
 
 The same assets are liquid on venues the vault does not accept: Aquarius XLM/USDC at $1.54M a side, USTRY/USDC $1.10M, AQUA/USDC $209k, ETH/USDC $63k, BTC/ETH $188k; SDEX AMMs XLM/USDC $2.2M, XLM/BTC $59k, BTC/USDC $43k.
 
-**Consequence: with the Soroswap-only route policy, BTC, ETH and AQUA legs cannot be reached on mainnet.** The two options, accepting Aqua or SDEX hops (a contract change) or holding zero target weight in those assets, are in the [D6-05 checklist](d6-05-mainnet-readiness-checklist.md#findings-from-d6-02). limits-v1 calibrates XLM and USTRY legs.
+**Consequence: with the Soroswap-only route policy, BTC, ETH and AQUA legs cannot be reached on mainnet.** The two options are in the [D6-05 checklist](d6-05-mainnet-readiness-checklist.md#findings-from-d6-02): accepting the other venues Aggregator v3 executes from a contract (Aquarius, SushiSwap V3 and Comet; a contract change), or holding zero target weight in those assets. The checklist review chose the first. SDEX liquidity is reached by a classic path payment, which a contract cannot execute. limits-v1 calibrates XLM and USTRY legs.
 
 ## Proposed limits-v1 parameters (mainnet)
 
