@@ -37,6 +37,10 @@ Each row quotes the award measure. Evidence links open this repository, the Port
 | 2. Monitoring and alerting operational for all testnet vaults | [Alerts with open and resolve times](docs/tranche-2/d6-03-alert-evidence.md) | — |
 | 3. Mainnet deployment checklist completed and reviewed | [Mainnet readiness checklist](docs/tranche-2/d6-05-mainnet-readiness-checklist.md) | — |
 
+The monitor posts each alert to a Telegram chat once when it opens and once when it resolves:
+
+<img src="docs/tranche-2/telegram-monitor-alerts.png" alt="Telegram chat with the monitor's OPEN and RESOLVED alerts" width="480">
+
 Also delivered: the [operations runbook](docs/operations.md), the [runbook drills](docs/tranche-2/d6-04-runbook-drills.md) and the [limits calibration](docs/tranche-2/d6-02-limits-v1.md) (rebalance thresholds, slippage caps and concentration limits).
 
 ## Transaction archive
