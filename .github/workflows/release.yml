@@ -1,7 +1,8 @@
 name: Release contract wasm
 
 # Builds the vault and pricing wasm, publishes each as a GitHub release with a build attestation and
-# submits its hash to StellarExpert. Deploy the release assets themselves: a local build has a different hash.
+# submits its hash to StellarExpert. On mainnet, deploy the release assets themselves: a local build has a
+# different hash. The testnet vaults run a local build (docs/operations.md).
 on:
   push:
     tags: ['v*']  # tag the master head only

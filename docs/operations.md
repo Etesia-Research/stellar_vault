@@ -143,8 +143,10 @@ The contract has no upgrade entry point. Code, assets, dependency identities, ri
 limits and borrowing mode cannot change after deployment; only fee terms, roles and
 `Resume` change, through the timelock below ([interfaces](interfaces.md)). A new
 code revision or limit set is a new deployment, and holders leave the old one
-through its own exits. Deploy the optimized WASM built by `scripts/check.sh`
-([local RPC guide](local-rpc.md)), record its SHA-256 and the network's current
+through its own exits. On testnet, deploy the optimized WASM built by
+`scripts/check.sh` ([local RPC guide](local-rpc.md)); on mainnet, deploy the
+attested release asset published by the
+[release workflow](../.github/workflows/release.yml). Record its SHA-256 and the network's current
 resource limits, and verify `config()` against the reviewed manifest before any
 deposit. The testnet vaults were deployed by `scripts/testnet-deploy.py vaults` into
 `deploy/testnet/pre-2026-12-16-reset.json`.

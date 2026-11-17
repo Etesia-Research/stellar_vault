@@ -1,12 +1,14 @@
 # D3 pricing provider
 
-Current A48 qualification scope excludes SHX: XLM/AQUA/ETH/BTC and USTRY require sources, with USDC as settlement. The generic constructor capacity below is not an approved asset list. Exact AQUA feed identity is verified, but its measured Soroswap liquidity remains inadequate for execution; see [acceptance](d3-acceptance.md).
+Current A48 qualification scope excludes SHX: XLM/AQUA/ETH/BTC and USTRY require sources, with USDC as settlement. The generic constructor capacity below is not an approved asset list. Mainnet routing and liquidity for each asset are measured in the [limits calibration](tranche-2/d6-02-limits-v1.md#finding-2-mainnet-soroswap-liquidity-covers-only-xlm-and-ustry); see also [acceptance](d3-acceptance.md).
 
 Implemented locally **2026-09-18**, on vault baseline `8aa9290`. See [acceptance](d3-acceptance.md) and the
-[network/source manifest](evidence/d3-network-manifest.json). Production network,
-limits and full-universe acceptance remain open. No live provider is activated.
+[network/source manifest](evidence/d3-network-manifest.json).
 The provider was later simplified to Reflector only, removing the Soroswap TWAP
-circuit breaker; recorded D3 evidence predates that change.
+circuit breaker; recorded D3 evidence predates that change. That provider is
+deployed on Stellar testnet ([manifest](../deploy/testnet/pre-2026-12-16-reset.json),
+`provider`); the mainnet items are in the
+[mainnet readiness checklist](tranche-2/d6-05-mainnet-readiness-checklist.md).
 
 ## Contract and units
 
