@@ -1,0 +1,439 @@
+{
+ "description": "D4-08 flagship NAV reads, 2026-11-14. Read-only simulateTransaction calls (no signature, nothing submitted) against https://soroban-testnet.stellar.org. Each read retries until every call reports the same latest_ledger; ledger close time from getLedgers. result_xdr is the raw SCVal returned by the RPC; decoded is stellar_sdk scval.to_native.",
+ "vault": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+ "manifest": "etesia-vault deploy/testnet/pre-2026-12-16-reset.json (master)",
+ "fees_config_read": {
+  "function": "config",
+  "latest_ledger": 5725463,
+  "fees": {
+   "management_bps": 100,
+   "performance_bps": 1000
+  }
+ },
+ "read_A": {
+  "taken_utc": "2026-11-14T10:09:14Z",
+  "rpc": "https://soroban-testnet.stellar.org",
+  "latest_ledger": 5725461,
+  "ledger": {
+   "sequence": 5725461,
+   "ledgerCloseTime": "1794650949",
+   "utc": "2026-11-14T10:09:09Z",
+   "hash": "84846db9bbf1067bc2eedd42a5e23eb06ec6bb8897c9d497296cd173da26eac4"
+  },
+  "attempts": 2,
+  "calls": {
+   "total_assets": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "total_assets",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAACgAAAAAAAAAAAAAAAn5VlF0=",
+    "decoded": 10709472349
+   },
+   "convert_to_assets_1_share": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "convert_to_assets",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAACgAAAAAAAAAAAAAAAACYaMM=",
+    "decoded": 9988291
+   },
+   "convert_to_assets_1000_shares": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "convert_to_assets",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAACgAAAAAAAAAAAAAAAlNZOsE=",
+    "decoded": 9988291265
+   },
+   "total_supply": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "total_supply",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAACgAAAAAAAAAAAAPPJoLvf6o=",
+    "decoded": 1072189242572714
+   },
+   "state": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "state",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAAEQAAAAEAAAANAAAADwAAAApoaWdoX3dhdGVyAAAAAAAKAAAAAAAAAAAAAAkxEUuDxAAAAA8AAAAObGFzdF9leGVjdXRpb24AAAAAAAMAVz5HAAAADwAAAAhsYXN0X2ZlZQAAAAUAAAAAaveZPwAAAA8AAAAEbG9zcwAAAAoAAAAAAAAAAAAAAAAD2ATzAAAADwAAAA9tYW5hZ2VtZW50X2R1c3QAAAAACgAAAAAAAAAABrupPlEococAAAAPAAAABW5vbmNlAAAAAAAABQAAAAAAAADaAAAADwAAAAZwYXVzZWQAAAAAAAAAAAAAAAAADwAAABBwZXJmb3JtYW5jZV9kdXN0AAAACgAAAAAAAAAAAAAB3+WfQWgAAAAPAAAABnN1cHBseQAAAAAACgAAAAAAAAAAAAPPJoLvf6oAAAAPAAAACHR1cm5vdmVyAAAACgAAAAAAAAAAAAAAAbWD+2MAAAAPAAAAB3ZlcnNpb24AAAAAAwAAAAEAAAAPAAAADXdpbmRvd19lcXVpdHkAAAAAAAAKAAAAAAAAAAAAAAACg2fjxAAAAA8AAAANd2luZG93X2xlZGdlcgAAAAAAAAMAVyy4",
+    "decoded": {
+     "high_water": 10106348209092,
+     "last_execution": 5717575,
+     "last_fee": 1794611519,
+     "loss": 64488691,
+     "management_dust": 485167469987132039,
+     "nonce": 218,
+     "paused": false,
+     "performance_dust": 2061141754216,
+     "supply": 1072189242572714,
+     "turnover": 7340292963,
+     "version": 1,
+     "window_equity": 10794558404,
+     "window_ledger": 5713080
+    }
+   },
+   "holdings": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "holdings",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAAEAAAAAEAAAADAAAAEQAAAAEAAAAFAAAADwAAAAVhc3NldAAAAAAAABIAAAABICLVbgq6ZFFvbmJgTSliMr6GT/37hNWGE+dCPKzgKygAAAAPAAAACmNvbGxhdGVyYWwAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAADwAAAARkZWJ0AAAACgAAAAAAAAAAAAAAAAAAAAAAAAAPAAAABHNwb3QAAAAKAAAAAAAAAAAAAAAAEDAXxAAAAA8AAAAGc3VwcGx5AAAAAAAKAAAAAAAAAAAAAAAANJ+iqQAAABEAAAABAAAABQAAAA8AAAAFYXNzZXQAAAAAAAASAAAAAZxfWJiEKFQyPJEqRduANkDsMNkWBQrdvwFNbN71IN94AAAADwAAAApjb2xsYXRlcmFsAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAEZGVidAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAADwAAAARzcG90AAAACgAAAAAAAAAAAAAAAdogsS8AAAAPAAAABnN1cHBseQAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAQAAAAUAAAAPAAAABWFzc2V0AAAAAAAAEgAAAAHXkotywnA8z+r365/0701QSlWouXn8m0UOoshCtNHOYQAAAA8AAAAKY29sbGF0ZXJhbAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAPAAAABGRlYnQAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAEc3BvdAAAAAoAAAAAAAAAAAAAAAKUcIHNAAAADwAAAAZzdXBwbHkAAAAAAAoAAAAAAAAAAAAAAAAAAAAA",
+    "decoded": [
+     {
+      "asset": "<Address [type=CONTRACT, address=CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU]>",
+      "collateral": 0,
+      "debt": 0,
+      "spot": 271587268,
+      "supply": 882877097
+     },
+     {
+      "asset": "<Address [type=CONTRACT, address=CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7]>",
+      "collateral": 0,
+      "debt": 0,
+      "spot": 7954542895,
+      "supply": 0
+     },
+     {
+      "asset": "<Address [type=CONTRACT, address=CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC]>",
+      "collateral": 0,
+      "debt": 0,
+      "spot": 11080335821,
+      "supply": 0
+     }
+    ]
+   },
+   "get_reserve_usdc": {
+    "contract": "CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF",
+    "function": "get_reserve",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAAEQAAAAEAAAAEAAAADwAAAAVhc3NldAAAAAAAABIAAAABICLVbgq6ZFFvbmJgTSliMr6GT/37hNWGE+dCPKzgKygAAAAPAAAABmNvbmZpZwAAAAAAEQAAAAEAAAANAAAADwAAAAhjX2ZhY3RvcgAAAAMAkPVgAAAADwAAAAhkZWNpbWFscwAAAAMAAAAHAAAADwAAAAdlbmFibGVkAAAAAAAAAAABAAAADwAAAAVpbmRleAAAAAAAAAMAAAADAAAADwAAAAhsX2ZhY3RvcgAAAAMAkPVgAAAADwAAAAhtYXhfdXRpbAAAAAMAkPVgAAAADwAAAAZyX2Jhc2UAAAAAAAMAABOIAAAADwAAAAVyX29uZQAAAAAAAAMABJPgAAAADwAAAAdyX3RocmVlAAAAAAMAmJaAAAAADwAAAAVyX3R3bwAAAAAAAAMAD0JAAAAADwAAAApyZWFjdGl2aXR5AAAAAAADAAAAFAAAAA8AAAAKc3VwcGx5X2NhcAAAAAAACn////////////////////8AAAAPAAAABHV0aWwAAAADAGrPwAAAAA8AAAAEZGF0YQAAABEAAAABAAAABwAAAA8AAAAGYl9yYXRlAAAAAAAKAAAAAAAAAAAAAAD351YuUQAAAA8AAAAIYl9zdXBwbHkAAAAKAAAAAAAAAAAAAAFlMr03yAAAAA8AAAAPYmFja3N0b3BfY3JlZGl0AAAAAAoAAAAAAAAAAAAAAAClTGKtAAAADwAAAAZkX3JhdGUAAAAAAAoAAAAAAAAAAAAAAPuwnfJRAAAADwAAAAhkX3N1cHBseQAAAAoAAAAAAAAAAAAAATZmtaByAAAADwAAAAZpcl9tb2QAAAAAAAoAAAAAAAAAAAAAAAAA4j0wAAAADwAAAAlsYXN0X3RpbWUAAAAAAAAFAAAAAGr4M0UAAAAPAAAABnNjYWxhcgAAAAAACgAAAAAAAAAAAAAAAACYloA=",
+    "decoded": {
+     "asset": "<Address [type=CONTRACT, address=CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU]>",
+     "config": {
+      "c_factor": 9500000,
+      "decimals": 7,
+      "enabled": true,
+      "index": 3,
+      "l_factor": 9500000,
+      "max_util": 9500000,
+      "r_base": 5000,
+      "r_one": 300000,
+      "r_three": 10000000,
+      "r_two": 1000000,
+      "reactivity": 20,
+      "supply_cap": 170141183460469231731687303715884105727,
+      "util": 7000000
+     },
+     "data": {
+      "b_rate": 1064738106961,
+      "b_supply": 1534154586056,
+      "backstop_credit": 2773246637,
+      "d_rate": 1080999932497,
+      "d_supply": 1333163040882,
+      "ir_mod": 14826800,
+      "last_time": 1794650949
+     },
+     "scalar": 10000000
+    }
+   },
+   "get_positions_vault": {
+    "contract": "CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF",
+    "function": "get_positions",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAAEQAAAAEAAAADAAAADwAAAApjb2xsYXRlcmFsAAAAAAARAAAAAQAAAAAAAAAPAAAAC2xpYWJpbGl0aWVzAAAAABEAAAABAAAAAAAAAA8AAAAGc3VwcGx5AAAAAAARAAAAAQAAAAEAAAADAAAAAwAAAAoAAAAAAAAAAAAAAAAxbIjH",
+    "decoded": {
+     "collateral": {},
+     "liabilities": {},
+     "supply": {
+      "3": 829196487
+     }
+    }
+   },
+   "mark_tRESERVE": {
+    "contract": "CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB",
+    "function": "mark",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAAEQAAAAEAAAACAAAADwAAAAVwcmljZQAAAAAAAAoAAAAAAAAAAAAAAOjUpRAAAAAADwAAAAl0aW1lc3RhbXAAAAAAAAAFAAAAAGr4Mkw=",
+    "decoded": {
+     "price": 1000000000000,
+     "timestamp": 1794650700
+    }
+   },
+   "mark_XLM": {
+    "contract": "CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB",
+    "function": "mark",
+    "latest_ledger": 5725461,
+    "result_xdr": "AAAAEQAAAAEAAAACAAAADwAAAAVwcmljZQAAAAAAAAoAAAAAAAAAAAAAACGhaPBzAAAADwAAAAl0aW1lc3RhbXAAAAAAAAAFAAAAAGr4Mkw=",
+    "decoded": {
+     "price": 144441929843,
+     "timestamp": 1794650700
+    }
+   }
+  }
+ },
+ "read_B": {
+  "taken_utc": "2026-11-14T10:21:34Z",
+  "rpc": "https://soroban-testnet.stellar.org",
+  "latest_ledger": 5725609,
+  "ledger": {
+   "sequence": 5725609,
+   "ledgerCloseTime": "1794651689",
+   "utc": "2026-11-14T10:21:29Z",
+   "hash": "cd5b88b647a212f8ac887a5e43b650bc9ddcff217bffebaf87d6c49a00174553"
+  },
+  "attempts": 1,
+  "calls": {
+   "total_assets": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "total_assets",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAACgAAAAAAAAAAAAAAAn45Tyw=",
+    "decoded": 10707619628
+   },
+   "convert_to_assets_1_share": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "convert_to_assets",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAACgAAAAAAAAAAAAAAAACYYgA=",
+    "decoded": 9986560
+   },
+   "convert_to_assets_1000_shares": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "convert_to_assets",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAACgAAAAAAAAAAAAAAAlM+08Q=",
+    "decoded": 9986560964
+   },
+   "total_supply": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "total_supply",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAACgAAAAAAAAAAAAPPJoLvf6o=",
+    "decoded": 1072189242572714
+   },
+   "state": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "state",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAAEQAAAAEAAAANAAAADwAAAApoaWdoX3dhdGVyAAAAAAAKAAAAAAAAAAAAAAkxEUuDxAAAAA8AAAAObGFzdF9leGVjdXRpb24AAAAAAAMAVz5HAAAADwAAAAhsYXN0X2ZlZQAAAAUAAAAAaveZPwAAAA8AAAAEbG9zcwAAAAoAAAAAAAAAAAAAAAAD2ATzAAAADwAAAA9tYW5hZ2VtZW50X2R1c3QAAAAACgAAAAAAAAAABrupPlEococAAAAPAAAABW5vbmNlAAAAAAAABQAAAAAAAADaAAAADwAAAAZwYXVzZWQAAAAAAAAAAAAAAAAADwAAABBwZXJmb3JtYW5jZV9kdXN0AAAACgAAAAAAAAAAAAAB3+WfQWgAAAAPAAAABnN1cHBseQAAAAAACgAAAAAAAAAAAAPPJoLvf6oAAAAPAAAACHR1cm5vdmVyAAAACgAAAAAAAAAAAAAAAbWD+2MAAAAPAAAAB3ZlcnNpb24AAAAAAwAAAAEAAAAPAAAADXdpbmRvd19lcXVpdHkAAAAAAAAKAAAAAAAAAAAAAAACg2fjxAAAAA8AAAANd2luZG93X2xlZGdlcgAAAAAAAAMAVyy4",
+    "decoded": {
+     "high_water": 10106348209092,
+     "last_execution": 5717575,
+     "last_fee": 1794611519,
+     "loss": 64488691,
+     "management_dust": 485167469987132039,
+     "nonce": 218,
+     "paused": false,
+     "performance_dust": 2061141754216,
+     "supply": 1072189242572714,
+     "turnover": 7340292963,
+     "version": 1,
+     "window_equity": 10794558404,
+     "window_ledger": 5713080
+    }
+   },
+   "holdings": {
+    "contract": "CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH",
+    "function": "holdings",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAAEAAAAAEAAAADAAAAEQAAAAEAAAAFAAAADwAAAAVhc3NldAAAAAAAABIAAAABICLVbgq6ZFFvbmJgTSliMr6GT/37hNWGE+dCPKzgKygAAAAPAAAACmNvbGxhdGVyYWwAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAADwAAAARkZWJ0AAAACgAAAAAAAAAAAAAAAAAAAAAAAAAPAAAABHNwb3QAAAAKAAAAAAAAAAAAAAAAEDAXxAAAAA8AAAAGc3VwcGx5AAAAAAAKAAAAAAAAAAAAAAAANJ+sgwAAABEAAAABAAAABQAAAA8AAAAFYXNzZXQAAAAAAAASAAAAAZxfWJiEKFQyPJEqRduANkDsMNkWBQrdvwFNbN71IN94AAAADwAAAApjb2xsYXRlcmFsAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAEZGVidAAAAAoAAAAAAAAAAAAAAAAAAAAAAAAADwAAAARzcG90AAAACgAAAAAAAAAAAAAAAdogsS8AAAAPAAAABnN1cHBseQAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAARAAAAAQAAAAUAAAAPAAAABWFzc2V0AAAAAAAAEgAAAAHXkotywnA8z+r365/0701QSlWouXn8m0UOoshCtNHOYQAAAA8AAAAKY29sbGF0ZXJhbAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAPAAAABGRlYnQAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAEc3BvdAAAAAoAAAAAAAAAAAAAAAKUcIHNAAAADwAAAAZzdXBwbHkAAAAAAAoAAAAAAAAAAAAAAAAAAAAA",
+    "decoded": [
+     {
+      "asset": "<Address [type=CONTRACT, address=CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU]>",
+      "collateral": 0,
+      "debt": 0,
+      "spot": 271587268,
+      "supply": 882879619
+     },
+     {
+      "asset": "<Address [type=CONTRACT, address=CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7]>",
+      "collateral": 0,
+      "debt": 0,
+      "spot": 7954542895,
+      "supply": 0
+     },
+     {
+      "asset": "<Address [type=CONTRACT, address=CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC]>",
+      "collateral": 0,
+      "debt": 0,
+      "spot": 11080335821,
+      "supply": 0
+     }
+    ]
+   },
+   "get_reserve_usdc": {
+    "contract": "CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF",
+    "function": "get_reserve",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAAEQAAAAEAAAAEAAAADwAAAAVhc3NldAAAAAAAABIAAAABICLVbgq6ZFFvbmJgTSliMr6GT/37hNWGE+dCPKzgKygAAAAPAAAABmNvbmZpZwAAAAAAEQAAAAEAAAANAAAADwAAAAhjX2ZhY3RvcgAAAAMAkPVgAAAADwAAAAhkZWNpbWFscwAAAAMAAAAHAAAADwAAAAdlbmFibGVkAAAAAAAAAAABAAAADwAAAAVpbmRleAAAAAAAAAMAAAADAAAADwAAAAhsX2ZhY3RvcgAAAAMAkPVgAAAADwAAAAhtYXhfdXRpbAAAAAMAkPVgAAAADwAAAAZyX2Jhc2UAAAAAAAMAABOIAAAADwAAAAVyX29uZQAAAAAAAAMABJPgAAAADwAAAAdyX3RocmVlAAAAAAMAmJaAAAAADwAAAAVyX3R3bwAAAAAAAAMAD0JAAAAADwAAAApyZWFjdGl2aXR5AAAAAAADAAAAFAAAAA8AAAAKc3VwcGx5X2NhcAAAAAAACn////////////////////8AAAAPAAAABHV0aWwAAAADAGrPwAAAAA8AAAAEZGF0YQAAABEAAAABAAAABwAAAA8AAAAGYl9yYXRlAAAAAAAKAAAAAAAAAAAAAAD354SXmQAAAA8AAAAIYl9zdXBwbHkAAAAKAAAAAAAAAAAAAAFlMr03xgAAAA8AAAAPYmFja3N0b3BfY3JlZGl0AAAAAAoAAAAAAAAAAAAAAAClVEv4AAAADwAAAAZkX3JhdGUAAAAAAAoAAAAAAAAAAAAAAPuw2UoJAAAADwAAAAhkX3N1cHBseQAAAAoAAAAAAAAAAAAAATZmtaByAAAADwAAAAZpcl9tb2QAAAAAAAoAAAAAAAAAAAAAAAAA4ke3AAAADwAAAAlsYXN0X3RpbWUAAAAAAAAFAAAAAGr4NikAAAAPAAAABnNjYWxhcgAAAAAACgAAAAAAAAAAAAAAAACYloA=",
+    "decoded": {
+     "asset": "<Address [type=CONTRACT, address=CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU]>",
+     "config": {
+      "c_factor": 9500000,
+      "decimals": 7,
+      "enabled": true,
+      "index": 3,
+      "l_factor": 9500000,
+      "max_util": 9500000,
+      "r_base": 5000,
+      "r_one": 300000,
+      "r_three": 10000000,
+      "r_two": 1000000,
+      "reactivity": 20,
+      "supply_cap": 170141183460469231731687303715884105727,
+      "util": 7000000
+     },
+     "data": {
+      "b_rate": 1064741148569,
+      "b_supply": 1534154586054,
+      "backstop_credit": 2773765112,
+      "d_rate": 1081003821577,
+      "d_supply": 1333163040882,
+      "ir_mod": 14829495,
+      "last_time": 1794651689
+     },
+     "scalar": 10000000
+    }
+   },
+   "get_positions_vault": {
+    "contract": "CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF",
+    "function": "get_positions",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAAEQAAAAEAAAADAAAADwAAAApjb2xsYXRlcmFsAAAAAAARAAAAAQAAAAAAAAAPAAAAC2xpYWJpbGl0aWVzAAAAABEAAAABAAAAAAAAAA8AAAAGc3VwcGx5AAAAAAARAAAAAQAAAAEAAAADAAAAAwAAAAoAAAAAAAAAAAAAAAAxbIjH",
+    "decoded": {
+     "collateral": {},
+     "liabilities": {},
+     "supply": {
+      "3": 829196487
+     }
+    }
+   },
+   "mark_tRESERVE": {
+    "contract": "CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB",
+    "function": "mark",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAAEQAAAAEAAAACAAAADwAAAAVwcmljZQAAAAAAAAoAAAAAAAAAAAAAAOjUpRAAAAAADwAAAAl0aW1lc3RhbXAAAAAAAAAFAAAAAGr4NdA=",
+    "decoded": {
+     "price": 1000000000000,
+     "timestamp": 1794651600
+    }
+   },
+   "mark_XLM": {
+    "contract": "CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB",
+    "function": "mark",
+    "latest_ledger": 5725609,
+    "result_xdr": "AAAAEQAAAAEAAAACAAAADwAAAAVwcmljZQAAAAAAAAoAAAAAAAAAAAAAACGXbhMfAAAADwAAAAl0aW1lc3RhbXAAAAAAAAAFAAAAAGr4NdA=",
+    "decoded": {
+     "price": 144274494239,
+     "timestamp": 1794651600
+    }
+   }
+  }
+ },
+ "vault_events_between": {
+  "startLedger": 5725461,
+  "endLedger": 5725609,
+  "vault_events": []
+ },
+ "decomposition": {
+  "A": {
+   "preview_supply": 1072202648505753,
+   "mgmt_fee_shares_pending": 13405933039,
+   "share_price_1000_recomputed": 9988291265,
+   "share_price_1000": 9988291265,
+   "ledger": 5725461,
+   "close_utc": "2026-11-14T10:09:09Z",
+   "close_ts": 1794650949,
+   "reserve_last_time": 1794650949,
+   "btokens": 829196487,
+   "b_rate": 1064738106961,
+   "usdc_spot": 271587268,
+   "tres_spot": 7954542895,
+   "xlm_spot": 11080335821,
+   "xlm_mark": 144441929843,
+   "xlm_mark_ts": 1794650700,
+   "tres_mark": 1000000000000,
+   "tres_mark_ts": 1794650700,
+   "usdc_blend": 882877097,
+   "tRESERVE": 7954542895,
+   "xlm": 1600465089,
+   "recomputed_total": 10709472349,
+   "total_assets": 10709472349,
+   "total_assets_minus_recomputed": 0,
+   "share_price_1": 9988291,
+   "total_supply": 1072189242572714,
+   "nonce": 218,
+   "last_execution": 5717575,
+   "last_fee": 1794611519
+  },
+  "B": {
+   "preview_supply": 1072202900103947,
+   "mgmt_fee_shares_pending": 13657531233,
+   "share_price_1000_recomputed": 9986560964,
+   "share_price_1000": 9986560964,
+   "ledger": 5725609,
+   "close_utc": "2026-11-14T10:21:29Z",
+   "close_ts": 1794651689,
+   "reserve_last_time": 1794651689,
+   "btokens": 829196487,
+   "b_rate": 1064741148569,
+   "usdc_spot": 271587268,
+   "tres_spot": 7954542895,
+   "xlm_spot": 11080335821,
+   "xlm_mark": 144274494239,
+   "xlm_mark_ts": 1794651600,
+   "tres_mark": 1000000000000,
+   "tres_mark_ts": 1794651600,
+   "usdc_blend": 882879619,
+   "tRESERVE": 7954542895,
+   "xlm": 1598609846,
+   "recomputed_total": 10707619628,
+   "total_assets": 10707619628,
+   "total_assets_minus_recomputed": 0,
+   "share_price_1": 9986560,
+   "total_supply": 1072189242572714,
+   "nonce": 218,
+   "last_execution": 5717575,
+   "last_fee": 1794611519
+  },
+  "delta": {
+   "preview_supply": 251598194,
+   "mgmt_fee_shares_pending": 251598194,
+   "share_price_1000_recomputed": -1730301,
+   "share_price_1000": -1730301,
+   "ledger": 148,
+   "close_ts": 740,
+   "reserve_last_time": 740,
+   "btokens": 0,
+   "b_rate": 3041608,
+   "usdc_spot": 0,
+   "tres_spot": 0,
+   "xlm_spot": 0,
+   "xlm_mark": -167435604,
+   "xlm_mark_ts": 900,
+   "tres_mark": 0,
+   "tres_mark_ts": 900,
+   "usdc_blend": 2522,
+   "tRESERVE": 0,
+   "xlm": -1855243,
+   "recomputed_total": -1852721,
+   "total_assets": -1852721,
+   "total_assets_minus_recomputed": 0,
+   "share_price_1": -1731,
+   "total_supply": 0,
+   "nonce": 0,
+   "last_execution": 0,
+   "last_fee": 0
+  },
+  "checks": {
+   "blend_from_brate": 2522.090668431096,
+   "sum_of_component_deltas": -1852721,
+   "xlm_price_effect_at_fixed_qty": -1855243,
+   "share_price_1000_if_supply_fixed_at_A": 9986563307,
+   "blend_rate_per_s": 3.408108108108108
+  }
+ },
+ "scripts": {
+  "navread.py": "\"\"\"Read-only NAV snapshot of the flagship vault: every call simulated at the same ledger. Nothing signed.\"\"\"\nimport json, sys, time, requests\nfrom stellar_sdk import SorobanServer, TransactionBuilder, Account, scval, Network\nfrom stellar_sdk.xdr import SCVal\n\nRPC = \"https://soroban-testnet.stellar.org\"\ns = SorobanServer(RPC)\nSRC = \"GDGCL46KVU6FR2BU32PUGS7KBQCE6U4375JCR7NHU3PMX5K3O7VXJT7N\"\nF = \"CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH\"\nPOOL = \"CCEBVDYM32YNYCVNRXQKDFFPISJJCV557CDZEIRBEE4NCV4KHPQ44HGF\"\nORACLE = \"CC3ASLC6FIH76EVTMJIC2IAMVUS5Y5JYXI4WM4U5RPEUBPUGCWWSX5EB\"\nUSDC = \"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\"\nTRES = \"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\"\nXLM = \"CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC\"\nONE_SHARE = 10**12  # vault shares have 12 decimals\n\nCALLS = [\n    (\"total_assets\", F, \"total_assets\", []),\n    (\"convert_to_assets_1_share\", F, \"convert_to_assets\", [scval.to_int128(ONE_SHARE)]),\n    (\"convert_to_assets_1000_shares\", F, \"convert_to_assets\", [scval.to_int128(1000 * ONE_SHARE)]),\n    (\"total_supply\", F, \"total_supply\", []),\n    (\"state\", F, \"state\", []),\n    (\"holdings\", F, \"holdings\", []),\n    (\"get_reserve_usdc\", POOL, \"get_reserve\", [scval.to_address(USDC)]),\n    (\"get_positions_vault\", POOL, \"get_positions\", [scval.to_address(F)]),\n    (\"mark_tRESERVE\", ORACLE, \"mark\", [scval.to_address(TRES)]),\n    (\"mark_XLM\", ORACLE, \"mark\", [scval.to_address(XLM)]),\n]\n\n\ndef sim(contract, fn, args):\n    tx = (TransactionBuilder(Account(SRC, 0), Network.TESTNET_NETWORK_PASSPHRASE, base_fee=100)\n          .append_invoke_contract_function_op(contract, fn, args).set_timeout(300).build())\n    r = s.simulate_transaction(tx)\n    if r.error:\n        raise RuntimeError(f\"{fn}: {r.error[:400]}\")\n    x = r.results[0].xdr\n    return {\"contract\": contract, \"function\": fn, \"latest_ledger\": r.latest_ledger, \"result_xdr\": x,\n            \"decoded\": scval.to_native(SCVal.from_xdr(x))}\n\n\ndef ledger_close(seq):\n    body = {\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getLedgers\", \"params\": {\"startLedger\": seq, \"pagination\": {\"limit\": 1}}}\n    r = requests.post(RPC, json=body, timeout=30).json()\n    l = r[\"result\"][\"ledgers\"][0]\n    return {\"sequence\": l[\"sequence\"], \"ledgerCloseTime\": l[\"ledgerCloseTime\"],\n            \"utc\": time.strftime(\"%Y-%m-%dT%H:%M:%SZ\", time.gmtime(int(l[\"ledgerCloseTime\"]))), \"hash\": l[\"hash\"]}\n\n\ndef snapshot():\n    for attempt in range(20):\n        out = {k: sim(c, f, a) for k, c, f, a in CALLS}\n        ledgers = {v[\"latest_ledger\"] for v in out.values()}\n        if len(ledgers) == 1:\n            seq = ledgers.pop()\n            return {\"taken_utc\": time.strftime(\"%Y-%m-%dT%H:%M:%SZ\", time.gmtime()), \"rpc\": RPC,\n                    \"latest_ledger\": seq, \"ledger\": ledger_close(seq), \"attempts\": attempt + 1, \"calls\": out}\n        time.sleep(0.5)\n    raise RuntimeError(\"could not get all reads at one ledger\")\n\n\nif __name__ == \"__main__\":\n    print(json.dumps(snapshot(), default=str))\n",
+  "analyse.py": "\"\"\"Decompose total_assets of two reads with the vault's own formula (pricing.rs equity_of).\"\"\"\nimport json, sys\n\nPRICE_SCALE = 10**12\nUSDC = \"CAQCFVLOBK5GIULPNZRGATJJMIZL5BSP7X5YJVMGCPTUEPFM4AVSRCJU\"\nTRES = \"CCOF6WEYQQUFIMR4SEVELW4AGZAOYMGZCYCQVXN7AFGWZXXVEDPXQ5K7\"\nXLM = \"CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC\"\n\n\ndef addr(a):\n    return str(a).split(\"address=\")[-1].rstrip(\"]>\")\n\n\ndef value(amount, price):  # decimals 7 for all three assets\n    return amount * price // (10**7 * (PRICE_SCALE // 10**7))\n\n\nSCALE, BPS, YEAR, MGMT_BPS, PERF_BPS = 10**18, 10_000, 31_536_000, 100, 1000\n\n\ndef preview_supply(st, now, equity):\n    \"\"\"fees.rs preview(): management accrual to `now`, then the performance check.\"\"\"\n    dt = min(now - st[\"last_fee\"], YEAR)\n    rt = MGMT_BPS * dt\n    den = BPS * YEAR - rt\n    scaled = (st[\"supply\"] * rt % den) * SCALE // den + st[\"management_dust\"]\n    minted = st[\"supply\"] * rt // den + scaled // SCALE\n    supply = st[\"supply\"] + minted\n    baseline = -(-st[\"high_water\"] * supply // SCALE)\n    assert equity <= baseline, \"performance fee would apply\"\n    return supply, minted\n\n\ndef parts(d):\n    c = d[\"calls\"]\n    h = {addr(x[\"asset\"]): x for x in c[\"holdings\"][\"decoded\"]}\n    r = c[\"get_reserve_usdc\"][\"decoded\"]\n    btok = c[\"get_positions_vault\"][\"decoded\"][\"supply\"].get(\"3\", c[\"get_positions_vault\"][\"decoded\"][\"supply\"].get(3, 0))\n    b_rate = r[\"data\"][\"b_rate\"]\n    blend = btok * b_rate // PRICE_SCALE\n    assert blend == h[USDC][\"supply\"], (blend, h[USDC][\"supply\"])\n    px = {USDC: PRICE_SCALE, TRES: c[\"mark_tRESERVE\"][\"decoded\"][\"price\"], XLM: c[\"mark_XLM\"][\"decoded\"][\"price\"]}\n    comp = {\n        \"usdc_spot\": value(h[USDC][\"spot\"], px[USDC]),\n        \"usdc_blend\": value(h[USDC][\"supply\"], px[USDC]),\n        \"tRESERVE\": value(h[TRES][\"spot\"], px[TRES]),\n        \"xlm\": value(h[XLM][\"spot\"], px[XLM]),\n    }\n    # equity_of values (spot + supply) together per asset; check that split matches\n    usdc_joint = value(h[USDC][\"spot\"] + h[USDC][\"supply\"], px[USDC])\n    assert usdc_joint == comp[\"usdc_spot\"] + comp[\"usdc_blend\"]\n    total = usdc_joint + comp[\"tRESERVE\"] + comp[\"xlm\"]\n    ta = c[\"total_assets\"][\"decoded\"]\n    st = c[\"state\"][\"decoded\"]\n    psup, minted = preview_supply(st, int(d[\"ledger\"][\"ledgerCloseTime\"]), ta)\n    return {\n        \"preview_supply\": psup, \"mgmt_fee_shares_pending\": minted,\n        \"share_price_1000_recomputed\": 1000 * 10**12 * ta // psup,\n        \"share_price_1000\": c[\"convert_to_assets_1000_shares\"][\"decoded\"] if \"convert_to_assets_1000_shares\" in c else None,\n        \"ledger\": d[\"latest_ledger\"], \"close_utc\": d[\"ledger\"][\"utc\"], \"close_ts\": int(d[\"ledger\"][\"ledgerCloseTime\"]),\n        \"reserve_last_time\": r[\"data\"][\"last_time\"], \"btokens\": btok, \"b_rate\": b_rate,\n        \"usdc_spot\": h[USDC][\"spot\"], \"tres_spot\": h[TRES][\"spot\"], \"xlm_spot\": h[XLM][\"spot\"],\n        \"xlm_mark\": px[XLM], \"xlm_mark_ts\": c[\"mark_XLM\"][\"decoded\"][\"timestamp\"],\n        \"tres_mark\": px[TRES], \"tres_mark_ts\": c[\"mark_tRESERVE\"][\"decoded\"][\"timestamp\"],\n        **comp, \"recomputed_total\": total, \"total_assets\": ta, \"total_assets_minus_recomputed\": ta - total,\n        \"share_price_1\": c[\"convert_to_assets_1_share\"][\"decoded\"], \"total_supply\": c[\"total_supply\"][\"decoded\"],\n        \"nonce\": st[\"nonce\"], \"last_execution\": st[\"last_execution\"], \"last_fee\": st[\"last_fee\"],\n    }\n\n\na, b = (parts(json.load(open(p))) for p in sys.argv[1:3])\nout = {\"A\": a, \"B\": b, \"delta\": {k: b[k] - a[k] for k in a if isinstance(a[k], int) and isinstance(b[k], int)}}\ndl = out[\"delta\"]\nout[\"checks\"] = {\n    \"blend_from_brate\": a[\"btokens\"] * dl[\"b_rate\"] / PRICE_SCALE,\n    \"sum_of_component_deltas\": dl[\"usdc_spot\"] + dl[\"usdc_blend\"] + dl[\"tRESERVE\"] + dl[\"xlm\"],\n    \"xlm_price_effect_at_fixed_qty\": value(a[\"xlm_spot\"], b[\"xlm_mark\"]) - value(a[\"xlm_spot\"], a[\"xlm_mark\"]),\n    \"share_price_1000_if_supply_fixed_at_A\": (1000 * 10**12 * b[\"total_assets\"] // a[\"preview_supply\"]) if a[\"share_price_1000\"] else None,\n    \"blend_rate_per_s\": dl[\"usdc_blend\"] / dl[\"close_ts\"] if dl[\"close_ts\"] else None,\n}\nprint(json.dumps(out, indent=1))\n",
+  "events.py": "\"\"\"Read-only getEvents: any vault or Blend-pool event for the vault between two ledgers.\"\"\"\nimport json, sys, requests\n\nRPC = \"https://soroban-testnet.stellar.org\"\nF = \"CD73M44EYNZOX7YWPSBMITVPERWNA6ZHDLAZ2XSM4RQM6V4XT7GYXFQH\"\nstart, end = int(sys.argv[1]), int(sys.argv[2])\nbody = {\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getEvents\",\n        \"params\": {\"startLedger\": start, \"endLedger\": end + 1,\n                   \"filters\": [{\"type\": \"contract\", \"contractIds\": [F]}], \"pagination\": {\"limit\": 200}}}\nr = requests.post(RPC, json=body, timeout=30).json()\nev = r.get(\"result\", {}).get(\"events\", r)\nprint(json.dumps({\"startLedger\": start, \"endLedger\": end, \"vault_events\": ev}, default=str))\n"
+ }
+}
